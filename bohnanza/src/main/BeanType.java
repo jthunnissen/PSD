@@ -6,14 +6,14 @@ public class BeanType {
 	/** 
 	 * @uml.property name="nrOfCards" readOnly="true"
 	 */
-	private String nrOfCards;
+	private int nrOfCards;
 
 	/** 
 	 * Getter of the property <tt>nrOfCards</tt>
 	 * @return  Returns the nrOfCards.
 	 * @uml.property  name="nrOfCards"
 	 */
-	public String getNrOfCards() {
+	public int getNrOfCards() {
 		return nrOfCards;
 	}
 

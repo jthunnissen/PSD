@@ -33,12 +33,6 @@ public class TurnState {
 
 
 
-		public HashMap<Action, TurnState> getActions() {
-			return actions;
-		}
-
-
-
 		public String getName() {
 			return name;
 		}
