@@ -3,6 +3,7 @@
  */
 package main;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -76,7 +77,7 @@ public class Game {
 		 * @param players  The players to set.
 		 * @uml.property  name="players"
 		 */
-		public void setPlayers(Collection players) {
+		public void setPlayers(ArrayList players) {
 			this.players = players;
 		}
 

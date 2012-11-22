@@ -13,29 +13,29 @@ public class GameFactory {
 	 */
 	private static final GameFactory singleton = new main.GameFactory();
 
-		
-		/**
-		 */
-		private GameFactory(){
-		}
 
-
-			
-			/**
-			 */
-			public static GameFactory getInstance(){
-				return singleton;
-			}
+	/**
+	 */
+	private GameFactory(){
+	}
 
 
 
-				
-				/**
-				 */
-				public TurnState createGameStates(Game game){
-					new TurnState();
-					Action a = new Trade();
-					return null;
-				}
+	/**
+	 */
+	public static GameFactory getInstance(){
+		return singleton;
+	}
+
+
+
+
+	/**
+	 */
+	public TurnState createGameStates(Game game){
+		new TurnState();
+		Action a = new Trade();
+		return null;
+	}
 
 }

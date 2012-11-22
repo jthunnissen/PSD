@@ -11,7 +11,7 @@ public class TurnState {
 	 */
 	private HashMap<Action, TurnState> actions = new HashMap<Action, TurnState>();
 
-		
+
 	/**
 	 */
 	public boolean handle(Action action, String[] args){
@@ -25,53 +25,53 @@ public class TurnState {
 	private final String name = "some name";
 
 
-		
-		/**
-		 */
-		public void addActionState(Action action, TurnState state){
-		}
+
+	/**
+	 */
+	public void addActionState(Action action, TurnState state){
+	}
 
 
 
-		public String getName() {
-			return name;
-		}
+	public String getName() {
+		return name;
+	}
 
 
-		/**
-		 * @uml.property  name="currentPlayer"
-		 * @uml.associationEnd  inverse="turnState:main.Player"
-		 */
-		private Player currentPlayer = null;
+	/**
+	 * @uml.property  name="currentPlayer"
+	 * @uml.associationEnd  inverse="turnState:main.Player"
+	 */
+	private Player currentPlayer = null;
 
 
-		/**
-		 * Getter of the property <tt>currentPlayer</tt>
-		 * @return  Returns the currentPlayer.
-		 * @uml.property  name="currentPlayer"
-		 */
-		public Player getCurrentPlayer() {
-			return currentPlayer;
-		}
-
-
-
-		/**
-		 * Setter of the property <tt>currentPlayer</tt>
-		 * @param currentPlayer  The currentPlayer to set.
-		 * @uml.property  name="currentPlayer"
-		 */
-		public void setCurrentPlayer(Player currentPlayer) {
-			this.currentPlayer = currentPlayer;
-		}
+	/**
+	 * Getter of the property <tt>currentPlayer</tt>
+	 * @return  Returns the currentPlayer.
+	 * @uml.property  name="currentPlayer"
+	 */
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
 
 
 
-			
-			/**
-			 */
-			public boolean handle(Action action){
-				return false;	
-			}
+	/**
+	 * Setter of the property <tt>currentPlayer</tt>
+	 * @param currentPlayer  The currentPlayer to set.
+	 * @uml.property  name="currentPlayer"
+	 */
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
+
+
+
+
+	/**
+	 */
+	public boolean handle(Action action){
+		return false;	
+	}
 
 }

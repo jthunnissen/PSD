@@ -71,27 +71,5 @@ public abstract class Card {
 		this.numberOfCards = numberOfCards;
 	}
 
-	/**
-	 * @uml.property  name="type"
-	 */
-	private ECardType type;
-
-	/**
-	 * Getter of the property <tt>type</tt>
-	 * @return  Returns the type.
-	 * @uml.property  name="type"
-	 */
-	public ECardType getType() {
-		return type;
-	}
-
-	/**
-	 * Setter of the property <tt>type</tt>
-	 * @param type  The type to set.
-	 * @uml.property  name="type"
-	 */
-	public void setType(ECardType type) {
-		this.type = type;
-	}
 
 }

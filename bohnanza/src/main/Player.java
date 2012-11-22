@@ -3,21 +3,38 @@ package main;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
+/**
+ * @author      Anne van de Venis
+ * @version     1.0                  
+ * @since       2012-11-22
+ */
 public class Player {
 
 	/**
+	 * Represents the fields this Player has.
 	 * @uml.property  name="fields"
 	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="player:main.Field"
 	 */
-	private ArrayList fields;
+	private ArrayList<Field> fields;
 
 	/**
-	 * Getter of the property <tt>fields</tt>
+	 * The score of this player.
+	 * @uml.property  name="score"
+	 */
+	private int score = 0;
+
+	
+	public Player(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Returns the fields this Player has.
+	 * @return Fields that belongs to this Player.
 	 * @return  Returns the fields.
 	 * @uml.property  name="fields"
 	 */
-	public ArrayList getFields() {
+	public ArrayList<Field> getFields() {
 		return fields;
 	}
 
@@ -54,10 +71,6 @@ public class Player {
 		this.hand = hand;
 	}
 
-	/**
-	 * @uml.property  name="score"
-	 */
-	private int score = 0;
 
 	/**
 	 * Getter of the property <tt>score</tt>
@@ -75,6 +88,29 @@ public class Player {
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	/**
+	 * @uml.property  name="name"
+	 */
+	private String name;
+
+	/**
+	 * Getter of the property <tt>name</tt>
+	 * @return  Returns the name.
+	 * @uml.property  name="name"
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Setter of the property <tt>name</tt>
+	 * @param name  The name to set.
+	 * @uml.property  name="name"
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

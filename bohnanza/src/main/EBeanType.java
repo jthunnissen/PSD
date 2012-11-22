@@ -7,13 +7,19 @@ package main;
  * @author Damiaan
  *
  */
-public enum ECardType {
+public enum EBeanType {
 	CHILIBEAN  {
 	    public String toString() {
 	        return "Chili Bean";
 	    }
 	    public int numberOfCards() {
 	    	return 18;
+	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {3,6,8,9}		
+	    	};
 	    }
 	},
 	COFFEEBEANS {
@@ -23,6 +29,12 @@ public enum ECardType {
 		    public int numberOfCards() {
 		    	return 24;
 		    }
+		    public int[][] beanometer(){
+		    	return new int[][]
+		    	{{1,2,3,4},
+		    	 {4,7,10,12}		
+		    	};
+		    }
 	},
 	WAXBEAN {
 		public String toString() {
@@ -30,6 +42,12 @@ public enum ECardType {
 	    }
 	    public int numberOfCards() {
 	    	return 22;
+	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {4,7,9,11}		
+	    	};
 	    }
 	},
 	BLUEBEAN {
@@ -39,6 +57,12 @@ public enum ECardType {
 	    public int numberOfCards() {
 	    	return 20;
 	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {4,6,8,10}		
+	    	};
+	    }
 	},
 	STICKBEAN {
 		public String toString() {
@@ -46,6 +70,12 @@ public enum ECardType {
 	    }
 	    public int numberOfCards() {
 	    	return 16;
+	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {3,5,7,8}		
+	    	};
 	    }
 	},
 	GREENBEAN {
@@ -55,6 +85,12 @@ public enum ECardType {
 	    public int numberOfCards() {
 	    	return 14;
 	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {3,5,6,7}		
+	    	};
+	    }
 	},
 	SOYBEAN {
 		public String toString() {
@@ -62,6 +98,12 @@ public enum ECardType {
 	    }
 	    public int numberOfCards() {
 	    	return 12;
+	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {2,4,6,7}		
+	    	};
 	    }
 	},
 	BLACKEYEDBEAN {
@@ -71,6 +113,12 @@ public enum ECardType {
 	    public int numberOfCards() {
 	    	return 10;
 	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {2,4,5,6}		
+	    	};
+	    }
 	},
 	REDBEAN {
 		public String toString() {
@@ -78,6 +126,12 @@ public enum ECardType {
 	    }
 	    public int numberOfCards() {
 	    	return 8;
+	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{1,2,3,4},
+	    	 {2,3,4,5}		
+	    	};
 	    }
 	},
 	GARDENBEAN {
@@ -87,6 +141,12 @@ public enum ECardType {
 	    public int numberOfCards() {
 	    	return 6;
 	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{2,3},
+	    	 {2,3}		
+	    	};
+	    }
 	},
 	CACOABEAN {
 		public String toString() {
@@ -94,6 +154,12 @@ public enum ECardType {
 	    }
 	    public int numberOfCards() {
 	    	return 4;
+	    }
+	    public int[][] beanometer(){
+	    	return new int[][]
+	    	{{2,3,4},
+	    	 {2,3,4}		
+	    	};
 	    }
 	},
 

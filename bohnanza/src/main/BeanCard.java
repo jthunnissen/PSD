@@ -8,6 +8,20 @@ public class BeanCard extends Card {
 	 */
 	private int[][] produces;
 
+
+	/**
+	 * @uml.property  name="type"
+	 */
+	private EBeanType type;
+	
+	
+	public void setType(EBeanType type) {
+		this.type = type;
+	}
+	
+	public EBeanType getType(){
+		return type;
+	}
 	/**
 	 * Getter of the property <tt>produce</tt>
 	 * @return  Returns the produces.
