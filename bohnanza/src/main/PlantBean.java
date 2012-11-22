@@ -5,7 +5,8 @@ public class PlantBean extends Action {
 	
 	@Override
 	public boolean handle(Player player, Object[] args) {
-		return false;
+		int fieldnr = (int) args[0];
+		return player.plantBean(fieldnr);
 	}
 
 }

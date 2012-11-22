@@ -11,6 +11,8 @@ import java.util.Collection;
  * @uml.dependency   supplier="main.GameFactory" stereotypes="Standard::Call"
  */
 public class Game {
+	
+	public static Game thisGame;
 
 	/**
 	 * @param args
@@ -19,23 +21,23 @@ public class Game {
 		// TODO Auto-generated method stub
 
 	}
-
 		
 		/**
 		 */
 		public Game(int players){
+			thisGame = this;
 			GameFactory.getInstance().createGameStates(this);
 		}
 
 
-		/**
-		 * @uml.property  name="currentState"
-		 * @uml.associationEnd  inverse="game:main.TurnState"
+		/** 
+		 * @uml.property name="currentState"
+		 * @uml.associationEnd inverse="context:main.TurnState"
 		 */
 		private TurnState currentState = null;
 
 
-		/**
+		/** 
 		 * Getter of the property <tt>currentState</tt>
 		 * @return  Returns the currentState.
 		 * @uml.property  name="currentState"
@@ -45,7 +47,7 @@ public class Game {
 		}
 
 
-		/**
+		/** 
 		 * Setter of the property <tt>currentState</tt>
 		 * @param currentState  The currentState to set.
 		 * @uml.property  name="currentState"
@@ -59,7 +61,7 @@ public class Game {
 		 * @uml.property name="players"
 		 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Player"
 		 */
-		private Collection players = new java.util.ArrayList();
+		private ArrayList players = new ArrayList();
 
 
 		/** 
@@ -67,7 +69,7 @@ public class Game {
 		 * @return  Returns the players.
 		 * @uml.property  name="players"
 		 */
-		public Collection getPlayers() {
+		public ArrayList getPlayers() {
 			return players;
 		}
 
@@ -83,56 +85,50 @@ public class Game {
 
 
 		/** 
-		 * @uml.property name="drawDesk"
+		 * @uml.property name="drawDeck"
 		 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 		 */
-		private Collection drawDesk;
-
-
-		/** 
-		 * Getter of the property <tt>drawDesk</tt>
-		 * @return  Returns the drawDesk.
-		 * @uml.property  name="drawDesk"
-		 */
-		public Collection getDrawDesk() {
-			return drawDesk;
-		}
+		private ArrayList drawDesk;
 
 
 		/**
 		 * @uml.property  name="discardPile"
 		 * @uml.associationEnd  multiplicity="(0 -1)" inverse="game:main.Card"
 		 */
-		private Collection discardPile = new java.util.ArrayList();
-
-
+		private ArrayList discardPile = new ArrayList();
+		
 		/**
-		 * Getter of the property <tt>discardPile</tt>
-		 * @return  Returns the discardPile.
-		 * @uml.property  name="discardPile"
+		 * @uml.property  name="faceUpCards"
+		 * @uml.associationEnd  multiplicity="(0 -1)" inverse="game:main.Card"
 		 */
-		public Collection getDiscardPile() {
-			return discardPile;
+		private FaceUpCard[] faceUpCards = new FaceUpCard[2];
+		
+		class FaceUpCard {
+			boolean setAside = false;
+			Card card = null;
+			
+			public FaceUpCard(Card card) {
+				this.card = card;
+			}
 		}
-
-
-		/**
-		 * Setter of the property <tt>discardPile</tt>
-		 * @param discardPile  The discardPile to set.
-		 * @uml.property  name="discardPile"
-		 */
-		public void setDiscardPile(Collection discardPile) {
-			this.discardPile = discardPile;
+		
+		public void drawFaceUpCards() {
+			Card card = drawCard();
+			faceUpCards[0] = new FaceUpCard(card);
+			Card morecard = drawCard();
+			faceUpCards[1] = new FaceUpCard(morecard);
 		}
-
-
-		/** 
-		 * Setter of the property <tt>drawDesk</tt>
-		 * @param drawDesk  The drawDesk to set.
-		 * @uml.property  name="drawDesk"
-		 */
-		public void setDrawDesk(Collection drawDesk) {
-			this.drawDesk = drawDesk;
+		
+		public Card drawCard()
+		{
+			return null;
 		}
-
+		
+		public boolean setAsideFaceUpCard(int i) {
+			if (faceUpCards == null) return false;
+			if (faceUpCards[i].setAside) return false;
+			faceUpCards[i].setAside = true;
+			return true;
+		}
 }
+

@@ -74,4 +74,32 @@ public class TurnState {
 		return false;	
 	}
 
+
+	/**
+	 * @uml.property  name="context"
+	 * @uml.associationEnd  inverse="currentState:main.Game"
+	 */
+	private Game context;
+
+
+	/**
+	 * Getter of the property <tt>context</tt>
+	 * @return  Returns the context.
+	 * @uml.property  name="context"
+	 */
+	public Game getContext() {
+		return context;
+	}
+
+
+
+	/**
+	 * Setter of the property <tt>context</tt>
+	 * @param context  The context to set.
+	 * @uml.property  name="context"
+	 */
+	public void setContext(Game context) {
+		this.context = context;
+	}
+
 }

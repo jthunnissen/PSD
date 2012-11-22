@@ -1,13 +1,7 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-/**
- * @author      Anne van de Venis
- * @version     1.0                  
- * @since       2012-11-22
- */
 public class Player {
 
 	/**
@@ -29,7 +23,6 @@ public class Player {
 	 */
 	private ArrayList<Card> coins;
 
-
 	/**
 	 * @uml.property  name="name"
 	 */
@@ -50,6 +43,20 @@ public class Player {
 	
 	public int calcScore() {
 		return -1;
+	}
+	
+	public boolean plantBean(int fieldnr) {
+		try {
+			BeanCard bean = takeBean();
+			Field<Card> field = fields.get(fieldnr);
+			return field.addCard(bean);
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			return false;
+		}
+	}
+	
+	private BeanCard takeBean() throws ArrayIndexOutOfBoundsException {
+		return (BeanCard) hand.get(0);
 	}
 
 }
