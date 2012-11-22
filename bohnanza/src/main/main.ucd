@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1481,1698" id="main" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020626F686E616E7A612F44616D6961616E">
-  <children xsi:type="editmodel:EnumerationEditModel" name="ECardType" location="915,55" size="110,71" id="main/ECardType" runTimeClassModel="CHILLIBEAN%">
-    <children xsi:type="editmodel:CompartmentEditModel" size="77,18">
-      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="CHILLIBEAN" id="main/ECardType#CHILLIBEAN%"/>
+  <children xsi:type="editmodel:EnumerationEditModel" name="ECardType" location="915,55" size="132,251" id="main/ECardType" runTimeClassModel="SOYBEAN%,CHILIBEAN%,COFFEEBEANS%,BLACKEYEDBEAN%,GARDENBEAN%,REDBEAN%,CACOABEAN%,BLUEBEAN%,WAXBEAN%,STICKBEAN%,GREENBEAN%,CHILLIBEAN%">
+    <children xsi:type="editmodel:CompartmentEditModel" size="109,198">
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="CACOABEAN" id="main/ECardType#CACOABEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GREENBEAN" id="main/ECardType#GREENBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="BLUEBEAN" id="main/ECardType#BLUEBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="COFFEEBEANS" id="main/ECardType#COFFEEBEANS%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="STICKBEAN" id="main/ECardType#STICKBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="CHILIBEAN" id="main/ECardType#CHILIBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="SOYBEAN" id="main/ECardType#SOYBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GARDENBEAN" id="main/ECardType#GARDENBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="REDBEAN" id="main/ECardType#REDBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="BLACKEYEDBEAN" id="main/ECardType#BLACKEYEDBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="WAXBEAN" id="main/ECardType#WAXBEAN%"/>
     </children>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
@@ -103,7 +113,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="BeanCard" location="581,287" size="105,57" id="main/BeanCard" runTimeClassModel="produce">
+  <children xsi:type="editmodel:ClassEditModel" name="BeanCard" location="579,305" size="105,57" id="main/BeanCard" runTimeClassModel="produce">
     <children xsi:type="editmodel:CompartmentEditModel" size="76,18">
       <children xsi:type="editmodel:AttributeEditModel" name="produce" id="main/BeanCard#produce"/>
     </children>
@@ -111,7 +121,7 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="main/Card&lt;-main/BeanCard" source="//@children.5" target="//@children.6" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
       <children xsi:type="editmodel:AssociationEndEditModel" location="52,0" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="69,111"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="67,111"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
@@ -142,7 +152,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="BeanField" location="776,291" size="116,67" id="main/BeanField" runTimeClassModel="addCard(Lmain.BeanCard;)">
+  <children xsi:type="editmodel:ClassEditModel" name="BeanField" location="776,300" size="116,67" id="main/BeanField" runTimeClassModel="addCard(Lmain.BeanCard;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="137,18">
       <children xsi:type="editmodel:MethodEditModel" name="addCard" id="main/BeanField#addCard(Lmain.BeanCard;)"/>
