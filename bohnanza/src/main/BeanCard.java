@@ -3,19 +3,27 @@ package main;
 
 public class BeanCard extends Card {
 
-	/** 
-	 * @uml.property name="type"
-	 * @uml.associationEnd readOnly="true" inverse="beanCard:main.BeanType"
+	/**
+	 * @uml.property  name="produce" multiplicity="(0 -1)" dimension="2"
 	 */
-	private BeanType type;
+	private int[][] produces;
 
-	/** 
-	 * Getter of the property <tt>type</tt>
-	 * @return  Returns the type.
-	 * @uml.property  name="type"
+	/**
+	 * Getter of the property <tt>produce</tt>
+	 * @return  Returns the produces.
+	 * @uml.property  name="produce"
 	 */
-	public BeanType getType() {
-		return type;
+	public int[][] getProduce() {
+		return produces;
+	}
+
+	/**
+	 * Setter of the property <tt>produce</tt>
+	 * @param produce  The produces to set.
+	 * @uml.property  name="produce"
+	 */
+	public void setProduce(int[][] produce) {
+		produces = produce;
 	}
 
 }

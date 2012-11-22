@@ -25,4 +25,73 @@ public abstract class Card {
 		this.flipped = flipped;
 	}
 
+	/**
+	 * @uml.property  name="name"
+	 */
+	private String name;
+
+	/**
+	 * Getter of the property <tt>name</tt>
+	 * @return  Returns the name.
+	 * @uml.property  name="name"
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Setter of the property <tt>name</tt>
+	 * @param name  The name to set.
+	 * @uml.property  name="name"
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @uml.property  name="numberOfCards"
+	 */
+	private int numberOfCards = 0;
+
+	/**
+	 * Getter of the property <tt>numberOfCards</tt>
+	 * @return  Returns the numberOfCards.
+	 * @uml.property  name="numberOfCards"
+	 */
+	public int getNumberOfCards() {
+		return numberOfCards;
+	}
+
+	/**
+	 * Setter of the property <tt>numberOfCards</tt>
+	 * @param numberOfCards  The numberOfCards to set.
+	 * @uml.property  name="numberOfCards"
+	 */
+	public void setNumberOfCards(int numberOfCards) {
+		this.numberOfCards = numberOfCards;
+	}
+
+	/**
+	 * @uml.property  name="type"
+	 */
+	private ECardType type;
+
+	/**
+	 * Getter of the property <tt>type</tt>
+	 * @return  Returns the type.
+	 * @uml.property  name="type"
+	 */
+	public ECardType getType() {
+		return type;
+	}
+
+	/**
+	 * Setter of the property <tt>type</tt>
+	 * @param type  The type to set.
+	 * @uml.property  name="type"
+	 */
+	public void setType(ECardType type) {
+		this.type = type;
+	}
+
 }
