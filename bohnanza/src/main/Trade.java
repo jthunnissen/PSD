@@ -4,8 +4,8 @@ package main;
 public class Trade extends Action {
 
 	@Override
-	public void handle(Player player, Object[] args) {
-		// TODO Auto-generated method stub
+	public boolean handle(Player player, Object[] args) {
+		return false;
 		
 	}
 
