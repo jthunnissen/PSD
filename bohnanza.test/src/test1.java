@@ -50,16 +50,4 @@ public class test1 {
 		field.addCard(card);
 		assertSame("Field has incorrect card", field.getCard().get(0), card);
 	}
-
-	@Test
-	public void testGameInitPlayer() {
-		Player player1 = new Player(PLAYER_NAME);
-		Player player2 = new Player(PLAYER_NAME);
-		Game game = new Game(2);
-		game.addPlayer(player1);
-		game.addPlayer(player2);
-		assertEquals("Game has incorrect number of players", game.getPlayers().size(), 2);
-		assertTrue("Player 1 must be in the game", game.getPlayers().contains(player1));
-		assertTrue("Player 2 must be in the game", game.getPlayers().contains(player2));
-	}
 }
