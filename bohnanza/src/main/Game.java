@@ -16,7 +16,7 @@ public class Game {
 	 * @uml.property name="currentState"
 	 * @uml.associationEnd inverse="context:main.TurnState"
 	 */
-	private TurnState currentState = null;
+	private TurnState currentState;
 
 	/**
 	 * @uml.property name="players"
@@ -52,6 +52,13 @@ public class Game {
 	 */
 	public TurnState getCurrentState() {
 		return currentState;
+	}
+
+	/**
+	 * @param currentState the currentState to set
+	 */
+	public void setCurrentState(TurnState currentState) {
+		this.currentState = currentState;
 	}
 
 	/**

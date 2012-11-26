@@ -35,19 +35,4 @@ public class test1 {
 		Player player = new Player(PLAYER_NAME);
 		assertEquals("Player has incorrect name", player.getName(), PLAYER_NAME);
 	}
-
-	@Test
-	public void testCardType() {
-		BeanCard card = new BeanCard();
-		card.setType(EBeanType.BLACKEYEDBEAN);
-		assertSame("Card has incorrect type", card.getType(), EBeanType.BLACKEYEDBEAN);
-	}
-
-	@Test
-	public void testFieldSetCard() {
-		BeanField field = new BeanField();
-		BeanCard card = new BeanCard();
-		field.addCard(card);
-		assertSame("Field has incorrect card", field.getCard().get(0), card);
-	}
 }
