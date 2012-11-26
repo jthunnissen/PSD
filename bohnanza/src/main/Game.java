@@ -16,7 +16,7 @@ public class Game {
 	 * @uml.property name="currentState"
 	 * @uml.associationEnd inverse="context:main.TurnState"
 	 */
-	private TurnState currentState = null;
+	private TurnState currentState;
 
 	/**
 	 * @uml.property name="players"
@@ -36,18 +36,12 @@ public class Game {
 	 */
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	private int currentPlayerIndex = 0;
 
 	/**
 		 */
-	public Game(int players) {
-		GameFactory.getInstance().createGameStates(this);
+	public Game() {
+		//GameFactory.getInstance().createGameStates(this);
 	}
 
 	/**
@@ -58,6 +52,13 @@ public class Game {
 	 */
 	public TurnState getCurrentState() {
 		return currentState;
+	}
+
+	/**
+	 * @param currentState the currentState to set
+	 */
+	public void setCurrentState(TurnState currentState) {
+		this.currentState = currentState;
 	}
 
 	/**
@@ -76,5 +77,29 @@ public class Game {
 
 	public Card drawCard() {
 		return null;
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public Player getCurrentPlayer() {
+		return players.get(currentPlayerIndex);
+	}
+
+	/**
+	 * 
+	 * @param skip
+	 * @requires skip >= 0
+	 */
+	public int goToNextPlayer(final int skip) {
+		if (skip < 0)
+			throw new IllegalArgumentException("skip must be >= 0");
+		
+		return currentPlayerIndex = (currentPlayerIndex + 1 + skip) % players.size();
 	}
 }

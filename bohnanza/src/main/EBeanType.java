@@ -150,6 +150,13 @@ public enum EBeanType {
 		public final int[][] beanometer() {
 			return new int[][] { { 2, 3, 4 }, { 2, 3, 4 } };
 		}
-	},
+	},;
 
+	public int numberOfCards() {
+		return this.numberOfCards();
+	}
+	
+	public int[][] beanometer() {
+		return this.beanometer();
+	}
 }
