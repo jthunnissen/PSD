@@ -1,8 +1,5 @@
 package main;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-
 public class BeanField extends Field<BeanCard> {
 
 	@Override
@@ -14,8 +11,17 @@ public class BeanField extends Field<BeanCard> {
 		}
 	}
 	
+	/**
+	 * Checks if the card that should be added is if the same type as the other cards in this field.
+	 * @param card Card that should be added.
+	 * @return true if card is of the same type of the other card on this field.
+	 */
 	private boolean checkCard(BeanCard card) {
-		throw new NotImplementedException();
+		if(cards.size() > 0){
+			if(cards.get(0).getType() != card.getType())
+				return false;
+		}
+		return true;
 	}
 	
 }

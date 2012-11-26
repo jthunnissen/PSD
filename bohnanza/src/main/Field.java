@@ -9,7 +9,7 @@ public abstract class Field<T extends Card> {
 	 * @uml.property name="card"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="field:main.Card"
 	 */
-	private ArrayList<T> cards = new ArrayList<T>();
+	protected ArrayList<T> cards = new ArrayList<T>();
 
 	/** 
 	 * Getter of the property <tt>card</tt>
