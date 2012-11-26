@@ -1,5 +1,7 @@
 package main;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 public class SetAsideCard extends Action {
 
@@ -9,8 +11,7 @@ public class SetAsideCard extends Action {
 	
 	@Override
 	public boolean handle(Object[] args) {
-		int i = (int) args[0];
-		return game.setAsideFaceUpCard(i);
+		throw new NotImplementedException();
 	}
 
 }

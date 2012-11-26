@@ -37,12 +37,6 @@ public class Game {
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
 
 	/**
-	 * @uml.property name="faceUpCards"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
-	 */
-	private FaceUpCard[] faceUpCards = new FaceUpCard[2];
-
-	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -80,32 +74,7 @@ public class Game {
 		return this.players.add(player);
 	}
 
-	class FaceUpCard {
-		boolean setAside = false;
-		Card card = null;
-
-		public FaceUpCard(Card card) {
-			this.card = card;
-		}
-	}
-
-	public void drawFaceUpCards() {
-		Card card = drawCard();
-		faceUpCards[0] = new FaceUpCard(card);
-		Card morecard = drawCard();
-		faceUpCards[1] = new FaceUpCard(morecard);
-	}
-
 	public Card drawCard() {
 		return null;
-	}
-
-	public boolean setAsideFaceUpCard(int i) {
-		if (faceUpCards == null)
-			return false;
-		if (faceUpCards[i].setAside)
-			return false;
-		faceUpCards[i].setAside = true;
-		return true;
 	}
 }

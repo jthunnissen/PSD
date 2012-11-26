@@ -29,6 +29,10 @@ public class Player {
 	 * @uml.property  name="name"
 	 */
 	private String name;
+	
+	private ArrayList<Card> aSideCards = new ArrayList<Card>();
+	
+	private ArrayList<Card> drawnCards = new ArrayList<Card>();
 
 	/**
 	 * Getter of the property <tt>name</tt>
@@ -55,6 +59,14 @@ public class Player {
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			return false;
 		}
+	}
+	
+	public boolean addASideCard(Card card) {
+		return aSideCards.add(card);
+	}
+	
+	public boolean addDrawnCard(Card card) {
+		return drawnCards.add(card);
 	}
 	
 	private BeanCard takeBean() throws ArrayIndexOutOfBoundsException {

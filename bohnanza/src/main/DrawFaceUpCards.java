@@ -9,7 +9,7 @@ public class DrawFaceUpCards extends Action {
 	
 	@Override
 	public boolean handle(Object[] args) {
-		game.drawFaceUpCards();
+		//game.drawFaceUpCards();
 		return true;
 	}
 
