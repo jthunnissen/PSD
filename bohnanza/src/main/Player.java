@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -76,5 +77,26 @@ public class Player {
 	public int getScore() {
 		throw new NotImplementedException();
 	}
-
+	
+	/**Perform a trade or donation
+	 * @param receive
+	 * @param give
+	 * @throws IllegalOperationException if not isValidTrade(receive,give)
+	 */
+	public void trade(List<Card> receive, List<Card> give, boolean active) throws IllegalOperationException {
+		if(!isValidTrade(receive, give, active)) throw new IllegalOperationException();
+		hand.removeAll(give);
+		if(active) drawnCards.removeAll(give);
+	}
+	
+	public boolean isValidTrade(List<Card> receive, List<Card> give, boolean active) {
+		boolean valid = true;
+		for(Card take: give) {
+			if (!hand.contains(take) && !(active && drawnCards.contains(take))) valid = false;
+		}
+		for(Card take: receive) {
+			if (hand.contains(take)) valid = false;
+		}
+		return valid;
+	}
 }
