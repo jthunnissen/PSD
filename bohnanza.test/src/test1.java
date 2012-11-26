@@ -18,48 +18,48 @@ import org.junit.Test;
 
 /**
  * @author Damiaan
- *
+ * 
  */
 public class test1 {
-	
+
 	private static final String PLAYER_NAME = "Player";
 
-
 	@Test
-	public void testPlayerInitScore(){
+	public void testPlayerInitScore() {
 		Player player = new Player(PLAYER_NAME);
 		assertSame("Score is not 0", player.getScore(), 0);
 	}
-	
+
 	@Test
-	public void testPlayerInitName(){
+	public void testPlayerInitName() {
 		Player player = new Player(PLAYER_NAME);
 		assertEquals("Player has incorrect name", player.getName(), PLAYER_NAME);
 	}
-	
+
 	@Test
-	public void testCardType(){
+	public void testCardType() {
 		BeanCard card = new BeanCard();
 		card.setType(EBeanType.BLACKEYEDBEAN);
-		assertSame("Card has incorrect type", card.getType(),EBeanType.BLACKEYEDBEAN);
+		assertSame("Card has incorrect type", card.getType(), EBeanType.BLACKEYEDBEAN);
 	}
-	
+
 	@Test
-	public void testFieldSetCard(){
+	public void testFieldSetCard() {
 		BeanField field = new BeanField();
 		BeanCard card = new BeanCard();
 		field.addCard(card);
-		assertSame("Field has incorrect card", field.getCard().get(0),card);
+		assertSame("Field has incorrect card", field.getCard().get(0), card);
 	}
-	
+
 	@Test
-	public void testGameInitPlayer(){
+	public void testGameInitPlayer() {
 		Player player1 = new Player(PLAYER_NAME);
 		Player player2 = new Player(PLAYER_NAME);
 		Game game = new Game(2);
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1); players.add(player2);
-		game.setPlayers(players);
-		assertSame("Game has incorrect number of players", game.getPlayers().size(), players.size());
+		game.addPlayer(player1);
+		game.addPlayer(player2);
+		assertEquals("Game has incorrect number of players", game.getPlayers().size(), 2);
+		assertTrue("Player 1 must be in the game", game.getPlayers().contains(player1));
+		assertTrue("Player 2 must be in the game", game.getPlayers().contains(player2));
 	}
 }

@@ -33,8 +33,8 @@ public class GameFactory {
 	/**
 	 */
 	public TurnState createGameStates(Game game){
-		new TurnState();
-		Action a = new Trade();
+		new TurnState(game, "newstate");
+		Action a = new Trade(game, game.getPlayers().get(0));
 		return null;
 	}
 

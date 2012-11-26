@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public class Player {
 
 	/**
@@ -57,6 +59,10 @@ public class Player {
 	
 	private BeanCard takeBean() throws ArrayIndexOutOfBoundsException {
 		return (BeanCard) hand.get(0);
+	}
+
+	public int getScore() {
+		throw new NotImplementedException();
 	}
 
 }

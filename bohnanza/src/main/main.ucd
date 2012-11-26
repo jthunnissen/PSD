@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1278,561" id="main" metadata="uml2-1.0" initialized="true" scrolledX="-74" tag="1000" key="32303037303533312D3130303020626F686E616E7A612F416E6E65">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1278,561" id="main" metadata="uml2-1.0" initialized="true" scrolledX="-74" tag="1000" key="32303037303533312D3130303020626F686E616E7A612F44616D6961616E">
   <children xsi:type="editmodel:EnumerationEditModel" name="EBeanType" location="960,30" size="132,251" id="main/EBeanType" runTimeClassModel="SOYBEAN%,CHILIBEAN%,COFFEEBEANS%,BLACKEYEDBEAN%,GARDENBEAN%,REDBEAN%,CACOABEAN%,BLUEBEAN%,CHILLIBEAN%,GREENBEAN%,STICKBEAN%,WAXBEAN%">
     <children xsi:type="editmodel:CompartmentEditModel" size="109,198">
       <children xsi:type="editmodel:EnumerationLiteralEditModel" name="CACOABEAN" id="main/EBeanType#CACOABEAN%"/>
@@ -16,27 +16,54 @@
     </children>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.8/@sourceConnections.0 //@children.2/@sourceConnections.1 //@children.4/@sourceConnections.0 //@children.6/@sourceConnections.1" name="Player" location="759,69" size="109,103" id="main/Player" runTimeClassModel="name,score,Player(Ljava.lang.String;)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.8/@sourceConnections.0 //@children.2/@sourceConnections.1 //@children.4/@sourceConnections.0 //@children.6/@sourceConnections.1" name="Player" location="759,69" size="131,121" id="main/Player" runTimeClassModel="name,calcScore(),plantBean(I),Player(Ljava.lang.String;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="79,36">
-      <children xsi:type="editmodel:AttributeEditModel" name="score" id="main/Player#score"/>
       <children xsi:type="editmodel:AttributeEditModel" name="name" id="main/Player#name"/>
     </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="86,18">
+    <children xsi:type="editmodel:CompartmentEditModel" size="108,54">
       <children xsi:type="editmodel:MethodEditModel" name="Player" id="main/Player#Player(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calcScore" id="main/Player#calcScore()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="plantBean" id="main/Player#plantBean(I)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="main/Card@coins+main/Player@player" source="//@children.1" target="//@children.6" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="player" id="main/Card@coins+main/Player@player|main/Player#player" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="coins" id="main/Card@coins+main/Player@player|main/Card#coins" multiplicityLabel="//@children.1/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.1/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - coins" location="521,168" size="36,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="571,140" size="4,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Game" location="375,75" size="117,67" id="main/Game" runTimeClassModel="main([Ljava.lang.String;),Game(I)">
-    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="94,18">
+  <children xsi:type="editmodel:ClassEditModel" name="Game" location="375,75" size="158,254" id="main/Game" runTimeClassModel="main([Ljava.lang.String;),setAsideFaceUpCard(I),drawFaceUpCards(),main.Game.FaceUpCard,thisGame,drawCard(),Game(I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,18"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="135,72">
       <children xsi:type="editmodel:MethodEditModel" name="Game" id="main/Game#Game(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setAsideFaceUpCard" id="main/Game#setAsideFaceUpCard(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="drawFaceUpCards" id="main/Game#drawFaceUpCards()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="drawCard" id="main/Game#drawCard()"/>
     </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="main/TurnState@currentState+main/Game@game" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.0/@children.1" label="//@children.2/@sourceConnections.0/@children.2" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" name="game" location="0,33" id="main/TurnState@currentState+main/Game@game|main/Game#game" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="currentState" location="221,93" id="main/TurnState@currentState+main/Game@game|main/TurnState#currentState" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - currentState" location="273,87" size="70,14" anchorKind="LastPart"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="135,105">
+      <children xsi:type="editmodel:ClassEditModel" name="FaceUpCard" size="135,103" id="main/Game$FaceUpCard">
+        <children xsi:type="editmodel:CompartmentEditModel" size="106,36">
+          <children xsi:type="editmodel:AttributeEditModel" name="card" id="main/Game$FaceUpCard#card"/>
+          <children xsi:type="editmodel:AttributeEditModel" name="setAside" id="main/Game$FaceUpCard#setAside"/>
+        </children>
+        <children xsi:type="editmodel:CompartmentEditModel" size="112,18">
+          <children xsi:type="editmodel:MethodEditModel" name="FaceUpCard" id="main/Game$FaceUpCard#FaceUpCard(Lmain.Card;)"/>
+        </children>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="main/Game@context+main/TurnState@currentState" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.0/@children.1" label="//@children.2/@sourceConnections.0/@children.2" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="context" location="0,33" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - context" location="322,87" size="46,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="350,115" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="currentState" location="221,93" id="main/Game@context+main/TurnState@currentState|main/TurnState#currentState" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" + currentState" location="273,87" size="72,14" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="1" location="273,115" size="6,14" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
@@ -44,8 +71,8 @@
     <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="main/Player@players+main/Game@game" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.1/@children.1" label="//@children.2/@sourceConnections.1/@children.2" sourceEnd="//@children.2/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
       <children xsi:type="editmodel:AssociationEndEditModel" name="game" location="117,33" id="main/Player@players+main/Game@game|main/Game#game" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" name="players" location="0,39" id="main/Player@players+main/Game@game|main/Player#players" multiplicityLabel="//@children.2/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.1/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - players" location="706,87" size="46,14" anchorKind="LastPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="*" location="748,115" size="4,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name=" - players" location="706,115" size="46,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="748,87" size="4,14" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
     </sourceConnections>
@@ -54,11 +81,11 @@
       <children xsi:type="editmodel:AssociationEndEditModel" location="58,67" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="84,0"/>
     </sourceConnections>
-    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="main/Card@drawDesk+main/Game@game" source="//@children.2" target="//@children.6" targetEnd="//@children.2/@sourceConnections.3/@children.2" label="//@children.2/@sourceConnections.3/@children.0" sourceEnd="//@children.2/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="main/Card@faceUpCards+main/Game@game" source="//@children.2" target="//@children.6" targetEnd="//@children.2/@sourceConnections.3/@children.2" label="//@children.2/@sourceConnections.3/@children.0" sourceEnd="//@children.2/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="game" location="117,40" id="main/Card@drawDesk+main/Game@game|main/Game#game" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="drawDesk" location="27,0" id="main/Card@drawDesk+main/Game@game|main/Card#drawDesk" multiplicityLabel="//@children.2/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.3/@children.2/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - drawDesk" location="598,140" size="60,14" anchorKind="LastPart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="game" location="117,40" id="main/Card@faceUpCards+main/Game@game|main/Game#game" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="faceUpCards" location="27,0" multiplicityLabel="//@children.2/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.3/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - faceUpCards" location="598,140" size="74,14" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="*" location="580,140" size="4,14" anchorKind="LastPart"/>
       </children>
     </sourceConnections>
@@ -68,6 +95,14 @@
       <children xsi:type="editmodel:AssociationEndEditModel" name="discardPile" location="0,25" id="main/Card@discardPile+main/Game@game|main/Card#discardPile" multiplicityLabel="//@children.2/@sourceConnections.4/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.4/@children.2/@children.0" navigable="true">
         <children xsi:type="editmodel:LabelEditModel" name=" - discardPile" location="495,193" size="62,14" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="*" location="553,165" size="4,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="main/Card@drawDeck+main/Game@game" source="//@children.2" target="//@children.6" targetEnd="//@children.2/@sourceConnections.5/@children.2" label="//@children.2/@sourceConnections.5/@children.0" sourceEnd="//@children.2/@sourceConnections.5/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="game" id="main/Card@drawDeck+main/Game@game|main/Game#game" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="drawDeck" id="main/Card@drawDeck+main/Game@game|main/Card#drawDeck" multiplicityLabel="//@children.2/@sourceConnections.5/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.5/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - drawDeck" location="497,168" size="60,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="571,140" size="4,14" anchorKind="LastPart"/>
       </children>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
@@ -81,7 +116,7 @@
       <children xsi:type="editmodel:MethodEditModel" name="getInstance" location="4,40" id="main/GameFactory#getInstance()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="main/GameFactory-Soyatec::Import->main/Action" source="//@children.3" target="//@children.10" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="main/GameFactory-Soyatec::Import->main/Action" source="//@children.3" target="//@children.9" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
       <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="0,33" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="142,33"/>
@@ -131,7 +166,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0 //@children.2/@sourceConnections.3 //@children.2/@sourceConnections.4" name="Card" location="564,161" size="136,93" id="main/Card" runTimeClassModel="name,flipped,numberOfCards">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0 //@children.2/@sourceConnections.3 //@children.2/@sourceConnections.4 //@children.1/@sourceConnections.0 //@children.2/@sourceConnections.5" name="Card" location="564,161" size="136,93" id="main/Card" runTimeClassModel="name,flipped,numberOfCards">
     <children xsi:type="editmodel:CompartmentEditModel" size="113,54">
       <children xsi:type="editmodel:AttributeEditModel" name="flipped" id="main/Card#flipped"/>
       <children xsi:type="editmodel:AttributeEditModel" name="name" id="main/Card#name"/>
@@ -149,8 +184,8 @@
     </sourceConnections>
     <sourceConnections xsi:type="editmodel:AssociationEditModel" id="main/Card@hand+main/Player@player" source="//@children.6" target="//@children.1" targetEnd="//@children.6/@sourceConnections.1/@children.1" label="//@children.6/@sourceConnections.1/@children.2" sourceEnd="//@children.6/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
       <children xsi:type="editmodel:AssociationEndEditModel" name="hand" location="136,19" id="main/Card@hand+main/Player@player|main/Card#hand" attachSource="true" multiplicityLabel="//@children.6/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.6/@sourceConnections.1/@children.0/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - hand" location="707,187" size="34,14" anchorKind="FirstPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="*" location="707,159" size="4,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name=" - hand" location="707,159" size="34,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="707,187" size="4,14" anchorKind="FirstPart"/>
       </children>
       <children xsi:type="editmodel:AssociationEndEditModel" name="player" location="29,101" id="main/Card@hand+main/Player@player|main/Player#player"/>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
@@ -185,22 +220,10 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Etc" location="234,378" size="142,67" id="main/Etc" runTimeClassModel="handle(Lmain.Player;[Ljava.lang.Object;)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.10/@sourceConnections.0 //@children.3/@sourceConnections.0" name="Action" location="85,237" size="142,67" id="main/Action" runTimeClassModel="handle(Lmain.Player;[Ljava.lang.Object;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="119,18">
-      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/Etc#handle(Lmain.Player;[Ljava.lang.Object;)"/>
-    </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="main/Action&lt;-main/Etc" source="//@children.9" target="//@children.11/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="71,0" anchorKind="FixedAtEdge" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="0,1"/>
-    </sourceConnections>
-    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
-  </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0 //@children.3/@sourceConnections.0" name="Action" location="85,237" size="142,67" id="main/Action" runTimeClassModel="handle(Lmain.Player;[Ljava.lang.Object;)">
-    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="119,18">
-      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/Action#handle(Lmain.Player;[Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/Action#handle([Ljava.lang.Object;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
@@ -208,10 +231,10 @@
   <children xsi:type="editmodel:ClassEditModel" name="PlantBean" location="-69,378" size="142,67" id="main/PlantBean" runTimeClassModel="handle(Lmain.Player;[Ljava.lang.Object;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="119,18">
-      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/PlantBean#handle(Lmain.Player;[Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/PlantBean#handle([Ljava.lang.Object;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.9/@sourceConnections.0 //@children.12/@sourceConnections.0" autoLocated="true" id="main/Action&lt;-main/PlantBean" source="//@children.11" target="//@children.10" targetEnd="//@children.11/@sourceConnections.0/@children.1" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.11/@sourceConnections.0" autoLocated="true" id="main/Action&lt;-main/PlantBean" source="//@children.10" target="//@children.9" targetEnd="//@children.10/@sourceConnections.0/@children.1" sourceEnd="//@children.10/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
       <children xsi:type="editmodel:AssociationEndEditModel" location="71,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="71,67" anchorKind="FixedAtEdge"/>
       <bendpoints secondRelativeDimension="-95,57" firstRelativeDimension="1,-54"/>
@@ -222,10 +245,10 @@
   <children xsi:type="editmodel:ClassEditModel" name="Trade" location="85,378" size="142,67" id="main/Trade" runTimeClassModel="handle(Lmain.Player;[Ljava.lang.Object;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="119,18">
-      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/Trade#handle(Lmain.Player;[Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handle" id="main/Trade#handle([Ljava.lang.Object;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="main/Action&lt;-main/Trade" source="//@children.12" target="//@children.11/@sourceConnections.0" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="main/Action&lt;-main/Trade" source="//@children.11" target="//@children.10/@sourceConnections.0" targetEnd="//@children.11/@sourceConnections.0/@children.1" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
       <children xsi:type="editmodel:AssociationEndEditModel" location="71,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="0,1" anchorKind="FixedAtEdge"/>
     </sourceConnections>
