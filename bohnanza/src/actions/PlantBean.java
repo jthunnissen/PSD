@@ -12,25 +12,21 @@ import main.Player;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
-public class Harvest extends Action {
+public class PlantBean extends Action {
 
-	public Harvest(Game game, Player player) {
+	public PlantBean(Game game, Player player) {
 		super(game, player);
 	}
 	
 	
 	@Override
 	/**
-	 * Harvest specified field from a Player
-	 * @param args[0] - Number of the field of the to be harvested field
+	 * Plants first card in a Player's hand in a specified field
+	 * @param args[0] - Number of the field where card should be planted
 	 */
 	public boolean handle(Object[] args) {
 		int fieldnr = (int) args[0];
-		ArrayList<Card> discard = player.harvastField(fieldnr);
-		for(Card card: discard){
-			game.addCardToDiscardPile(card);
-		}
-		return true;
+		return player.plantBean(fieldnr);
 	}
 
 }

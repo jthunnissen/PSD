@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class BeanField extends Field<BeanCard> {
 
 	@Override
@@ -10,6 +12,8 @@ public class BeanField extends Field<BeanCard> {
 			return false;
 		}
 	}
+	
+	
 	
 	/**
 	 * Checks if the card that should be added is if the same type as the other cards in this field.

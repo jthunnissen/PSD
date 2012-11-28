@@ -1,12 +1,15 @@
 package main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class BeanCard extends Card {
 
 	/**
 	 * @uml.property  name="produce" multiplicity="(0 -1)" dimension="2"
 	 */
-	private final int[][] produces;
+	private final HashMap<Integer, Integer> produces;
 
 
 	/**
@@ -29,8 +32,27 @@ public class BeanCard extends Card {
 	 * @return  Returns the produces.
 	 * @uml.property  name="produce"
 	 */
-	public int[][] getProduce() {
+	public HashMap<Integer, Integer> getProduce() {
 		return produces;
+	}
+	
+	/**
+	 * Calculates the beanometer.
+	 * @param cards Number of cards
+	 * @return Score of the beanometer
+	 */
+	public int getBeanometer(int cards) {
+		int nrOfCards = cards;
+		int result = 0;
+		while(result == 0 && nrOfCards != 0 ) {
+			if(produces.get(nrOfCards) != null) {
+				result = produces.get(nrOfCards);     
+			} else {
+				nrOfCards--;
+			}
+		}
+		return result;
+		
 	}
 
 }

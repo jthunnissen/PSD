@@ -74,6 +74,10 @@ public class Game {
 	public boolean addPlayer(Player player) {
 		return this.players.add(player);
 	}
+	
+	public boolean addCardToDiscardPile(Card card){
+		return this.discardPile.add(card);
+	}
 
 	public Card drawCard() {
 		return null;

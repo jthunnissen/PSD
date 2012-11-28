@@ -27,9 +27,10 @@ public class TestField {
 		BeanField field = new BeanField();
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		field.addCard(card);
-		assertSame("Field has incorrect card", field.getCard().get(0),card);
+		assertEquals("Field has incorrect card", field.getCards().get(0),card);
 	}
 	
+	@Test
 	public void testIncorrectCard(){
 		BeanField field = new BeanField();
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
@@ -38,6 +39,20 @@ public class TestField {
 		boolean result = field.addCard(errorCard);
 		assertEquals("Field accepts card from other type", false, result);
 	}
+	
+	@Test
+	public void testHarvest(){
+		BeanField field = new BeanField();
+		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		int toHarvest = 5;
+		for(int i=0; i<toHarvest; i++){
+			field.addCard(card);
+		}
+		int harvested = field.harvest().size();
+		assertEquals("Not all beans are harvested", toHarvest, harvested);
+	}
+	
+	
 
 	
 }

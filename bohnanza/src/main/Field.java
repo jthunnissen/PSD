@@ -16,12 +16,23 @@ public abstract class Field<T extends Card> {
 	 * @return  Returns the cards.
 	 * @uml.property  name="card"
 	 */
-	public ArrayList<T> getCard() {
+	public ArrayList<T> getCards() {
 		return cards;
 	}
 
 	public boolean addCard(T card) {
 		return cards.add(card);
+	}
+	
+	/**
+	 * Harvests this field. It clears this field and returns the cards that this field contained.
+	 * @post this.getCards().size() == 0
+	 * @return The cards that are harvested from this field.
+	 */
+	public ArrayList<T> harvest(){
+		ArrayList<T> result = cards;
+		cards = new ArrayList<T>();
+		return result; 
 	}
 
 }

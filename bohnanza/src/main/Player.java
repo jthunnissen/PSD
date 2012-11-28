@@ -3,8 +3,11 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+/**
+ * This class represents a Player
+ * @author Anne
+ *
+ */
 public class Player {
 
 	/**
@@ -12,21 +15,21 @@ public class Player {
 	 * @uml.property  name="fields"
 	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="player:main.Field"
 	 */
-	private ArrayList<Field> fields;
+	private ArrayList<Field> fields = new ArrayList<Field>();
 
 	/**
 	 * Represents the cards in the hand of this Player.
 	 * @uml.property  name="hand"
 	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="player:main.Card"
 	 */
-	private ArrayList<Card> hand;
+	private ArrayList<Card> hand = new ArrayList<Card>();
 
 	/**
 	 * Represents the treasury of this Player
 	 * @uml.property  name="coins"
 	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="player:main.Card"
 	 */
-	private ArrayList<Card> coins;
+	private ArrayList<Card> treasury = new ArrayList<Card>();
 
 	private ArrayList<Card> aSideCards = new ArrayList<Card>();
 
@@ -47,8 +50,15 @@ public class Player {
 		return name;
 	}
 
+	/**
+	 * @post getFields.size() == 2
+	 * @param name The Player's name
+	 */
 	public Player(String name) {
 		this.name = name;
+		BeanField field = new BeanField();
+		this.fields.add(field);
+		this.fields.add(field);
 	}
 
 	/**
@@ -56,9 +66,13 @@ public class Player {
 	 * @return score
 	 */
 	public int calcScore() {
-		return -1;
+		return this.treasury.size();
 	}
-
+		
+	public int addCardToTreasury(Card card) {
+		this.treasury.add(card);
+		return treasury.size();
+	}
 
 	/**
 	 * Adds a card to the players hand.
@@ -70,13 +84,22 @@ public class Player {
 	}
 
 	/**
-	 * Harvast the Players' field.
-	 * @param fieldnr Number of the field that will be harvasted.
-	 * @return Point that will be added to the players treasury.
+	 * Harvest the Players' field.
+	 * @param fieldnr Number of the field that will be harvested.
+	 * @return Cards that should be added to the discard pile.
 	 */
-	public int harvastField(int fieldnr){
-		//TODO
-		return 0;
+	public ArrayList<Card> harvastField(int fieldnr){
+		ArrayList<Card> cards = this.fields.get(fieldnr).harvest();
+		int beano = ((BeanCard) cards.get(0)).getBeanometer(cards.size());
+		ArrayList<Card> discard = new ArrayList<Card>();
+		for(int i=0; i<cards.size(); i++){
+			if(i<beano){
+				this.addCardToTreasury(cards.get(i));
+			} else {
+				discard.add(cards.get(i));
+			}
+		}
+		return discard;
 	}
 
 	/**
@@ -99,8 +122,10 @@ public class Player {
 	 * @return The first (newest) BeanCard in the Players' hand.
 	 * @throws ArrayIndexOutOfBoundsException
 	 */
-	private BeanCard takeBean() throws ArrayIndexOutOfBoundsException {
-		return (BeanCard) hand.get(0);
+	public BeanCard takeBean() throws ArrayIndexOutOfBoundsException {
+		BeanCard card = (BeanCard) hand.get(0);
+		hand.remove(0);
+		return card;
 	}
 
 	/**
