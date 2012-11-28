@@ -143,6 +143,24 @@ public class Player {
 	public ArrayList<Field> getFields(){
 		return fields;
 	}
+	
+	/**
+	 * This methods represents the Player's action to buy a third Field.
+	 * @return true if player has enough money and field is successfully bought.
+	 */
+	public boolean buyThirdField(){
+		if(this.calcScore() < 3) 
+			return false;
+		BeanField thirdField = new BeanField();
+		fields.add(thirdField);
+		
+		for(int i=0;i<3;i++){
+			this.fields.remove(0);
+		}
+		
+		return true;
+		
+	}
 
 	/**
 	 * Perform a trade or donation
