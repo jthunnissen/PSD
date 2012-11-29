@@ -1,6 +1,9 @@
-package main;
+package actions;
 
-public abstract class Action {
+import main.Game;
+import main.Player;
+
+public abstract class ActionBase {
 
 	protected final Game game;
 	protected final Player player;
@@ -10,7 +13,7 @@ public abstract class Action {
 	 * @require player != null
 	 * @require game.getPlayers().contains(player)
 	 */
-	public Action(Game game, Player player) {
+	public ActionBase(Game game, Player player) {
 		assert game != null : "@require game != null";
 		assert player != null : "@require player != null";
 		assert game.getPlayers().contains(player) : "@require game.getPlayers().contains(player)";

@@ -1,6 +1,11 @@
-package main;
+package states;
 
 import java.util.HashMap;
+
+import main.Game;
+import main.Player;
+
+import actions.ActionBase;
 
 /**
  * @uml.dependency supplier="main.Action" stereotypes="Standard::Call"
@@ -10,7 +15,7 @@ public class TurnState {
 	/**
 	 * @uml.property name="actions"
 	 */
-	private HashMap<Action, TurnState> actions = new HashMap<Action, TurnState>();
+	private HashMap<ActionBase, TurnState> actions = new HashMap<ActionBase, TurnState>();
 
 	/**
 	 * @uml.property name="name" readOnly="true"
@@ -34,19 +39,19 @@ public class TurnState {
 
 	/**
 	 */
-	public boolean handle(Action action, String[] args) {
+	public boolean handle(ActionBase action, String[] args) {
 		return false;
 	}
 
 	/**
 	 */
-	public boolean handle(Action action) {
+	public boolean handle(ActionBase action) {
 		return false;
 	}
 
 	/**
 	 */
-	public void addActionState(Action action, TurnState state) {
+	public void addActionState(ActionBase action, TurnState state) {
 	}
 
 	public String getName() {

@@ -6,6 +6,9 @@ import exceptions.IllegalActionException;
 import exceptions.NotEnoughMoneyException;
 import java.util.List;
 
+import exceptions.IllegalOperationException;
+
+
 /**
  * This class represents a Player
  * @author Anne
@@ -59,7 +62,7 @@ public class Player {
 	 */
 	public Player(String name) {
 		this.name = name;
-		BeanField field = new BeanField();
+		Field field = new BeanField();
 		this.fields.add(field);
 		this.fields.add(field);
 	}
@@ -127,7 +130,7 @@ public class Player {
 	public boolean plantBean(int fieldnr) {
 		try {
 			BeanCard bean = takeBean();
-			Field<Card> field = fields.get(fieldnr);
+			Field field = fields.get(fieldnr);
 			return field.addCard(bean);
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			return false;

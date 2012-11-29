@@ -77,37 +77,4 @@ public class ActionDrawCardsTest {
 	
 
 
-	@Test
-	public void testDrawCards(){
-		
-	}
-
-	@Test
-	public void testBuyThirdField(){
-		
-		boolean result = true;
-		try{
-			player.buyThirdField();
-		} catch (IllegalActionException | NotEnoughMoneyException e) {
-			result = false;
-		}
-		assertEquals("Player has not enough buy, but can buy third field", result, true);
-		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
-		player.addCardToTreasury(card);
-		player.addCardToTreasury(card);
-		BuyThirdField action = new BuyThirdField(game, player);
-		result = action.handle(null); 
-		assertEquals("Player can't buy a third field", result, true);
-
-		player.addCardToTreasury(card);
-		player.addCardToTreasury(card);
-		try{
-			player.buyThirdField();
-		} catch(Exception e) {
-			result = false;
-		}
-		assertEquals("Player can buy third field, but already has a third field", result, true);
-
-	}
-
 }

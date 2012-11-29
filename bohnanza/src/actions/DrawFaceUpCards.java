@@ -1,7 +1,10 @@
-package main;
+package actions;
+
+import main.Game;
+import main.Player;
 
 
-public class DrawFaceUpCards extends Action {
+public class DrawFaceUpCards extends ActionBase {
 
 	public DrawFaceUpCards(Game game, Player player) {
 		super(game, player);

@@ -2,8 +2,6 @@ package actions;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import main.Action;
 import main.Card;
 import main.Game;
 import main.GameFactory;
@@ -12,7 +10,7 @@ import main.Player;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
-public class Draw3Cards extends Action {
+public class Draw3Cards extends ActionBase {
 
 	public Draw3Cards(Game game, Player player) {
 		super(game, player);
