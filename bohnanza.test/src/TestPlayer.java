@@ -8,6 +8,8 @@ import main.EBeanType;
 import main.Player;
 import org.junit.Test;
 
+import exceptions.IllegalActionException;
+
 /**
  * 
  */
@@ -66,7 +68,11 @@ public class TestPlayer {
 		player.addCardToHand(card);
 		player.plantBean(1);
 		player.plantBean(1);
-		player.harvastField(1);
+		try {
+			player.harvastField(1);
+		} catch (IllegalActionException e) {
+
+		}
 		assertEquals("Score is incorrect",player.calcScore(), card.getBeanometer(2));
 	}
 	
@@ -79,7 +85,12 @@ public class TestPlayer {
 			player.addCardToHand(card);
 			player.plantBean(1);
 		}
-		int discard = player.harvastField(1).size();
+		int discard;
+		try {
+			discard = player.harvastField(1).size();
+		} catch (IllegalActionException e) {
+			discard = 0;
+		}
 		assertEquals("Player discards incorrectly",1, discard);
 	}
 }

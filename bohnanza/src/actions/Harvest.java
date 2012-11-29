@@ -3,6 +3,8 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.IllegalActionException;
+
 import main.Action;
 import main.Card;
 import main.Game;
@@ -26,7 +28,13 @@ public class Harvest extends Action {
 	 */
 	public boolean handle(Object[] args) {
 		int fieldnr = (int) args[0];
-		ArrayList<Card> discard = player.harvastField(fieldnr);
+		ArrayList<Card> discard = new ArrayList<Card>();
+		try {
+			discard = player.harvastField(fieldnr);
+		} catch (IllegalActionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(Card card: discard){
 			game.addCardToDiscardPile(card);
 		}

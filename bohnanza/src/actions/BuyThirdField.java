@@ -1,16 +1,10 @@
 package actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import exceptions.IllegalActionException;
+import exceptions.NotEnoughMoneyException;
 import main.Action;
-import main.Card;
 import main.Game;
-import main.GameFactory;
 import main.Player;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 
 public class BuyThirdField extends Action {
 
@@ -18,14 +12,20 @@ public class BuyThirdField extends Action {
 		super(game, player);
 	}
 	
-	
 	@Override
 	/**
 	 * Plants first card in a Player's hand in a specified field
-	 * @param args[0] - Number of the field where card should be planted
 	 */
 	public boolean handle(Object[] args) {
-		return player.buyThirdField();
+		boolean result = true;
+		try {
+			result = player.buyThirdField();
+		} catch (NotEnoughMoneyException e) {
+			result = false;
+		} catch (IllegalActionException e) {
+			result = false;
+		}
+		return result;
 	}
 
 }

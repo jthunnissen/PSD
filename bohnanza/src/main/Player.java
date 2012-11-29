@@ -1,6 +1,9 @@
 package main;
 
 import java.util.ArrayList;
+
+import exceptions.IllegalActionException;
+import exceptions.NotEnoughMoneyException;
 import java.util.List;
 
 /**
@@ -87,8 +90,22 @@ public class Player {
 	 * Harvest the Players' field.
 	 * @param fieldnr Number of the field that will be harvested.
 	 * @return Cards that should be added to the discard pile.
+	 * @throws IllegalActionException 
 	 */
-	public ArrayList<Card> harvastField(int fieldnr){
+	public ArrayList<Card> harvastField(int fieldnr) throws IllegalActionException{
+		// Check if all fields contain one card 
+		if(fields.get(fieldnr).getCards().size() == 1) {
+			boolean ok = true;
+			for(Field field: fields){
+				if(field.getCards().size() != 1)
+					ok = false;
+			}
+			if(!ok) {
+				throw new IllegalActionException("This field has one card, other fields have more");
+			}
+		}
+		
+		
 		ArrayList<Card> cards = this.fields.get(fieldnr).harvest();
 		int beano = ((BeanCard) cards.get(0)).getBeanometer(cards.size());
 		ArrayList<Card> discard = new ArrayList<Card>();
@@ -147,10 +164,15 @@ public class Player {
 	/**
 	 * This methods represents the Player's action to buy a third Field.
 	 * @return true if player has enough money and field is successfully bought.
+	 * @throws NotEnoughMoneyException 
+	 * @throws IllegalActionException 
 	 */
-	public boolean buyThirdField(){
+	public boolean buyThirdField() throws NotEnoughMoneyException, IllegalActionException{
+		if(this.fields.size() == 3) {
+			throw new IllegalActionException("Player has already 3 fields");
+		}
 		if(this.calcScore() < 3) 
-			return false;
+			throw new NotEnoughMoneyException("Player has " +calcScore()+ " coins");
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
 		
