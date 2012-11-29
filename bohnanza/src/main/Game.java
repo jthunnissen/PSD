@@ -4,7 +4,8 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Collection;
+
+import states.TurnState;
 
 /**
  * @author Damiaan
@@ -37,10 +38,13 @@ public class Game {
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
 
 	private int currentPlayerIndex = 0;
+	
 
 	/**
 		 */
 	public Game() {
+		GameFactory factory = GameFactory.getInstance();
+		drawDesk = factory.getGameDeck();
 		//GameFactory.getInstance().createGameStates(this);
 	}
 

@@ -23,7 +23,6 @@ public class GameFactoryTest {
 	@Test
 	public void standartCardDeckTest() {
 		ArrayList<Card> deck = gameFactory.getGameDeck();
-		
 		assertEquals("Standard deck size must be " + String.valueOf(STANDARDDECKSIZE), STANDARDDECKSIZE, deck.size());
 	}
 

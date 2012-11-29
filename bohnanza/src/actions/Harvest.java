@@ -1,18 +1,13 @@
 package actions;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import main.Action;
 import main.Card;
 import main.Game;
-import main.GameFactory;
 import main.Player;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-
-public class Harvest extends Action {
+public class Harvest extends ActionBase {
 
 	public Harvest(Game game, Player player) {
 		super(game, player);

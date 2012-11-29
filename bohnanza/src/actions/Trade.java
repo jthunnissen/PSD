@@ -1,11 +1,14 @@
-package main;
+package actions;
 
 import java.util.List;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import main.Card;
+import main.Game;
+import main.Player;
+import exceptions.IllegalOperationException;
 
 
-public class Trade extends Action {
+public class Trade extends ActionBase {
 
 	public Trade(Game game, Player player) {
 		super(game, player);

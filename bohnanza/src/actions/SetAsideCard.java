@@ -1,9 +1,11 @@
-package main;
+package actions;
 
+import main.Game;
+import main.Player;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
-public class SetAsideCard extends Action {
+public class SetAsideCard extends ActionBase {
 
 	public SetAsideCard(Game game, Player player) {
 		super(game, player);

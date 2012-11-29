@@ -2,6 +2,11 @@ package main;
 
 import java.util.ArrayList;
 
+import states.TurnState;
+
+import actions.ActionBase;
+import actions.Trade;
+
 /**
  * @uml.dependency supplier="main.TurnState" stereotypes="Standard::Create"
  * @uml.dependency supplier="main.Action" stereotypes="Standard::Create"
@@ -28,7 +33,7 @@ public class GameFactory {
 	 */
 	public TurnState createGameStates(Game game) {
 		new TurnState(game, "newstate");
-		Action a = new Trade(game, game.getPlayers().get(0));
+		ActionBase a = new Trade(game, game.getPlayers().get(0));
 		return null;
 	}
 

@@ -1,18 +1,10 @@
 package actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import main.Action;
-import main.Card;
 import main.Game;
-import main.GameFactory;
 import main.Player;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-
-public class BuyThirdField extends Action {
+public class BuyThirdField extends ActionBase {
 
 	public BuyThirdField(Game game, Player player) {
 		super(game, player);

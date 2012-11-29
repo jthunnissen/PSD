@@ -3,24 +3,24 @@ package main;
 import java.util.ArrayList;
 
 
-public abstract class Field<T extends Card> {
+public abstract class Field {
 
 	/** 
 	 * @uml.property name="card"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="field:main.Card"
 	 */
-	protected ArrayList<T> cards = new ArrayList<T>();
+	protected ArrayList<Card> cards = new ArrayList<Card>();
 
 	/** 
 	 * Getter of the property <tt>card</tt>
 	 * @return  Returns the cards.
 	 * @uml.property  name="card"
 	 */
-	public ArrayList<T> getCards() {
+	public ArrayList<Card> getCards() {
 		return cards;
 	}
 
-	public boolean addCard(T card) {
+	public boolean addCard(Card card) {
 		return cards.add(card);
 	}
 	
@@ -29,9 +29,9 @@ public abstract class Field<T extends Card> {
 	 * @post this.getCards().size() == 0
 	 * @return The cards that are harvested from this field.
 	 */
-	public ArrayList<T> harvest(){
-		ArrayList<T> result = cards;
-		cards = new ArrayList<T>();
+	public ArrayList<Card> harvest(){
+		ArrayList<Card> result = cards;
+		cards = new ArrayList<Card>();
 		return result; 
 	}
 
