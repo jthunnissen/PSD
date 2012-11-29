@@ -2,11 +2,14 @@ package actions;
 
 import exceptions.IllegalActionException;
 import exceptions.NotEnoughMoneyException;
+
 import main.Game;
 import main.Player;
 
 
+
 public class BuyThirdField extends ActionBase {
+
 
 	public BuyThirdField(Game game, Player player) {
 		super(game, player);
