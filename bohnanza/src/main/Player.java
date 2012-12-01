@@ -1,13 +1,8 @@
 package main;
-
 import java.util.ArrayList;
-
 import exceptions.IllegalActionException;
 import exceptions.NotEnoughMoneyException;
 import java.util.List;
-
-import exceptions.IllegalOperationException;
-
 
 /**
  * This class represents a Player
@@ -193,8 +188,8 @@ public class Player {
 	 * @param give
 	 * @throws IllegalOperationException if not isValidTrade(receive,give)
 	 */
-	public void trade(List<Card> receive, List<Card> give, boolean active) throws IllegalOperationException {
-		if(!isValidTrade(receive, give, active)) throw new IllegalOperationException();
+	public void trade(List<Card> receive, List<Card> give, boolean active) throws IllegalActionException {
+		if(!isValidTrade(receive, give, active)) throw new IllegalActionException(this.name + "can only trade onwned for not owned cards");
 		hand.removeAll(give);
 		if(active) drawnCards.removeAll(give);
 	}

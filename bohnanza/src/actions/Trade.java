@@ -1,12 +1,9 @@
 package actions;
-
 import java.util.List;
-
 import main.Card;
 import main.Game;
 import main.Player;
-import exceptions.IllegalOperationException;
-
+import exceptions.IllegalActionException;
 
 public class Trade extends ActionBase {
 
@@ -28,7 +25,8 @@ public class Trade extends ActionBase {
 		else try {
 			player.trade(give, receive, true);
 			otherPlayer.trade(receive, give, false);
-		} catch (IllegalOperationException e) {
+		} catch (IllegalActionException e) {
+			e.printStackTrace();
 			result = false;
 		}
 		return result;
