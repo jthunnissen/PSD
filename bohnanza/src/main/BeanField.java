@@ -39,10 +39,14 @@ public class BeanField extends Field {
 	 */
 	private boolean checkCard(BeanCard card) {
 		if (cards.size() > 0) {
-			if (((BeanCard) cards.get(0)).getType() != card.getType())
+			if (getTypeOf(card) != card.getType())
 				return false;
 		}
 		return true;
+	}
+	
+	private EBeanType getTypeOf(Card card) {
+		return ((BeanCard) cards.get(0)).getType();
 	}
 
 }

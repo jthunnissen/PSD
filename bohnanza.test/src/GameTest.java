@@ -10,14 +10,11 @@ import org.junit.Test;
 
 public class GameTest {
 	
-	public Game game;
 	public final String PLAYER1_NAME = "player1";
 	public final String PLAYER2_NAME = "player2";
 	public final String PLAYER3_NAME = "player3";
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+	
+	public Game game;
 
 	@Before
 	public void setUp() throws Exception {
