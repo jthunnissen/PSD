@@ -35,9 +35,9 @@ public class ActionDrawCardsTest {
 
 	@Before 
 	public void setUp() { 
-		Player player = new Player(PLAYER_NAME);
-		Game game = new Game();
-		PlantBean action = new PlantBean(game, player);
+		player = new Player(PLAYER_NAME);
+		game = new Game();
+		action = new PlantBean(game, player);
 	}
 	
 	@Test

@@ -36,9 +36,9 @@ public class ActionPlantBeanTest {
 
 	@Before 
 	public void setUp() { 
-		Player player = new Player(PLAYER_NAME);
-		Game game = new Game();
-		Draw2Cards action = new Draw2Cards(game, player);
+		player = new Player(PLAYER_NAME);
+		game = new Game();
+		action = new Draw2Cards(game, player);
 	}
 
 	@Test
