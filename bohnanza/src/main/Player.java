@@ -163,11 +163,7 @@ public class Player {
 			throw new IllegalActionException("Player has not enough money. Has: "+this.calcScore());
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
-		
-		for(int i=0;i<3;i++){
-			this.fields.remove(0);
-		}
-		
+				
 		return true;
 		
 	}

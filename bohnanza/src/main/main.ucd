@@ -16,7 +16,7 @@
     </children>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterNames="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.4/@sourceConnections.1" name="Player" location="759,69" size="235,304" id="main/Player" runTimeClassModel="trade(Ljava.util.List;Ljava.util.List;Z),getHand(),getFields(),harvastField(I),calcScore(),isValidTrade(Ljava.util.List;Ljava.util.List;Z),plantBean(I),buyThirdField(),name,drawnCards,aSideCards,Player(Ljava.lang.String;),addCardToTreasury(Lmain.Card;),addCardToHand(Lmain.Card;)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.4/@sourceConnections.1" name="Player" location="759,69" size="235,304" id="main/Player" runTimeClassModel="trade(Ljava.util.List;Ljava.util.List;Z),getHand(),getFields(),harvastField(I),calcScore(),plantBean(I),isValidTrade(Ljava.util.List;Ljava.util.List;Z),buyThirdField(),name,drawnCards,aSideCards,Player(Ljava.lang.String;),addCardToTreasury(Lmain.Card;),addCardToHand(Lmain.Card;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="189,54">
       <children xsi:type="editmodel:AttributeEditModel" name="name" id="main/Player#name"/>
       <children xsi:type="editmodel:AttributeEditModel" name="drawnCards" id="main/Player#drawnCards"/>
@@ -26,8 +26,8 @@
       <children xsi:type="editmodel:MethodEditModel" name="Player" id="main/Player#Player(Ljava.lang.String;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="calcScore" id="main/Player#calcScore()"/>
       <children xsi:type="editmodel:MethodEditModel" name="plantBean" id="main/Player#plantBean(I)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="trade" id="main/Player#trade(Ljava.util.List;Ljava.util.List;Z)"/>
       <children xsi:type="editmodel:MethodEditModel" name="isValidTrade" id="main/Player#isValidTrade(Ljava.util.List;Ljava.util.List;Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="trade" id="main/Player#trade(Ljava.util.List;Ljava.util.List;Z)"/>
       <children xsi:type="editmodel:MethodEditModel" name="harvastField" id="main/Player#harvastField(I)"/>
       <children xsi:type="editmodel:MethodEditModel" name="getFields" id="main/Player#getFields()"/>
       <children xsi:type="editmodel:MethodEditModel" name="addCardToHand" id="main/Player#addCardToHand(Lmain.Card;)"/>

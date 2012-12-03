@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.BeanCard;
 import main.BeanField;
+import main.Card;
 import main.EBeanType;
 import main.Field;
 import main.Game;
@@ -21,7 +22,14 @@ import org.junit.Test;
  * @author Anne van de Venis
  */
 public class TestField {
-
+	
+	@Test
+	public void testAddCard(){
+		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		BeanField field = new BeanField();
+		field.addCard(card);
+	}
+	
 	@Test
 	public void testFieldSetCard(){
 		BeanField field = new BeanField();

@@ -25,21 +25,12 @@ public class TestPlayer {
 
 
 	@Test
-	public void testPlayerInitScore(){
+	public void testPlayerInit(){
 		Player player = new Player(PLAYER_NAME);
 		assertSame("Score is not 0", player.calcScore(), 0);
-	}
-	
-	@Test
-	public void testPlayerInitFields(){
-		Player player = new Player(PLAYER_NAME);
 		assertSame("Player has not two fields", player.getFields().size(), 2);
-	}
-	
-	@Test
-	public void testPlayerInitName(){
-		Player player = new Player(PLAYER_NAME);
 		assertEquals("Player has incorrect name", player.getName(), PLAYER_NAME);
+		assertEquals("Player has strange hand", player.getHand().size(), 0);
 	}
 	
 	@Test
@@ -127,6 +118,27 @@ public class TestPlayer {
 			System.out.println(e.getMessage());
 		}
 		assertEquals("Player can not buy third field", true, result);
+		assertEquals("Player does not have a third field", 3, player.getFields().size());
+		
+		for(int i=0; i<5; i++){
+			player.addCardToHand(card);
+			try {
+				player.plantBean(1);
+			} catch (IllegalActionException e) {
+			}		
+		}
+		try {
+			player.harvastField(1);
+		} catch (IllegalActionException e) {
+			result = false;
+		}
+		
+		try {
+			player.buyThirdField();
+		} catch (IllegalActionException e) {
+			result = false;
+		}
+		assertEquals("Player can buy a fourth field", false, result);
 		
 	}
 }

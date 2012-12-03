@@ -26,6 +26,7 @@ public class TestCard {
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		assertEquals("Card name is not created correctly", card.getName(), EBeanType.BLACKEYEDBEAN.toString());
 		assertEquals("No. of cards is not created correctly", card.getNumberOfCards(), EBeanType.BLACKEYEDBEAN.numberOfCards());
+		assertEquals("Produces of card is not created correctly", card.getProduce(), EBeanType.BLACKEYEDBEAN.beanometer());
 	}
 	
 	@Test
