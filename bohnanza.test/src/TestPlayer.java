@@ -1,19 +1,7 @@
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
-import main.BeanCard;
-import main.Card;
-import main.EBeanType;
-import main.Player;
+import main.*;
 import org.junit.Test;
-
-import exceptions.IllegalActionException;
-import exceptions.NotEnoughMoneyException;
-
-/**
- * 
- */
 
 /**
  * Test class for the Player.

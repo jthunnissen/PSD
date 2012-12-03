@@ -1,27 +1,10 @@
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import main.BeanCard;
-import main.Card;
-import main.EBeanType;
-import main.Game;
-import main.GameFactory;
-import main.Player;
-
+import main.*;
 import org.junit.Before;
 import org.junit.Test;
-
 import actions.BuyThirdField;
 import actions.Draw2Cards;
 import actions.PlantBean;
-
-import exceptions.IllegalActionException;
-import exceptions.NotEnoughMoneyException;
-
-/**
- * 
- */
 
 /**
  * Test class for the Player.

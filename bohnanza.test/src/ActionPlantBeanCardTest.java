@@ -1,15 +1,8 @@
 import static org.junit.Assert.*;
-import main.BeanCard;
-import main.EBeanType;
-import main.Game;
-import main.Player;
+import main.*;
 import org.junit.Before;
 import org.junit.Test;
 import actions.PlantBean;
-
-/**
- * 
- */
 
 /**
  * Test class for the Player.
@@ -30,40 +23,28 @@ public class ActionPlantBeanCardTest {
 	}
 	
 	@Test
-	public void testPlant(){
-		boolean result = true;
+	public void testPlant() throws IllegalActionException {
 		Object args[] = {1};
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		player.addCardToHand(card);
 		player.addCardToHand(card);
-		result = action.handle(args);
-		
-		assertEquals("Player could not plant a BeanCard", result, true);		
+		action.handle(args);		
 	}
 	
-	@Test
-	public void testPlantNoCardsInHands(){
-		boolean result = true;
+	@Test(expected=IllegalActionException.class)
+	public void testPlantNoCardsInHands() throws IllegalActionException {
 		Object args[] = {1};
-		result = action.handle(args);
-		
-		assertEquals("Player planted card but has no cards", result, false);		
+		action.handle(args);	
 	}
 	
-	@Test 
-	public void testPlantInNotMatchingField(){
+	@Test(expected=IllegalActionException.class)
+	public void testPlantInNotMatchingField() throws IllegalActionException {
 		BeanCard card1 = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		BeanCard card2 = new BeanCard(EBeanType.BLUEBEAN);
 		player.addCardToHand(card1);
 		player.addCardToHand(card2);
 		Object args[] = {1};
 		action.handle(args);
-		boolean result = true;
-		result = action.handle(args);
-		
-		assertEquals("Player planted card in a not-matching field", result, false);
+		action.handle(args);
 	}
-	
-
-
 }

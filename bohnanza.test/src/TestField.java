@@ -1,20 +1,5 @@
 import static org.junit.Assert.*;
-<<<<<<< HEAD
 import main.*;
-=======
-
-import java.util.ArrayList;
-
-import main.BeanCard;
-import main.BeanField;
-import main.Card;
-import main.EBeanType;
-import main.Field;
-import main.Game;
-import main.GameFactory;
-import main.Player;
-
->>>>>>> branch 'master' of ssh://git@github.com/q41/PSD.git
 import org.junit.Test;
 
 /**
@@ -23,16 +8,6 @@ import org.junit.Test;
  */
 public class TestField {
 	
-<<<<<<< HEAD
-=======
-	@Test
-	public void testAddCard(){
-		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
-		BeanField field = new BeanField();
-		field.addCard(card);
-	}
-	
->>>>>>> branch 'master' of ssh://git@github.com/q41/PSD.git
 	@Test
 	public void testAddCard() throws IllegalActionException {
 		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
@@ -68,8 +43,4 @@ public class TestField {
 		int harvested = field.harvest().size();
 		assertEquals("Not all beans are harvested", toHarvest, harvested);
 	}
-	
-	
-
-	
 }
