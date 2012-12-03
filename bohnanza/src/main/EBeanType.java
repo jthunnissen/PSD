@@ -214,11 +214,7 @@ public enum EBeanType {
 		}
 	},;
 
-	public int numberOfCards() {
-		return this.numberOfCards();
-	}
+	public abstract int numberOfCards();
 	
-	public HashMap<Integer, Integer> beanometer() {
-		return this.beanometer();
-	}
+	public abstract HashMap<Integer, Integer> beanometer();
 }

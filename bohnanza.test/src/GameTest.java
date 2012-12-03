@@ -1,10 +1,12 @@
 import static org.junit.Assert.*;
-
+import main.Card;
 import main.Game;
 import main.Player;
 
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsSame;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -52,5 +54,12 @@ public class GameTest {
 		
 		game.goToNextPlayer(-1);
 	}
-
+	
+	@Test
+	public void drawCardsTest() {
+		int drawDeskSize = game.getDrawDeskSize();
+		int discardPileSize = game.getDiscardPileSize();
+		
+		//assertThat("discrad pile size must be 0 by default", game.getDiscardPileSize(), );
+	}
 }

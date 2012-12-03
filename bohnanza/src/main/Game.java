@@ -4,6 +4,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import states.TurnState;
 
@@ -41,10 +42,19 @@ public class Game {
 	
 
 	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+	}
+
+	/**
 		 */
 	public Game() {
 		GameFactory factory = GameFactory.getInstance();
 		drawDesk = factory.getGameDeck();
+		shuffleCards();
 		//GameFactory.getInstance().createGameStates(this);
 	}
 
@@ -84,15 +94,9 @@ public class Game {
 	}
 
 	public Card drawCard() {
-		return null;
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Card drawnCard = drawDesk.get(0);
+		drawDesk.remove(0);
+		return drawnCard;
 	}
 
 	public Player getCurrentPlayer() {
@@ -109,5 +113,17 @@ public class Game {
 			throw new IllegalArgumentException("skip must be >= 0");
 		
 		return currentPlayerIndex = (currentPlayerIndex + 1 + skip) % players.size();
+	}
+	
+	private void shuffleCards() {
+		Collections.shuffle(drawDesk);
+	}
+	
+	public int getDrawDeskSize() {
+		return drawDesk.size();
+	}
+	
+	public int getDiscardPileSize() {
+		return discardPile.size();
 	}
 }
