@@ -128,8 +128,14 @@ public class Player {
 	 * @return true if the BeanCard is successfully planted in the Players' field.
 	 */
 	public void plantBean(int fieldnr) throws IllegalActionException {
+		BeanCard bean;
 		try {
-			BeanCard bean = takeBean();
+			bean = (BeanCard) hand.get(0);
+			hand.remove(0);
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			throw new IllegalActionException("Player not enough cards");
+		}
+		try {
 			Field field = fields.get(fieldnr);
 			field.addCard(bean);
 		} catch (ArrayIndexOutOfBoundsException ex) {
@@ -175,7 +181,7 @@ public class Player {
 			throw new IllegalActionException("Player already has 3 fields");
 		}
 		if(this.calcScore() < 3) 
-			throw new IllegalActionException("Player has only" +calcScore()+ " coins");
+			throw new IllegalActionException("Player has not enough money. Has: "+this.calcScore());
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
 		

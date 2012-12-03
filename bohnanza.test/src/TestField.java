@@ -1,28 +1,20 @@
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import main.BeanCard;
-import main.BeanField;
-import main.EBeanType;
-import main.Field;
-import main.Game;
-import main.GameFactory;
-import main.IllegalActionException;
-import main.Player;
-
+import main.*;
 import org.junit.Test;
-
-/**
- * 
- */
 
 /**
  * Test class for the Field
  * @author Anne van de Venis
  */
 public class TestField {
-
+	
+	@Test
+	public void testAddCard() throws IllegalActionException {
+		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		BeanField field = new BeanField();
+		field.addCard(card);
+	}
+	
 	@Test
 	public void testFieldSetCard() throws IllegalActionException {
 		BeanField field = new BeanField();
