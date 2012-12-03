@@ -1,9 +1,5 @@
 package actions;
-
-import main.Game;
-import main.Player;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
+import main.*;
 
 public class SetAsideCard extends ActionBase {
 
@@ -12,8 +8,9 @@ public class SetAsideCard extends ActionBase {
 	}
 	
 	@Override
-	public boolean handle(Object[] args) {
-		throw new NotImplementedException();
+	public void handle(Object[] args) throws IllegalActionException {
+		Card card = (Card)args[0];
+		player.setFaceUpCardaside(card);
 	}
 
 }

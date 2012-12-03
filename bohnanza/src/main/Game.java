@@ -94,6 +94,7 @@ public class Game {
 	}
 
 	public Card drawCard() {
+		//TODO: reshuffle deck if empty
 		Card drawnCard = drawDesk.get(0);
 		drawDesk.remove(0);
 		return drawnCard;

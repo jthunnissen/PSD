@@ -8,6 +8,7 @@ import main.EBeanType;
 import main.Field;
 import main.Game;
 import main.GameFactory;
+import main.IllegalActionException;
 import main.Player;
 
 import org.junit.Test;
@@ -23,25 +24,24 @@ import org.junit.Test;
 public class TestField {
 
 	@Test
-	public void testFieldSetCard(){
+	public void testFieldSetCard() throws IllegalActionException {
 		BeanField field = new BeanField();
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		field.addCard(card);
 		assertEquals("Field has incorrect card", field.getCards().get(0),card);
 	}
 	
-	@Test
-	public void testIncorrectCard(){
+	@Test(expected=IllegalActionException.class)
+	public void testIncorrectCard() throws IllegalActionException {
 		BeanField field = new BeanField();
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		field.addCard(card);
 		BeanCard errorCard = new BeanCard(EBeanType.BLUEBEAN);	
-		boolean result = field.addCard(errorCard);
-		assertEquals("Field accepts card from other type", false, result);
+		field.addCard(errorCard);
 	}
 	
 	@Test
-	public void testHarvest(){
+	public void testHarvest() throws IllegalActionException {
 		BeanField field = new BeanField();
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		int toHarvest = 5;

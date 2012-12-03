@@ -1,7 +1,5 @@
 package actions;
-
-import main.Game;
-import main.Player;
+import main.*;
 
 
 public class PlantBean extends ActionBase {
@@ -18,9 +16,9 @@ public class PlantBean extends ActionBase {
 	 * @see main.Action#handle(main.Player, java.lang.Object[])
 	 */
 	@Override
-	public boolean handle(Object[] args) {
+	public void handle(Object[] args) throws IllegalActionException {
 		int fieldnr = (int) args[0];
-		return player.plantBean(fieldnr);
+		player.plantBean(fieldnr);
 	}
 
 }

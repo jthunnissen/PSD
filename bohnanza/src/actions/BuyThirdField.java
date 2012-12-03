@@ -1,12 +1,5 @@
 package actions;
-
-import exceptions.IllegalActionException;
-import exceptions.NotEnoughMoneyException;
-
-import main.Game;
-import main.Player;
-
-
+import main.*;
 
 public class BuyThirdField extends ActionBase {
 
@@ -19,16 +12,8 @@ public class BuyThirdField extends ActionBase {
 	/**
 	 * Plants first card in a Player's hand in a specified field
 	 */
-	public boolean handle(Object[] args) {
-		boolean result = true;
-		try {
-			result = player.buyThirdField();
-		} catch (NotEnoughMoneyException e) {
-			result = false;
-		} catch (IllegalActionException e) {
-			result = false;
-		}
-		return result;
+	public void handle(Object[] args) throws IllegalActionException {
+		player.buyThirdField();
 	}
 
 }

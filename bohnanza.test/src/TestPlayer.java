@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import main.BeanCard;
 import main.Card;
 import main.EBeanType;
+import main.IllegalActionException;
 import main.Player;
 import org.junit.Test;
 
-import exceptions.IllegalActionException;
 
 /**
  * 
@@ -52,7 +52,7 @@ public class TestPlayer {
 	}
 	
 	@Test
-	public void testPlayerPlant(){
+	public void testPlayerPlant() throws IllegalActionException{
 		Player player = new Player(PLAYER_NAME);
 		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		player.addCardToHand(card);
@@ -61,7 +61,7 @@ public class TestPlayer {
 	}
 	
 	@Test
-	public void testPlayerHarvest(){
+	public void testPlayerHarvest() throws IllegalActionException {
 		Player player = new Player(PLAYER_NAME);
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		player.addCardToHand(card);
@@ -77,7 +77,7 @@ public class TestPlayer {
 	}
 	
 	@Test
-	public void testPlayerHarvestWithDiscard(){
+	public void testPlayerHarvestWithDiscard() throws IllegalActionException {
 		Player player = new Player(PLAYER_NAME);
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		int nrOfCards = 2;

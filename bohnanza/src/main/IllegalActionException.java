@@ -1,4 +1,4 @@
-package exceptions;
+package main;
 
 public class IllegalActionException extends Exception
 {

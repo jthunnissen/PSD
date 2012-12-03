@@ -1,8 +1,8 @@
 package main;
 import java.util.ArrayList;
-import exceptions.IllegalActionException;
-import exceptions.NotEnoughMoneyException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class represents a Player
@@ -31,9 +31,14 @@ public class Player {
 	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="player:main.Card"
 	 */
 	private ArrayList<Card> treasury = new ArrayList<Card>();
-
-	private ArrayList<Card> aSideCards = new ArrayList<Card>();
-
+	
+	/** 
+	 * Represents face up cards during trade/donate turn phase
+	 * @uml.property name="faceUpCards"
+	 */
+	private Map<Card, Boolean> faceUpCards = new HashMap<Card,Boolean>();
+	
+	//TODO: doc
 	private ArrayList<Card> drawnCards = new ArrayList<Card>();
 
 	/**
@@ -122,13 +127,13 @@ public class Player {
 	 * @param fieldnr Number of the field where the card will be planted.
 	 * @return true if the BeanCard is successfully planted in the Players' field.
 	 */
-	public boolean plantBean(int fieldnr) {
+	public void plantBean(int fieldnr) throws IllegalActionException {
 		try {
 			BeanCard bean = takeBean();
 			Field field = fields.get(fieldnr);
-			return field.addCard(bean);
+			field.addCard(bean);
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			return false;
+			throw new IllegalActionException("Non existing field");
 		}
 	}
 
@@ -165,12 +170,12 @@ public class Player {
 	 * @throws NotEnoughMoneyException 
 	 * @throws IllegalActionException 
 	 */
-	public boolean buyThirdField() throws NotEnoughMoneyException, IllegalActionException{
+	public boolean buyThirdField() throws IllegalActionException {
 		if(this.fields.size() == 3) {
-			throw new IllegalActionException("Player has already 3 fields");
+			throw new IllegalActionException("Player already has 3 fields");
 		}
 		if(this.calcScore() < 3) 
-			throw new NotEnoughMoneyException("Player has " +calcScore()+ " coins");
+			throw new IllegalActionException("Player has only" +calcScore()+ " coins");
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
 		
@@ -205,4 +210,28 @@ public class Player {
 		return valid;
 	}
 
+	/**
+	 * Getter of the property <tt>faceUpCards</tt>
+	 * @return  Returns the faceUpCards.
+	 * @uml.property  name="faceUpCards"
+	 */
+	public Map getFaceUpCards() {
+		return faceUpCards;
+	}
+
+	/**
+	 * Setter of the property <tt>faceUpCards</tt>
+	 * @param faceUpCards  The faceUpCards to set.
+	 * @uml.property  name="faceUpCards"
+	 */
+	public void setFaceUpCards(Map faceUpCards) {
+		this.faceUpCards = faceUpCards;
+	}
+	
+	public void setFaceUpCardaside(Card card) throws IllegalActionException {
+		Boolean aside = faceUpCards.get(card);
+		if(aside == null) throw new IllegalActionException("Can only set aside face-up cards");
+		if(!aside) throw new IllegalActionException("Card is already set aside");
+		faceUpCards.put(card, true);
+	}
 }

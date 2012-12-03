@@ -1,6 +1,7 @@
 package actions;
 
 import main.Game;
+import main.IllegalActionException;
 import main.Player;
 
 public abstract class ActionBase {
@@ -22,6 +23,6 @@ public abstract class ActionBase {
 		this.player = player;
 	}
 	
-	public abstract boolean handle(Object[] args);
+	public abstract void handle(Object[] args) throws IllegalActionException;
 
 }

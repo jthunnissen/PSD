@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import main.*;
 
 
 public abstract class Field {
@@ -20,8 +21,8 @@ public abstract class Field {
 		return cards;
 	}
 
-	public boolean addCard(Card card) {
-		return cards.add(card);
+	public void addCard(Card card) throws IllegalActionException {
+		if(!cards.add(card)) throw new IllegalActionException("Card already in field");
 	}
 	
 	/**

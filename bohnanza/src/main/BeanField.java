@@ -1,6 +1,6 @@
 package main;
-
 import java.util.ArrayList;
+import main.*;
 
 public class BeanField extends Field {
 
@@ -10,8 +10,9 @@ public class BeanField extends Field {
 	 * @see main.Field#addCard(main.Card)
 	 */
 	@Override
-	public boolean addCard(Card card) {
-		return card instanceof BeanCard ? addCard((BeanCard) card) : false;
+	public void addCard(Card card) throws IllegalActionException {
+		if(card instanceof BeanCard) super.addCard((BeanCard) card);
+		else throw new IllegalActionException("Cannot at non-Beancard to Beanfield");
 	}
 
 	/*
@@ -25,8 +26,9 @@ public class BeanField extends Field {
 		return super.harvest();
 	}
 
-	public boolean addCard(BeanCard card) {
-		return checkCard(card) ? super.addCard(card) : false;
+	public void addCard(BeanCard card) throws IllegalActionException {
+		if(checkCard(card)) super.addCard(card);
+		else throw new IllegalActionException("Bean is not of same type");
 	}
 
 	/**
