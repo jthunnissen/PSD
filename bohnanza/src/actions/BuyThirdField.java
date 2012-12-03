@@ -23,8 +23,6 @@ public class BuyThirdField extends ActionBase {
 		boolean result = true;
 		try {
 			result = player.buyThirdField();
-		} catch (NotEnoughMoneyException e) {
-			result = false;
 		} catch (IllegalActionException e) {
 			result = false;
 		}

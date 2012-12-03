@@ -85,7 +85,7 @@ public class Player {
 	}
 
 	/**
-	 * Harvest the Players' field.
+	 * Harvest the Players' field and adds cards to the treasury.
 	 * @param fieldnr Number of the field that will be harvested.
 	 * @return Cards that should be added to the discard pile.
 	 * @throws IllegalActionException 
@@ -121,26 +121,17 @@ public class Player {
 	 * The first BeanCard in the Players' hand will be planted on a Players' field.
 	 * @param fieldnr Number of the field where the card will be planted.
 	 * @return true if the BeanCard is successfully planted in the Players' field.
+	 * @throws IllegalActionException 
 	 */
-	public boolean plantBean(int fieldnr) {
+	public boolean plantBean(int fieldnr) throws IllegalActionException {
 		try {
-			BeanCard bean = takeBean();
+			BeanCard card = (BeanCard) hand.get(0);
+			hand.remove(0);
 			Field field = fields.get(fieldnr);
-			return field.addCard(bean);
+			return field.addCard(card);
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			return false;
+			throw new IllegalActionException("Player not enough cards");
 		}
-	}
-
-	/**
-	 * Returns the first BeanCard in the Players' hand.
-	 * @return The first (newest) BeanCard in the Players' hand.
-	 * @throws ArrayIndexOutOfBoundsException
-	 */
-	public BeanCard takeBean() throws ArrayIndexOutOfBoundsException {
-		BeanCard card = (BeanCard) hand.get(0);
-		hand.remove(0);
-		return card;
 	}
 
 	/**
@@ -162,15 +153,14 @@ public class Player {
 	/**
 	 * This methods represents the Player's action to buy a third Field.
 	 * @return true if player has enough money and field is successfully bought.
-	 * @throws NotEnoughMoneyException 
 	 * @throws IllegalActionException 
 	 */
-	public boolean buyThirdField() throws NotEnoughMoneyException, IllegalActionException{
+	public boolean buyThirdField() throws IllegalActionException{
 		if(this.fields.size() == 3) {
 			throw new IllegalActionException("Player has already 3 fields");
 		}
 		if(this.calcScore() < 3) 
-			throw new NotEnoughMoneyException("Player has " +calcScore()+ " coins");
+			throw new IllegalActionException("Player has not enough money. Has: "+this.calcScore());
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
 		

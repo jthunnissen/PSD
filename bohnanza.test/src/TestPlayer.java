@@ -9,6 +9,7 @@ import main.Player;
 import org.junit.Test;
 
 import exceptions.IllegalActionException;
+import exceptions.NotEnoughMoneyException;
 
 /**
  * 
@@ -40,23 +41,16 @@ public class TestPlayer {
 		Player player = new Player(PLAYER_NAME);
 		assertEquals("Player has incorrect name", player.getName(), PLAYER_NAME);
 	}
-
-	@Test 
-	public void testPlayerTakeFirstCard(){
-		Player player = new Player(PLAYER_NAME);
-		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
-		player.addCardToHand(card);
-		int cardsInHand = player.getHand().size();
-		player.takeBean();
-		assertEquals("Card has not been removed from hand", cardsInHand - 1,player.getHand().size() );
-	}
 	
 	@Test
 	public void testPlayerPlant(){
 		Player player = new Player(PLAYER_NAME);
 		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		player.addCardToHand(card);
-		player.plantBean(1);
+		try {
+			player.plantBean(1);
+		} catch (IllegalActionException e) {
+		}
 		assertEquals("Card has not been removed from hand", 1, player.getFields().get(1).getCards().size() );
 	}
 	
@@ -64,11 +58,11 @@ public class TestPlayer {
 	public void testPlayerHarvest(){
 		Player player = new Player(PLAYER_NAME);
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
-		player.addCardToHand(card);
-		player.addCardToHand(card);
-		player.plantBean(1);
-		player.plantBean(1);
 		try {
+			player.addCardToHand(card);
+			player.addCardToHand(card);
+			player.plantBean(1);
+			player.plantBean(1);
 			player.harvastField(1);
 		} catch (IllegalActionException e) {
 
@@ -83,7 +77,11 @@ public class TestPlayer {
 		int nrOfCards = 2;
 		for(int i=0;i<nrOfCards;i++){
 			player.addCardToHand(card);
-			player.plantBean(1);
+			try {
+				player.plantBean(1);
+			} catch (IllegalActionException e) {
+				e.printStackTrace();
+			}
 		}
 		int discard;
 		try {
@@ -92,5 +90,43 @@ public class TestPlayer {
 			discard = 0;
 		}
 		assertEquals("Player discards incorrectly",1, discard);
+	}
+	
+	@Test
+	public void testPlayerBuyThirdField(){
+		Player player = new Player(PLAYER_NAME);
+		boolean result = true;
+		try{
+			result = player.buyThirdField();
+		} catch (IllegalActionException e) {
+			result = false;
+		}
+		assertEquals("Player can buy field but has not enough money", false, result );
+		
+		result = true;
+		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		// 5 BlackEyedBeanCards means 3 coins
+		for(int i=0; i<5; i++){
+			player.addCardToHand(card);
+			try {
+				player.plantBean(1);
+			} catch (IllegalActionException e) {
+			}		
+		}
+		
+		try {
+			player.harvastField(1);
+		} catch (IllegalActionException e) {
+			result = false;
+		}
+		
+		try {
+			player.buyThirdField();
+		} catch (IllegalActionException e) {
+			result = false;
+			System.out.println(e.getMessage());
+		}
+		assertEquals("Player can not buy third field", true, result);
+		
 	}
 }

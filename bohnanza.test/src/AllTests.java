@@ -7,9 +7,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @Suite.SuiteClasses({ 
 		GameFactoryTest.class, 
 		GameTest.class, 
+		TestCard.class,
 		TestField.class, 
 		TestPlayer.class, 
-		ActionPlantBeanTest.class,
+		ActionPlantBeanCardTest.class,
 		ActionDrawCardsTest.class} )
 public class AllTests {
 
