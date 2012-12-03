@@ -90,7 +90,7 @@ public class Player {
 	}
 
 	/**
-	 * Harvest the Players' field.
+	 * Harvest the Players' field and adds cards to the treasury.
 	 * @param fieldnr Number of the field that will be harvested.
 	 * @return Cards that should be added to the discard pile.
 	 * @throws IllegalActionException 
@@ -126,6 +126,7 @@ public class Player {
 	 * The first BeanCard in the Players' hand will be planted on a Players' field.
 	 * @param fieldnr Number of the field where the card will be planted.
 	 * @return true if the BeanCard is successfully planted in the Players' field.
+	 * @throws IllegalActionException 
 	 */
 	public void plantBean(int fieldnr) throws IllegalActionException {
 		BeanCard bean;
@@ -141,17 +142,6 @@ public class Player {
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			throw new IllegalActionException("Non existing field");
 		}
-	}
-
-	/**
-	 * Returns the first BeanCard in the Players' hand.
-	 * @return The first (newest) BeanCard in the Players' hand.
-	 * @throws ArrayIndexOutOfBoundsException
-	 */
-	public BeanCard takeBean() throws ArrayIndexOutOfBoundsException {
-		BeanCard card = (BeanCard) hand.get(0);
-		hand.remove(0);
-		return card;
 	}
 
 	/**
@@ -173,7 +163,6 @@ public class Player {
 	/**
 	 * This methods represents the Player's action to buy a third Field.
 	 * @return true if player has enough money and field is successfully bought.
-	 * @throws NotEnoughMoneyException 
 	 * @throws IllegalActionException 
 	 */
 	public boolean buyThirdField() throws IllegalActionException {
@@ -184,11 +173,7 @@ public class Player {
 			throw new IllegalActionException("Player has not enough money. Has: "+this.calcScore());
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
-		
-		for(int i=0;i<3;i++){
-			this.fields.remove(0);
-		}
-		
+				
 		return true;
 		
 	}

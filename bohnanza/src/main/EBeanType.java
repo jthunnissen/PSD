@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.util.HashMap;
@@ -45,7 +42,7 @@ public enum EBeanType {
 			beano.put(4, 1);
 			return beano;
 		}
-		
+
 	},
 	WAXBEAN {
 		public final String toString() {
@@ -64,7 +61,7 @@ public enum EBeanType {
 			beano.put(4, 1);
 			return beano;
 		}
-		
+
 	},
 	BLUEBEAN {
 		public final String toString() {
@@ -93,7 +90,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 16;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(8, 4);
@@ -111,7 +108,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 14;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(7, 4);
@@ -130,7 +127,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 12;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(7, 4);
@@ -149,7 +146,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 10;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(6, 4);
@@ -168,7 +165,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 8;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(5, 4);
@@ -187,7 +184,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 6;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(3, 3);
@@ -204,7 +201,7 @@ public enum EBeanType {
 		public final int numberOfCards() {
 			return 4;
 		}
-		
+
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(4, 4);
@@ -215,6 +212,6 @@ public enum EBeanType {
 	},;
 
 	public abstract int numberOfCards();
-	
+
 	public abstract HashMap<Integer, Integer> beanometer();
 }
