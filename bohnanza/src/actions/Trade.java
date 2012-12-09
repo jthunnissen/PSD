@@ -7,8 +7,8 @@ import main.Player;
 
 public class Trade extends ActionBase {
 
-	public Trade(Game game, Player player) {
-		super(game, player);
+	public Trade(Game game) {
+		super(game);
 	}
 	
 	/**Trade or donate cards
@@ -16,7 +16,7 @@ public class Trade extends ActionBase {
 	 * @require give != null
 	 */
 	@Override
-	public void handle(Object[] args) throws IllegalActionException {
+	public void handle(Player player, Object[] args) throws IllegalActionException {
 		Player otherPlayer = (Player) args[0];
 		List<Card> give = (List<Card>) args[1];
 		List<Card> receive = (List<Card>) args[2];

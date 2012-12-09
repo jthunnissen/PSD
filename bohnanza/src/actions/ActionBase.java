@@ -1,28 +1,19 @@
 package actions;
-
-import main.Game;
+import main.*;
 import main.IllegalActionException;
-import main.Player;
 
 public abstract class ActionBase {
 
 	protected final Game game;
-	protected final Player player;
 	
 	/**
 	 * @require game != null
-	 * @require player != null
-	 * @require game.getPlayers().contains(player)
 	 */
-	public ActionBase(Game game, Player player) {
+	public ActionBase(Game game) {
 		assert game != null : "@require game != null";
-		assert player != null : "@require player != null";
-		assert game.getPlayers().contains(player) : "@require game.getPlayers().contains(player)";
-		
 		this.game = game;
-		this.player = player;
 	}
 	
-	public abstract void handle(Object[] args) throws IllegalActionException;
+	public abstract void handle(Player player, Object[] args) throws IllegalActionException;
 
 }

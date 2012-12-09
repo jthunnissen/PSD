@@ -1,5 +1,6 @@
 package main;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,30 +17,33 @@ public class Player {
 	 * @uml.property  name="fields"
 	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="player:main.Field"
 	 */
-	private ArrayList<Field> fields = new ArrayList<Field>();
+	private List<BeanField> beanFields = new ArrayList<BeanField>();
 
 	/**
 	 * Represents the cards in the hand of this Player.
 	 * @uml.property  name="hand"
 	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="player:main.Card"
 	 */
-	private ArrayList<Card> hand = new ArrayList<Card>();
+	private List<Card> hand = new ArrayList<Card>();
 
 	/**
 	 * Represents the treasury of this Player
 	 * @uml.property  name="coins"
 	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="player:main.Card"
 	 */
-	private ArrayList<Card> treasury = new ArrayList<Card>();
+	private List<Card> treasury = new ArrayList<Card>();
 	
 	/** 
 	 * Represents face up cards during trade/donate turn phase
 	 * @uml.property name="faceUpCards"
 	 */
-	private Map<Card, Boolean> faceUpCards = new HashMap<Card,Boolean>();
+	private List<Card> faceUpCards = new ArrayList<Card>();
 	
-	//TODO: doc
-	private ArrayList<Card> drawnCards = new ArrayList<Card>();
+	/** 
+	 * Represents traded/donated/set aside cards during turn phase
+	 * @uml.property name="setAsideCards"
+	 */
+	private List<Card> setAsideCards = new ArrayList<Card>();
 
 	/**
 	 * The name from this Player.
@@ -62,9 +66,8 @@ public class Player {
 	 */
 	public Player(String name) {
 		this.name = name;
-		Field field = new BeanField();
-		this.fields.add(field);
-		this.fields.add(field);
+		this.beanFields.add(new BeanField());
+		this.beanFields.add(new BeanField());
 	}
 
 	/**
@@ -95,12 +98,12 @@ public class Player {
 	 * @return Cards that should be added to the discard pile.
 	 * @throws IllegalActionException 
 	 */
-	public ArrayList<Card> harvastField(int fieldnr) throws IllegalActionException{
+	public ArrayList<Card> harvastField(Field field) throws IllegalActionException{
 		// Check if all fields contain one card 
-		if(fields.get(fieldnr).getCards().size() == 1) {
+		if(field.getCards().size() == 1) {
 			boolean ok = true;
-			for(Field field: fields){
-				if(field.getCards().size() != 1)
+			for(Field f: beanFields){
+				if(f.getCards().size() != 1)
 					ok = false;
 			}
 			if(!ok) {
@@ -109,7 +112,7 @@ public class Player {
 		}
 		
 		
-		ArrayList<Card> cards = this.fields.get(fieldnr).harvest();
+		ArrayList<Card> cards = field.harvest();
 		int beano = ((BeanCard) cards.get(0)).getBeanometer(cards.size());
 		ArrayList<Card> discard = new ArrayList<Card>();
 		for(int i=0; i<cards.size(); i++){
@@ -128,27 +131,22 @@ public class Player {
 	 * @return true if the BeanCard is successfully planted in the Players' field.
 	 * @throws IllegalActionException 
 	 */
-	public void plantBean(int fieldnr) throws IllegalActionException {
-		BeanCard bean;
-		try {
-			bean = (BeanCard) hand.get(0);
-			hand.remove(0);
-		} catch (ArrayIndexOutOfBoundsException ex) {
-			throw new IllegalActionException("Player not enough cards");
+	public void plantBean(BeanCard bean, BeanField field) throws IllegalActionException {
+		if(!setAsideCards.isEmpty()){
+			if(setAsideCards.remove(bean)) throw new IllegalActionException("Bean must be set aside");
 		}
-		try {
-			Field field = fields.get(fieldnr);
-			field.addCard(bean);
-		} catch (ArrayIndexOutOfBoundsException ex) {
-			throw new IllegalActionException("Non existing field");
-		}
+		else if(!hand.isEmpty() && hand.get(0)==bean) hand.remove(0);
+		else throw new IllegalActionException("Player cannot plant this bean");
+		
+		if(beanFields.contains(field)) field.addCard(bean);
+		else throw new IllegalActionException("Player does not own field");
 	}
 
 	/**
 	 * Getter of the Players' hand
 	 * @return The hand of this Player.
 	 */
-	public ArrayList<Card> getHand(){
+	public List<Card> getHand(){
 		return hand;
 	}
 	
@@ -156,8 +154,8 @@ public class Player {
 	 * Getter of the Players' fields
 	 * @return The fields of this Player.
 	 */
-	public ArrayList<Field> getFields(){
-		return fields;
+	public List<BeanField> getBeanFields(){
+		return beanFields;
 	}
 	
 	/**
@@ -165,14 +163,14 @@ public class Player {
 	 * @return true if player has enough money and field is successfully bought.
 	 * @throws IllegalActionException 
 	 */
-	public boolean buyThirdField() throws IllegalActionException {
-		if(this.fields.size() == 3) {
+	public boolean buyField() throws IllegalActionException {
+		if(this.beanFields.size() == 3) {
 			throw new IllegalActionException("Player already has 3 fields");
 		}
 		if(this.calcScore() < 3) 
 			throw new IllegalActionException("Player has not enough money. Has: "+this.calcScore());
 		BeanField thirdField = new BeanField();
-		fields.add(thirdField);
+		beanFields.add(thirdField);
 				
 		return true;
 		
@@ -187,16 +185,14 @@ public class Player {
 	public void trade(List<Card> receive, List<Card> give, boolean active) throws IllegalActionException {
 		if(!isValidTrade(receive, give, active)) throw new IllegalActionException(this.name + "can only trade onwned for not owned cards");
 		hand.removeAll(give);
-		if(active) drawnCards.removeAll(give);
+		if(active) faceUpCards.removeAll(give);
+		setAsideCards.addAll(receive);
 	}
 
 	public boolean isValidTrade(List<Card> receive, List<Card> give, boolean active) {
 		boolean valid = true;
 		for(Card take: give) {
-			if (!hand.contains(take) && !(active && drawnCards.contains(take))) valid = false;
-		}
-		for(Card take: receive) {
-			if (hand.contains(take)) valid = false;
+			if (!hand.contains(take) && !(active && faceUpCards.contains(take))) valid = false;
 		}
 		return valid;
 	}
@@ -206,7 +202,7 @@ public class Player {
 	 * @return  Returns the faceUpCards.
 	 * @uml.property  name="faceUpCards"
 	 */
-	public Map getFaceUpCards() {
+	public Collection<Card> getFaceUpCards() {
 		return faceUpCards;
 	}
 
@@ -215,14 +211,12 @@ public class Player {
 	 * @param faceUpCards  The faceUpCards to set.
 	 * @uml.property  name="faceUpCards"
 	 */
-	public void setFaceUpCards(Map faceUpCards) {
+	public void setFaceUpCards(List<Card> faceUpCards) {
 		this.faceUpCards = faceUpCards;
 	}
 	
 	public void setFaceUpCardaside(Card card) throws IllegalActionException {
-		Boolean aside = faceUpCards.get(card);
-		if(aside == null) throw new IllegalActionException("Can only set aside face-up cards");
-		if(!aside) throw new IllegalActionException("Card is already set aside");
-		faceUpCards.put(card, true);
+		if(!faceUpCards.remove(card)) throw new IllegalActionException("Can only set aside face-up cards");
+		setAsideCards.add(card);
 	}
 }

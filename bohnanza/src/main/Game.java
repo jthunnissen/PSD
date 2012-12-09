@@ -4,7 +4,10 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
 
 import states.TurnState;
 
@@ -21,6 +24,12 @@ public class Game {
 	private TurnState currentState;
 
 	/**
+	 * @uml.property name="currentPlayer"
+	 * @uml.associationEnd inverse="turnState:main.Player"
+	 */
+	private Player activePlayer;
+	
+	/**
 	 * @uml.property name="players"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Player"
 	 */
@@ -30,7 +39,7 @@ public class Game {
 	 * @uml.property name="drawDeck"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
-	private ArrayList<Card> drawDesk = new ArrayList<Card>();
+	private ArrayList<Card> drawDeck = new ArrayList<Card>();
 
 	/**
 	 * @uml.property name="discardPile"
@@ -53,7 +62,7 @@ public class Game {
 		 */
 	public Game() {
 		GameFactory factory = GameFactory.getInstance();
-		drawDesk = factory.getGameDeck();
+		drawDeck = factory.getGameDeck();
 		shuffleCards();
 		//GameFactory.getInstance().createGameStates(this);
 	}
@@ -93,13 +102,18 @@ public class Game {
 		return this.discardPile.add(card);
 	}
 
+	/**Draws one card from the draw deck and shuffles the deck it if this depletes it.
+	 * @require !drawDeck.isEmpty()
+	 */
 	public Card drawCard() {
-		//TODO: reshuffle deck if empty
-		Card drawnCard = drawDesk.get(0);
-		drawDesk.remove(0);
+		Card drawnCard = drawDeck.remove(0);
+		if(drawDeck.isEmpty()) {
+			drawDeck.addAll(discardPile);
+			Collections.shuffle(drawDeck);
+		}
 		return drawnCard;
 	}
-
+	
 	public Player getCurrentPlayer() {
 		return players.get(currentPlayerIndex);
 	}
@@ -117,11 +131,11 @@ public class Game {
 	}
 	
 	private void shuffleCards() {
-		Collections.shuffle(drawDesk);
+		Collections.shuffle(drawDeck);
 	}
 	
 	public int getDrawDeskSize() {
-		return drawDesk.size();
+		return drawDeck.size();
 	}
 	
 	public int getDiscardPileSize() {

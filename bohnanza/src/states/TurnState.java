@@ -3,7 +3,11 @@ package states;
 import java.util.HashMap;
 
 import main.Game;
+import main.IllegalActionException;
 import main.Player;
+import java.util.Map;
+
+import javax.activity.InvalidActivityException;
 
 import actions.ActionBase;
 
@@ -13,80 +17,56 @@ import actions.ActionBase;
 public class TurnState {
 
 	/**
-	 * @uml.property name="actions"
+	 * @uml.property name="playeractions"
 	 */
-	private HashMap<ActionBase, TurnState> actions = new HashMap<ActionBase, TurnState>();
+	private Map<Player,Map<ActionBase, TurnState>> actions = new HashMap<Player, Map<ActionBase, TurnState>>();
 
 	/**
+	 * @uml.property name="stateAdvance"
+	 */
+	private StateAdvance stateAdvance;
+	
+	/**For developer reference
 	 * @uml.property name="name" readOnly="true"
 	 */
-	private String name;
-	/**
-	 * @uml.property name="currentPlayer"
-	 * @uml.associationEnd inverse="turnState:main.Player"
-	 */
-	private Player currentPlayer;
+	private final String name;
+	
 	/**
 	 * @uml.property name="context"
 	 * @uml.associationEnd inverse="currentState:main.Game"
 	 */
 	private final Game context;
-
-	public TurnState(final Game context, String name) {
-		this.context = context;
-		this.name = name;
-	}
-
+	
 	/**
-	 */
-	public boolean handle(ActionBase action, String[] args) {
-		return false;
-	}
-
-	/**
-	 */
-	public boolean handle(ActionBase action) {
-		return false;
-	}
-
-	/**
-	 */
-	public void addActionState(ActionBase action, TurnState state) {
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Getter of the property <tt>currentPlayer</tt>
-	 * 
-	 * @return Returns the currentPlayer.
-	 * @uml.property name="currentPlayer"
-	 */
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-
-	/**
-	 * Setter of the property <tt>currentPlayer</tt>
-	 * 
-	 * @param currentPlayer
-	 *            The currentPlayer to set.
-	 * @uml.property name="currentPlayer"
-	 */
-	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
-	}
-
-	/**
-	 * Getter of the property <tt>context</tt>
-	 * 
 	 * @return Returns the context.
 	 * @uml.property name="context"
 	 */
 	public Game getContext() {
 		return context;
+	}
+	
+	public TurnState(final Game context, String name) {
+		this.context = context;
+		this.name = name;
+		this.stateAdvance = new AlwaysAdvance();
+	}
+	
+	public TurnState(final Game context, StateAdvance stateAdvance, String name) {
+		this.context = context;
+		this.name = name;
+		this.stateAdvance = stateAdvance;
+	}
+
+	/** Execute action for player and advance to next state if appropriate */
+	public void performAction(Player player, ActionBase action, Object[] args) throws IllegalActionException {
+		if(!actions.get(player).containsKey(action)) throw new IllegalActionException("Action not available");
+		action.handle(player, args);
+		if(stateAdvance.canAdvance()) context.setCurrentState(actions.get(player).get(action));
+	}
+
+	/**
+	 */
+	public void addActionState(Player player, ActionBase action, TurnState state) {
 	}
 
 }
