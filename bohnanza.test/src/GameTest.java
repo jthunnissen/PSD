@@ -1,11 +1,13 @@
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import main.Card;
 import main.Game;
 import main.Player;
 
-import org.hamcrest.core.Is;
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsSame;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +31,7 @@ public class GameTest {
 		assertEquals("Players must be empty on creation", 0, game.getPlayers().size());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void playerTest() {
 		Player player1 = new Player(PLAYER1_NAME);
 		Player player2 = new Player(PLAYER2_NAME);
@@ -42,7 +44,7 @@ public class GameTest {
 		assertEquals("Player size must be 2", 2, game.getPlayers().size());
 		assertSame("Default player must be the first player added (player1)", player1, game.getCurrentPlayer());
 		
-		game.goToNextPlayer(0);
+		game.goToNextPlayer();
 		assertSame("The (next) current player must be player2", player2, game.getCurrentPlayer());
 		
 		game.addPlayer(player3);
@@ -51,15 +53,32 @@ public class GameTest {
 		
 		game.goToNextPlayer(1);
 		assertSame("player 3 must be skipped so current playter must be 1", player1, game.getCurrentPlayer());
-		
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void goToNextPlayerInvalidArgsTest() {
 		game.goToNextPlayer(-1);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shuffleDeck() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Field drawDeskField = Game.class.getDeclaredField("drawDesk");
+		drawDeskField.setAccessible(true);
+		ArrayList<Card> game1DrawDesk = (ArrayList<Card>) drawDeskField.get(game);
+		ArrayList<Card> game2DrawDesk = (ArrayList<Card>) drawDeskField.get(new Game());
+		
+		assertThat(game1DrawDesk.size(), is(game2DrawDesk.size()));
+		assertThat(game1DrawDesk, is(not(equalTo(game2DrawDesk))));
 	}
 	
 	@Test
 	public void drawCardsTest() {
 		int drawDeskSize = game.getDrawDeskSize();
-		int discardPileSize = game.getDiscardPileSize();
 		
-		//assertThat("discrad pile size must be 0 by default", game.getDiscardPileSize(), );
+		assertThat("discrad pile size must be 0 by default", game.getDiscardPileSize(), is(0));
+		assertThat(game.drawCard(), instanceOf(Card.class));
+		assertThat(game.getDrawDeskSize(), is(drawDeskSize-1));
+		assertThat(game.getDiscardPileSize(), is(0));
 	}
 }

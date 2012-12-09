@@ -1,15 +1,10 @@
 package states;
 
 import java.util.HashMap;
-import java.util.Set;
-
 import main.Game;
 import main.IllegalActionException;
 import main.Player;
 import java.util.Map;
-
-import javax.activity.InvalidActivityException;
-
 import actions.ActionBase;
 
 /**
@@ -31,7 +26,6 @@ public class TurnState {
 	 * @uml.property name="name" readOnly="true"
 	 */
 	private final String name;
-	
 	/**
 	 * @uml.property name="context"
 	 * @uml.associationEnd inverse="currentState:main.Game"

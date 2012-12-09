@@ -2,9 +2,7 @@ import static org.junit.Assert.*;
 import main.*;
 import org.junit.Before;
 import org.junit.Test;
-import actions.BuyThirdField;
-import actions.Draw2Cards;
-import actions.PlantBean;
+import actions.*;
 
 /**
  * Test class for the Player.
@@ -15,13 +13,13 @@ public class ActionDrawCardsTest {
 	private static final String PLAYER_NAME = "Player";
 	private Player player;
 	private Game game;
-	private Draw2Cards action;
+	private DrawFaceUpCards action;
 
 	@Before 
 	public void setUp() { 
 		player = new Player(PLAYER_NAME);
 		game = new Game();
-		action = new Draw2Cards(game, player);
+		action = new DrawFaceUpCards(game);
 	}
 
 	@Test

@@ -19,7 +19,7 @@ public class ActionPlantBeanCardTest {
 	public void setUp() { 
 		player = new Player(PLAYER_NAME);
 		game = new Game();
-		action = new PlantBean(game, player);
+		action = new PlantBean(game);
 	}
 	
 	@Test
@@ -28,13 +28,13 @@ public class ActionPlantBeanCardTest {
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		player.addCardToHand(card);
 		player.addCardToHand(card);
-		action.handle(args);		
+		action.handle(player, args);		
 	}
 	
 	@Test(expected=IllegalActionException.class)
 	public void testPlantNoCardsInHands() throws IllegalActionException {
 		Object args[] = {1};
-		action.handle(args);	
+		action.handle(player, args);	
 	}
 	
 	@Test(expected=IllegalActionException.class)
@@ -44,7 +44,7 @@ public class ActionPlantBeanCardTest {
 		player.addCardToHand(card1);
 		player.addCardToHand(card2);
 		Object args[] = {1};
-		action.handle(args);
-		action.handle(args);
+		action.handle(player, args);
+		action.handle(player, args);
 	}
 }
