@@ -8,14 +8,17 @@ import java.util.HashMap;
  */
 public enum EBeanType {
 	CHILIBEAN {
+		@Override
 		public final String toString() {
 			return "Chili Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 18;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(9, 4);
@@ -26,14 +29,17 @@ public enum EBeanType {
 		}
 	},
 	COFFEEBEANS {
+		@Override
 		public final String toString() {
 			return "Coffee Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 24;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(12, 4);
@@ -45,14 +51,17 @@ public enum EBeanType {
 
 	},
 	WAXBEAN {
+		@Override
 		public final String toString() {
 			return "Wax Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 22;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(11, 4);
@@ -64,14 +73,17 @@ public enum EBeanType {
 
 	},
 	BLUEBEAN {
+		@Override
 		public final String toString() {
 			return "Blue Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 20;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(10, 4);
@@ -83,14 +95,17 @@ public enum EBeanType {
 
 	},
 	STICKBEAN {
+		@Override
 		public final String toString() {
 			return "Stick Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 16;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(8, 4);
@@ -101,14 +116,17 @@ public enum EBeanType {
 		}
 	},
 	GREENBEAN {
+		@Override
 		public final String toString() {
 			return "Green Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 14;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(7, 4);
@@ -120,14 +138,17 @@ public enum EBeanType {
 
 	},
 	SOYBEAN {
+		@Override
 		public final String toString() {
 			return "Soy Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 12;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(7, 4);
@@ -139,14 +160,17 @@ public enum EBeanType {
 
 	},
 	BLACKEYEDBEAN {
+		@Override
 		public final String toString() {
 			return "Black-eyed Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 10;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(6, 4);
@@ -158,14 +182,17 @@ public enum EBeanType {
 
 	},
 	REDBEAN {
+		@Override
 		public final String toString() {
 			return "Red Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 8;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(5, 4);
@@ -177,14 +204,17 @@ public enum EBeanType {
 
 	},
 	GARDENBEAN {
+		@Override
 		public final String toString() {
 			return "Garden Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 6;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(3, 3);
@@ -194,14 +224,17 @@ public enum EBeanType {
 
 	},
 	CACOABEAN {
+		@Override
 		public final String toString() {
 			return "Cocoa Bean";
 		}
 
+		@Override
 		public final int numberOfCards() {
 			return 4;
 		}
 
+		@Override
 		public final HashMap<Integer, Integer> beanometer() {
 			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
 			beano.put(4, 4);

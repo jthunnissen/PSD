@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import main.*;
 
 
 public abstract class Field {

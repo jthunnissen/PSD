@@ -1,6 +1,5 @@
 package main;
 import java.util.ArrayList;
-import main.*;
 
 public class BeanField extends Field {
 
@@ -11,7 +10,7 @@ public class BeanField extends Field {
 	 */
 	@Override
 	public void addCard(Card card) throws IllegalActionException {
-		if(card instanceof BeanCard) super.addCard((BeanCard) card);
+		if(card instanceof BeanCard) super.addCard(card);
 		else throw new IllegalActionException("Cannot at non-Beancard to Beanfield");
 	}
 

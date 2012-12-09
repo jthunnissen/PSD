@@ -4,11 +4,7 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
-
 import states.TurnState;
 
 /**
