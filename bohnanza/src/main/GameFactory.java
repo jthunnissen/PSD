@@ -1,11 +1,11 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import states.TurnState;
 
-import actions.ActionBase;
-import actions.Trade;
+import actions.*;
 
 /**
  * @uml.dependency supplier="main.TurnState" stereotypes="Standard::Create"
@@ -34,6 +34,28 @@ public class GameFactory {
 	public TurnState createGameStates(Game game) {
 		new TurnState(game, "newstate");
 		ActionBase a = new Trade(game);
+		if (game.getPlayers().size() > 2 ) {
+			Iterator<Player> playerItr = game.getPlayers().iterator();
+			
+			Player player1 = playerItr.next();
+			
+			final ActionBase plantBean = new PlantBean(game);
+			final ActionBase harvest = new Harvest(game);
+			
+			final TurnState plantFirstBeanState = new TurnState(game, "Plant first bean (Player: " + player1.getName() + ")");
+			final TurnState plantSecondBeanState = new TurnState(game, "Plant second bean (Player: " + player1.getName() + ")");
+			final TurnState plantThirdBeanState = new TurnState(game, "Plant third bean (Player: " + player1.getName() + ")");
+			
+			plantFirstBeanState.addActionState(player1, plantBean, plantSecondBeanState);
+			plantFirstBeanState.addActionState(player1, harvest, plantFirstBeanState);
+			
+			plantSecondBeanState.addActionState(player1, plantBean, plantThirdBeanState);
+			plantSecondBeanState.addActionState(player1, harvest, plantSecondBeanState);
+			
+			plantSecondBeanState.addActionState(player1, plantBean, plantThirdBeanState);
+			plantSecondBeanState.addActionState(player1, harvest, plantThirdBeanState);
+			
+		}
 		return null;
 	}
 

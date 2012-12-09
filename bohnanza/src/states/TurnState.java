@@ -1,6 +1,7 @@
 package states;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import main.Game;
 import main.IllegalActionException;
@@ -67,6 +68,14 @@ public class TurnState {
 	/**
 	 */
 	public void addActionState(Player player, ActionBase action, TurnState state) {
+		actions.get(player).put(action, state);
 	}
 
+	public String getName() {
+		return name;
+	}
+	
+//	public Set<ActionBase> getActions() {
+//		return actions.keySet();
+//	}
 }
