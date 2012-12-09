@@ -103,6 +103,10 @@ public class Game {
 	public Player getCurrentPlayer() {
 		return players.get(currentPlayerIndex);
 	}
+	
+	public int goToNextPlayer() {
+		return goToNextPlayer(0);
+	}
 
 	/**
 	 * 

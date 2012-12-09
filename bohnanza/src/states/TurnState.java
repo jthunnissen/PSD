@@ -1,10 +1,9 @@
 package states;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import main.Game;
-import main.Player;
-
 import actions.ActionBase;
 
 /**
@@ -22,11 +21,6 @@ public class TurnState {
 	 */
 	private String name;
 	/**
-	 * @uml.property name="currentPlayer"
-	 * @uml.associationEnd inverse="turnState:main.Player"
-	 */
-	private Player currentPlayer;
-	/**
 	 * @uml.property name="context"
 	 * @uml.associationEnd inverse="currentState:main.Game"
 	 */
@@ -40,53 +34,30 @@ public class TurnState {
 	/**
 	 */
 	public boolean handle(ActionBase action, String[] args) {
+		if (action.handle(args)) {
+			context.setCurrentState(actions.get(action));
+			return true;
+		}
 		return false;
 	}
 
 	/**
 	 */
 	public boolean handle(ActionBase action) {
-		return false;
+		return handle(action, new String[0]);
 	}
 
 	/**
 	 */
 	public void addActionState(ActionBase action, TurnState state) {
+		actions.put(action, state);
 	}
 
 	public String getName() {
 		return name;
 	}
-
-	/**
-	 * Getter of the property <tt>currentPlayer</tt>
-	 * 
-	 * @return Returns the currentPlayer.
-	 * @uml.property name="currentPlayer"
-	 */
-	public Player getCurrentPlayer() {
-		return currentPlayer;
+	
+	public Set<ActionBase> getActions() {
+		return actions.keySet();
 	}
-
-	/**
-	 * Setter of the property <tt>currentPlayer</tt>
-	 * 
-	 * @param currentPlayer
-	 *            The currentPlayer to set.
-	 * @uml.property name="currentPlayer"
-	 */
-	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
-	}
-
-	/**
-	 * Getter of the property <tt>context</tt>
-	 * 
-	 * @return Returns the context.
-	 * @uml.property name="context"
-	 */
-	public Game getContext() {
-		return context;
-	}
-
 }
