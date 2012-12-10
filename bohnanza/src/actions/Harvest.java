@@ -16,7 +16,7 @@ public class Harvest extends ActionBase {
 	 * Harvest specified field from a Player
 	 * @param args[0] - Number of the field of the to be harvested field
 	 */
-	public void handle(Player player, Object[] args) throws IllegalActionException {
+	public void handle(Object[] args) throws IllegalActionException {
 		Field field = (Field) args[0];
 		ArrayList<Card> discard = new ArrayList<Card>();
 		discard = player.harvastField(field);

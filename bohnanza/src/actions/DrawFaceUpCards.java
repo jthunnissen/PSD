@@ -10,7 +10,7 @@ public class DrawFaceUpCards extends ActionBase {
 	}
 	
 	@Override
-	public void handle(Player player, Object[] args) throws IllegalActionException {
+	public void handle(Object[] args) throws IllegalActionException {
 		List<Card> asideCards = new ArrayList<Card>();
 		asideCards.add(game.drawCard());
 		asideCards.add(game.drawCard());

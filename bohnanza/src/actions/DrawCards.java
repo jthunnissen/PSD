@@ -9,7 +9,7 @@ public class DrawCards extends ActionBase {
 	
 	
 	@Override
-	public void handle(Player player, Object[] args) throws IllegalActionException {
+	public void handle(Object[] args) throws IllegalActionException {
 		for (int i = 0; i < 3; i++) {
 			Card card = game.drawCard();
 			player.addCardToHand(card);

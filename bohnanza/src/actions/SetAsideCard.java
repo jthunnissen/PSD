@@ -8,7 +8,7 @@ public class SetAsideCard extends ActionBase {
 	}
 	
 	@Override
-	public void handle(Player player, Object[] args) throws IllegalActionException {
+	public void handle(Object[] args) throws IllegalActionException {
 		Card card = (Card)args[0];
 		player.setFaceUpCardaside(card);
 	}
