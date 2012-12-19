@@ -20,8 +20,8 @@ public abstract class TurnState {
 	/**
 	 * @uml.property name="transitions"
 	 */
-	protected Map<Action, Class<TurnState>> transitions = new HashMap<Action, Class<TurnState>>();
 
+	protected Map<Action, Class<TurnState>> transitions = new HashMap<Action, Class<TurnState>>();
 	/**
 	 * @uml.property name="context"
 	 * @uml.associationEnd inverse="currentState:main.Game"
