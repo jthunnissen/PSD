@@ -1,28 +1,17 @@
-/**
- * 
- */
 package states;
+import actions.*;
+import main.*;
 
-import main.Game;
-
-/**
- * @author Damiaan
- *
- */
 public class TradeOrDonateState extends TurnState {
 
 	/**
 	 * @param context
 	 */
-	public TradeOrDonateState(Game context) {
-		super(context);
+	public TradeOrDonateState(Game context, Player activePlayer) {
+		super(context, activePlayer);
 		// TODO Auto-generated constructor stub
 	}
-
-	/* (non-Javadoc)
-	 * @see states.TurnState#buildStateMapping()
-	 */
-	@Override
+	
 	public void buildStateMapping() {
 		// TODO Auto-generated method stub
 

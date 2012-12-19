@@ -1,7 +1,7 @@
 package actions;
 import main.*;
 
-public class DrawCards extends ActionBase {
+public class DrawCards extends Action {
 
 	public DrawCards(Game game) {
 		super(game);
@@ -14,6 +14,7 @@ public class DrawCards extends ActionBase {
 			Card card = game.drawCard();
 			player.addCardToHand(card);
 		}
+		game.goToNextPlayer();
 	}
 
 }

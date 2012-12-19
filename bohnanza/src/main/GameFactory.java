@@ -33,7 +33,7 @@ public class GameFactory {
 	 */
 	public TurnState createGameStates(Game game) {
 		if (game.getPlayers().size() > 2 ) {
-			return new PlantState(game);
+			return new PlantState(game,null);
 		}
 		return null;
 	}

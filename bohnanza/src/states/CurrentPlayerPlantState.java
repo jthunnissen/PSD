@@ -1,32 +1,16 @@
-/**
- * 
- */
 package states;
+import actions.*;
+import main.*;
 
-import actions.BuyBeanField;
-import actions.Harvest;
-import actions.PlantBean;
-import actions.SkipAction;
-import main.Game;
-import main.Player;
-
-/**
- * @author Damiaan
- *
- */
 public class CurrentPlayerPlantState extends TurnState {
 
 	/**
 	 * @param context
 	 */
-	public CurrentPlayerPlantState(Game context) {
-		super(context);
+	public CurrentPlayerPlantState(Game context, Player activePlayer) {
+		super(context, activePlayer);
 	}
 
-	/* (non-Javadoc)
-	 * @see states.TurnState#buildStateMapping()
-	 */
-	@Override
 	public void buildStateMapping() {
 		
 		if (getCurrentPlayer().getFaceUpCards().size() > 0 ) {
@@ -37,9 +21,9 @@ public class CurrentPlayerPlantState extends TurnState {
 			}
 		} else {
 			if (hasOtherPlayersCardsUp()) {
-				addActionState(new SkipAction(getContext()), new OtherPlayersPlantState(getContext(), getCurrentPlayer()));
+				addActionState(new EndPhase(getContext()), new OtherPlayersPlantState(getContext(), getCurrentPlayer()));
 			} else {
-				addActionState(new SkipAction(getContext()), new PlantState(getContext()));
+				addActionState(new EndPhase(getContext()), new PlantState(getContext(),activePlayer));
 			}
 		}
 

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import main.*;
 
-public class DrawFaceUpCards extends ActionBase {
+public class DrawFaceUpCards extends Action {
 
 	public DrawFaceUpCards(Game game) {
 		super(game);
