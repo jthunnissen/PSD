@@ -4,16 +4,25 @@ import main.*;
 
 public class CurrentPlayerPlantState extends TurnState {
 
-	/**
-	 * @param context
-	 */
 	public CurrentPlayerPlantState(Game context, Player activePlayer) {
-		super(context, activePlayer);
+		super(context, activePlayer, null);
+	}
+	
+	private boolean hasOtherPlayersCardsUp() {
+		for (Player p : context.getPlayers()) {
+			if (p == activePlayer) continue;
+			if (p.getFaceUpCards().size() > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public void buildStateMapping() {
+	@Override
+	protected boolean handled(Action action, Object[] args) {
+		// TODO Auto-generated method stub
 		
-		if (getCurrentPlayer().getFaceUpCards().size() > 0 ) {
+	/*	if (getCurrentPlayer().getFaceUpCards().size() > 0 ) {
 			addActionState(new BuyBeanField(getContext()), this);
 			addActionState(new PlantBean(getContext()), this);
 			if (getCurrentPlayer().getBeanFields().size() > 0) {
@@ -25,17 +34,8 @@ public class CurrentPlayerPlantState extends TurnState {
 			} else {
 				addActionState(new EndPhase(getContext()), new PlantState(getContext(),activePlayer));
 			}
-		}
-
-	}
-	
-	private boolean hasOtherPlayersCardsUp() {
-		for (Player p : getContext().getPlayers()) {
-			if (p == getCurrentPlayer()) continue;
-			if (p.getFaceUpCards().size() > 0) {
-				return true;
-			}
-		}
+		}*/
+		
 		return false;
 	}
 }

@@ -8,7 +8,7 @@ public class OtherPlayersPlantState extends TurnState {
 	private boolean firstTime;
 	
 	public OtherPlayersPlantState(Game context, Player activePlayer) {
-		super(context, activePlayer);
+		super(context, activePlayer, null);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -18,22 +18,27 @@ public class OtherPlayersPlantState extends TurnState {
 		this.firstTime = true;
 	}
 
-	public void buildStateMapping() {
-		if (getCurrentPlayer() == turnStartedPlayer && firstTime) {
-			firstTime = false;
-			getContext().goToNextPlayer();
-		}
-		while (getCurrentPlayer().getFaceUpCards().size() == 0) {
-			getContext().goToNextPlayer();
-			if (getCurrentPlayer() == turnStartedPlayer) break;
-		}
-		if (getCurrentPlayer() == turnStartedPlayer) {
-			addActionState(new DrawCards(getContext()), new PlantState(getContext(),activePlayer));
-		} else {
-			addActionState(new PlantBean(getContext()), this);
-			addActionState(new Harvest(getContext()), this);
-			addActionState(new BuyBeanField(getContext()), this);
-		}
+	@Override
+	protected boolean handled(Action action, Object[] args) {
+		// TODO Auto-generated method stub
+
+//		if (getCurrentPlayer() == turnStartedPlayer && firstTime) {
+//			firstTime = false;
+//			getContext().goToNextPlayer();
+//		}
+//		while (getCurrentPlayer().getFaceUpCards().size() == 0) {
+//			getContext().goToNextPlayer();
+//			if (getCurrentPlayer() == turnStartedPlayer) break;
+//		}
+//		if (getCurrentPlayer() == turnStartedPlayer) {
+//			addActionState(new DrawCards(getContext()), new PlantState(getContext(),activePlayer));
+//		} else {
+//			addActionState(new PlantBean(getContext()), this);
+//			addActionState(new Harvest(getContext()), this);
+//			addActionState(new BuyBeanField(getContext()), this);
+//		}
+		
+		return false;
 	}
 
 }

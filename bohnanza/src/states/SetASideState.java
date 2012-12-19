@@ -5,16 +5,21 @@ import main.*;
 public class SetASideState extends TurnState {
 
 	public SetASideState(Game context, Player activePlayer) {
-		super(context, activePlayer);
+		super(context, activePlayer, null);
 	}
 
-	public void buildStateMapping() {
-		if (getCurrentPlayer().getFaceUpCards().size() > 0) {
-			addActionState(new SetAsideCard(getContext()), this);
-		}
-		addActionState(new Trade(getContext()), new AcceptTradeState(getContext(),activePlayer));
-		addActionState(new Donate(getContext()), new AcceptDonateState(getContext(),activePlayer));
-		addActionState(new EndPhase(getContext()), new CurrentPlayerPlantState(getContext(),activePlayer));
+	@Override
+	protected boolean handled(Action action, Object[] args) {
+		// TODO Auto-generated method stub
+		
+//		if (getCurrentPlayer().getFaceUpCards().size() > 0) {
+//			addActionState(new SetAsideCard(getContext()), this);
+//		}
+//		addActionState(new Trade(getContext()), new AcceptTradeState(getContext(),activePlayer));
+//		addActionState(new Donate(getContext()), new AcceptDonateState(getContext(),activePlayer));
+//		addActionState(new EndPhase(getContext()), new CurrentPlayerPlantState(getContext(),activePlayer));
+		
+		return false;
 	}
 
 }

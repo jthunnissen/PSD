@@ -4,15 +4,17 @@ import main.*;
 
 public class DrawState extends TurnState {
 
-	/**
-	 * @param context
-	 */
 	public DrawState(Game context, Player activePlayer) {
-		super(context,activePlayer);
+		super(context, activePlayer, null);
 	}
 
-	public void buildStateMapping() {
-		addActionState(new DrawCards(getContext()), new SetASideState(getContext(),activePlayer));
+	@Override
+	protected boolean handled(Action action, Object[] args) {
+		// TODO Auto-generated method stub
+		
+		//addActionState(new DrawCards(getContext()), new SetASideState(getContext(),activePlayer));
+		
+		return false;
 	}
 
 }

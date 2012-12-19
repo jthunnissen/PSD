@@ -3,25 +3,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import main.*;
 import actions.*;
 
-/**
- * @uml.dependency supplier="main.Action" stereotypes="Standard::Call"
- */
 public abstract class TurnState {
 
 	/**
 	 * @uml.property name="actions"
 	 */
-	protected List<Action> actions = new ArrayList<Action>();
+	private List<Action> actions = new ArrayList<Action>();
 	
 	/**
 	 * @uml.property name="transitions"
 	 */
-
-	protected Map<Action, Class<TurnState>> transitions = new HashMap<Action, Class<TurnState>>();
+	private Map<Action, Class<TurnState>> transitions = new HashMap<Action, Class<TurnState>>();
+	
 	/**
 	 * @uml.property name="context"
 	 * @uml.associationEnd inverse="currentState:main.Game"
@@ -34,45 +30,44 @@ public abstract class TurnState {
 	 */
 	protected final Player activePlayer;
 
-	public TurnState(final Game context, final Player activePlayer) {
+	public TurnState(final Game context, final Player activePlayer, List<Action> actions) {
+		assert actions != null;
 		this.context = context;
 		this.activePlayer = activePlayer;
+		this.actions = actions;
 	}
 
-	/**
-	 * @throws IllegalActionException 
-	 */
 	public final void handle(Action action, String[] args) throws IllegalActionException {
+		if(!actions.contains(action)) throw new IllegalActionException("Action not permitted in current state");
 		action.handle(args);
-		
-		TurnState nextState;
-		try {
-			nextState = transitions.get(action).getConstructor().newInstance(context, activePlayer);
-			getContext().setCurrentState(nextState);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(handled(action, args)) {
+			try {
+				TurnState nextState = transitions.get(action).getConstructor().newInstance(context, activePlayer);
+				context.setCurrentState(nextState);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	/**
+	 * Update internal state of this TurnState, called after action was successfully executed with parameters args
+	 * @return true if action advances the game to a new TurnState
 	 */
-	protected void addActionState(Action action, Class<TurnState> state) {
-		transitions.put(action, state);
-	}
-	
-	protected void addActionState(Action action, TurnState state) {
-		//TODO: remove this method
-	}
-	
-	protected Set<Action> getActions() {
-		return transitions.keySet();
-	}
+	protected abstract boolean handled(Action action, Object[] args);
 
-	public Game getContext() {
-		return context;
+	/**Adds state as the next state when action ends the current state.*/
+	protected void addAction(Action action) {
+		actions.add(action);
 	}
 	
-	protected final Player getCurrentPlayer() {
-		return context.getCurrentPlayer();
+	/**Adds action to the list of possible actions.*/
+	protected void removeAction(Action action) {
+		transitions.remove(action);
+	}
+	
+	/**Removes action form the list of possible actions.*/
+	protected void addTransition(Action action, Class<TurnState> state) {
+		transitions.put(action, state);
 	}
 }
