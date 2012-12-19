@@ -11,7 +11,7 @@ import main.Player;
  * @author Damiaan
  *
  */
-public class DeclineTrade extends ActionBase {
+public class DeclineTrade extends Action {
 
 	/**
 	 * @param game

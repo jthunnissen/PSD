@@ -1,7 +1,7 @@
 package actions;
 import main.*;
 
-public class SetAsideCard extends ActionBase {
+public class SetAsideCard extends Action {
 
 	public SetAsideCard(Game game) {
 		super(game);

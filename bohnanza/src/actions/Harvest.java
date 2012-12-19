@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import main.*;
 
 
-public class Harvest extends ActionBase {
+public class Harvest extends Action {
 
 	public Harvest(Game game) {
 		super(game);

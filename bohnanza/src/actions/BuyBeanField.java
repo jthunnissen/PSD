@@ -1,7 +1,7 @@
 package actions;
 import main.*;
 
-public class BuyBeanField extends ActionBase {
+public class BuyBeanField extends Action {
 
 
 	public BuyBeanField(Game game) {

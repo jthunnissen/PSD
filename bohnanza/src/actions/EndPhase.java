@@ -1,11 +1,9 @@
 package actions;
+import main.*;
 
-import main.Game;
-import main.IllegalActionException;
+public class EndPhase extends Action {
 
-public class SkipAction extends ActionBase {
-
-	public SkipAction(Game game) {
+	public EndPhase(Game game) {
 		super(game);
 		// TODO Auto-generated constructor stub
 	}

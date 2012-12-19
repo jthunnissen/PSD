@@ -1,8 +1,7 @@
 package actions;
 import main.*;
 
-
-public class PlantBean extends ActionBase {
+public class PlantBean extends Action {
 
 	public PlantBean(Game game) {
 		super(game);

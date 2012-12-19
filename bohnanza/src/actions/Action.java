@@ -2,17 +2,17 @@ package actions;
 import main.*;
 import main.IllegalActionException;
 
-public abstract class ActionBase {
+public abstract class Action {
 
 	protected final Game game;
 	protected final Player player;
 	
-	public ActionBase(Game game, Player player) {
+	public Action(Game game, Player player) {
 		this.game = game;
 		this.player = player;
 	}
 	
-	public ActionBase(Game game) {
+	public Action(Game game) {
 		this(game, game.getCurrentPlayer());
 	}
 	

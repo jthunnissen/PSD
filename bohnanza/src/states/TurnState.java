@@ -1,12 +1,10 @@
 package states;
-
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
-
-import main.Game;
-import main.IllegalActionException;
-import main.Player;
-import actions.ActionBase;
+import main.*;
+import actions.*;
 
 /**
  * @uml.dependency supplier="main.Action" stereotypes="Standard::Call"
@@ -16,38 +14,47 @@ public abstract class TurnState {
 	/**
 	 * @uml.property name="actions"
 	 */
-	private HashMap<ActionBase, TurnState> actions = new HashMap<ActionBase, TurnState>();
+	private Map<Action, Class<TurnState>> actions = new HashMap<Action, Class<TurnState>>();
 
 	/**
 	 * @uml.property name="context"
 	 * @uml.associationEnd inverse="currentState:main.Game"
 	 */
-	private final Game context;
+	protected final Game context;
+	
+	protected final Player activePlayer;
 
-	public TurnState(final Game context) {
+	public TurnState(final Game context, final Player activePlayer) {
 		this.context = context;
+		this.activePlayer = activePlayer;
 	}
 
 	/**
 	 * @throws IllegalActionException 
 	 */
-	public final void handle(ActionBase action, String[] args) throws IllegalActionException {
+	public final void handle(Action action, String[] args) throws IllegalActionException {
 		action.handle(args);
-		TurnState nextState = actions.get(action);
-		nextState.actions.clear();
-		nextState.buildStateMapping();
-		getContext().setCurrentState(nextState);
+		
+		TurnState nextState;
+		try {
+			nextState = actions.get(action).getConstructor().newInstance(context, activePlayer);
+			getContext().setCurrentState(nextState);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 */
-	protected void addActionState(ActionBase action, TurnState state) {
+	protected void addActionState(Action action, Class<TurnState> state) {
 		actions.put(action, state);
 	}
 	
-	public abstract void buildStateMapping();
+	protected void addActionState(Action action, TurnState state) {
+		//actions.put(action, state);
+	}
 	
-	public Set<ActionBase> getActions() {
+	protected Set<Action> getActions() {
 		return actions.keySet();
 	}
 

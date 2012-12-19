@@ -1,11 +1,8 @@
 package actions;
 import java.util.List;
-import main.Card;
-import main.Game;
-import main.IllegalActionException;
-import main.Player;
+import main.*;
 
-public class Trade extends ActionBase {
+public class Trade extends Action {
 
 	public Trade(Game game) {
 		super(game);
