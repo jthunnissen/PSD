@@ -42,17 +42,17 @@ public class GameTest {
 		
 		game.addPlayer(player2);
 		assertEquals("Player size must be 2", 2, game.getPlayers().size());
-		assertSame("Default player must be the first player added (player1)", player1, game.getCurrentPlayer());
+		assertSame("Default player must be the first player added (player1)", player1, game.getActivePlayer());
 		
 		game.goToNextPlayer();
-		assertSame("The (next) current player must be player2", player2, game.getCurrentPlayer());
+		assertSame("The (next) current player must be player2", player2, game.getActivePlayer());
 		
 		game.addPlayer(player3);
 		assertEquals("Player size must be 3", 3, game.getPlayers().size());
-		assertSame("The current player shouldn't change by adding a player", player2, game.getCurrentPlayer());
+		assertSame("The current player shouldn't change by adding a player", player2, game.getActivePlayer());
 		
 		game.goToNextPlayer(1);
-		assertSame("player 3 must be skipped so current playter must be 1", player1, game.getCurrentPlayer());
+		assertSame("player 3 must be skipped so current playter must be 1", player1, game.getActivePlayer());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)

@@ -1,21 +1,20 @@
 package actions;
 import main.*;
-import main.IllegalActionException;
 
 public abstract class Action {
 
 	protected final Game game;
-	protected final Player player;
+	protected final Player initiator;
 	
-	public Action(Game game, Player player) {
+	public Action(Game game, Player initiator) {
 		this.game = game;
-		this.player = player;
+		this.initiator = initiator;
 	}
 	
-	public Action(Game game) {
-		this(game, game.getCurrentPlayer());
+	public abstract void handle() throws IllegalActionException;
+
+	public Player getInitiator() {
+		return initiator;
 	}
-	
-	public abstract void handle(Object[] args) throws IllegalActionException;
 
 }

@@ -5,16 +5,16 @@ import main.*;
 
 public class DrawFaceUpCards extends Action {
 
-	public DrawFaceUpCards(Game game) {
-		super(game);
+	public DrawFaceUpCards(Game game, Player initiator) {
+		super(game, initiator);
 	}
 	
 	@Override
-	public void handle(Object[] args) throws IllegalActionException {
+	public void handle() throws IllegalActionException {
 		List<Card> asideCards = new ArrayList<Card>();
 		asideCards.add(game.drawCard());
 		asideCards.add(game.drawCard());
-		player.setFaceUpCards(asideCards);
+		initiator.setFaceUpCards(asideCards);
 	}
 
 }

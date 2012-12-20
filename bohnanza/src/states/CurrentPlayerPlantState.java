@@ -5,12 +5,12 @@ import main.*;
 public class CurrentPlayerPlantState extends TurnState {
 
 	public CurrentPlayerPlantState(Game context, Player activePlayer) {
-		super(context, activePlayer, null);
+		super(context);
 	}
 	
 	private boolean hasOtherPlayersCardsUp() {
 		for (Player p : context.getPlayers()) {
-			if (p == activePlayer) continue;
+			if (p == context.getActivePlayer()) continue;
 			if (p.getFaceUpCards().size() > 0) {
 				return true;
 			}
@@ -19,7 +19,7 @@ public class CurrentPlayerPlantState extends TurnState {
 	}
 
 	@Override
-	protected boolean handled(Action action, Object[] args) {
+	protected boolean handled(Action action) {
 		// TODO Auto-generated method stub
 		
 	/*	if (getCurrentPlayer().getFaceUpCards().size() > 0 ) {

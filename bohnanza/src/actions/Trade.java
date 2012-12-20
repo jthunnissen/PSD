@@ -4,8 +4,15 @@ import main.*;
 
 public class Trade extends Action {
 
-	public Trade(Game game) {
-		super(game);
+	private final Player otherPlayer;
+	private final List<Card> give;
+	private final List<Card> receive;
+	
+	public Trade(Game game, Player initiator, Player otherPlayer, List<Card> give, List<Card> receive) {
+		super(game, initiator);
+		this.otherPlayer = otherPlayer;
+		this.give = give;
+		this.receive = receive;
 	}
 	
 	/**Trade or donate cards
@@ -13,12 +20,9 @@ public class Trade extends Action {
 	 * @require give != null
 	 */
 	@Override
-	public void handle(Object[] args) throws IllegalActionException {
-		Player otherPlayer = (Player) args[0];
-		List<Card> give = (List<Card>) args[1];
-		List<Card> receive = (List<Card>) args[2];
-		if(player.isValidTrade(give,receive,true) && otherPlayer.isValidTrade(receive, give, false)) {
-			player.trade(give, receive, true);
+	public void handle() throws IllegalActionException {
+		if(initiator.isValidTrade(give,receive,true) && otherPlayer.isValidTrade(receive, give, false)) {
+			initiator.trade(give, receive, true);
 			otherPlayer.trade(receive, give, false);
 		}
 	}

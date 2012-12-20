@@ -8,7 +8,7 @@ public class OtherPlayersPlantState extends TurnState {
 	private boolean firstTime;
 	
 	public OtherPlayersPlantState(Game context, Player activePlayer) {
-		super(context, activePlayer, null);
+		super(context);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -19,7 +19,7 @@ public class OtherPlayersPlantState extends TurnState {
 	}
 
 	@Override
-	protected boolean handled(Action action, Object[] args) {
+	protected boolean handled(Action action) {
 		// TODO Auto-generated method stub
 
 //		if (getCurrentPlayer() == turnStartedPlayer && firstTime) {

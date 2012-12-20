@@ -1,6 +1,7 @@
 package states;
 import actions.Action;
 import actions.Harvest;
+import actions.NextPhase;
 import actions.PlantBean;
 import main.*;
 
@@ -12,26 +13,18 @@ public class PlantState extends TurnState {
 	 * @param context
 	 * @param name
 	 */
-	public PlantState(Game context, Player activePlayer) {	
-		super(context, activePlayer, null);
+	public PlantState(Game context) {	
+		super(context);
+		addAction(Harvest.class);
+		addAction(PlantBean.class);
 	}
 
 	@Override
-	protected boolean handled(Action action, Object[] args) {
-		// TODO Auto-generated method stub
-		
-//		if (isFirstPlant) {
-//			isFirstPlant = false;
-//			addActionState(new PlantBean(getContext()), this);
-//		} else {
-//			addActionState(new PlantBean(getContext()), new DrawState(getContext(),activePlayer));
-//		}
-//		if (getContext().getCurrentPlayer().getBeanFields().size() > 0) {
-//			addActionState(new Harvest(getContext()), this);
-//		}
-		
-		return false;
+	protected boolean handled(Action action) {
+		if (isFirstPlant && action instanceof PlantBean) {
+			isFirstPlant = false;
+			addAction(NextPhase.class);
+		}
+		return true;
 	}
-	
-	
 }

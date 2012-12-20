@@ -3,13 +3,12 @@ import main.*;
 
 public class EndPhase extends Action {
 
-	public EndPhase(Game game) {
-		super(game);
-		// TODO Auto-generated constructor stub
+	public EndPhase(Game game, Player initiator) {
+		super(game, initiator);
 	}
 
 	@Override
-	public void handle(Object[] args) throws IllegalActionException {
+	public void handle() throws IllegalActionException {
 		// TODO Auto-generated method stub
 
 	}

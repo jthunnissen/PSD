@@ -4,15 +4,15 @@ import main.*;
 public class BuyBeanField extends Action {
 
 
-	public BuyBeanField(Game game) {
-		super(game);
+	public BuyBeanField(Game game, Player initiator) {
+		super(game, initiator);
 	}
 	
 	@Override
 	/**
-	 * Plants first card in a Player's hand in a specified field
+	 * Player buys a new bean field
 	 */
-	public void handle(Object[] args) throws IllegalActionException {
-		player.buyField();
+	public void handle() throws IllegalActionException {
+		initiator.buyField();
 	}
 }

@@ -5,11 +5,11 @@ import main.*;
 public class AcceptTradeState extends TurnState {
 
 	public AcceptTradeState(Game context, Player activePlayer) {
-		super(context, activePlayer, null);
+		super(context);
 	}
 
 	@Override
-	protected boolean handled(Action action, Object[] args) {
+	protected boolean handled(Action action) {
 		// TODO Auto-generated method stub
 		
 //		TurnState nextState;

@@ -24,21 +24,20 @@ public class Game {
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Player"
 	 */
 	private ArrayList<Player> players = new ArrayList<Player>();
-
+	
+	private int activePlayerIndex = 0;
+	
 	/**
 	 * @uml.property name="drawDeck"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
-	private ArrayList<Card> drawDesk = new ArrayList<Card>();
+	private ArrayList<Card> drawDeck = new ArrayList<Card>();
 
 	/**
 	 * @uml.property name="discardPile"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
-
-	private int currentPlayerIndex = 0;
-	
 
 	/**
 	 * @param args
@@ -52,9 +51,13 @@ public class Game {
 		 */
 	public Game() {
 		GameFactory factory = GameFactory.getInstance();
-		drawDesk = factory.getGameDeck();
+		drawDeck = factory.getGameDeck();
 		shuffleCards();
 		//GameFactory.getInstance().createGameStates(this);
+	}
+
+	private void shuffleCards() {
+		Collections.shuffle(drawDeck);
 	}
 
 	/**
@@ -83,24 +86,29 @@ public class Game {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-
-	public boolean addPlayer(Player player) {
-		return this.players.add(player);
-	}
 	
 	public boolean addCardToDiscardPile(Card card){
 		return this.discardPile.add(card);
 	}
 
+	/**
+	 * Draw the top card from the drawdeck
+	 * @require !drawDeck.isEmpty()
+	 * @return the card that was drawn
+	 */
 	public Card drawCard() {
 		//TODO: reshuffle deck if empty
-		Card drawnCard = drawDesk.get(0);
-		drawDesk.remove(0);
+		Card drawnCard = drawDeck.remove(0);
+		if(drawDeck.isEmpty()) {
+			drawDeck.addAll(discardPile);
+			discardPile.clear();
+			shuffleCards();
+		}
 		return drawnCard;
 	}
 
-	public Player getCurrentPlayer() {
-		return players.get(currentPlayerIndex);
+	public Player getActivePlayer() {
+		return players.get(activePlayerIndex);
 	}
 	
 	public int goToNextPlayer() {
@@ -108,7 +116,6 @@ public class Game {
 	}
 
 	/**
-	 * 
 	 * @param skip
 	 * @requires skip >= 0
 	 */
@@ -116,22 +123,10 @@ public class Game {
 		if (skip < 0)
 			throw new IllegalArgumentException("skip must be >= 0");
 		
-		return currentPlayerIndex = (currentPlayerIndex + 1 + skip) % players.size();
-	}
-	
-	private void shuffleCards() {
-		Collections.shuffle(drawDesk);
-	}
-	
-	public int getDrawDeskSize() {
-		return drawDesk.size();
-	}
-	
-	public int getDiscardPileSize() {
-		return discardPile.size();
+		return activePlayerIndex = (activePlayerIndex + 1 + skip) % players.size();
 	}
 	
 	public Player getNextPlayer() {
-		return players.get(currentPlayerIndex+1);
+		return players.get(activePlayerIndex+1);
 	}
 }

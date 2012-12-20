@@ -1,13 +1,15 @@
 package actions;
-
 import java.util.ArrayList;
 import main.*;
 
 
 public class Harvest extends Action {
 
-	public Harvest(Game game) {
-		super(game);
+	private final Field field;
+	
+	public Harvest(Game game, Player initiator, Field field) {
+		super(game, initiator);
+		this.field = field;
 	}
 	
 	
@@ -16,10 +18,9 @@ public class Harvest extends Action {
 	 * Harvest specified field from a Player
 	 * @param args[0] - Number of the field of the to be harvested field
 	 */
-	public void handle(Object[] args) throws IllegalActionException {
-		Field field = (Field) args[0];
+	public void handle() throws IllegalActionException {
 		ArrayList<Card> discard = new ArrayList<Card>();
-		discard = player.harvastField(field);
+		discard = initiator.harvastField(field);
 		for(Card card: discard){
 			game.addCardToDiscardPile(card);
 		}

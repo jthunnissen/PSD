@@ -1,16 +1,8 @@
 package main;
-
 import java.util.ArrayList;
-
-import states.PlantState;
-import states.TurnState;
-
+import states.*;
 import actions.*;
 
-/**
- * @uml.dependency supplier="main.TurnState" stereotypes="Standard::Create"
- * @uml.dependency supplier="main.Action" stereotypes="Standard::Create"
- */
 public class GameFactory {
 
 	/**
@@ -29,13 +21,17 @@ public class GameFactory {
 		return singleton;
 	}
 
-	/**
+	/**Links the different states that compose a turn together
+	 * @return the start state of the game
 	 */
-	public TurnState createGameStates(Game game) {
-		if (game.getPlayers().size() > 2 ) {
-			return new PlantState(game,null);
-		}
-		return null;
+	public TurnState buildTurnStatespace(Game game, Player activePlayer) {
+		//TODO: fix this!
+		//TurnStart.addTransition(NextPlayer.class, PlantState.class);
+		//PlantState.addTransition(NextPhase.class, TradeOrDonateState.class);
+		//etc
+		
+		return new PlantState(game);
+		
 	}
 
 	public ArrayList<Card> getGameDeck() {

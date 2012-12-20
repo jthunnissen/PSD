@@ -3,14 +3,16 @@ import main.*;
 
 public class SetAsideCard extends Action {
 
-	public SetAsideCard(Game game) {
-		super(game);
+	private final Card card;
+	
+	public SetAsideCard(Game game, Player initiator, Card card) {
+		super(game, initiator);
+		this.card = card;
 	}
 	
 	@Override
-	public void handle(Object[] args) throws IllegalActionException {
-		Card card = (Card)args[0];
-		player.setFaceUpCardaside(card);
+	public void handle() throws IllegalActionException {
+		initiator.setFaceUpCardaside(card);
 	}
 
 }

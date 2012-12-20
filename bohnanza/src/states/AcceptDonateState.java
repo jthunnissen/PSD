@@ -5,11 +5,11 @@ import main.*;
 public class AcceptDonateState extends TurnState {
 
 	public AcceptDonateState(Game context, Player activePlayer) {
-		super(context, activePlayer, null);
+		super(context);
 	}
 
 	@Override
-	protected boolean handled(Action action, Object[] args) {
+	protected boolean handled(Action action) {
 		//TODO: implement
 		
 //		TurnState nextState;
