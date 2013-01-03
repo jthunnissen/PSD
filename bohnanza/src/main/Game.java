@@ -56,6 +56,11 @@ public class Game {
 		//GameFactory.getInstance().createGameStates(this);
 	}
 
+	
+	public void addPlayer(Player player){
+		players.add(player);
+	}
+	
 	private void shuffleCards() {
 		Collections.shuffle(drawDeck);
 	}
