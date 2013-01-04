@@ -25,6 +25,10 @@ public class ClientGUI extends Application {
 		Application.launch(ClientGUI.class, (java.lang.String[])null);
 	}
 	
+	public Client getClient(){
+		return client;
+	}
+	
 	public void setUsername(String username){
 		this.username = username;
 	}

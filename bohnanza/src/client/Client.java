@@ -49,7 +49,7 @@ public class Client implements Runnable {
 		if (clientSocket != null && os != null && is != null) {
 			/* Create a thread to read from the server. */
 			new Thread(this).start();
-			os.println("NEWPLAYER "+username);
+			sendToServer("NEWPLAYER "+username);
 			//while (!closed) {
 			//	os.println(inputLine.readLine().trim());
 			//}
@@ -59,6 +59,9 @@ public class Client implements Runnable {
 		}
 	}
 
+	public void sendToServer(String update){
+		os.println(update);
+	}
 
 
 	/*

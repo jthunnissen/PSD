@@ -53,6 +53,16 @@ public class GameController extends AnchorPane implements Initializable {
 	ImageView field2;
 	@FXML
 	ImageView field3;
+	@FXML
+	Button action1;
+	@FXML
+	Button action2;
+	@FXML
+	Button action3_harvast;
+	@FXML
+	Button action3_buy;
+	@FXML
+	Button action_draw;
 
 	private ClientGUI application;
 
@@ -63,10 +73,6 @@ public class GameController extends AnchorPane implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//error.setText("");
-		ObservableList<String> data =FXCollections.observableArrayList (
-				"Player1");
-		players.setItems(data);
 	}
 
 	public void update(String update){
@@ -77,41 +83,68 @@ public class GameController extends AnchorPane implements Initializable {
 		ArrayList<PlayerPOJO> playersPOJOS = protocol.fromJSONGetPlayers(update, null);
 		ObservableList<String> items = FXCollections.observableArrayList();
 		for(PlayerPOJO playerPOJO : playersPOJOS) {
-			items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());
+			if(protocol.fromJSONCurrentPlayer(update).equals(playerPOJO.getName())){
+				items.add(">>> "+playerPOJO.getName() + " - " + playerPOJO.getScore());
+			} else {
+				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
+			}
+			
 		}
 		players.setItems(items);
 
 
-		// This player
+		// This playerPOJO
+		hand.getChildren().clear();
 		PlayerPOJO player = protocol.fromJSONGetPlayers(update, application.getUsername()).get(0);
 		for(CardPOJO card : player.getHand()){
 			ImageView cardView = new ImageView(card.getImage());
-			this.setupGestureSource(cardView);
+			this.setupGestureSource(cardView, card.getName());
 			hand.getChildren().add(cardView);
 			cardView = new ImageView(card.getImage());
 			hand.getChildren().add(cardView);
 		}
 
-		setupGestureTarget(field1);
-		setupGestureTarget(field2);
-
-
-
+		setupGestureTarget(field1, 1);
+		setupGestureTarget(field2, 2);
+		if(player.getFields().size() > 2){
+			// Player has bought third field
+			setupGestureTarget(field3, 3);
+			action3_harvast.setVisible(true);
+			action3_buy.setVisible(false);
+		} else {
+			// Default FMXL
+			action3_harvast.setVisible(false);	
+		}
 	}
 
-
-	void setupGestureTarget(final ImageView targetBox){
-
+	public void harvast1(){
+		application.getClient().sendToServer("HARVAST 1");
+	}
+	
+	public void harvast2(){
+		application.getClient().sendToServer("HARVAST 2");
+	}
+	
+	public void harvast3(){
+		application.getClient().sendToServer("HARVAST 3");
+	}
+	
+	public void buy3(){
+		application.getClient().sendToServer("BUYFIELD 3");
+	}
+	
+	public void drawCard(){
+		application.getClient().sendToServer("DRAWCARD");
+	}
+	
+	void setupGestureTarget(final ImageView targetBox, final int fieldid){
 		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
 			@Override
 			public void handle(DragEvent event) {
-
 				Dragboard db = event.getDragboard();
-
 				if(db.hasImage()){
 					event.acceptTransferModes(TransferMode.COPY);
 				}
-
 				event.consume();
 			}
 		});
@@ -119,25 +152,20 @@ public class GameController extends AnchorPane implements Initializable {
 		targetBox.setOnDragDropped(new EventHandler <DragEvent>() {
 			@Override
 			public void handle(DragEvent event) {
-
 				Dragboard db = event.getDragboard();
-
 				if(db.hasImage()){
-
 					targetBox.setImage(db.getImage());
-
+					application.getClient().sendToServer("PLANT "+fieldid+" "+db.getString());
 					event.setDropCompleted(true);
 				}else{
 					event.setDropCompleted(false);
 				}
-
 				event.consume();
 			}
 		});
-
 	}
 
-	void setupGestureSource(final ImageView source){
+	void setupGestureSource(final ImageView source, final String cardName){
 
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			@Override
@@ -151,6 +179,7 @@ public class GameController extends AnchorPane implements Initializable {
 
 				Image sourceImage = source.getImage();
 				content.putImage(sourceImage);
+				content.putString(cardName);
 				db.setContent(content);
 
 				event.consume();
