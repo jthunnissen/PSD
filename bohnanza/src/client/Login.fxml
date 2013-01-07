@@ -13,7 +13,7 @@
   <children>
     <Button fx:id="login" layoutX="281.0" layoutY="207.0" mnemonicParsing="false" onAction="#doLogin" text="Login" />
     <TextField fx:id="host" layoutX="116.0" layoutY="95.0" prefWidth="200.0" text="localhost:2222" />
-    <TextField fx:id="username" layoutX="116.0" layoutY="159.0" prefWidth="200.0" />
+    <TextField fx:id="username" layoutX="116.0" layoutY="159.0" onAction="#doLogin" prefWidth="200.0" />
     <Label layoutX="116.0" layoutY="75.0" text="Host" />
     <Label layoutX="116.0" layoutY="139.0" text="Username" />
     <Label layoutX="116.0" layoutY="14.0" text="Bohnaza">

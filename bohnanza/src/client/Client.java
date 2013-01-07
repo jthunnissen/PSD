@@ -62,6 +62,7 @@ public class Client implements Runnable {
 	}
 
 	public void sendToServer(String update){
+		System.out.println("OUT:"+update);
 		os.println(update);
 	}
 
@@ -79,7 +80,7 @@ public class Client implements Runnable {
 		String responseLine;
 		try {
 			while ((responseLine = is.readLine()) != null) {
-				System.out.println(responseLine);
+				System.out.println("IN:"+responseLine);
 				application.update(responseLine);
 				if (responseLine.indexOf("*** Bye") != -1)
 					break;

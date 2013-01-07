@@ -45,7 +45,7 @@
         <Image url="@../../res/res/cards/Empty.png" />
       </image>
     </ImageView>
-    <TextArea fx:id="chatbox" layoutX="14.0" layoutY="239.0" prefHeight="258.0" prefWidth="229.0" wrapText="true" />
+    <TextArea fx:id="chatbox" editable="false" layoutX="14.0" layoutY="239.0" prefHeight="258.0" prefWidth="229.0" wrapText="true" />
     <TextField fx:id="chatmessage" layoutX="14.0" layoutY="500.0" onAction="#sendmessage" prefWidth="166.0" promptText="Message..." />
     <Button layoutX="188.0" layoutY="500.0" mnemonicParsing="false" onAction="#sendmessage" prefWidth="68.73876953125" text="Send" />
     <Button id="harvest2" fx:id="harvest3" layoutX="547.0" layoutY="317.0" mnemonicParsing="false" onAction="#harvest3" text="Harvest" visible="false" />

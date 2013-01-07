@@ -133,28 +133,28 @@ public class GameController extends AnchorPane implements Initializable {
 	}
 
 	public void harvest1(){
-		application.getClient().sendToServer("HARVEST 1");
+		application.getClient().sendToServer(Protocol.HARVEST+" 1");
 	}
 	
 	public void harvest2(){
-		application.getClient().sendToServer("HARVEST 2");
+		application.getClient().sendToServer(Protocol.HARVEST+"HARVEST 2");
 	}
 	
 	public void harvest3(){
-		application.getClient().sendToServer("HARVEST 3");
+		application.getClient().sendToServer(Protocol.HARVEST+"HARVEST 3");
 	}
 	
 	public void buy3(){
-		application.getClient().sendToServer("BUYFIELD");
+		application.getClient().sendToServer(Protocol.BUYBEANFIELD);
 	}
 	
 	public void drawcard(){
-		application.getClient().sendToServer("DRAWCARD");
+		application.getClient().sendToServer(Protocol.DRAWCARDS);
 	}
 	
 	public void sendmessage(){
 		if(chatmessage.getText().length()>0){
-			application.getClient().sendToServer(Protocol.CHAT + " " +chatmessage.getText());
+			application.getClient().sendToServer(Protocol.CHAT + " "+application.getUsername()+": " +chatmessage.getText());
 			chatmessage.setText("");
 		}
 	}
@@ -177,7 +177,7 @@ public class GameController extends AnchorPane implements Initializable {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()){
 					targetBox.setImage(db.getImage());
-					application.getClient().sendToServer("PLANT "+fieldid+" "+db.getString());
+					application.getClient().sendToServer(Protocol.PLANTBEAN +" "+ fieldid+" "+db.getString());
 					event.setDropCompleted(true);
 				}else{
 					event.setDropCompleted(false);
