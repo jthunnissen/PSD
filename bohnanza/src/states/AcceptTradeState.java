@@ -4,7 +4,7 @@ import main.*;
 
 public class AcceptTradeState extends TurnState {
 
-	public AcceptTradeState(Game context, Player activePlayer) {
+	public AcceptTradeState(Game context) {
 		super(context);
 	}
 

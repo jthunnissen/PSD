@@ -4,14 +4,26 @@ import main.*;
 
 public class TradeOrDonateState extends TurnState {
 
-	public TradeOrDonateState(Game context, Player activePlayer) {
+	public TradeOrDonateState(Game context) {
 		super(context);
-		// TODO Auto-generated constructor stub
+		addAction(DrawFaceUpCards.class);
 	}
 
 	@Override
 	protected boolean handled(Action action) {
-		// TODO Auto-generated method stub
+		if(action instanceof DrawFaceUpCards) {
+			removeAction(DrawFaceUpCards.class);
+			addAction(SetAsideCard.class);
+			addAction(InitTradeOrDonation.class);
+		} else if(action instanceof NextPhase) {
+			return true;
+		} else {
+			//TODO: add trade logic
+			
+			if(context.getActivePlayer().getFaceUpCards().isEmpty()) {
+				addAction(NextPhase.class);
+			}
+		}
 		return false;
 	}
 }

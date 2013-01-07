@@ -9,10 +9,6 @@ public class PlantState extends TurnState {
 
 	private boolean isFirstPlant = true;
 	
-	/**
-	 * @param context
-	 * @param name
-	 */
 	public PlantState(Game context) {	
 		super(context);
 		addAction(Harvest.class);

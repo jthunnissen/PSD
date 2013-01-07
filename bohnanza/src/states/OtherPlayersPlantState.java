@@ -7,13 +7,13 @@ public class OtherPlayersPlantState extends TurnState {
 	private Player turnStartedPlayer;
 	private boolean firstTime;
 	
-	public OtherPlayersPlantState(Game context, Player activePlayer) {
+	public OtherPlayersPlantState(Game context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public OtherPlayersPlantState(Game context, Player activePlayer, Player turnStartedPlayer) {
-		this(context, activePlayer);
+	public OtherPlayersPlantState(Game context, Player turnStartedPlayer) {
+		this(context);
 		this.turnStartedPlayer = turnStartedPlayer;
 		this.firstTime = true;
 	}

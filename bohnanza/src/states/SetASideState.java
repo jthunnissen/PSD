@@ -4,7 +4,7 @@ import main.*;
 
 public class SetASideState extends TurnState {
 
-	public SetASideState(Game context, Player activePlayer) {
+	public SetASideState(Game context) {
 		super(context);
 	}
 

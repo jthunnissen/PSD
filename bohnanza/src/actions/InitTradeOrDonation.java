@@ -2,13 +2,13 @@ package actions;
 import java.util.List;
 import main.*;
 
-public class Trade extends Action {
+public class InitTradeOrDonation extends Action {
 
 	private final Player otherPlayer;
 	private final List<Card> give;
 	private final List<Card> receive;
 	
-	public Trade(Game game, Player initiator, Player otherPlayer, List<Card> give, List<Card> receive) {
+	public InitTradeOrDonation(Game game, Player initiator, Player otherPlayer, List<Card> give, List<Card> receive) {
 		super(game, initiator);
 		this.otherPlayer = otherPlayer;
 		this.give = give;
