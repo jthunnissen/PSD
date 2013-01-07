@@ -1,7 +1,12 @@
 package server;
 
-import java.net.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+import states.TurnState;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
@@ -30,8 +35,18 @@ public class ServerThread extends Thread {
 			while ((inputLine = in.readLine()) != null) {
 				server.broadcast(id, inputLine);
 				out.println(outputLine);
+				String[] commandos = outputLine.split(" ");
 				if (outputLine.equals("Bye"))
 					break;
+				else if(outputLine.startsWith("NEWPLAYER")){
+					
+				} else if(outputLine.startsWith("DRAWCARD")){
+					
+				} else if(outputLine.startsWith("HARVAST")) {
+					int field = Integer.valueOf(commandos[1]);
+					
+					
+				}
 			}
 			out.close();
 			in.close();

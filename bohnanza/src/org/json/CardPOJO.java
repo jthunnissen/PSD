@@ -22,10 +22,10 @@ public class CardPOJO {
 	
 	public Image getImage(){
 		Image result = null;
-		String filename = name+".png";
+		String filename = "res/cards/"+name+".png";
 		System.out.println(filename);
 		
-		result = new Image(CardPOJO.class.getResourceAsStream(filename));
+		result = new Image(this.getClass().getClassLoader().getResourceAsStream(filename));
 		return result;
 	}
 }
