@@ -25,13 +25,14 @@ public class GameFactory {
 	 * @return the start state of the game
 	 */
 	public TurnState buildTurnStatespace(Game game, Player activePlayer) {
-		//TODO: fix this!
-		//TurnStart.addTransition(NextPlayer.class, PlantState.class);
-		//PlantState.addTransition(NextPhase.class, TradeOrDonateState.class);
-		//etc
+		TurnState startState = new TurnStart(game);
+		TurnState plantState = new PlantState(game);
+		startState.addTransition(NextPlayer.class, plantState);
+		TurnState tradedonateState = new TradeOrDonateState(game);
+		plantState.addTransition(NextPhase.class, tradedonateState);
+		//TODO: implement full hierarchy
 		
 		return new PlantState(game);
-		
 	}
 
 	public ArrayList<Card> getGameDeck() {

@@ -4,7 +4,7 @@ import main.*;
 
 public class AcceptDonateState extends TurnState {
 
-	public AcceptDonateState(Game context, Player activePlayer) {
+	public AcceptDonateState(Game context) {
 		super(context);
 	}
 

@@ -4,7 +4,7 @@ import main.*;
 
 public class CurrentPlayerPlantState extends TurnState {
 
-	public CurrentPlayerPlantState(Game context, Player activePlayer) {
+	public CurrentPlayerPlantState(Game context) {
 		super(context);
 	}
 	

@@ -4,7 +4,7 @@ import main.*;
 
 public class DrawState extends TurnState {
 
-	public DrawState(Game context, Player activePlayer) {
+	public DrawState(Game context) {
 		super(context);
 	}
 
