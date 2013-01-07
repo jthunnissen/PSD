@@ -3,14 +3,18 @@ package client;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import server.Protocol;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class ClientGUI extends Application {
@@ -18,28 +22,44 @@ public class ClientGUI extends Application {
 	Stage stage;
 	Client client;
 	GameController game;
+	LoginController login;
 	String username = "";
 
 	public static void main(String[] args) {
 		System.out.println("Hello");
 		Application.launch(ClientGUI.class, (java.lang.String[])null);
 	}
-	
+
 	public Client getClient(){
 		return client;
 	}
-	
+
 	public void setUsername(String username){
 		this.username = username;
 	}
-	
+
 	public String getUsername(){
 		return username;
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
-		try {
+
+		try{
+			primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>(){
+				@Override
+				public void handle(WindowEvent arg0) {
+					try { 
+					//	Platform.exit();
+						java.lang.System.exit(0);
+					}
+					catch(Exception ex)	{
+						System.out.print(ex.getMessage()+"\r\n");
+					}
+
+				}
+			}));
+
 			stage = primaryStage;
 			gotoLogin();
 			primaryStage.show();
@@ -50,24 +70,28 @@ public class ClientGUI extends Application {
 
 	private void gotoLogin() {
 		try {
-			LoginController login = (LoginController) replaceSceneContent("Login.fxml");
+			login = (LoginController) replaceSceneContent("Login.fxml");
 			login.setApp(this);
 		} catch (Exception ex) {
 			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
-	public void goToGame(String host, String username){
-		if(client == null){
-			setUsername(username);
-			client = new Client(this, host, username);
-		}
+	public void goToGame(){
 		try {
 			game = (GameController) replaceSceneContent("Game.fxml");
 			game.setApp(this);
 		} catch (Exception ex) {
 			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+
+	public void testLogin(String host, String username){
+		if(client == null){
+			setUsername(username);
+			client = new Client(this, host);
+		}
+		client.sendToServer("NEWPLAYER " + username);
 	}
 
 	/**
@@ -79,7 +103,14 @@ public class ClientGUI extends Application {
 		Platform.runLater(new Runnable() {
 			@Override public void run() {
 				try{
-					game.update(update);
+					if(update.startsWith("NEWPLAYEROK")){
+						goToGame();
+					} else if(update.startsWith("NEWPLAYERNOK")) {
+						login.loginFail("Username taken");
+					} else if(update.startsWith(Protocol.CHAT))
+						game.addChat(update.replaceFirst(Protocol.CHAT+" ", ""));
+					else
+						game.update(update);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}     

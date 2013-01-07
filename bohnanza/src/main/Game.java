@@ -57,8 +57,14 @@ public class Game {
 	}
 
 	
-	public void addPlayer(Player player){
-		players.add(player);
+	public Player addPlayer(String name) throws IllegalActionException{
+		for(Player player: players){
+			if(player.getName().equals(name))
+				throw new IllegalActionException("Username already taken."); 
+		}
+		Player result = new Player(name);
+		players.add(result);
+		return result;
 	}
 	
 	private void shuffleCards() {

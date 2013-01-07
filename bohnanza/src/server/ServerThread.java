@@ -3,57 +3,124 @@ package server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.net.Socket;
 
-import states.TurnState;
+import main.BeanCard;
+import main.Card;
+import main.EBeanType;
+import main.Game;
+import main.IllegalActionException;
+import main.Player;
+import actions.Action;
+import actions.BuyBeanField;
+import actions.DrawCards;
+import actions.Harvest;
+import actions.PlantBean;
 
-public class ServerThread extends Thread {
-	private Socket socket = null;
+class ServerThread extends Thread {
+
+	private BufferedReader is = null;
+	private PrintStream os = null;
+	private Socket clientSocket = null;
+	private int id = 0;
 	private Server server;
-	int id;
+	private Game game;
+	private Player player;
 
-	public ServerThread(Socket socket, Server server, int id) {
-		super("ServerThread");
-		this.socket = socket;
+
+	public ServerThread(Socket clientSocket, Server server, int id) {
+		this.clientSocket = clientSocket;
 		this.server = server;
 		this.id = id;
+		this.game = server.game;	
+	}
+
+	public void sendMessage(String message) {
+		this.os.println(message);
 	}
 
 	public void run() {
-
 		try {
-			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(
-							socket.getInputStream()));
+			is = new BufferedReader (new InputStreamReader(clientSocket.getInputStream()));
+			os = new PrintStream(clientSocket.getOutputStream());
 
-			String inputLine, outputLine;
-			outputLine = "Output";
-			out.println(outputLine);
-			
-			while ((inputLine = in.readLine()) != null) {
-				server.broadcast(id, inputLine);
-				out.println(outputLine);
-				String[] commandos = outputLine.split(" ");
-				if (outputLine.equals("Bye"))
-					break;
-				else if(outputLine.startsWith("NEWPLAYER")){
-					
-				} else if(outputLine.startsWith("DRAWCARD")){
-					
-				} else if(outputLine.startsWith("HARVAST")) {
-					int field = Integer.valueOf(commandos[1]);
-					
-					
+			String line;
+			while ((line = is.readLine()) != null) {
+				try {
+					if(player != null){
+						System.out.println(player.getName() +": "+line);
+					}	else{
+						System.out.println(line);
+					}
+					if (line.startsWith("/quit")) {
+						break;
+					}
+					String[] commandos = line.split(" ");
+					if(line.startsWith("NEWPLAYER")){
+						try{
+							player = server.game.addPlayer(line.replace("NEWPLAYER ", ""));
+						}catch(IllegalActionException e){
+							this.sendMessage("NEWPLAYERNOK");
+						}
+						if(player != null){
+							this.sendMessage("NEWPLAYEROK");
+							player.addCardToHand(new BeanCard(EBeanType.BLUEBEAN));
+							server.sendUpdate(id);
+						}
+						
+					} else if(line.startsWith(Protocol.ACCEPTTRADE)) {
+						// TODO
+					} else if(line.startsWith(Protocol.BUYBEANFIELD)){
+						Action action = new BuyBeanField(game, player);
+						game.getCurrentState().handle(action);
+						server.sendUpdate(id);
+					} else if(line.startsWith(Protocol.DECLINETRADE)) {
+						// TODO										
+					} else if(line.startsWith(Protocol.DRAWCARDS)) {
+						Action action = new DrawCards(game, player);
+						game.getCurrentState().handle(action);
+						server.sendUpdate(id);
+					} else if(line.startsWith(Protocol.DRAWFACEUPCARDS)) {
+						// TODO
+					} else if(line.startsWith(Protocol.HARVEST)){
+						int fieldid = Integer.valueOf(commandos[1]);
+						Action action = new Harvest(game, player, player.getBeanFields().get(fieldid));
+						game.getCurrentState().handle(action);
+						server.sendUpdate(id);
+					} else if(line.startsWith(Protocol.PLANTBEAN)) {
+						BeanCard card = null;
+						for(EBeanType bean : EBeanType.values()){
+							if(bean.toString().startsWith((commandos[1])))
+								card = new BeanCard(bean);
+						}
+						int fieldid = Integer.valueOf(commandos[3]);
+						Action action = new PlantBean(game, player, card, player.getBeanFields().get(fieldid));
+						game.getCurrentState().handle(action);
+						server.sendUpdate(id);
+					} else {
+						server.broadcast(id, line);
+					}
+
+				} catch (IllegalActionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
-			out.close();
-			in.close();
-			socket.close();
 
+			synchronized (this) {
+				server.broadcast(id, "Houdoe");	
+			}
+			os.println("*** Bye ***");
+
+
+			/*
+			 * Close the output stream, close the input stream, close the socket.
+			 */
+			is.close();
+			os.close();
+			clientSocket.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 }

@@ -49,7 +49,11 @@ public class LoginController extends AnchorPane implements Initializable {
             error.setText("Login...");
             
             //application.goToGame();
-            application.goToGame(host.getText(), username.getText());
+            application.testLogin(host.getText(), username.getText());
         }
+    }
+    
+    public void loginFail(String message){
+    	username.setText(message);
     }
 }

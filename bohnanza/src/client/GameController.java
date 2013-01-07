@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,15 +55,21 @@ public class GameController extends AnchorPane implements Initializable {
 	@FXML
 	ImageView field3;
 	@FXML
-	Button action1;
+	Button harvest1;
 	@FXML
-	Button action2;
+	Button harvest2;
 	@FXML
-	Button action3_harvast;
+	Button harvest3;
 	@FXML
-	Button action3_buy;
+	Button buy3;
 	@FXML
-	Button action_draw;
+	Button drawcard;
+	@FXML
+	TextArea chatbox;
+	@FXML
+	TextField chatmessage;
+	@FXML
+	Button sendmessage;
 
 	private ClientGUI application;
 
@@ -70,9 +77,16 @@ public class GameController extends AnchorPane implements Initializable {
 	public void setApp(ClientGUI application){
 		this.application = application;
 	}
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+	}
+	
+	public void addChat(String text){
+		chatbox.setText(chatbox.getText() +"\n"+text);
 	}
 
 	public void update(String update){
@@ -109,32 +123,40 @@ public class GameController extends AnchorPane implements Initializable {
 		if(player.getFields().size() > 2){
 			// Player has bought third field
 			setupGestureTarget(field3, 3);
-			action3_harvast.setVisible(true);
-			action3_buy.setVisible(false);
+			harvest3.setVisible(true);
+			buy3.setVisible(false);
 		} else {
 			// Default FMXL
-			action3_harvast.setVisible(false);	
+			harvest3.setVisible(false);
+			buy3.setVisible(true);
 		}
 	}
 
-	public void harvast1(){
-		application.getClient().sendToServer("HARVAST 1");
+	public void harvest1(){
+		application.getClient().sendToServer("HARVEST 1");
 	}
 	
-	public void harvast2(){
-		application.getClient().sendToServer("HARVAST 2");
+	public void harvest2(){
+		application.getClient().sendToServer("HARVEST 2");
 	}
 	
-	public void harvast3(){
-		application.getClient().sendToServer("HARVAST 3");
+	public void harvest3(){
+		application.getClient().sendToServer("HARVEST 3");
 	}
 	
 	public void buy3(){
-		application.getClient().sendToServer("BUYFIELD 3");
+		application.getClient().sendToServer("BUYFIELD");
 	}
 	
-	public void drawCard(){
+	public void drawcard(){
 		application.getClient().sendToServer("DRAWCARD");
+	}
+	
+	public void sendmessage(){
+		if(chatmessage.getText().length()>0){
+			application.getClient().sendToServer(Protocol.CHAT + " " +chatmessage.getText());
+			chatmessage.setText("");
+		}
 	}
 	
 	void setupGestureTarget(final ImageView targetBox, final int fieldid){

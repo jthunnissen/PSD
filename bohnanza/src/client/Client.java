@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import server.Protocol;
+
 import javafx.application.Application;
 
 public class Client implements Runnable {
@@ -25,7 +27,7 @@ public class Client implements Runnable {
 	private String host;
 	private Integer port;
 
-	public Client (ClientGUI application, String host, String username) {
+	public Client (ClientGUI application, String host) {
 		this.application = application;
 		String[] temp = host.split(":");
 		this.host = temp[0];
@@ -49,7 +51,7 @@ public class Client implements Runnable {
 		if (clientSocket != null && os != null && is != null) {
 			/* Create a thread to read from the server. */
 			new Thread(this).start();
-			sendToServer("NEWPLAYER "+username);
+			//sendToServer("NEWPLAYER "+username);
 			//while (!closed) {
 			//	os.println(inputLine.readLine().trim());
 			//}

@@ -42,6 +42,10 @@ public abstract class TurnState {
 			}
 		}
 	}
+	
+	public List<Class<? extends Action>> getActions(Player player) {
+		return actions.get(player);
+	}
 
 	/**
 	 * Update internal state of this TurnState, called after action was successfully executed with parameters args

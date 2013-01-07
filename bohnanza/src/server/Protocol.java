@@ -26,6 +26,18 @@ public class Protocol {
 	private static final String CARD_NAME = "name";
 	private static final String CARD_SCORE = "score";
 	
+	public static final String ACCEPTTRADE = "ACCEPTTRADE";
+	public static final String BUYBEANFIELD = "BUYBEANFIELD";
+	public static final String DECLINETRADE = "DECLINETRADE";
+	public static final String DRAWCARDS = "DRAWCARDS";
+	public static final String DRAWFACEUPCARDS = "DRAWFACEUPCARDS";
+	public static final String HARVEST = "HARVEST";
+	public static final String PLANTBEAN = "PLANTBEAN";
+	public static final String PROPOSETRADEORDONATION = "PROPOSETRADEORDONATION";
+	public static final String CHAT = "CHAT";
+	
+	
+	
 	
 	private ArrayList<Player> players;
 	private ArrayList<Action> actions;
@@ -85,9 +97,12 @@ public class Protocol {
 				jsonPlayers.put(jsonPlayer);
 			}
 			root.put(PLAYERS, jsonPlayers);
-			result = root.toString();
+			
 			
 			// Actions
+			
+			
+			result = root.toString();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
