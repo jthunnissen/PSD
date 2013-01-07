@@ -8,9 +8,5 @@ public class DeclineTrade extends Action {
 	}
 
 	@Override
-	public void handle() throws IllegalActionException {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void handle() throws IllegalActionException {}
 }
