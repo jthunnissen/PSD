@@ -46,7 +46,7 @@ public class BeanField extends Field {
 		return true;
 	}
 	
-	private EBeanType getTypeOf(Card card) {
+	private IBeanType getTypeOf(Card card) {
 		return ((BeanCard) cards.get(0)).getType();
 	}
 

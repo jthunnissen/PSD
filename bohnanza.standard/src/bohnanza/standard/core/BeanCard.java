@@ -14,16 +14,16 @@ public class BeanCard extends Card {
 	/**
 	 * @uml.property  name="type"
 	 */
-	private final EBeanType type;
+	private final IBeanType type;
 	
 	
-	public BeanCard(EBeanType type) {
+	public BeanCard(IBeanType type) {
 		super(type.toString(), type.numberOfCards());
 		this.produces = type.beanometer();
 		this.type = type;
 	}
 
-	public EBeanType getType(){
+	public IBeanType getType(){
 		return type;
 	}
 	/**

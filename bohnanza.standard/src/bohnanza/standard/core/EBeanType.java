@@ -6,7 +6,7 @@ import java.util.HashMap;
  * @author Damiaan
  * 
  */
-public enum EBeanType {
+public enum EBeanType implements IBeanType {
 	CHILIBEAN {
 		@Override
 		public final String toString() {
@@ -242,9 +242,5 @@ public enum EBeanType {
 			beano.put(2, 2);
 			return beano;
 		}
-	},;
-
-	public abstract int numberOfCards();
-
-	public abstract HashMap<Integer, Integer> beanometer();
+	}
 }
