@@ -1,8 +1,9 @@
 import static org.junit.Assert.*;
-import main.*;
 import org.junit.Before;
 import org.junit.Test;
-import actions.PlantBean;
+
+import bohnanza.standard.core.*;
+import bohnanza.standard.core.actions.PlantBean;
 
 /**
  * Test class for the Player.

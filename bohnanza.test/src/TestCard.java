@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
-import main.*;
 import org.junit.Test;
+
+import bohnanza.standard.core.*;
 
 /**
  * 

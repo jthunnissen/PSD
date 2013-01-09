@@ -1,9 +1,10 @@
 import static org.junit.Assert.*;
 
-import main.*;
 import org.junit.Before;
 import org.junit.Test;
-import actions.DrawFaceUpCards;
+
+import bohnanza.standard.core.*;
+import bohnanza.standard.core.actions.DrawFaceUpCards;
 
 /**
  * 

@@ -2,11 +2,12 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import main.Card;
-import main.GameFactory;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import bohnanza.standard.core.Card;
+import bohnanza.standard.core.GameFactory;
 
 
 public class GameFactoryTest {

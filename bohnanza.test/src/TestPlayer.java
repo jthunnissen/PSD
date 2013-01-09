@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
 import java.util.ArrayList;
-import main.*;
 import org.junit.Test;
+
+import bohnanza.standard.core.*;
 
 /**
  * Test class for the Player.

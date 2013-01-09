@@ -4,12 +4,13 @@ import static org.hamcrest.CoreMatchers.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import main.Card;
-import main.Game;
-import main.Player;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import bohnanza.standard.core.Card;
+import bohnanza.standard.core.Game;
+import bohnanza.standard.core.Player;
 
 
 public class GameTest {
