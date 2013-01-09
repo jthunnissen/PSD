@@ -6,15 +6,16 @@ public class DrawState extends TurnState {
 
 	public DrawState(Game context) {
 		super(context);
+		addAction(DrawCards.class);
 	}
 
 	@Override
 	protected boolean handled(Action action) {
-		// TODO Auto-generated method stub
+		return action instanceof DrawCards ? true : false;
+	}
+	
+	public static void jan() {
 		
-		//addActionState(new DrawCards(getContext()), new SetASideState(getContext(),activePlayer));
-		
-		return false;
 	}
 
 }
