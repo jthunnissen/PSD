@@ -1,3 +1,4 @@
+
 package bohnanza.standard.client;
 
 /*
@@ -10,9 +11,13 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -27,7 +32,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import org.json.CardPOJO;
 import org.json.PlayerPOJO;
@@ -166,17 +174,11 @@ public class GameController extends AnchorPane implements Initializable {
 		CardPOJO card = new CardPOJO(EBeanType.BLACKEYEDBEAN.toString(), "");
 		ImageView cardView = new ImageView(card.getImage());
 		this.setupGestureSource(cardView, card.getName());
-		tradearea.getChildren().add(cardView);
+		
 		cardView = new ImageView(card.getImage());
 		initOffer(cardView, card);
-		card = new CardPOJO(EBeanType.BLUEBEAN.toString(), "");
-		cardView = new ImageView(card.getImage());
-		this.setupGestureSource(cardView, card.getName());
 		tradearea.getChildren().add(cardView);
-		cardView = new ImageView(card.getImage());
-		initOffer(cardView, card);
 		// Other players = face up cards from active player
-
 	}
 
 	public void initOffer(final ImageView cardView, final CardPOJO card){
@@ -192,6 +194,41 @@ public class GameController extends AnchorPane implements Initializable {
 				}};
 		});
 
+	}
+
+	public void viewOffer(final String player, String card, String offer){
+		final Stage myDialog = new Stage();
+		myDialog.initModality(Modality.WINDOW_MODAL);
+
+		Text descriptionText = new Text(player +" offers "+ offer + " for: "+ card);
+		
+		Button dismissButton = new Button("Dismiss");
+		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				application.client.sendToServer(Protocol.DECLINETRADE + " " + player);
+				myDialog.close();
+			}
+		});
+		
+		Button okButton = new Button("OK");
+		okButton.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				application.client.sendToServer(Protocol.ACCEPTTRADE + " " + player);
+				myDialog.close();
+			}
+
+		});
+
+		Scene myDialogScene = new Scene(VBoxBuilder.create()
+				.children(new Text("Hello! it's My Dialog."), descriptionText, dismissButton, okButton)
+				.alignment(Pos.CENTER)
+				.padding(new Insets(10))
+				.build());
+
+		myDialog.setScene(myDialogScene);
+		myDialog.show();
 	}
 
 	public void sendOffer(){

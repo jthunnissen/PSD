@@ -1,4 +1,6 @@
+
 package bohnanza.standard.server;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,18 +8,29 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bohnanza.standard.core.BeanCard;
+import bohnanza.standard.core.Card;
+
+
+import bohnanza.standard.core.BeanCard;
+
 import bohnanza.standard.core.EBeanType;
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
+
+import bohnanza.standard.core.actions.AcceptTrade;
 import bohnanza.standard.core.actions.Action;
 import bohnanza.standard.core.actions.BuyBeanField;
+import bohnanza.standard.core.actions.DeclineTrade;
 import bohnanza.standard.core.actions.DrawCards;
+import bohnanza.standard.core.actions.DrawFaceUpCards;
 import bohnanza.standard.core.actions.Harvest;
 import bohnanza.standard.core.actions.PlantBean;
-import bohnanza.standard.core.actions.ProposeTradeOrDonation;
-
+import bohnanza.standard.core.actions.ProposeTrade;
 
 class ServerThread extends Thread {
 
@@ -29,6 +42,9 @@ class ServerThread extends Thread {
 	private Game game;
 	private Player player;
 
+	public Player getPlayer(){
+		return player;
+	}
 
 	public ServerThread(Socket clientSocket, Server server, int id) {
 		this.clientSocket = clientSocket;
@@ -69,23 +85,35 @@ class ServerThread extends Thread {
 							player.addCardToHand(new BeanCard(EBeanType.BLUEBEAN));
 							server.sendUpdate(id);
 						}
-						
+
 					} else if(line.startsWith(Protocol.ACCEPTTRADE)) {
-						// TODO
-						//Action action = new AcceptTrade();
+						String[] options = line.split(";");
+						BeanCard giveCard = findBeanCard(options[1]);
+						List<Card> give = new ArrayList<Card>();
+						give.add(giveCard);
+						List<Card> receive = new ArrayList<Card>();
+						String[] receiveCards = options[2].split(",");
+						for(int i=0; i<receiveCards.length; i++){
+							receive.add(findBeanCard(receiveCards[i]));
+						}
+						Action action = new AcceptTrade(game, player, game.getActivePlayer(), give, receive);
+						game.getCurrentState().handle(action);
 					} else if(line.startsWith(Protocol.BUYBEANFIELD)){
 						Action action = new BuyBeanField(game, player);
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.DECLINETRADE)) {
-						// TODO
-						//Action action = new DeclineTrade();
+						Action action = new DeclineTrade(game, player);
+						game.getCurrentState().handle(action);
+						server.sendToPlayer(player, Protocol.DECLINETRADE);
 					} else if(line.startsWith(Protocol.DRAWCARDS)) {
 						Action action = new DrawCards(game, player);
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.DRAWFACEUPCARDS)) {
-						// TODO
+						Action action = new DrawFaceUpCards(game, player);
+						game.getCurrentState().handle(action);
+						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.HARVEST)){
 						int fieldid = Integer.valueOf(commandos[1]);
 						Action action = new Harvest(game, player, player.getBeanFields().get(fieldid));
@@ -102,7 +130,20 @@ class ServerThread extends Thread {
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.PROPOSETRADEORDONATION)){
-						//Action action = new ProposeTradeOrDonation();
+						String[] options = line.split(";");
+						BeanCard giveCard = findBeanCard(options[1]);
+						List<Card> give = new ArrayList<Card>();
+						give.add(giveCard);
+						List<Card> receive = new ArrayList<Card>();
+						String[] receiveCards = options[2].split(",");
+						if(receiveCards.length>0){
+							for(int i=0; i<receiveCards.length; i++){
+								receive.add(findBeanCard(receiveCards[i]));
+							}
+						}
+						Action action = new ProposeTrade(game, player, game.getActivePlayer(), give, receive);
+						game.getCurrentState().handle(action);
+						server.sendToPlayer(game.getActivePlayer(), line);
 					} else if(line.startsWith(Protocol.CHAT)){
 						server.broadcast(id, Protocol.chatToJSON(line.replace(Protocol.CHAT+" ", "")));
 					} else {
@@ -129,5 +170,14 @@ class ServerThread extends Thread {
 			clientSocket.close();
 		} catch (IOException e) {
 		}
+	}
+
+	public BeanCard findBeanCard(String cardName){
+		BeanCard result = null;
+		for(EBeanType bean : EBeanType.values()){
+			if(bean.toString().startsWith(cardName))
+				result = new BeanCard(bean);
+		}
+		return result;
 	}
 }

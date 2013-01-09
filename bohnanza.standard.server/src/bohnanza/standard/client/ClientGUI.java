@@ -1,3 +1,4 @@
+
 package bohnanza.standard.client;
 
 import java.io.InputStream;
@@ -159,5 +160,4 @@ public class ClientGUI extends Application {
 		stage.sizeToScene();
 		return (Initializable) loader.getController();
 	}
-
 }

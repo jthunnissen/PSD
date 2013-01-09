@@ -5,7 +5,6 @@ import bohnanza.standard.core.Card;
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
-import bohnanza.standard.core.states.OtherPlayersPlantState;
 
 
 public class AcceptTrade extends Action {

@@ -1,4 +1,10 @@
+
+
 package bohnanza.standard.server;
+
+
+
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,18 +13,9 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import bohnanza.standard.core.BeanCard;
-import bohnanza.standard.core.EBeanType;
+
 import bohnanza.standard.core.Game;
-import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
-import bohnanza.standard.core.actions.Action;
-import bohnanza.standard.core.actions.DrawCards;
-
-
-/*
- * A chat server that delivers public and private messages.
- */
 public class Server implements Runnable {
 
 	// The server socket.
@@ -113,5 +110,15 @@ public class Server implements Runnable {
 		} catch (IOException e) {
 			System.err.println("IOException:  " + e);
 		}
+	}
+
+	public void sendToPlayer(Player player, String message) {
+		for (int i = 0; i < maxClientsCount; i++) {
+			if (threads[i] != null && threads[i].getPlayer() == player) {
+				threads[i].sendMessage(message);
+				break;
+			}
+		}
+
 	}
 }
