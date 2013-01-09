@@ -13,41 +13,56 @@
     <Separator layoutX="262.0" layoutY="14.0" orientation="VERTICAL" prefHeight="512.0" />
     <Separator layoutX="295.0" layoutY="155.0" prefWidth="553.0" />
     <Separator layoutX="295.0" layoutY="359.0" prefWidth="553.0" />
-    <Label layoutX="295.0" layoutY="24.0" text="Trade" />
+    <Label layoutX="295.0" layoutY="24.0" text="Trade area" />
     <Label layoutX="295.0" layoutY="159.0" text="Actions" />
     <Label layoutX="295.0" layoutY="363.0" text="Hand" />
-    <ImageView fx:id="field1" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="320.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../res/res/cards/Empty.png" />
-      </image>
-    </ImageView>
-    <Button fx:id="harvest1" layoutX="317.0" layoutY="317.0" mnemonicParsing="false" onAction="#harvest1" text="Harvest" />
-    <Button fx:id="harvest2" layoutX="433.0" layoutY="317.0" mnemonicParsing="false" onAction="#harvest2" text="Harvest" />
-    <Button fx:id="buy3" layoutX="567.0" layoutY="317.0" mnemonicParsing="false" text="Buy" />
-    <Button fx:id="drawcard" layoutX="738.0" layoutY="317.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
-    <ScrollPane layoutX="313.0" layoutY="398.0" prefHeight="146.0" prefWidth="544.0">
+    <ScrollPane layoutX="313.0" layoutY="398.0" prefHeight="146.0" prefWidth="245.0">
       <content>
-        <HBox fx:id="hand" prefHeight="145.0" prefWidth="543.0" />
+        <HBox fx:id="hand" prefHeight="145.0" prefWidth="244.0" />
       </content>
     </ScrollPane>
-    <ImageView fitHeight="109.0" fitWidth="68.73874038696289" layoutX="752.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../res/res/cards/Coin.png" />
-      </image>
-    </ImageView>
-    <ImageView fx:id="field2" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="436.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../res/res/cards/Empty.png" />
-      </image>
-    </ImageView>
-    <ImageView fx:id="field3" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="558.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../../res/res/cards/Empty.png" />
-      </image>
-    </ImageView>
-    <TextArea fx:id="chatbox" layoutX="14.0" layoutY="239.0" prefHeight="258.0" prefWidth="229.0" wrapText="true" />
+    <TextArea fx:id="chatbox" editable="false" layoutX="14.0" layoutY="239.0" prefHeight="258.0" prefWidth="229.0" wrapText="true" />
     <TextField fx:id="chatmessage" layoutX="14.0" layoutY="500.0" onAction="#sendmessage" prefWidth="166.0" promptText="Message..." />
     <Button layoutX="188.0" layoutY="500.0" mnemonicParsing="false" onAction="#sendmessage" prefWidth="68.73876953125" text="Send" />
     <Button id="harvest2" fx:id="harvest3" layoutX="547.0" layoutY="317.0" mnemonicParsing="false" onAction="#harvest3" text="Harvest" visible="false" />
+    <ScrollPane layoutX="317.0" layoutY="44.0" prefHeight="111.0" prefWidth="530.0">
+      <content>
+        <HBox fx:id="tradearea" prefHeight="100.0" prefWidth="200.0" />
+      </content>
+    </ScrollPane>
+    <Label layoutX="618.0" layoutY="368.0" text="A-side (to be planted)" />
+    <ScrollPane layoutX="603.0" layoutY="400.0" prefHeight="146.0" prefWidth="245.0">
+      <content>
+        <HBox id="hand" fx:id="aside" prefHeight="145.0" prefWidth="244.0" />
+      </content>
+    </ScrollPane>
+    <AnchorPane fx:id="actionspane" layoutX="306.0" layoutY="189.0" prefHeight="163.0" prefWidth="552.0" visible="true">
+      <children>
+        <Button fx:id="buy3" layoutX="242.0" layoutY="136.0" mnemonicParsing="false" text="Buy" />
+        <Button fx:id="harvest2" layoutX="131.0" layoutY="136.0" mnemonicParsing="false" onAction="#harvest2" text="Harvest" />
+        <Button fx:id="harvest1" layoutX="36.0" layoutY="136.0" mnemonicParsing="false" onAction="#harvest1" text="Harvest" />
+        <ImageView fx:id="field2" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="134.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../res/res/cards/Empty.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="109.0" fitWidth="68.73874038696289" layoutX="428.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../res/res/cards/Coin.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="field1" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="39.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../res/res/cards/Empty.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="field3" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../../res/res/cards/Empty.png" />
+          </image>
+        </ImageView>
+        <Button fx:id="drawcard" layoutX="414.0" layoutY="136.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
+      </children>
+    </AnchorPane>
   </children>
 </AnchorPane>

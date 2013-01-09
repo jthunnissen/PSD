@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import server.Protocol;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -16,17 +15,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import org.json.JSONObject;
+
+import server.Protocol;
+
 
 public class ClientGUI extends Application {
 
 	Stage stage;
 	Client client;
-	GameController game;
-	LoginController login;
+	GameController gameController;
+	LoginController loginController;
 	String username = "";
 
+	public static final int AWAITING_USERNAMECHECK = 0;
+	public static final int AWAITING_GAMEUPDATE = 1;
+	public static final int AWAITING_OFFER = 2;
+	public int state = AWAITING_USERNAMECHECK;
+
+
 	public static void main(String[] args) {
-		System.out.println("Hello");
 		Application.launch(ClientGUI.class, (java.lang.String[])null);
 	}
 
@@ -49,14 +57,7 @@ public class ClientGUI extends Application {
 			primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>(){
 				@Override
 				public void handle(WindowEvent arg0) {
-					try { 
-					//	Platform.exit();
-						java.lang.System.exit(0);
-					}
-					catch(Exception ex)	{
-						System.out.print(ex.getMessage()+"\r\n");
-					}
-
+					java.lang.System.exit(0);
 				}
 			}));
 
@@ -70,8 +71,8 @@ public class ClientGUI extends Application {
 
 	private void gotoLogin() {
 		try {
-			login = (LoginController) replaceSceneContent("Login.fxml");
-			login.setApp(this);
+			loginController = (LoginController) replaceSceneContent("Login.fxml");
+			loginController.setApp(this);
 		} catch (Exception ex) {
 			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -79,8 +80,8 @@ public class ClientGUI extends Application {
 
 	public void goToGame(){
 		try {
-			game = (GameController) replaceSceneContent("Game.fxml");
-			game.setApp(this);
+			gameController = (GameController) replaceSceneContent("Game.fxml");
+			gameController.setApp(this);
 		} catch (Exception ex) {
 			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -103,21 +104,21 @@ public class ClientGUI extends Application {
 		Platform.runLater(new Runnable() {
 			@Override public void run() {
 				try{
-					if(update.startsWith("NEWPLAYEROK")){
-						goToGame();
-					} else if(update.startsWith("NEWPLAYERNOK")) {
-						login.loginFail("Username taken");
-					} else if(update.startsWith(Protocol.CHAT))
-						game.addChat(update.replaceFirst(Protocol.CHAT+" ", ""));
-					else
-						game.update(update);
+					JSONObject response = new JSONObject(update);
+					String action = response.getString("type");
+					if(state == ClientGUI.AWAITING_USERNAMECHECK && action.equals("usernamecheck")){
+						loginController.checkLogin(Protocol.usernameFromJSON(response));
+					} else if(action.equals(Protocol.CHAT))
+						gameController.addChat(Protocol.chatFromJSON(response));
+					else if(action.equals("gameupdate")) {
+						gameController.update(update);
+					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}     
 			}
 		});
 	}
-
 
 	private Initializable replaceSceneContent(String fxml) throws Exception {
 		FXMLLoader loader = new FXMLLoader();

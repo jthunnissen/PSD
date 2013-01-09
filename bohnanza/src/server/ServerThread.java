@@ -7,7 +7,6 @@ import java.io.PrintStream;
 import java.net.Socket;
 
 import main.BeanCard;
-import main.Card;
 import main.EBeanType;
 import main.Game;
 import main.IllegalActionException;
@@ -17,6 +16,7 @@ import actions.BuyBeanField;
 import actions.DrawCards;
 import actions.Harvest;
 import actions.PlantBean;
+import actions.ProposeTradeOrDonation;
 
 class ServerThread extends Thread {
 
@@ -61,22 +61,24 @@ class ServerThread extends Thread {
 						try{
 							player = server.game.addPlayer(line.replace("NEWPLAYER ", ""));
 						}catch(IllegalActionException e){
-							this.sendMessage("NEWPLAYERNOK");
+							this.sendMessage(Protocol.usernameCheckToJSON(false));
 						}
 						if(player != null){
-							this.sendMessage("NEWPLAYEROK");
+							this.sendMessage(Protocol.usernameCheckToJSON(true));
 							player.addCardToHand(new BeanCard(EBeanType.BLUEBEAN));
 							server.sendUpdate(id);
 						}
 						
 					} else if(line.startsWith(Protocol.ACCEPTTRADE)) {
 						// TODO
+						//Action action = new AcceptTrade();
 					} else if(line.startsWith(Protocol.BUYBEANFIELD)){
 						Action action = new BuyBeanField(game, player);
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.DECLINETRADE)) {
-						// TODO										
+						// TODO
+						//Action action = new DeclineTrade();
 					} else if(line.startsWith(Protocol.DRAWCARDS)) {
 						Action action = new DrawCards(game, player);
 						game.getCurrentState().handle(action);
@@ -98,6 +100,10 @@ class ServerThread extends Thread {
 						Action action = new PlantBean(game, player, card, player.getBeanFields().get(fieldid));
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
+					} else if(line.startsWith(Protocol.PROPOSETRADEORDONATION)){
+						//Action action = new ProposeTradeOrDonation();
+					} else if(line.startsWith(Protocol.CHAT)){
+						server.broadcast(id, Protocol.chatToJSON(line.replace(Protocol.CHAT+" ", "")));
 					} else {
 						server.broadcast(id, line);
 					}

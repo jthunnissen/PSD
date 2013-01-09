@@ -8,6 +8,7 @@ import main.Game;
 import main.Player;
 
 import org.json.CardPOJO;
+import org.json.GamePOJO;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ public class Protocol {
 	private static final String PLAYER_NAME = "name";
 	private static final String PLAYER_SCORE = "score";
 	private static final String PLAYER_HAND = "hand";
+	private static final String PLAYER_FACEUP = "faceup";
 	private static final String PLAYER_FIELDS = "fields";
 	private static final String CARD_NAME = "name";
 	private static final String CARD_SCORE = "score";
@@ -62,6 +64,7 @@ public class Protocol {
 		
 		try {
 			JSONObject root = new JSONObject();
+			root.put("type", "gameupdate");
 			// Current player
 			root.put(CURRENTPLAYER, game.getActivePlayer().getName());
 			// All players
@@ -79,6 +82,15 @@ public class Protocol {
 					jsonCards.put(jsonCard);
 				}
 				jsonPlayer.put(PLAYER_HAND, jsonCards);
+				
+				JSONArray jsonFaceUps = new JSONArray();
+				for(Card card : player.getFaceUpCards()){
+					JSONObject jsonFaceUp = new JSONObject();
+					jsonFaceUp.put(CARD_NAME, card.getName());
+					jsonFaceUp.put(CARD_SCORE, String.valueOf(card.getNumberOfCards()));
+					jsonFaceUps.put(jsonFaceUp);
+				}
+				jsonPlayer.put(PLAYER_FACEUP, jsonFaceUps);
 				
 				JSONArray jsonFields = new JSONArray();
 				for(Field field : player.getBeanFields()) {
@@ -108,6 +120,12 @@ public class Protocol {
 			e.printStackTrace();
 		}
 		
+		
+		return result;
+	}
+	
+	public GamePOJO fromJSON(String json){
+		GamePOJO result = null;
 		
 		return result;
 	}
@@ -144,6 +162,15 @@ public class Protocol {
 						String cardScore = jsonCards.getJSONObject(j).getString(CARD_SCORE);
 						playerHand.add(new CardPOJO(cardName, cardScore));
 					}
+					
+					// Face up
+					JSONArray jsonFaceUp = players.getJSONObject(i).getJSONArray(PLAYER_FACEUP);
+					ArrayList<CardPOJO> playerFaceUp = new ArrayList<CardPOJO>();
+					for(int l=0; l<jsonFaceUp.length(); l++){
+						String cardName = jsonFaceUp.getJSONObject(l).getString(CARD_NAME);
+						String cardScore = jsonFaceUp.getJSONObject(l).getString(CARD_SCORE);
+						playerFaceUp.add(new CardPOJO(cardName, cardScore));
+					}
 					// Fields
 					JSONArray jsonFields = players.getJSONObject(i).getJSONArray(PLAYER_FIELDS);
 					ArrayList<CardPOJO> playerFields = new ArrayList<CardPOJO>();
@@ -153,7 +180,7 @@ public class Protocol {
 						playerFields.add(new CardPOJO(cardName, cardScore));
 					}
 					
-					result.add(new PlayerPOJO(playerName, playerScore, playerHand, playerFields));
+					result.add(new PlayerPOJO(playerName, playerScore, playerHand, playerFaceUp, playerFields));
 				}
 			}
 		} catch (JSONException e) {
@@ -163,6 +190,52 @@ public class Protocol {
 		
 		return result;
 		
+	}
+	
+	public static boolean usernameFromJSON(JSONObject root){
+		boolean result = false;
+		try {
+			result = (root.getBoolean("response") == true);
+		} catch (JSONException e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	public static String usernameCheckToJSON(boolean response){
+		String result = "";
+		JSONObject root = new JSONObject();
+		try {
+			root.put("type", "usernamecheck");
+			root.put("response", response);
+			result = root.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String chatFromJSON(JSONObject response) {
+		String result = "";
+		try {
+			result = response.getString("response");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String chatToJSON(String response){
+		String result = "";	
+		try {
+			JSONObject root = new JSONObject();
+			root.put("type", Protocol.CHAT);
+			root.put("response", response);
+			result = root.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

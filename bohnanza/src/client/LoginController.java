@@ -19,41 +19,42 @@ import javafx.scene.layout.AnchorPane;
  */
 public class LoginController extends AnchorPane implements Initializable {
 
-    @FXML
-    TextField host;
-    @FXML
-    TextField username;
-    @FXML
-    Button login;
-    @FXML
-    Label error;
+	@FXML
+	TextField host;
+	@FXML
+	TextField username;
+	@FXML
+	Button login;
+	@FXML
+	Label error;
 
-    private ClientGUI application;
-    
-    
-    public void setApp(ClientGUI application){
-        this.application = application;
-    }
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    	error.setText("");
-    }
+	private ClientGUI application;
 
-    public void doLogin(ActionEvent event) {
-        if (application == null){
-            // We are running in isolated FXML, possibly in Scene Builder.
-            // NO-OP.
-        	error.setText("Hello " + username.getText());
-        } else {
-            error.setText("Login...");
-            
-            //application.goToGame();
-            application.testLogin(host.getText(), username.getText());
-        }
-    }
-    
-    public void loginFail(String message){
-    	username.setText(message);
-    }
+
+	public void setApp(ClientGUI application){
+		this.application = application;
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		error.setText("");
+	}
+
+	public void doLogin(ActionEvent event) {
+		if (application == null){
+			// We are running in isolated FXML, possibly in Scene Builder.
+			// NO-OP.
+		} else {
+			error.setText("Logging in...");
+			application.testLogin(host.getText(), username.getText());
+		}
+	}
+	
+	public void checkLogin(boolean ok){
+		if(ok)
+			application.goToGame();
+		else
+			username.setText("Username already taken");
+	}
+
 }

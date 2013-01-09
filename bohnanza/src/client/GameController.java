@@ -28,6 +28,8 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
+import main.EBeanType;
+
 import org.json.CardPOJO;
 import org.json.PlayerPOJO;
 
@@ -48,6 +50,12 @@ public class GameController extends AnchorPane implements Initializable {
 	Label error;
 	@FXML
 	HBox hand;
+	@FXML
+	HBox aside;
+	@FXML
+	HBox tradearea;
+	@FXML
+	HBox offer;
 	@FXML
 	ImageView field1;
 	@FXML
@@ -72,24 +80,25 @@ public class GameController extends AnchorPane implements Initializable {
 	Button sendmessage;
 
 	private ClientGUI application;
+	private ArrayList<String> offerList = new ArrayList<String>();
+	private CardPOJO offerItem;
 
 
 	public void setApp(ClientGUI application){
 		this.application = application;
 	}
-	
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
-	
+
 	public void addChat(String text){
 		chatbox.setText(chatbox.getText() +"\n"+text);
 	}
 
 	public void update(String update){
+		System.out.println("GAME WINDOW UPDATE");
 		//String[] commandos = update.split(" ");
 		Protocol protocol = new Protocol(null);
 
@@ -102,12 +111,13 @@ public class GameController extends AnchorPane implements Initializable {
 			} else {
 				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
 			}
-			
+
 		}
 		players.setItems(items);
 
 
 		// This playerPOJO
+		// Hand window
 		hand.getChildren().clear();
 		PlayerPOJO player = protocol.fromJSONGetPlayers(update, application.getUsername()).get(0);
 		for(CardPOJO card : player.getHand()){
@@ -115,50 +125,146 @@ public class GameController extends AnchorPane implements Initializable {
 			this.setupGestureSource(cardView, card.getName());
 			hand.getChildren().add(cardView);
 			cardView = new ImageView(card.getImage());
-			hand.getChildren().add(cardView);
 		}
 
-		setupGestureTarget(field1, 1);
-		setupGestureTarget(field2, 2);
-		if(player.getFields().size() > 2){
-			// Player has bought third field
-			setupGestureTarget(field3, 3);
-			harvest3.setVisible(true);
-			buy3.setVisible(false);
-		} else {
-			// Default FMXL
-			harvest3.setVisible(false);
-			buy3.setVisible(true);
+		// Actions window
+		if(isActivePlayer(protocol.fromJSONCurrentPlayer(update))){
+			setupGestureTarget(field1, 1);
+			setupGestureTarget(field2, 2);
+			if(player.getFields().size() > 2){
+				// Player has bought third field
+				setupGestureTarget(field3, 3);
+				harvest3.setVisible(true);
+				buy3.setVisible(false);
+			} else {
+				// Default FMXL
+				harvest3.setVisible(false);
+				buy3.setVisible(true);
+			}
 		}
+
+		// Trading area - Face up cards from active player
+		PlayerPOJO activePlayer;
+		if(isActivePlayer(protocol.fromJSONCurrentPlayer(update)))
+			activePlayer = protocol.fromJSONGetPlayers(update, protocol.fromJSONCurrentPlayer(update)).get(0);
+		else
+			activePlayer = player;
+
+		if(tradearea.getChildren().size() > 0){
+			tradearea.getChildren().clear();
+		}
+		for(CardPOJO card : activePlayer.getFaceUp()){
+			ImageView cardView = new ImageView(card.getImage());
+			this.setupGestureSource(cardView, card.getName());
+			tradearea.getChildren().add(cardView);
+			cardView = new ImageView(card.getImage());
+			tradearea.getChildren().add(cardView);
+			initOffer(cardView, card);
+		}
+		///// TEMP
+		CardPOJO card = new CardPOJO(EBeanType.BLACKEYEDBEAN.toString(), "");
+		ImageView cardView = new ImageView(card.getImage());
+		this.setupGestureSource(cardView, card.getName());
+		tradearea.getChildren().add(cardView);
+		cardView = new ImageView(card.getImage());
+		initOffer(cardView, card);
+		card = new CardPOJO(EBeanType.BLUEBEAN.toString(), "");
+		cardView = new ImageView(card.getImage());
+		this.setupGestureSource(cardView, card.getName());
+		tradearea.getChildren().add(cardView);
+		cardView = new ImageView(card.getImage());
+		initOffer(cardView, card);
+		// Other players = face up cards from active player
+
+	}
+
+	public void initOffer(final ImageView cardView, final CardPOJO card){
+		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				System.out.println("Click on: "+card.getName());
+				offer.setVisible(true);
+				setupOfferTarget(offer);
+				if(offerItem != card) {
+					offerItem = card;
+					offer.getChildren().clear();
+					offerList.clear();
+				}};
+		});
+
+	}
+
+	public void sendOffer(){
+		StringBuilder result = new StringBuilder();
+		for(String string : offerList) {
+			result.append(string);
+			result.append(",");
+		}
+		String cards= result.length() > 0 ? result.substring(0, result.length() - 1): "";
+		application.getClient().sendToServer(Protocol.PROPOSETRADEORDONATION + ";"+offerItem.getName() + ";"+cards);
 	}
 
 	public void harvest1(){
 		application.getClient().sendToServer(Protocol.HARVEST+" 1");
 	}
-	
+
 	public void harvest2(){
-		application.getClient().sendToServer(Protocol.HARVEST+"HARVEST 2");
+		application.getClient().sendToServer(Protocol.HARVEST+" 2");
 	}
-	
+
 	public void harvest3(){
-		application.getClient().sendToServer(Protocol.HARVEST+"HARVEST 3");
+		application.getClient().sendToServer(Protocol.HARVEST+" 3");
 	}
-	
+
 	public void buy3(){
 		application.getClient().sendToServer(Protocol.BUYBEANFIELD);
 	}
-	
+
 	public void drawcard(){
 		application.getClient().sendToServer(Protocol.DRAWCARDS);
 	}
-	
+
+	public void drawfaceupcard(){
+		application.getClient().sendToServer(Protocol.DRAWFACEUPCARDS);
+	}
+
 	public void sendmessage(){
 		if(chatmessage.getText().length()>0){
 			application.getClient().sendToServer(Protocol.CHAT + " "+application.getUsername()+": " +chatmessage.getText());
 			chatmessage.setText("");
 		}
 	}
-	
+
+	public boolean isActivePlayer(String activePlayer){
+		return (activePlayer.equals(application.getUsername()));
+	}
+
+	void setupOfferTarget(final HBox targetBox){
+		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				if(db.hasImage()){
+					event.acceptTransferModes(TransferMode.COPY);
+				}
+				event.consume();
+			}
+		});
+		targetBox.setOnDragDropped(new EventHandler <DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				if(db.hasImage()){
+					targetBox.getChildren().add(new ImageView(db.getImage()));
+					offerList.add(db.getString());
+					event.setDropCompleted(true);
+				}else{
+					event.setDropCompleted(false);
+				}
+				event.consume();
+			}
+		});
+	}
+
 	void setupGestureTarget(final ImageView targetBox, final int fieldid){
 		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
 			@Override
