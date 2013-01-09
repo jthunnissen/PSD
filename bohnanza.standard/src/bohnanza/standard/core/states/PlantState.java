@@ -7,7 +7,7 @@ import bohnanza.standard.core.actions.PlantBean;
 
 public class PlantState extends TurnState {
 
-	private int beansPlanted = 0;
+	private int beansPlanted;
 	
 	public PlantState(Game context) {	
 		super(context);
@@ -30,6 +30,7 @@ public class PlantState extends TurnState {
 	@Override
 	protected void reset() {
 		removeAllActions();
+		beansPlanted = 0;
 		if(context.getActivePlayer().getHand().isEmpty()) {
 			addAction(NextPhase.class);
 		} else {

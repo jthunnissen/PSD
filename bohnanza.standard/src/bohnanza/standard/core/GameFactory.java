@@ -29,10 +29,13 @@ public class GameFactory {
 		TurnState startState = new TurnStart(game);
 		TurnState plantState = new PlantState(game);
 		startState.addTransition(NextPlayer.class, plantState);
-		TurnState tradedonateState = new TradeOrDonateState(game);
+		TurnState tradedonateState = new TradeState(game);
 		plantState.addTransition(NextPhase.class, tradedonateState);
-		//TODO: implement full hierarchy
-		
+		TurnState secondplantState = new SecondPlantState(game);
+		tradedonateState.addTransition(NextPhase.class, secondplantState);
+		TurnState drawState = new DrawState(game);
+		secondplantState.addTransition(PlantAsideBean.class, drawState);
+		drawState.addTransition(DrawCards.class, startState);		
 		return new PlantState(game);
 	}
 

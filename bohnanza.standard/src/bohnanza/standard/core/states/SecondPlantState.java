@@ -7,36 +7,38 @@ public class SecondPlantState extends TurnState {
 	public SecondPlantState(Game context) {
 		super(context);
 	}
-	
-	private boolean hasOtherPlayersCardsUp() {
-		for (Player p : context.getPlayers()) {
-			if (p == context.getActivePlayer()) continue;
-			if (p.getFaceUpCards().size() > 0) {
-				return true;
+
+	@Override
+	protected boolean handled(Action action) {
+		if(action instanceof PlantAsideBean) {
+			Player initiator = action.getInitiator();
+			if(initiator.getSetAsideCards().isEmpty()) {
+				removeAction(initiator, PlantAsideBean.class);
+				removeAction(initiator, Harvest.class);
+				removeAction(initiator, BuyBeanField.class);
+				if(phaseEnd()) return true;
 			}
 		}
 		return false;
 	}
 
+	private boolean phaseEnd() {
+		for(Player player: context.getPlayers()) {
+			if(!player.getSetAsideCards().isEmpty()) return false;
+		}
+		return true;
+	}
+
 	@Override
-	protected boolean handled(Action action) {
-		// TODO Auto-generated method stub
-		
-	/*	if (getCurrentPlayer().getFaceUpCards().size() > 0 ) {
-			addActionState(new BuyBeanField(getContext()), this);
-			addActionState(new PlantBean(getContext()), this);
-			if (getCurrentPlayer().getBeanFields().size() > 0) {
-				addActionState(new Harvest(getContext()), this);
+	protected void reset() {
+		removeAllActions();
+		for(Player player: context.getPlayers()) {
+			if(!player.getSetAsideCards().isEmpty()) {
+				addAction(player, PlantAsideBean.class);
+				addAction(player, Harvest.class);
+				addAction(player, BuyBeanField.class);
 			}
-		} else {
-			if (hasOtherPlayersCardsUp()) {
-				addActionState(new EndPhase(getContext()), new OtherPlayersPlantState(getContext(), getCurrentPlayer()));
-			} else {
-				addActionState(new EndPhase(getContext()), new PlantState(getContext(),activePlayer));
-			}
-		}*/
-		
-		return false;
+		}
 	}
 }
 

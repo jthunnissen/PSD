@@ -43,6 +43,10 @@ public class Player {
 	 */
 	private List<Card> setAsideCards = new ArrayList<Card>();
 
+	public List<Card> getSetAsideCards() {
+		return setAsideCards;
+	}
+	
 	/**
 	 * The name from this Player.
 	 * @uml.property  name="name"

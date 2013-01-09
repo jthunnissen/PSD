@@ -14,6 +14,8 @@ public class PlantBean extends Action {
 	
 	@Override
 	public void handle() throws IllegalActionException {
-		initiator.plantBean(card, field);
+		if(initiator.getHand().indexOf(card)==0)
+			initiator.plantBean(card, field);
+		else throw new IllegalActionException("Can only plant first card in hand");
 	}
 }

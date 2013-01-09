@@ -2,11 +2,11 @@ package bohnanza.standard.core.states;
 import bohnanza.standard.core.*;
 import bohnanza.standard.core.actions.*;
 
-public class TradeOrDonateState extends TurnState {
+public class TradeState extends TurnState {
 
-	private ProposeTradeOrDonation proposition;
+	private ProposeTrade proposition;
 	
-	public TradeOrDonateState(Game context) {
+	public TradeState(Game context) {
 		super(context);
 	}
 
@@ -17,11 +17,11 @@ public class TradeOrDonateState extends TurnState {
 			startTrade();			
 		} else if(action instanceof NextPhase) {
 			return true;
-		} else if(action instanceof ProposeTradeOrDonation){
-			proposition = (ProposeTradeOrDonation)action;
+		} else if(action instanceof ProposeTrade){
+			proposition = (ProposeTrade)action;
 			removeAction(SetAsideCard.class);
 			for(Player player: context.getPlayers()) {
-				removeAction(player, ProposeTradeOrDonation.class);
+				removeAction(player, ProposeTrade.class);
 			}
 			addAction(proposition.getOtherPlayer(), AcceptTrade.class);
 			addAction(proposition.getOtherPlayer(), DeclineTrade.class);
@@ -37,7 +37,7 @@ public class TradeOrDonateState extends TurnState {
 	private void startTrade() {
 		addAction(SetAsideCard.class);
 		for(Player player: context.getPlayers()) {
-			addAction(player, ProposeTradeOrDonation.class);
+			addAction(player, ProposeTrade.class);
 		}
 	}
 
