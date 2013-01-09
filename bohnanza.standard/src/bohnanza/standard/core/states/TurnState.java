@@ -26,8 +26,8 @@ public abstract class TurnState {
 	protected final Game context;
 
 	public TurnState(final Game context) {
-		assert actions != null;
 		this.context = context;
+		reset();
 	}
 
 	public final void handle(Action action) throws IllegalActionException {
@@ -37,12 +37,18 @@ public abstract class TurnState {
 		if(handled(action)) {
 			try {
 				TurnState nextState = transitions.get(action);
+				nextState.reset();
 				context.setCurrentState(nextState);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
+	
+	/**
+	 * Resets the states internal state, called when the game enters this state
+	 */
+	protected abstract void reset();
 	
 	public List<Class<? extends Action>> getActions(Player player) {
 		return actions.get(player);
@@ -64,14 +70,19 @@ public abstract class TurnState {
 		actions.get(context.getActivePlayer()).add(action);
 	}
 	
-	/**Remove action from the list of possible actions for the active player in the curren state.*/
+	/**Remove action from the list of possible actions for the active player in the current state.*/
 	protected void removeAction(Class<? extends Action> action) {
 		actions.get(context.getActivePlayer()).remove(action);
 	}
 	
-	/**Remove action from the list of possible actions for initiator in the curren state.*/
+	/**Remove action from the list of possible actions for initiator in the current state.*/
 	protected void removeAction(Player initiator, Class<? extends Action> action) {
 		actions.get(initiator).remove(action);
+	}
+	
+	/**Remove all actions in the current state.*/
+	protected void removeAllActions() {
+		actions.clear();
 	}
 	
 	/**To be used only by the game factory. Adds state as the next state the game will be in if action ends the current state.*/

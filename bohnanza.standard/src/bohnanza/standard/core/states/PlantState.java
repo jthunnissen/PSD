@@ -7,20 +7,34 @@ import bohnanza.standard.core.actions.PlantBean;
 
 public class PlantState extends TurnState {
 
-	private boolean isFirstPlant = true;
+	private int beansPlanted = 0;
 	
 	public PlantState(Game context) {	
 		super(context);
-		addAction(Harvest.class);
-		addAction(PlantBean.class);
 	}
 
 	@Override
 	protected boolean handled(Action action) {
-		if (isFirstPlant && action instanceof PlantBean) {
-			isFirstPlant = false;
-			addAction(NextPhase.class);
+		if(action instanceof NextPhase) return true;
+		if(action instanceof PlantBean) {
+			beansPlanted++;
+			if(beansPlanted==1) addAction(NextPhase.class);
+			if(beansPlanted==2) {
+				removeAction(PlantBean.class);
+				removeAction(Harvest.class);
+			}
 		}
-		return true;
+		return false;
+	}
+
+	@Override
+	protected void reset() {
+		removeAllActions();
+		if(context.getActivePlayer().getHand().isEmpty()) {
+			addAction(NextPhase.class);
+		} else {
+			addAction(Harvest.class);
+			addAction(PlantBean.class);
+		}
 	}
 }

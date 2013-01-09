@@ -8,7 +8,6 @@ public class TradeOrDonateState extends TurnState {
 	
 	public TradeOrDonateState(Game context) {
 		super(context);
-		addAction(DrawFaceUpCards.class);
 	}
 
 	@Override
@@ -40,5 +39,11 @@ public class TradeOrDonateState extends TurnState {
 		for(Player player: context.getPlayers()) {
 			addAction(player, ProposeTradeOrDonation.class);
 		}
+	}
+
+	@Override
+	protected void reset() {
+		removeAllActions();
+		addAction(DrawFaceUpCards.class);
 	}
 }
