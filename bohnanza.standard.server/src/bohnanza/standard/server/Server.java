@@ -103,7 +103,11 @@ public class Server implements Runnable {
 		try {
 			while ((responseLine = is.readLine()) != null) {
 				System.out.println(responseLine);
-				if (responseLine.indexOf("start") != -1)
+				if(responseLine.equals("start")){
+					game.start();
+					sendUpdate(0);
+				}
+				if (responseLine.indexOf("end") != -1)
 					break;
 			}
 			//closed = true;

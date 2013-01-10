@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -124,9 +125,9 @@ public class ClientGUI extends Application {
 
 	private Initializable replaceSceneContent(String fxml) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		InputStream in = ClientGUI.class.getResourceAsStream(fxml);
+		InputStream in = this.getClass().getClassLoader().getResourceAsStream("res/ui/"+fxml);
 		loader.setBuilderFactory(new JavaFXBuilderFactory());
-		loader.setLocation(ClientGUI.class.getResource(fxml));
+		loader.setLocation(getClass().getClassLoader().getResource("res/ui/"+fxml));
 		AnchorPane page = null;
 		try {
 			page = (AnchorPane) loader.load(in);

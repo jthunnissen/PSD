@@ -47,6 +47,14 @@ public class Game {
 		// TODO Auto-generated method stub
 	
 	}
+	
+	public void start(){
+		for(Player player: players){
+			for(int i=0; i<5; i++) {
+				player.addCardToHand(this.drawCard());
+			}
+		}
+	}
 
 	/**
 		 */
