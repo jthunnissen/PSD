@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane prefHeight="565.0" prefWidth="890.0" xmlns:fx="http://javafx.com/fxml" fx:controller="client.GameController">
+<AnchorPane prefHeight="565.0" prefWidth="890.0" xmlns:fx="http://javafx.com/fxml" fx:controller="bohnanza.standard.client.GameController">
   <children>
     <ListView fx:id="players" layoutX="14.0" layoutY="24.0" prefHeight="200.0" prefWidth="229.0" />
     <Separator layoutX="262.0" layoutY="14.0" orientation="VERTICAL" prefHeight="512.0" />
@@ -25,7 +25,7 @@
     <TextField fx:id="chatmessage" layoutX="14.0" layoutY="500.0" onAction="#sendmessage" prefWidth="166.0" promptText="Message..." />
     <Button layoutX="188.0" layoutY="500.0" mnemonicParsing="false" onAction="#sendmessage" prefWidth="68.73876953125" text="Send" />
     <Button id="harvest2" fx:id="harvest3" layoutX="547.0" layoutY="317.0" mnemonicParsing="false" onAction="#harvest3" text="Harvest" visible="false" />
-    <ScrollPane layoutX="317.0" layoutY="44.0" prefHeight="111.0" prefWidth="530.0">
+    <ScrollPane layoutX="317.0" layoutY="44.0" prefHeight="96.0" prefWidth="530.0">
       <content>
         <HBox fx:id="tradearea" prefHeight="100.0" prefWidth="200.0" />
       </content>
@@ -36,32 +36,38 @@
         <HBox id="hand" fx:id="aside" prefHeight="145.0" prefWidth="244.0" />
       </content>
     </ScrollPane>
-    <AnchorPane fx:id="actionspane" layoutX="306.0" layoutY="189.0" prefHeight="163.0" prefWidth="552.0" visible="true">
+    <AnchorPane id="actionspane" fx:id="actionsPane" layoutX="306.0" layoutY="189.0" prefHeight="163.0" prefWidth="552.0" visible="false">
       <children>
         <Button fx:id="buy3" layoutX="242.0" layoutY="136.0" mnemonicParsing="false" text="Buy" />
         <Button fx:id="harvest2" layoutX="131.0" layoutY="136.0" mnemonicParsing="false" onAction="#harvest2" text="Harvest" />
         <Button fx:id="harvest1" layoutX="36.0" layoutY="136.0" mnemonicParsing="false" onAction="#harvest1" text="Harvest" />
         <ImageView fx:id="field2" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="134.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../res/res/cards/Empty.png" />
+            <Image url="@../cards/Empty.png" />
           </image>
         </ImageView>
         <ImageView fitHeight="109.0" fitWidth="68.73874038696289" layoutX="428.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../res/res/cards/Coin.png" />
+            <Image url="@../cards/Coin.png" />
           </image>
         </ImageView>
         <ImageView fx:id="field1" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="39.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../res/res/cards/Empty.png" />
+            <Image url="@../cards/Empty.png" />
           </image>
         </ImageView>
         <ImageView fx:id="field3" fitHeight="110.0" fitWidth="146.66666666666666" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../../res/res/cards/Empty.png" />
+            <Image url="@../cards/Empty.png" />
           </image>
         </ImageView>
         <Button fx:id="drawcard" layoutX="414.0" layoutY="136.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
+      </children>
+    </AnchorPane>
+    <AnchorPane fx:id="offerpane" layoutX="314.0" layoutY="186.0" prefHeight="146.0" prefWidth="530.0" visible="false">
+      <children>
+        <HBox fx:id="offer" prefHeight="146.0" prefWidth="442.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="0.0" />
+        <Button fx:id="sendoffer" layoutX="445.0" layoutY="60.0" mnemonicParsing="false" onAction="#sendOffer" text="Send" />
       </children>
     </AnchorPane>
   </children>

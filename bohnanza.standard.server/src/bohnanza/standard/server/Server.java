@@ -111,7 +111,6 @@ public class Server implements Runnable {
 				System.out.println(responseLine);
 				if(responseLine.equals("start")){
 					game.start();
-					broadcast(0, "start");
 					sendUpdate(0);
 				}
 				if (responseLine.indexOf("end") != -1)

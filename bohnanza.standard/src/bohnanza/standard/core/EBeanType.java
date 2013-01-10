@@ -94,10 +94,10 @@ public enum EBeanType implements IBeanType {
 		}
 
 	},
-	STICKBEAN {
+	STINKBEAN {
 		@Override
 		public final String toString() {
-			return "Stick Bean";
+			return "Stink Bean";
 		}
 
 		@Override

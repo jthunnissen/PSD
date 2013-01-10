@@ -122,10 +122,15 @@ class ServerThread extends Thread {
 					} else if(line.startsWith(Protocol.PLANTBEAN)) {
 						BeanCard card = null;
 						for(EBeanType bean : EBeanType.values()){
-							if(bean.toString().startsWith((commandos[1])))
+							if(bean.toString().startsWith((commandos[2])))
 								card = new BeanCard(bean);
 						}
-						int fieldid = Integer.valueOf(commandos[3]);
+						// TODO: Hack possible?
+						if(card.getName().equals(player.getHand().get(0).getName())){
+							card = (BeanCard) player.getHand().get(0);
+						} else
+							System.out.println("RAAAAR");
+						int fieldid = Integer.valueOf(commandos[1]);
 						Action action = new PlantBean(game, player, card, player.getBeanFields().get(fieldid));
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
@@ -153,6 +158,7 @@ class ServerThread extends Thread {
 				} catch (IllegalActionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					server.sendUpdate(0);
 				}
 			}
 
