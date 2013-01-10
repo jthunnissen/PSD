@@ -53,7 +53,7 @@ public class LoginController extends AnchorPane implements Initializable {
 	
 	public void checkLogin(boolean ok){
 		if(ok){
-			//application.goToGame();
+			application.state = ClientGUI.AWAITING_START;
 		}else
 			username.setText("Username already taken");
 	}

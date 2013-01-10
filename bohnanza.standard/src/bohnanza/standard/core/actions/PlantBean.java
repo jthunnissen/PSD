@@ -16,6 +16,6 @@ public class PlantBean extends Action {
 	public void handle() throws IllegalActionException {
 		if(initiator.getHand().indexOf(card)==0)
 			initiator.plantBean(card, field);
-		else throw new IllegalActionException("Can only plant first card in hand");
+		else throw new IllegalActionException("Can only plant first card in hand ("+initiator.getHand().get(0).getName()+")");
 	}
 }

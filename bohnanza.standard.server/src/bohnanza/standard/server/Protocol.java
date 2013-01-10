@@ -52,8 +52,8 @@ public class Protocol {
 	public static final String PROPOSETRADE = "PROPOSETRADE";
 	public static final String SETASIDECARD = "SETASIDECARD";
 	public static final String CHAT = "CHAT";
-	
-	
+
+
 
 	private ArrayList<Player> players;
 	private ArrayList<Action> actions;
@@ -117,32 +117,34 @@ public class Protocol {
 					jsonFields.put(jsonField);
 				}
 				jsonPlayer.put(PLAYER_FIELDS, jsonFields);
-				
+
 				// Actions
 				JSONArray jsonActions = new JSONArray();
 				if(game == null) System.out.println("Game null");
 				if(game.getCurrentState() == null) System.out.println("Currentstate null"); 
 				List<Class<? extends Action>> actions = game.getCurrentState().getActions(player);
-				if(actions.contains(AcceptTrade.class))
-					jsonActions.put(Protocol.ACCEPTTRADE);
-				if(actions.contains(BuyBeanField.class))
-					jsonActions.put(Protocol.BUYBEANFIELD);
-				if(actions.contains(DeclineTrade.class))
-					jsonActions.put(Protocol.DECLINETRADE);
-				if(actions.contains(DrawCards.class))
-					jsonActions.put(Protocol.DRAWCARDS);
-				if(actions.contains(DrawFaceUpCards.class))
-					jsonActions.put(Protocol.DRAWFACEUPCARDS);
-				if(actions.contains(Harvest.class))
-					jsonActions.put(Protocol.HARVEST);
-				if(actions.contains(PlantAsideBean.class))
-					jsonActions.put(Protocol.PLANTASIDEBEAN);
-				if(actions.contains(PlantBean.class))
-					jsonActions.put(Protocol.PLANTBEAN);
-				if(actions.contains(ProposeTrade.class))
-					jsonActions.put(Protocol.PROPOSETRADE);
-				if(actions.contains(SetAsideCard.class))
-					jsonActions.put(Protocol.SETASIDECARD);
+				if(actions.size() > 0){
+					if(actions.contains(AcceptTrade.class))
+						jsonActions.put(Protocol.ACCEPTTRADE);
+					if(actions.contains(BuyBeanField.class))
+						jsonActions.put(Protocol.BUYBEANFIELD);
+					if(actions.contains(DeclineTrade.class))
+						jsonActions.put(Protocol.DECLINETRADE);
+					if(actions.contains(DrawCards.class))
+						jsonActions.put(Protocol.DRAWCARDS);
+					if(actions.contains(DrawFaceUpCards.class))
+						jsonActions.put(Protocol.DRAWFACEUPCARDS);
+					if(actions.contains(Harvest.class))
+						jsonActions.put(Protocol.HARVEST);
+					if(actions.contains(PlantAsideBean.class))
+						jsonActions.put(Protocol.PLANTASIDEBEAN);
+					if(actions.contains(PlantBean.class))
+						jsonActions.put(Protocol.PLANTBEAN);
+					if(actions.contains(ProposeTrade.class))
+						jsonActions.put(Protocol.PROPOSETRADE);
+					if(actions.contains(SetAsideCard.class))
+						jsonActions.put(Protocol.SETASIDECARD);
+				}
 				jsonPlayer.put(PLAYER_ACTIONS, jsonActions);
 
 				jsonPlayers.put(jsonPlayer);
@@ -205,27 +207,27 @@ public class Protocol {
 				for(int m=0; m<jsonActions.length(); m++){
 					playerActions.add(jsonActions.getString(m));
 				}
-				
-				
+
+
 				PlayerPOJO playerPOJO = new PlayerPOJO(playerName, playerScore, playerHand, playerFaceUp, playerFields, playerActions);
-				
+
 				playersPOJO.add(playerPOJO);
-				
-				
+
+
 				if(username.equals(playerName)){
 					thisPlayer = playerPOJO;
 				}
 				if(currentPlayerName.equals(playerName)){
 					currentPlayer = playerPOJO;
 				}
-				
+
 			}
 			result = new GamePOJO(currentPlayer, thisPlayer, playersPOJO);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 
@@ -277,7 +279,7 @@ public class Protocol {
 
 	public static String waitingForPlayers() {
 		String result = "";
-		
+
 		try {
 			JSONObject root = new JSONObject();
 			root.put("type", "waiting");

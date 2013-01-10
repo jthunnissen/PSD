@@ -87,6 +87,10 @@ public class GameController extends AnchorPane implements Initializable {
 	TextField chatmessage;
 	@FXML
 	Button sendmessage;
+	@FXML
+	AnchorPane offerPane;
+	@FXML
+	AnchorPane actionsPane;
 
 	private ClientGUI application;
 	private ArrayList<String> offerList = new ArrayList<String>();
@@ -158,15 +162,22 @@ public class GameController extends AnchorPane implements Initializable {
 	public void updateThisPlayerHand(GamePOJO update){
 		hand.getChildren().clear();
 		PlayerPOJO player = update.getThisPlayer();
+		boolean first = true;
 		for(CardPOJO card : player.getHand()){
 			ImageView cardView = new ImageView(card.getImage());
-			this.setupGestureSource(cardView, card.getName());
-			hand.getChildren().add(cardView);
 			cardView = new ImageView(card.getImage());
+			if(first){
+				this.setupGestureSource(cardView, card.getName());
+				first = false;
+			}
+			hand.getChildren().add(cardView);
 		}
+		
 	}
 
 	public void updateActionsView(GamePOJO update){
+		actionsPane.setVisible(true);
+		offerPane.setVisible(false);
 		ArrayList<String> actions = update.getThisPlayer().getActions();
 		if(actions.contains(Protocol.BUYBEANFIELD)){
 			harvest3.setVisible(false);
@@ -189,11 +200,11 @@ public class GameController extends AnchorPane implements Initializable {
 			// TODO
 		}
 		if(actions.contains(Protocol.PLANTBEAN)){
-			setupGestureTarget(field1, 1);
-			setupGestureTarget(field2, 2);
+			setupGestureTarget(field1, 0);
+			setupGestureTarget(field2, 1);
 			if(update.getThisPlayer().getFields().size() > 2){
 				// Player has bought third field
-				setupGestureTarget(field3, 3);
+				setupGestureTarget(field3, 2);
 				harvest3.setVisible(true);
 			}
 		}
@@ -373,8 +384,10 @@ public class GameController extends AnchorPane implements Initializable {
 		source.setOnDragDone(new EventHandler<DragEvent>() {
 			@Override	
 			public void handle(DragEvent event) {
-				hand.getChildren().remove(source);
-				event.consume();
+				if(event.isAccepted()){
+					hand.getChildren().remove(source);
+					event.consume();
+				}
 			}
 
 		});
