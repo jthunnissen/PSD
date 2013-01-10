@@ -27,6 +27,7 @@ public abstract class TurnState {
 
 	public TurnState(final Game context) {
 		this.context = context;
+		for(Player player: context.getPlayers()) actions.put(player, new ArrayList<Class<? extends Action>>());
 		reset();
 	}
 
