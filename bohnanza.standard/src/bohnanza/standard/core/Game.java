@@ -54,6 +54,7 @@ public class Game {
 				player.addCardToHand(this.drawCard());
 			}
 		}
+		currentState = GameFactory.getInstance().buildTurnStatespace(this, this.getActivePlayer());
 	}
 
 	/**
@@ -62,7 +63,7 @@ public class Game {
 		GameFactory factory = GameFactory.getInstance();
 		drawDeck = factory.getGameDeck();
 		shuffleCards();
-		//GameFactory.getInstance().createGameStates(this);
+		
 	}
 
 	

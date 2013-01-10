@@ -77,7 +77,13 @@ public class Server implements Runnable {
 
 	public void sendUpdate(int from){
 		Protocol protocol = new Protocol(game);
-		String message = protocol.toJSON();
+		String message;
+		if(game.getCurrentState() == null){
+			message = Protocol.waitingForPlayers();
+		} else {
+			message = protocol.toJSON();
+		}
+			
 		for (int i = 0; i < maxClientsCount; i++) {
 			if (threads[i] != null /*&& i != from*/) {
 				threads[i].sendMessage(message);
@@ -105,6 +111,7 @@ public class Server implements Runnable {
 				System.out.println(responseLine);
 				if(responseLine.equals("start")){
 					game.start();
+					broadcast(0, "start");
 					sendUpdate(0);
 				}
 				if (responseLine.indexOf("end") != -1)

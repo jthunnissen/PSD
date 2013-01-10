@@ -32,6 +32,7 @@ public class ClientGUI extends Application {
 	String username = "";
 
 	public static final int AWAITING_USERNAMECHECK = 0;
+	public static final int AWAITING_START = 3;
 	public static final int AWAITING_GAMEUPDATE = 1;
 	public static final int AWAITING_OFFER = 2;
 	public int state = AWAITING_USERNAMECHECK;
@@ -111,10 +112,16 @@ public class ClientGUI extends Application {
 					String action = response.getString("type");
 					if(state == ClientGUI.AWAITING_USERNAMECHECK && action.equals("usernamecheck")){
 						loginController.checkLogin(Protocol.usernameFromJSON(response));
-					} else if(action.equals(Protocol.CHAT))
+					} else if(action.equals("waiting")) {
+						loginController.username.setText("waiting for game...");
+					} else if(action.equals(Protocol.CHAT)) {
 						gameController.addChat(Protocol.chatFromJSON(response));
-					else if(action.equals("gameupdate")) {
-						gameController.update(update);
+					} else if(action.equals("gameupdate")) {
+						if(state == ClientGUI.AWAITING_START){
+							goToGame();
+							state = ClientGUI.AWAITING_GAMEUPDATE;
+						}
+						gameController.update(Protocol.fromJSON(update, username));
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();

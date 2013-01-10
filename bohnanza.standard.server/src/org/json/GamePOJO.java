@@ -6,21 +6,25 @@ import javafx.scene.image.Image;
 
 public class GamePOJO {
 
-	private String currentPlayer;
+	private PlayerPOJO currentPlayer;
 	private ArrayList<PlayerPOJO> players;
 	private ArrayList<CardPOJO> faceup;
 	
+	private PlayerPOJO thisPlayer;
 	private ArrayList<String> actions;
 	
-	public GamePOJO(String currentPlayer, ArrayList<PlayerPOJO> players, ArrayList<CardPOJO> faceup, ArrayList<String> actions){
+	public GamePOJO(PlayerPOJO currentPlayer, PlayerPOJO thisPlayer, ArrayList<PlayerPOJO> players){
 		this.currentPlayer = currentPlayer;
+		this.thisPlayer = thisPlayer;
 		this.players = players;
-		this.faceup = faceup;
-		this.actions = actions;
 	}
 	
-	public String getCurrentPlayer(){
+	public PlayerPOJO getCurrentPlayer(){
 		return currentPlayer;
+	}
+	
+	public PlayerPOJO getThisPlayer(){
+		return thisPlayer;
 	}
 	
 	public ArrayList<PlayerPOJO> getPlayers(){

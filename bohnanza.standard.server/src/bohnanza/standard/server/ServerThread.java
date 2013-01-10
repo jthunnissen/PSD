@@ -129,7 +129,7 @@ class ServerThread extends Thread {
 						Action action = new PlantBean(game, player, card, player.getBeanFields().get(fieldid));
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
-					} else if(line.startsWith(Protocol.PROPOSETRADEORDONATION)){
+					} else if(line.startsWith(Protocol.PROPOSETRADE)){
 						String[] options = line.split(";");
 						BeanCard giveCard = findBeanCard(options[1]);
 						List<Card> give = new ArrayList<Card>();

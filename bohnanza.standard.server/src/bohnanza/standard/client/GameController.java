@@ -38,9 +38,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import org.json.CardPOJO;
+import org.json.GamePOJO;
 import org.json.PlayerPOJO;
 
-import bohnanza.standard.core.EBeanType;
 import bohnanza.standard.server.Protocol;
 
 
@@ -106,58 +106,27 @@ public class GameController extends AnchorPane implements Initializable {
 		chatbox.setText(chatbox.getText() +"\n"+text);
 	}
 
-	public void update(String update){
-		System.out.println("GAME WINDOW UPDATE");
-		//String[] commandos = update.split(" ");
-		Protocol protocol = new Protocol(null);
-
+	public void update(GamePOJO update){
 		// Players + scores
-		ArrayList<PlayerPOJO> playersPOJOS = protocol.fromJSONGetPlayers(update, null);
-		ObservableList<String> items = FXCollections.observableArrayList();
-		for(PlayerPOJO playerPOJO : playersPOJOS) {
-			if(protocol.fromJSONCurrentPlayer(update).equals(playerPOJO.getName())){
-				items.add(">>> "+playerPOJO.getName() + " - " + playerPOJO.getScore());
-			} else {
-				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
-			}
+		updatePlayersList(update);
+		// Hand view of this player
+		updateThisPlayerHand(update);
 
+		if(this.isActivePlayer(update.getCurrentPlayer().getName())) {
+			// Build actions view		
+			updateActionsView(update);
 		}
-		players.setItems(items);
 
 
-		// This playerPOJO
-		// Hand window
-		hand.getChildren().clear();
-		PlayerPOJO player = protocol.fromJSONGetPlayers(update, application.getUsername()).get(0);
-		for(CardPOJO card : player.getHand()){
-			ImageView cardView = new ImageView(card.getImage());
-			this.setupGestureSource(cardView, card.getName());
-			hand.getChildren().add(cardView);
-			cardView = new ImageView(card.getImage());
-		}
+		// Build trading phase
 
 		// Actions window
-		if(isActivePlayer(protocol.fromJSONCurrentPlayer(update))){
-			setupGestureTarget(field1, 1);
-			setupGestureTarget(field2, 2);
-			if(player.getFields().size() > 2){
-				// Player has bought third field
-				setupGestureTarget(field3, 3);
-				harvest3.setVisible(true);
-				buy3.setVisible(false);
-			} else {
-				// Default FMXL
-				harvest3.setVisible(false);
-				buy3.setVisible(true);
-			}
+		if(isActivePlayer(update.getCurrentPlayer().getName())){
+
 		}
 
 		// Trading area - Face up cards from active player
-		PlayerPOJO activePlayer;
-		if(isActivePlayer(protocol.fromJSONCurrentPlayer(update)))
-			activePlayer = protocol.fromJSONGetPlayers(update, protocol.fromJSONCurrentPlayer(update)).get(0);
-		else
-			activePlayer = player;
+		PlayerPOJO activePlayer = update.getCurrentPlayer();
 
 		if(tradearea.getChildren().size() > 0){
 			tradearea.getChildren().clear();
@@ -170,16 +139,66 @@ public class GameController extends AnchorPane implements Initializable {
 			tradearea.getChildren().add(cardView);
 			initOffer(cardView, card);
 		}
-		///// TEMP
-		CardPOJO card = new CardPOJO(EBeanType.BLACKEYEDBEAN.toString(), "");
-		ImageView cardView = new ImageView(card.getImage());
-		this.setupGestureSource(cardView, card.getName());
-		
-		cardView = new ImageView(card.getImage());
-		initOffer(cardView, card);
-		tradearea.getChildren().add(cardView);
-		// Other players = face up cards from active player
 	}
+
+	public void updatePlayersList(GamePOJO update) {
+		ArrayList<PlayerPOJO> playersPOJOS = update.getPlayers();
+		ObservableList<String> items = FXCollections.observableArrayList();
+		for(PlayerPOJO playerPOJO : playersPOJOS) {
+			if(update.getCurrentPlayer().equals(playerPOJO.getName())){
+				items.add(">>> "+playerPOJO.getName() + " - " + playerPOJO.getScore());
+			} else {
+				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
+			}
+
+		}
+		players.setItems(items);
+	}
+
+	public void updateThisPlayerHand(GamePOJO update){
+		hand.getChildren().clear();
+		PlayerPOJO player = update.getThisPlayer();
+		for(CardPOJO card : player.getHand()){
+			ImageView cardView = new ImageView(card.getImage());
+			this.setupGestureSource(cardView, card.getName());
+			hand.getChildren().add(cardView);
+			cardView = new ImageView(card.getImage());
+		}
+	}
+
+	public void updateActionsView(GamePOJO update){
+		ArrayList<String> actions = update.getThisPlayer().getActions();
+		if(actions.contains(Protocol.BUYBEANFIELD)){
+			harvest3.setVisible(false);
+			buy3.setVisible(true);
+		}
+		if(actions.contains(Protocol.DRAWCARDS)){
+			drawcard.setVisible(true);
+		}
+		if(actions.contains(Protocol.DRAWFACEUPCARDS)){
+			// TODO
+		}
+		if(actions.contains(Protocol.HARVEST)){
+			harvest1.setVisible(true);
+			harvest2.setVisible(true);
+			if(update.getThisPlayer().getFields().size() > 2){
+				harvest3.setVisible(true);
+			}
+		}
+		if(actions.contains(Protocol.PLANTASIDEBEAN)){
+			// TODO
+		}
+		if(actions.contains(Protocol.PLANTBEAN)){
+			setupGestureTarget(field1, 1);
+			setupGestureTarget(field2, 2);
+			if(update.getThisPlayer().getFields().size() > 2){
+				// Player has bought third field
+				setupGestureTarget(field3, 3);
+				harvest3.setVisible(true);
+			}
+		}
+	}
+
 
 	public void initOffer(final ImageView cardView, final CardPOJO card){
 		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -201,7 +220,7 @@ public class GameController extends AnchorPane implements Initializable {
 		myDialog.initModality(Modality.WINDOW_MODAL);
 
 		Text descriptionText = new Text(player +" offers "+ offer + " for: "+ card);
-		
+
 		Button dismissButton = new Button("Dismiss");
 		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
@@ -210,7 +229,7 @@ public class GameController extends AnchorPane implements Initializable {
 				myDialog.close();
 			}
 		});
-		
+
 		Button okButton = new Button("OK");
 		okButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
@@ -238,7 +257,7 @@ public class GameController extends AnchorPane implements Initializable {
 			result.append(",");
 		}
 		String cards= result.length() > 0 ? result.substring(0, result.length() - 1): "";
-		application.getClient().sendToServer(Protocol.PROPOSETRADEORDONATION + ";"+offerItem.getName() + ";"+cards);
+		application.getClient().sendToServer(Protocol.PROPOSETRADE + ";"+offerItem.getName() + ";"+cards);
 	}
 
 	public void harvest1(){
