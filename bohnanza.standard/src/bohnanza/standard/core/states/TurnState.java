@@ -83,7 +83,9 @@ public abstract class TurnState {
 	
 	/**Remove all actions in the current state.*/
 	protected void removeAllActions() {
-		actions.clear();
+		for(List<Class<? extends Action>> playeractions: actions.values()) {
+			playeractions.clear();
+		}
 	}
 	
 	/**To be used only by the game factory. Adds state as the next state the game will be in if action ends the current state.*/
