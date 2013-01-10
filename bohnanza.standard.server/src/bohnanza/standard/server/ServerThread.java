@@ -139,10 +139,12 @@ class ServerThread extends Thread {
 						List<Card> give = new ArrayList<Card>();
 						give.add(giveCard);
 						List<Card> receive = new ArrayList<Card>();
-						String[] receiveCards = options[2].split(",");
-						if(receiveCards.length>0){
-							for(int i=0; i<receiveCards.length; i++){
-								receive.add(findBeanCard(receiveCards[i]));
+						if(options.length>2){
+							String[] receiveCards = options[2].split(",");
+							if(receiveCards.length>0){
+								for(int i=0; i<receiveCards.length; i++){
+									receive.add(findBeanCard(receiveCards[i]));
+								}
 							}
 						}
 						Action action = new ProposeTrade(game, player, game.getActivePlayer(), give, receive);

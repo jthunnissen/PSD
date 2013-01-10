@@ -163,7 +163,7 @@ public class ClientGUI extends Application {
 		});		
 
 		Scene myDialogScene = new Scene(VBoxBuilder.create()
-				.children(new Text("Hello! it's My Dialog."), descriptionText, dismissButton)
+				.children(descriptionText, dismissButton)
 				.alignment(Pos.CENTER)
 				.padding(new Insets(10))
 				.build());

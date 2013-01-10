@@ -37,7 +37,9 @@ public class TradeState extends TurnState {
 	private void startTrade() {
 		addAction(SetAsideCard.class);
 		for(Player player: context.getPlayers()) {
-			addAction(player, ProposeTrade.class);
+			if(!player.equals(context.getActivePlayer())){
+				addAction(player, ProposeTrade.class);
+			}
 		}
 	}
 
