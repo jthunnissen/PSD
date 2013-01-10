@@ -62,7 +62,7 @@ public class Game {
 		GameFactory factory = GameFactory.getInstance();
 		drawDeck = factory.getGameDeck();
 		shuffleCards();
-		//GameFactory.getInstance().createGameStates(this);
+		currentState = factory.buildTurnStatespace(this, getActivePlayer());
 	}
 
 	
