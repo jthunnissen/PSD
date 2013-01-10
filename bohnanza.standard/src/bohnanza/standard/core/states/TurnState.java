@@ -37,7 +37,7 @@ public abstract class TurnState {
 		action.handle();
 		if(handled(action)) {
 			try {
-				TurnState nextState = transitions.get(action);
+				TurnState nextState = transitions.get(action.getClass());
 				nextState.reset();
 				context.setCurrentState(nextState);
 			} catch (Exception e) {

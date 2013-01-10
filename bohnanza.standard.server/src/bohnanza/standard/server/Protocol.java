@@ -22,6 +22,7 @@ import bohnanza.standard.core.actions.DeclineTrade;
 import bohnanza.standard.core.actions.DrawCards;
 import bohnanza.standard.core.actions.DrawFaceUpCards;
 import bohnanza.standard.core.actions.Harvest;
+import bohnanza.standard.core.actions.NextPhase;
 import bohnanza.standard.core.actions.PlantAsideBean;
 import bohnanza.standard.core.actions.PlantBean;
 import bohnanza.standard.core.actions.ProposeTrade;
@@ -47,11 +48,13 @@ public class Protocol {
 	public static final String DRAWCARDS = "DRAWCARDS";
 	public static final String DRAWFACEUPCARDS = "DRAWFACEUPCARDS";
 	public static final String HARVEST = "HARVEST";
+	public static final String NEXTPHASE = "NEXTPHASE";
 	public static final String PLANTASIDEBEAN = "PLANTASIDEBEAN";
 	public static final String PLANTBEAN = "PLANTBEAN";
 	public static final String PROPOSETRADE = "PROPOSETRADE";
 	public static final String SETASIDECARD = "SETASIDECARD";
 	public static final String CHAT = "CHAT";
+	public static final String ERROR = "error";
 
 
 
@@ -136,6 +139,8 @@ public class Protocol {
 						jsonActions.put(Protocol.DRAWFACEUPCARDS);
 					if(actions.contains(Harvest.class))
 						jsonActions.put(Protocol.HARVEST);
+					if(actions.contains(NextPhase.class))
+						jsonActions.put(Protocol.NEXTPHASE);
 					if(actions.contains(PlantAsideBean.class))
 						jsonActions.put(Protocol.PLANTASIDEBEAN);
 					if(actions.contains(PlantBean.class))
@@ -286,6 +291,19 @@ public class Protocol {
 			result = root.toString();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String errorToJSON(String message) {
+		String result = "";	
+		try {
+			JSONObject root = new JSONObject();
+			root.put("type", Protocol.ERROR);
+			root.put("response", message);
+			result = root.toString();
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return result;

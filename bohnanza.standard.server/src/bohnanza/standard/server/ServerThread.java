@@ -7,21 +7,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import bohnanza.standard.core.BeanCard;
 import bohnanza.standard.core.Card;
-
-
-import bohnanza.standard.core.BeanCard;
-
 import bohnanza.standard.core.EBeanType;
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
-
 import bohnanza.standard.core.actions.AcceptTrade;
 import bohnanza.standard.core.actions.Action;
 import bohnanza.standard.core.actions.BuyBeanField;
@@ -29,6 +23,7 @@ import bohnanza.standard.core.actions.DeclineTrade;
 import bohnanza.standard.core.actions.DrawCards;
 import bohnanza.standard.core.actions.DrawFaceUpCards;
 import bohnanza.standard.core.actions.Harvest;
+import bohnanza.standard.core.actions.NextPhase;
 import bohnanza.standard.core.actions.PlantBean;
 import bohnanza.standard.core.actions.ProposeTrade;
 
@@ -119,6 +114,10 @@ class ServerThread extends Thread {
 						Action action = new Harvest(game, player, player.getBeanFields().get(fieldid));
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
+					} else if(line.startsWith(Protocol.NEXTPHASE)){
+						Action action = new NextPhase(game,player);
+						game.getCurrentState().handle(action);
+						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.PLANTBEAN)) {
 						BeanCard card = null;
 						for(EBeanType bean : EBeanType.values()){
@@ -158,7 +157,7 @@ class ServerThread extends Thread {
 				} catch (IllegalActionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					server.sendUpdate(0);
+					server.sendToPlayer(player, Protocol.errorToJSON(e.getMessage()));
 				}
 			}
 

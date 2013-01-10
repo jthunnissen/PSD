@@ -36,7 +36,7 @@ public class GameFactory {
 		TurnState drawState = new DrawState(game);
 		secondplantState.addTransition(PlantAsideBean.class, drawState);
 		drawState.addTransition(DrawCards.class, startState);		
-		return new PlantState(game);
+		return plantState;
 	}
 
 	public ArrayList<Card> getGameDeck() {

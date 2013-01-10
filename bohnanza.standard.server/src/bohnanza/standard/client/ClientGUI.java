@@ -7,13 +7,20 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -99,6 +106,8 @@ public class ClientGUI extends Application {
 		client.sendToServer("NEWPLAYER " + username);
 	}
 
+	private String oldResponse;
+	
 	/**
 	 * This method is needed to update UI on UI-thread.
 	 * @param update
@@ -108,6 +117,7 @@ public class ClientGUI extends Application {
 		Platform.runLater(new Runnable() {
 			@Override public void run() {
 				try{
+					
 					JSONObject response = new JSONObject(update);
 					String action = response.getString("type");
 					if(state == ClientGUI.AWAITING_USERNAMECHECK && action.equals("usernamecheck")){
@@ -116,11 +126,18 @@ public class ClientGUI extends Application {
 						loginController.username.setText("waiting for game...");
 					} else if(action.equals(Protocol.CHAT)) {
 						gameController.addChat(Protocol.chatFromJSON(response));
+					} else if(action.equals(Protocol.ERROR)){
+						showError(response.getString("response"));
+						if(state == ClientGUI.AWAITING_GAMEUPDATE){
+							gameController.update(Protocol.fromJSON(oldResponse.toString(), username));
+						}
+							
 					} else if(action.equals("gameupdate")) {
 						if(state == ClientGUI.AWAITING_START){
 							goToGame();
 							state = ClientGUI.AWAITING_GAMEUPDATE;
 						}
+						oldResponse = update;
 						gameController.update(Protocol.fromJSON(update, username));
 					}
 				} catch (Exception ex) {
@@ -128,6 +145,31 @@ public class ClientGUI extends Application {
 				}     
 			}
 		});
+	}
+	
+	public void showError(String message){
+		final Stage myDialog = new Stage();
+		myDialog.initModality(Modality.WINDOW_MODAL);
+
+		Text descriptionText = new Text(message);
+
+		Button dismissButton = new Button("Dismiss");
+		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+			
+				myDialog.close();
+			}
+		});		
+
+		Scene myDialogScene = new Scene(VBoxBuilder.create()
+				.children(new Text("Hello! it's My Dialog."), descriptionText, dismissButton)
+				.alignment(Pos.CENTER)
+				.padding(new Insets(10))
+				.build());
+
+		myDialog.setScene(myDialogScene);
+		myDialog.show();
 	}
 
 	private Initializable replaceSceneContent(String fxml) throws Exception {

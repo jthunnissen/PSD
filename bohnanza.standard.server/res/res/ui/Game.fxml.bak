@@ -36,7 +36,7 @@
         <HBox id="hand" fx:id="aside" prefHeight="145.0" prefWidth="244.0" />
       </content>
     </ScrollPane>
-    <AnchorPane id="actionspane" fx:id="actionsPane" layoutX="306.0" layoutY="189.0" prefHeight="163.0" prefWidth="552.0" visible="false">
+    <AnchorPane id="actionspane" fx:id="actionsPane" layoutX="306.0" layoutY="189.0" minWidth="467.0" prefHeight="163.0" prefWidth="467.0" visible="true">
       <children>
         <Button fx:id="buy3" layoutX="242.0" layoutY="136.0" mnemonicParsing="false" text="Buy" />
         <Button fx:id="harvest2" layoutX="131.0" layoutY="136.0" mnemonicParsing="false" onAction="#harvest2" text="Harvest" />
@@ -46,7 +46,7 @@
             <Image url="@../cards/Empty.png" />
           </image>
         </ImageView>
-        <ImageView fitHeight="109.0" fitWidth="68.73874038696289" layoutX="428.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="109.0" fitWidth="68.73874038696289" layoutX="367.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../cards/Coin.png" />
           </image>
@@ -61,14 +61,16 @@
             <Image url="@../cards/Empty.png" />
           </image>
         </ImageView>
-        <Button fx:id="drawcard" layoutX="414.0" layoutY="136.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
+        <Button fx:id="drawcard" layoutX="353.0" layoutY="136.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="offerpane" layoutX="314.0" layoutY="186.0" prefHeight="146.0" prefWidth="530.0" visible="false">
+    <AnchorPane id="offerpane" fx:id="offerPane" layoutX="314.0" layoutY="186.0" minWidth="459.0" prefHeight="146.0" prefWidth="459.0" visible="true">
       <children>
         <HBox fx:id="offer" prefHeight="146.0" prefWidth="442.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="88.0" AnchorPane.topAnchor="0.0" />
-        <Button fx:id="sendoffer" layoutX="445.0" layoutY="60.0" mnemonicParsing="false" onAction="#sendOffer" text="Send" />
+        <Button fx:id="sendoffer" layoutX="378.0" layoutY="60.0" mnemonicParsing="false" onAction="#sendOffer" text="Send" />
+        <Button id="drawfaceup" fx:id="drawfaceupcard" layoutX="327.0" layoutY="110.0" mnemonicParsing="false" onAction="#drawfaceupcard" text="Draw Face-up" />
       </children>
     </AnchorPane>
+    <Button fx:id="nextPhase" layoutX="796.0" layoutY="246.0" mnemonicParsing="false" onAction="#nextPhase" text="Next" />
   </children>
 </AnchorPane>

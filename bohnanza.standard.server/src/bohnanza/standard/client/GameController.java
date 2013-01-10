@@ -82,6 +82,10 @@ public class GameController extends AnchorPane implements Initializable {
 	@FXML
 	Button drawcard;
 	@FXML
+	Button drawfaceupcard;
+	@FXML
+	Button nextPhase;
+	@FXML
 	TextArea chatbox;
 	@FXML
 	TextField chatmessage;
@@ -117,17 +121,18 @@ public class GameController extends AnchorPane implements Initializable {
 		updateThisPlayerHand(update);
 
 		if(this.isActivePlayer(update.getCurrentPlayer().getName())) {
+			if(update.getCurrentPlayer().getActions().contains(Protocol.NEXTPHASE)){
+				nextPhase.setVisible(true);
+			}
 			// Build actions view		
 			updateActionsView(update);
+		} else {
+			nextPhase.setVisible(false);
+			actionsPane.setVisible(false);
 		}
 
 
 		// Build trading phase
-
-		// Actions window
-		if(isActivePlayer(update.getCurrentPlayer().getName())){
-
-		}
 
 		// Trading area - Face up cards from active player
 		PlayerPOJO activePlayer = update.getCurrentPlayer();
@@ -137,9 +142,8 @@ public class GameController extends AnchorPane implements Initializable {
 		}
 		for(CardPOJO card : activePlayer.getFaceUp()){
 			ImageView cardView = new ImageView(card.getImage());
-			this.setupGestureSource(cardView, card.getName());
-			tradearea.getChildren().add(cardView);
 			cardView = new ImageView(card.getImage());
+			this.setupGestureSource(cardView, card.getName());
 			tradearea.getChildren().add(cardView);
 			initOffer(cardView, card);
 		}
@@ -167,12 +171,12 @@ public class GameController extends AnchorPane implements Initializable {
 			ImageView cardView = new ImageView(card.getImage());
 			cardView = new ImageView(card.getImage());
 			if(first){
-				this.setupGestureSource(cardView, card.getName());
+				//this.setupGestureSource(cardView, card.getName());
 				first = false;
 			}
 			hand.getChildren().add(cardView);
 		}
-		
+
 	}
 
 	public void updateActionsView(GamePOJO update){
@@ -183,12 +187,10 @@ public class GameController extends AnchorPane implements Initializable {
 			harvest3.setVisible(false);
 			buy3.setVisible(true);
 		}
-		if(actions.contains(Protocol.DRAWCARDS)){
-			drawcard.setVisible(true);
-		}
-		if(actions.contains(Protocol.DRAWFACEUPCARDS)){
-			// TODO
-		}
+
+		drawcard.setVisible((actions.contains(Protocol.DRAWCARDS)) ? true : false);
+		drawfaceupcard.setVisible((actions.contains(Protocol.DRAWFACEUPCARDS)) ? true : false);
+
 		if(actions.contains(Protocol.HARVEST)){
 			harvest1.setVisible(true);
 			harvest2.setVisible(true);
@@ -196,6 +198,7 @@ public class GameController extends AnchorPane implements Initializable {
 				harvest3.setVisible(true);
 			}
 		}
+		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true : false);
 		if(actions.contains(Protocol.PLANTASIDEBEAN)){
 			// TODO
 		}
@@ -207,6 +210,8 @@ public class GameController extends AnchorPane implements Initializable {
 				setupGestureTarget(field3, 2);
 				harvest3.setVisible(true);
 			}
+			setupGestureSource((ImageView) hand.getChildren().get(0), update.getCurrentPlayer().getHand().get(0).getName());
+
 		}
 	}
 
@@ -272,15 +277,15 @@ public class GameController extends AnchorPane implements Initializable {
 	}
 
 	public void harvest1(){
-		application.getClient().sendToServer(Protocol.HARVEST+" 1");
+		application.getClient().sendToServer(Protocol.HARVEST+" 0");
 	}
 
 	public void harvest2(){
-		application.getClient().sendToServer(Protocol.HARVEST+" 2");
+		application.getClient().sendToServer(Protocol.HARVEST+" 1");
 	}
 
 	public void harvest3(){
-		application.getClient().sendToServer(Protocol.HARVEST+" 3");
+		application.getClient().sendToServer(Protocol.HARVEST+" 2");
 	}
 
 	public void buy3(){
@@ -293,6 +298,10 @@ public class GameController extends AnchorPane implements Initializable {
 
 	public void drawfaceupcard(){
 		application.getClient().sendToServer(Protocol.DRAWFACEUPCARDS);
+	}
+
+	public void nextPhase(){
+		application.getClient().sendToServer(Protocol.NEXTPHASE);
 	}
 
 	public void sendmessage(){
