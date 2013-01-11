@@ -13,9 +13,11 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 import bohnanza.standard.core.Game;
+import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
+import bohnanza.standard.core.actions.Action;
+import bohnanza.standard.core.actions.NextPlayer;
 public class Server implements Runnable {
 
 	// The server socket.
@@ -76,9 +78,15 @@ public class Server implements Runnable {
 	}
 
 	public void sendUpdate(int from){
-		if(game.getCurrentState().getActions(game.getActivePlayer()).size() == 1) {
+		if(game.getCurrentState() != null && game.getCurrentState().getActions(game.getActivePlayer()).size() == 1) {
 			if(game.getCurrentState().getActions(game.getActivePlayer()).contains(Protocol.NEXTPLAYER)){
-				
+				Action action = new NextPlayer(game, game.getActivePlayer());
+				try {
+					game.getCurrentState().handle(action);
+				} catch (IllegalActionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		Protocol protocol = new Protocol(game);
