@@ -27,15 +27,16 @@ public class TradeState extends TurnState {
 			addAction(proposition.getOtherPlayer(), DeclineTrade.class);
 		} else if(action instanceof AcceptTrade || action instanceof DeclineTrade) {
 			startTrade();
-			if(context.getActivePlayer().getFaceUpCards().isEmpty()) {
-				addAction(NextPhase.class);
-			}
+		}
+		if(context.getActivePlayer().getFaceUpCards().isEmpty()) {
+			addAction(NextPhase.class);
+			removeAction(SetAsideCard.class);
 		}
 		return false;
 	}
 	
 	private void startTrade() {
-		addAction(SetAsideCard.class);
+		
 		for(Player player: context.getPlayers()) {
 			if(!player.equals(context.getActivePlayer())){
 				addAction(player, ProposeTrade.class);
