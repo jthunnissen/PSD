@@ -23,6 +23,7 @@ import bohnanza.standard.core.actions.DrawCards;
 import bohnanza.standard.core.actions.DrawFaceUpCards;
 import bohnanza.standard.core.actions.Harvest;
 import bohnanza.standard.core.actions.NextPhase;
+import bohnanza.standard.core.actions.NextPlayer;
 import bohnanza.standard.core.actions.PlantAsideBean;
 import bohnanza.standard.core.actions.PlantBean;
 import bohnanza.standard.core.actions.ProposeTrade;
@@ -50,6 +51,7 @@ public class Protocol {
 	public static final String DRAWFACEUPCARDS = "DRAWFACEUPCARDS";
 	public static final String HARVEST = "HARVEST";
 	public static final String NEXTPHASE = "NEXTPHASE";
+	public static final String NEXTPLAYER = "NEXTPLAYER";
 	public static final String PLANTASIDEBEAN = "PLANTASIDEBEAN";
 	public static final String PLANTBEAN = "PLANTBEAN";
 	public static final String PROPOSETRADE = "PROPOSETRADE";
@@ -151,6 +153,8 @@ public class Protocol {
 						jsonActions.put(Protocol.HARVEST);
 					if(actions.contains(NextPhase.class))
 						jsonActions.put(Protocol.NEXTPHASE);
+					if(actions.contains(NextPlayer.class))
+						jsonActions.put(Protocol.NEXTPLAYER);
 					if(actions.contains(PlantAsideBean.class))
 						jsonActions.put(Protocol.PLANTASIDEBEAN);
 					if(actions.contains(PlantBean.class))

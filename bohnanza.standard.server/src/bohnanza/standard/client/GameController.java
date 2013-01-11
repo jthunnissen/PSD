@@ -101,7 +101,7 @@ public class GameController extends AnchorPane implements Initializable {
 	private ClientGUI application;
 	private ArrayList<String> offerList = new ArrayList<String>();
 	private CardPOJO offerItem;
-
+	private Image defaultEmptyImage;
 
 	public void setApp(ClientGUI application){
 		this.application = application;
@@ -109,7 +109,7 @@ public class GameController extends AnchorPane implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		defaultEmptyImage = field1.getImage();
 	}
 
 	public void addChat(String text){
@@ -117,59 +117,56 @@ public class GameController extends AnchorPane implements Initializable {
 	}
 
 	public void update(GamePOJO update){
+		// Init
+		nextPhase.setVisible(false);
+		actionsPane.setVisible(false);
+		offerPane.setVisible(false);
+		
 		// Players + scores
 		updatePlayersList(update);
 		// Hand view of this player
 		updateThisPlayerHand(update);
-
+		updateFaceUpCards(update);
 		if(this.isActivePlayer(update.getCurrentPlayer().getName())) {
-			if(update.getCurrentPlayer().getActions().contains(Protocol.NEXTPHASE)){
-				nextPhase.setVisible(true);
-			}
 			// Build actions view		
 			updateActionsView(update);
-			updateTradeViewActivePlayer(update);
-		} else {
-			nextPhase.setVisible(false);
-			actionsPane.setVisible(false);
+		} else if(update.getCurrentPlayer().getActions().contains(Protocol.PROPOSETRADE)) {
+			offerPane.setVisible(true);
 		}
-
 
 		// Build trading phase
-
-		// Trading area - Face up cards from active player
-		PlayerPOJO activePlayer = update.getCurrentPlayer();
-
-		if(tradearea.getChildren().size() > 0){
-			tradearea.getChildren().clear();
-		}
-		for(CardPOJO card : activePlayer.getFaceUp()){
-			ImageView cardView = new ImageView(card.getImage());
-			cardView = new ImageView(card.getImage());
-			cardView.setUserData(card);
-			this.setupPlantSource(cardView, card.getName());
-			tradearea.getChildren().add(cardView);
-			initOffer(cardView, card);
-		}
+		updateAsideCards(update);
 		
-		aside.getChildren().clear();
-		for(CardPOJO card : activePlayer.getAside()){
-			ImageView cardView = new ImageView(card.getImage());
-			cardView.setUserData(card);
-			this.setupPlantSource(cardView, card.getName());
-			aside.getChildren().add(cardView);
-		}
+		
 	
 	}
-
-	private void updateTradeViewActivePlayer(GamePOJO update) {
-		for(CardPOJO card : update.getThisPlayer().getFaceUp()){
+	
+	private void updateAsideCards(GamePOJO update){
+		aside.getChildren().clear();
+		for(CardPOJO card : update.getCurrentPlayer().getAside()){
 			ImageView cardView = new ImageView(card.getImage());
-			this.setupPlantSource(cardView, card.getName());
-			tradearea.getChildren().add(cardView);
-			setupSetAsideSource(cardView, card);
+			cardView.setUserData(card);
+			if(update.getCurrentPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)){
+				this.setupPlantSource(cardView, card.getName());	
+			}
+			
+			aside.getChildren().add(cardView);
 		}
-		setupSetAsideTarget(aside);
+	}
+
+	private void updateFaceUpCards(GamePOJO update) {
+		tradearea.getChildren().clear();
+		for(CardPOJO card : update.getCurrentPlayer().getFaceUp()){
+			ImageView cardView = new ImageView(card.getImage());
+			tradearea.getChildren().add(cardView);
+			if(isActivePlayer(update.getCurrentPlayer().getName())){
+				setupSetAsideSource(cardView, card);
+				setupSetAsideTarget(aside);
+			} else {
+				setupMakeOffer(cardView, card);
+			}
+		}
+		
 
 	}
 
@@ -232,7 +229,7 @@ public class GameController extends AnchorPane implements Initializable {
 		ArrayList<PlayerPOJO> playersPOJOS = update.getPlayers();
 		ObservableList<String> items = FXCollections.observableArrayList();
 		for(PlayerPOJO playerPOJO : playersPOJOS) {
-			if(update.getCurrentPlayer().equals(playerPOJO.getName())){
+			if(update.getCurrentPlayer().getName().equals(playerPOJO.getName())){
 				items.add(">>> "+playerPOJO.getName() + " - " + playerPOJO.getScore());
 			} else {
 				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
@@ -260,8 +257,23 @@ public class GameController extends AnchorPane implements Initializable {
 
 	public void updateActionsView(GamePOJO update){
 		actionsPane.setVisible(true);
-		offerPane.setVisible(false);
 		ArrayList<String> actions = update.getThisPlayer().getActions();
+		field1.setImage(defaultEmptyImage);
+		field2.setImage(defaultEmptyImage);
+		field3.setImage(defaultEmptyImage);
+		
+		if(Integer.valueOf(update.getThisPlayer().getFields().get(0).getScore()) > 0){
+			field1.setImage(update.getThisPlayer().getFields().get(0).getImage());
+		}
+		if(Integer.valueOf(update.getThisPlayer().getFields().get(1).getScore()) > 0){
+			field2.setImage(update.getThisPlayer().getFields().get(1).getImage());
+		}
+		if(update.getThisPlayer().getFields().size() > 2) {
+			if(Integer.valueOf(update.getThisPlayer().getFields().get(2).getScore()) > 0){
+				field3.setImage(update.getThisPlayer().getFields().get(2).getImage());
+			}
+		}
+		
 		if(actions.contains(Protocol.BUYBEANFIELD)){
 			harvest3.setVisible(false);
 			buy3.setVisible(true);
@@ -304,7 +316,7 @@ public class GameController extends AnchorPane implements Initializable {
 	}
 
 
-	public void initOffer(final ImageView cardView, final CardPOJO card){
+	public void setupMakeOffer(final ImageView cardView, final CardPOJO card){
 		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("Click on: "+card.getName());

@@ -76,6 +76,11 @@ public class Server implements Runnable {
 	}
 
 	public void sendUpdate(int from){
+		if(game.getCurrentState().getActions(game.getActivePlayer()).size() == 1) {
+			if(game.getCurrentState().getActions(game.getActivePlayer()).contains(Protocol.NEXTPLAYER)){
+				
+			}
+		}
 		Protocol protocol = new Protocol(game);
 		String message;
 		if(game.getCurrentState() == null){
