@@ -24,6 +24,7 @@ import bohnanza.standard.core.actions.DrawCards;
 import bohnanza.standard.core.actions.DrawFaceUpCards;
 import bohnanza.standard.core.actions.Harvest;
 import bohnanza.standard.core.actions.NextPhase;
+import bohnanza.standard.core.actions.PlantAsideBean;
 import bohnanza.standard.core.actions.PlantBean;
 import bohnanza.standard.core.actions.ProposeTrade;
 import bohnanza.standard.core.actions.SetAsideCard;
@@ -119,19 +120,25 @@ class ServerThread extends Thread {
 						Action action = new NextPhase(game,player);
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
-					} else if(line.startsWith(Protocol.PLANTBEAN)) {
-						BeanCard card = null;
-						for(EBeanType bean : EBeanType.values()){
-							if(bean.toString().startsWith((commandos[2])))
-								card = new BeanCard(bean);
-						}
+					} else if(line.startsWith(Protocol.PLANTBEAN )|| line.startsWith(Protocol.PLANTASIDEBEAN)) {
+						BeanCard card = findBeanCard(commandos[2]);
+						
 						// TODO: Hack possible?
-						if(card.getName().equals(player.getHand().get(0).getName())){
-							card = (BeanCard) player.getHand().get(0);
-						} else
-							System.out.println("RAAAAR");
+					
 						int fieldid = Integer.valueOf(commandos[1]);
-						Action action = new PlantBean(game, player, card, player.getBeanFields().get(fieldid));
+						
+						Action action;
+						if(line.startsWith(Protocol.PLANTBEAN )) {
+							// Must be first card in hand
+							if(card.getName().equals(player.getHand().get(0).getName())){
+								card = (BeanCard) player.getHand().get(0);
+							}
+							action = new PlantBean(game, player, card, player.getBeanFields().get(fieldid));
+						} else{
+							card = this.findBeanCardFromPlayerAside(card.getName());
+							action = new PlantAsideBean(game, player, card, player.getBeanFields().get(fieldid));
+						}
+						
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.PROPOSETRADE)){
@@ -187,6 +194,17 @@ class ServerThread extends Thread {
 	public BeanCard findBeanCardFromPlayerFaceUp(String cardName){
 		BeanCard result = null;
 		for(Card card :  player.getFaceUpCards()){
+			if(card.getName().startsWith(cardName)){
+				result = (BeanCard) card;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public BeanCard findBeanCardFromPlayerAside(String cardName){
+		BeanCard result = null;
+		for(Card card :  player.getSetAsideCards()){
 			if(card.getName().startsWith(cardName)){
 				result = (BeanCard) card;
 				break;

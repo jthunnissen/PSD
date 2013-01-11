@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,6 +42,7 @@ import org.json.CardPOJO;
 import org.json.GamePOJO;
 import org.json.PlayerPOJO;
 
+import bohnanza.standard.core.Card;
 import bohnanza.standard.server.Protocol;
 
 
@@ -144,16 +146,26 @@ public class GameController extends AnchorPane implements Initializable {
 		for(CardPOJO card : activePlayer.getFaceUp()){
 			ImageView cardView = new ImageView(card.getImage());
 			cardView = new ImageView(card.getImage());
-			this.setupGestureSource(cardView, card.getName());
+			cardView.setUserData(card);
+			this.setupPlantSource(cardView, card.getName());
 			tradearea.getChildren().add(cardView);
 			initOffer(cardView, card);
 		}
+		
+		aside.getChildren().clear();
+		for(CardPOJO card : activePlayer.getAside()){
+			ImageView cardView = new ImageView(card.getImage());
+			cardView.setUserData(card);
+			this.setupPlantSource(cardView, card.getName());
+			aside.getChildren().add(cardView);
+		}
+	
 	}
 
 	private void updateTradeViewActivePlayer(GamePOJO update) {
 		for(CardPOJO card : update.getThisPlayer().getFaceUp()){
 			ImageView cardView = new ImageView(card.getImage());
-			this.setupGestureSource(cardView, card.getName());
+			this.setupPlantSource(cardView, card.getName());
 			tradearea.getChildren().add(cardView);
 			setupSetAsideSource(cardView, card);
 		}
@@ -267,17 +279,26 @@ public class GameController extends AnchorPane implements Initializable {
 		}
 		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true : false);
 		if(actions.contains(Protocol.PLANTASIDEBEAN)){
-			// TODO
-		}
-		if(actions.contains(Protocol.PLANTBEAN)){
-			setupGestureTarget(field1, 0);
-			setupGestureTarget(field2, 1);
+			for(Node node : aside.getChildren()){
+				setupPlantSource((ImageView) node, ((CardPOJO)node.getUserData()).getName());
+			}
+			setupPlantTarget(false, field1, 0);
+			setupPlantTarget(false, field2, 1);
 			if(update.getThisPlayer().getFields().size() > 2){
 				// Player has bought third field
-				setupGestureTarget(field3, 2);
+				setupPlantTarget(false, field3, 2);
 				harvest3.setVisible(true);
 			}
-			setupGestureSource((ImageView) hand.getChildren().get(0), update.getCurrentPlayer().getHand().get(0).getName());
+		}
+		if(actions.contains(Protocol.PLANTBEAN)){
+			setupPlantTarget(true, field1, 0);
+			setupPlantTarget(true, field2, 1);
+			if(update.getThisPlayer().getFields().size() > 2){
+				// Player has bought third field
+				setupPlantTarget(true, field3, 2);
+				harvest3.setVisible(true);
+			}
+			setupPlantSource((ImageView) hand.getChildren().get(0), update.getCurrentPlayer().getHand().get(0).getName());
 
 		}
 	}
@@ -409,7 +430,7 @@ public class GameController extends AnchorPane implements Initializable {
 		});
 	}
 
-	void setupGestureTarget(final ImageView targetBox, final int fieldid){
+	void setupPlantTarget(final boolean isFromHand, final ImageView targetBox, final int fieldid){
 		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
 			@Override
 			public void handle(DragEvent event) {
@@ -427,7 +448,12 @@ public class GameController extends AnchorPane implements Initializable {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()){
 					targetBox.setImage(db.getImage());
-					application.getClient().sendToServer(Protocol.PLANTBEAN +" "+ fieldid+" "+db.getString());
+					if(isFromHand){
+						application.getClient().sendToServer(Protocol.PLANTBEAN +" "+ fieldid+" "+db.getString());
+					} else {
+						application.getClient().sendToServer(Protocol.PLANTASIDEBEAN +" "+ fieldid+" "+db.getString());
+					}
+					
 					event.setDropCompleted(true);
 				}else{
 					event.setDropCompleted(false);
@@ -437,7 +463,7 @@ public class GameController extends AnchorPane implements Initializable {
 		});
 	}
 
-	void setupGestureSource(final ImageView source, final String cardName){
+	void setupPlantSource(final ImageView source, final String cardName){
 
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			@Override

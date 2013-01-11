@@ -36,6 +36,7 @@ public class Protocol {
 	private static final String PLAYER_NAME = "name";
 	private static final String PLAYER_SCORE = "score";
 	private static final String PLAYER_HAND = "hand";
+	private static final String PLAYER_ASIDE = "aside";
 	private static final String PLAYER_FACEUP = "faceup";
 	private static final String PLAYER_FIELDS = "fields";
 	private static final String PLAYER_ACTIONS = "actions";
@@ -106,6 +107,15 @@ public class Protocol {
 					jsonFaceUps.put(jsonFaceUp);
 				}
 				jsonPlayer.put(PLAYER_FACEUP, jsonFaceUps);
+				
+				JSONArray jsonAsideCards = new JSONArray();
+				for(Card card : player.getSetAsideCards()){
+					JSONObject jsonAside = new JSONObject();
+					jsonAside.put(CARD_NAME, card.getName());
+					jsonAside.put(CARD_SCORE, String.valueOf(card.getNumberOfCards()));
+					jsonAsideCards.put(jsonAside);
+				}
+				jsonPlayer.put(PLAYER_ASIDE, jsonAsideCards);
 
 				JSONArray jsonFields = new JSONArray();
 				for(Field field : player.getBeanFields()) {
@@ -197,6 +207,15 @@ public class Protocol {
 					String cardScore = jsonFaceUp.getJSONObject(l).getString(CARD_SCORE);
 					playerFaceUp.add(new CardPOJO(cardName, cardScore));
 				}
+				
+				// Aside
+				JSONArray jsonAside = players.getJSONObject(i).getJSONArray(PLAYER_ASIDE);
+				ArrayList<CardPOJO> playerAside = new ArrayList<CardPOJO>();
+				for(int l=0; l<jsonAside.length(); l++){
+					String cardName = jsonAside.getJSONObject(l).getString(CARD_NAME);
+					String cardScore = jsonAside.getJSONObject(l).getString(CARD_SCORE);
+					playerAside.add(new CardPOJO(cardName, cardScore));
+				}
 				// Fields
 				JSONArray jsonFields = players.getJSONObject(i).getJSONArray(PLAYER_FIELDS);
 				ArrayList<CardPOJO> playerFields = new ArrayList<CardPOJO>();
@@ -214,7 +233,7 @@ public class Protocol {
 				}
 
 
-				PlayerPOJO playerPOJO = new PlayerPOJO(playerName, playerScore, playerHand, playerFaceUp, playerFields, playerActions);
+				PlayerPOJO playerPOJO = new PlayerPOJO(playerName, playerScore, playerHand, playerFaceUp, playerAside, playerFields, playerActions);
 
 				playersPOJO.add(playerPOJO);
 

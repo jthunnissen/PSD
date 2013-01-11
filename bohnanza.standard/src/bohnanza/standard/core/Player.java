@@ -135,7 +135,7 @@ public class Player {
 	 */
 	public void plantBean(BeanCard bean, BeanField field) throws IllegalActionException {
 		if(!setAsideCards.isEmpty()){
-			if(setAsideCards.remove(bean)) throw new IllegalActionException("Bean must be set aside");
+			if(!setAsideCards.remove(bean)) throw new IllegalActionException("Bean must be set aside");
 		}
 		else if(!hand.isEmpty() && hand.get(0)==bean) hand.remove(0);
 		else throw new IllegalActionException("Player cannot plant this bean");

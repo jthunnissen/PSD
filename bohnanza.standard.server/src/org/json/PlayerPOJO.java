@@ -8,15 +8,17 @@ public class PlayerPOJO {
 	private String score;
 	private ArrayList<CardPOJO> hand;
 	private ArrayList<CardPOJO> faceUp;
+	private ArrayList<CardPOJO> aside;
 	private ArrayList<CardPOJO> fields;
 	private ArrayList<String> actions;
 	
 	
-	public PlayerPOJO(String name, String score, ArrayList<CardPOJO> hand, ArrayList<CardPOJO> faceUp, ArrayList<CardPOJO> fields, ArrayList<String> actions){
+	public PlayerPOJO(String name, String score, ArrayList<CardPOJO> hand, ArrayList<CardPOJO> faceUp, ArrayList<CardPOJO> aside, ArrayList<CardPOJO> fields, ArrayList<String> actions){
 		this.name = name;
 		this.score = score;
 		this.hand = hand;
 		this.faceUp = faceUp;
+		this.aside = aside;
 		this.fields = fields;
 		this.actions = actions;
 	}
@@ -35,6 +37,10 @@ public class PlayerPOJO {
 	
 	public ArrayList<CardPOJO> getFaceUp(){
 		return faceUp;
+	}
+	
+	public ArrayList<CardPOJO> getAside(){
+		return aside;
 	}
 	
 	public ArrayList<CardPOJO> getFields(){

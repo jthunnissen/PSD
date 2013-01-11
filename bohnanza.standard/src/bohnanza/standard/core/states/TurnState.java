@@ -35,7 +35,8 @@ public abstract class TurnState {
 		List<Class<? extends Action>> playerActions =  actions.get(action.getInitiator());
 		if(playerActions == null || !playerActions.contains(action.getClass())) throw new IllegalActionException("Action not permitted for this player in current state");
 		action.handle();
-		if(handled(action) && transitions.containsKey(action)) {
+		//if(handled(action) && transitions.containsKey(action)) {
+		if(handled(action)) {
 			try {
 				TurnState nextState = transitions.get(action.getClass());
 				nextState.reset();
@@ -43,7 +44,8 @@ public abstract class TurnState {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		} else System.out.println("Contains next state :"+String.valueOf(transitions.containsKey(action)));
+		System.out.println("State: "+context.getCurrentState().getClass().getName());
 	}
 	
 	/**
