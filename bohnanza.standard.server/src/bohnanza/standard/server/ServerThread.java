@@ -26,6 +26,7 @@ import bohnanza.standard.core.actions.Harvest;
 import bohnanza.standard.core.actions.NextPhase;
 import bohnanza.standard.core.actions.PlantBean;
 import bohnanza.standard.core.actions.ProposeTrade;
+import bohnanza.standard.core.actions.SetAsideCard;
 
 class ServerThread extends Thread {
 
@@ -150,6 +151,10 @@ class ServerThread extends Thread {
 						Action action = new ProposeTrade(game, player, game.getActivePlayer(), give, receive);
 						game.getCurrentState().handle(action);
 						server.sendToPlayer(game.getActivePlayer(), line);
+					} else if(line.startsWith(Protocol.SETASIDECARD)){
+						Action action = new SetAsideCard(game, player, findBeanCardFromPlayerFaceUp(commandos[1]));
+						game.getCurrentState().handle(action);
+						server.sendUpdate(0);
 					} else if(line.startsWith(Protocol.CHAT)){
 						server.broadcast(id, Protocol.chatToJSON(line.replace(Protocol.CHAT+" ", "")));
 					} else {
@@ -177,6 +182,17 @@ class ServerThread extends Thread {
 			clientSocket.close();
 		} catch (IOException e) {
 		}
+	}
+	
+	public BeanCard findBeanCardFromPlayerFaceUp(String cardName){
+		BeanCard result = null;
+		for(Card card :  player.getFaceUpCards()){
+			if(card.getName().startsWith(cardName)){
+				result = (BeanCard) card;
+				break;
+			}
+		}
+		return result;
 	}
 
 	public BeanCard findBeanCard(String cardName){

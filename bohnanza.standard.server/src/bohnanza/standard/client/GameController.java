@@ -126,6 +126,7 @@ public class GameController extends AnchorPane implements Initializable {
 			}
 			// Build actions view		
 			updateActionsView(update);
+			updateTradeViewActivePlayer(update);
 		} else {
 			nextPhase.setVisible(false);
 			actionsPane.setVisible(false);
@@ -148,6 +149,72 @@ public class GameController extends AnchorPane implements Initializable {
 			initOffer(cardView, card);
 		}
 	}
+
+	private void updateTradeViewActivePlayer(GamePOJO update) {
+		for(CardPOJO card : update.getThisPlayer().getFaceUp()){
+			ImageView cardView = new ImageView(card.getImage());
+			this.setupGestureSource(cardView, card.getName());
+			tradearea.getChildren().add(cardView);
+			setupSetAsideSource(cardView, card);
+		}
+		setupSetAsideTarget(aside);
+
+	}
+
+	private void setupSetAsideTarget(final HBox targetBox) {
+		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				if(db.hasImage()){
+					event.acceptTransferModes(TransferMode.COPY);
+				}
+				event.consume();
+			}
+		});
+
+		targetBox.setOnDragDropped(new EventHandler <DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				if(db.hasImage()){
+					targetBox.getChildren().add(new ImageView(db.getImage()));
+					application.getClient().sendToServer(Protocol.SETASIDECARD +" "+db.getString());
+					event.setDropCompleted(true);
+				}else{
+					event.setDropCompleted(false);
+				}
+				event.consume();
+			}
+		});
+
+	}
+
+	private void setupSetAsideSource(final ImageView cardView, final CardPOJO card) {
+		cardView.setOnDragDetected(new EventHandler <MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				Dragboard db = cardView.startDragAndDrop(TransferMode.COPY);
+				ClipboardContent content = new ClipboardContent();
+				content.putImage(cardView.getImage());
+				content.putString(card.getName());
+				db.setContent(content);
+				event.consume();
+			}
+		});
+		cardView.setOnDragDone(new EventHandler<DragEvent>() {
+			@Override	
+			public void handle(DragEvent event) {
+				if(event.isAccepted()){
+					tradearea.getChildren().remove(cardView);
+					event.consume();
+				}
+			}
+
+		});
+	}
+
+
 
 	public void updatePlayersList(GamePOJO update) {
 		ArrayList<PlayerPOJO> playersPOJOS = update.getPlayers();
