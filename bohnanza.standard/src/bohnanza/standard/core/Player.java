@@ -185,7 +185,7 @@ public class Player {
 	 * @throws IllegalOperationException if not isValidTrade(receive,give)
 	 */
 	public void trade(List<Card> receive, List<Card> give, boolean active) throws IllegalActionException {
-		if(!isValidTrade(receive, give, active)) throw new IllegalActionException(this.name + "can only trade onwned for not owned cards");
+		if(!isValidTrade(receive, give, active)) throw new IllegalActionException(this.name + " can only trade onwned for not owned cards");
 		hand.removeAll(give);
 		if(active) faceUpCards.removeAll(give);
 		setAsideCards.addAll(receive);
@@ -193,8 +193,12 @@ public class Player {
 
 	public boolean isValidTrade(List<Card> receive, List<Card> give, boolean active) {
 		boolean valid = true;
-		for(Card take: give) {
-			if (!hand.contains(take) && !(active && faceUpCards.contains(take))) valid = false;
+		for(Card card: give) {
+			if(active){
+				if(faceUpCards.contains(card)) valid = false;
+			} else {
+				if(!hand.contains(card)) valid = false;
+			}
 		}
 		return valid;
 	}

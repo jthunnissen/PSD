@@ -23,7 +23,7 @@ public class ProposeTrade extends Action {
 	@Override
 	public void handle() throws IllegalActionException {
 		if(!(initiator == game.getActivePlayer() || otherPlayer == game.getActivePlayer())) throw new IllegalActionException("Only trades with the active player are allowed");
-		if(!initiator.isValidTrade(give,receive,true) || !otherPlayer.isValidTrade(receive, give, false)) throw new IllegalActionException("No valid trade");
+		if(!initiator.isValidTrade(receive,give,false) || !otherPlayer.isValidTrade(give, receive, true)) throw new IllegalActionException("No valid trade");
 	}
 	
 	public List<Card> getGivenCards() {

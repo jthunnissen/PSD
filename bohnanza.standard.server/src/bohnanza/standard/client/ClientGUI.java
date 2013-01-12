@@ -131,7 +131,11 @@ public class ClientGUI extends Application {
 						if(state == ClientGUI.AWAITING_GAMEUPDATE){
 							gameController.update(Protocol.fromJSON(oldResponse.toString(), username));
 						}
-							
+					} else if(action.equals(Protocol.PROPOSETRADE)){
+						String playerName = response.getString(Protocol.PLAYER_NAME);
+						String cardName = response.getString(Protocol.CARD_NAME);
+						String offerCards = response.getString(Protocol.PROPOSETRADE);
+						gameController.viewOffer(playerName, cardName, offerCards);
 					} else if(action.equals("gameupdate")) {
 						if(state == ClientGUI.AWAITING_START){
 							goToGame();

@@ -143,7 +143,7 @@ class ServerThread extends Thread {
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.PROPOSETRADE)){
 						String[] options = line.split(";");
-						BeanCard giveCard = findBeanCard(options[1]);
+						BeanCard giveCard = findBeanCardFromActivePlayerHand(options[1]);
 						List<Card> give = new ArrayList<Card>();
 						give.add(giveCard);
 						List<Card> receive = new ArrayList<Card>();
@@ -151,13 +151,14 @@ class ServerThread extends Thread {
 							String[] receiveCards = options[2].split(",");
 							if(receiveCards.length>0){
 								for(int i=0; i<receiveCards.length; i++){
-									receive.add(findBeanCard(receiveCards[i]));
+									receive.add(findBeanCardFromPlayerHand(receiveCards[i]));
 								}
 							}
 						}
-						Action action = new ProposeTrade(game, player, game.getActivePlayer(), give, receive);
+						//Action action = new ProposeTrade(game, player, game.getActivePlayer(), give, receive);
+						Action action = new ProposeTrade(game, player, game.getActivePlayer(), receive, give);
 						game.getCurrentState().handle(action);
-						server.sendToPlayer(game.getActivePlayer(), line);
+						server.sendToPlayer(game.getActivePlayer(), Protocol.sendOfferToJSON("PLAYERNAME", options[1], options[2]));
 					} else if(line.startsWith(Protocol.SETASIDECARD)){
 						Action action = new SetAsideCard(game, player, findBeanCardFromPlayerFaceUp(commandos[1]));
 						game.getCurrentState().handle(action);
@@ -165,7 +166,8 @@ class ServerThread extends Thread {
 					} else if(line.startsWith(Protocol.CHAT)){
 						server.broadcast(id, Protocol.chatToJSON(line.replace(Protocol.CHAT+" ", "")));
 					} else {
-						server.broadcast(id, line);
+						System.out.println("Unknown command: "+ line);
+						//server.broadcast(id, line);
 					}
 
 				} catch (IllegalActionException e) {
@@ -202,6 +204,27 @@ class ServerThread extends Thread {
 		return result;
 	}
 	
+	public BeanCard findBeanCardFromActivePlayerHand(String cardName){
+		BeanCard result = null;
+		for(Card card :  game.getActivePlayer().getHand()){
+			if(card.getName().startsWith(cardName)){
+				result = (BeanCard) card;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public BeanCard findBeanCardFromPlayerHand(String cardName){
+		BeanCard result = null;
+		for(Card card :  player.getHand()){
+			if(card.getName().startsWith(cardName)){
+				result = (BeanCard) card;
+				break;
+			}
+		}
+		return result;
+	}
 	public BeanCard findBeanCardFromPlayerAside(String cardName){
 		BeanCard result = null;
 		for(Card card :  player.getSetAsideCards()){

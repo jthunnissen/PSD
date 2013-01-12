@@ -32,17 +32,17 @@ import bohnanza.standard.core.actions.SetAsideCard;
 
 public class Protocol {
 
-	private static final String CURRENTPLAYER = "currentplayer";
-	private static final String PLAYERS = "players";
-	private static final String PLAYER_NAME = "name";
-	private static final String PLAYER_SCORE = "score";
-	private static final String PLAYER_HAND = "hand";
-	private static final String PLAYER_ASIDE = "aside";
-	private static final String PLAYER_FACEUP = "faceup";
-	private static final String PLAYER_FIELDS = "fields";
-	private static final String PLAYER_ACTIONS = "actions";
-	private static final String CARD_NAME = "name";
-	private static final String CARD_SCORE = "score";
+	public static final String CURRENTPLAYER = "currentplayer";
+	public static final String PLAYERS = "players";
+	public static final String PLAYER_NAME = "name";
+	public static final String PLAYER_SCORE = "score";
+	public static final String PLAYER_HAND = "hand";
+	public static final String PLAYER_ASIDE = "aside";
+	public static final String PLAYER_FACEUP = "faceup";
+	public static final String PLAYER_FIELDS = "fields";
+	public static final String PLAYER_ACTIONS = "actions";
+	public static final String CARD_NAME = "name";
+	public static final String CARD_SCORE = "score";
 
 	public static final String ACCEPTTRADE = "ACCEPTTRADE";
 	public static final String BUYBEANFIELD = "BUYBEANFIELD";
@@ -325,6 +325,21 @@ public class Protocol {
 			JSONObject root = new JSONObject();
 			root.put("type", Protocol.ERROR);
 			root.put("response", message);
+			result = root.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String sendOfferToJSON(String playerName, String cardName, String offerCards) {
+		String result = "";	
+		try {
+			JSONObject root = new JSONObject();
+			root.put("type", Protocol.PROPOSETRADE);
+			root.put("response", playerName);
+			root.put(Protocol.CARD_NAME, cardName);
+			root.put(Protocol.PROPOSETRADE, offerCards);
 			result = root.toString();
 		} catch (JSONException e) {
 			e.printStackTrace();

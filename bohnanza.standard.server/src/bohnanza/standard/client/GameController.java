@@ -152,7 +152,7 @@ public class GameController extends AnchorPane implements Initializable {
 			ImageView cardView = new ImageView(card.getImage());
 			cardView.setUserData(card);
 			if(update.getCurrentPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)){
-				this.setupPlantSource(cardView, card.getName());	
+				this.setupPlantSource(cardView);	
 			}
 			aside.getChildren().add(cardView);
 		}
@@ -163,10 +163,10 @@ public class GameController extends AnchorPane implements Initializable {
 		for(CardPOJO card : update.getCurrentPlayer().getFaceUp()){
 			ImageView cardView = new ImageView(card.getImage());
 			tradearea.getChildren().add(cardView);
-			if(isActivePlayer(update.getCurrentPlayer().getName())){
+			if(update.getThisPlayer().getActions().contains(Protocol.SETASIDECARD)){
 				setupSetAsideSource(cardView, card);
 				setupSetAsideTarget(aside);
-			} else {
+			} else if(update.getThisPlayer().getActions().contains(Protocol.PROPOSETRADE)) {
 				setupMakeOffer(cardView, card);
 			}
 		}
@@ -244,6 +244,7 @@ public class GameController extends AnchorPane implements Initializable {
 		hand.getChildren().clear();
 		for(CardPOJO card : update.getThisPlayer().getHand()){
 			ImageView cardView = new ImageView(card.getImage());
+			cardView.setUserData(card);
 			hand.getChildren().add(cardView);
 		}
 	}
@@ -291,7 +292,7 @@ public class GameController extends AnchorPane implements Initializable {
 		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true : false);
 		if(actions.contains(Protocol.PLANTASIDEBEAN)){
 			for(Node node : aside.getChildren()){
-				setupPlantSource((ImageView) node, ((CardPOJO)node.getUserData()).getName());
+				setupPlantSource((ImageView) node);
 			}
 			setupPlantTarget(false, field1, 0);
 			setupPlantTarget(false, field2, 1);
@@ -309,7 +310,7 @@ public class GameController extends AnchorPane implements Initializable {
 				setupPlantTarget(true, field3, 2);
 				harvest3.setVisible(true);
 			}
-			setupPlantSource((ImageView) hand.getChildren().get(0), update.getCurrentPlayer().getHand().get(0).getName());
+			setupPlantSource((ImageView) hand.getChildren().get(0));
 
 		}
 	}
@@ -318,8 +319,11 @@ public class GameController extends AnchorPane implements Initializable {
 		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("Click on: "+card.getName());
-				offer.setVisible(true);
+				offerPane.setVisible(true);
 				setupOfferTarget(offer);
+				for(Node node : hand.getChildren()){
+					setupPlantSource((ImageView) node);
+				}
 				if(offerItem != card) {
 					offerItem = card;
 					offer.getChildren().clear();
@@ -329,7 +333,7 @@ public class GameController extends AnchorPane implements Initializable {
 
 	}
 
-	public void viewOffer(final String player, String card, String offer){
+	public void viewOffer(final String player, final String card, final String offer){
 		final Stage myDialog = new Stage();
 		myDialog.initModality(Modality.WINDOW_MODAL);
 
@@ -348,7 +352,7 @@ public class GameController extends AnchorPane implements Initializable {
 		okButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.ACCEPTTRADE + " " + player);
+				application.client.sendToServer(Protocol.ACCEPTTRADE + ";" + card +";"+offer);
 				myDialog.close();
 			}
 
@@ -473,7 +477,7 @@ public class GameController extends AnchorPane implements Initializable {
 		});
 	}
 
-	void setupPlantSource(final ImageView source, final String cardName){
+	void setupPlantSource(final ImageView source){
 
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			@Override
@@ -487,7 +491,7 @@ public class GameController extends AnchorPane implements Initializable {
 
 				Image sourceImage = source.getImage();
 				content.putImage(sourceImage);
-				content.putString(cardName);
+				content.putString(((CardPOJO)source.getUserData()).getName());
 				db.setContent(content);
 
 				event.consume();
