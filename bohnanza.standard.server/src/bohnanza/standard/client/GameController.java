@@ -121,6 +121,14 @@ public class GameController extends AnchorPane implements Initializable {
 		nextPhase.setVisible(false);
 		actionsPane.setVisible(false);
 		offerPane.setVisible(false);
+		aside.setOnDragOver(null);
+		aside.setOnDragDropped(null);
+		field1.setOnDragOver(null);
+		field1.setOnDragDropped(null);
+		field2.setOnDragOver(null);
+		field2.setOnDragDropped(null);
+		field3.setOnDragOver(null);
+		field3.setOnDragDropped(null);
 		
 		// Players + scores
 		updatePlayersList(update);
@@ -136,9 +144,6 @@ public class GameController extends AnchorPane implements Initializable {
 
 		// Build trading phase
 		updateAsideCards(update);
-		
-		
-	
 	}
 	
 	private void updateAsideCards(GamePOJO update){
@@ -149,7 +154,6 @@ public class GameController extends AnchorPane implements Initializable {
 			if(update.getCurrentPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)){
 				this.setupPlantSource(cardView, card.getName());	
 			}
-			
 			aside.getChildren().add(cardView);
 		}
 	}
@@ -166,8 +170,6 @@ public class GameController extends AnchorPane implements Initializable {
 				setupMakeOffer(cardView, card);
 			}
 		}
-		
-
 	}
 
 	private void setupSetAsideTarget(final HBox targetBox) {
@@ -234,25 +236,16 @@ public class GameController extends AnchorPane implements Initializable {
 			} else {
 				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
 			}
-
 		}
 		players.setItems(items);
 	}
 
 	public void updateThisPlayerHand(GamePOJO update){
 		hand.getChildren().clear();
-		PlayerPOJO player = update.getThisPlayer();
-		boolean first = true;
-		for(CardPOJO card : player.getHand()){
+		for(CardPOJO card : update.getThisPlayer().getHand()){
 			ImageView cardView = new ImageView(card.getImage());
-			cardView = new ImageView(card.getImage());
-			if(first){
-				//this.setupGestureSource(cardView, card.getName());
-				first = false;
-			}
 			hand.getChildren().add(cardView);
 		}
-
 	}
 
 	public void updateActionsView(GamePOJO update){
@@ -277,6 +270,8 @@ public class GameController extends AnchorPane implements Initializable {
 		if(actions.contains(Protocol.BUYBEANFIELD)){
 			harvest3.setVisible(false);
 			buy3.setVisible(true);
+		} else {
+			buy3.setVisible(false);
 		}
 
 		drawcard.setVisible((actions.contains(Protocol.DRAWCARDS)) ? true : false);
@@ -288,6 +283,10 @@ public class GameController extends AnchorPane implements Initializable {
 			if(update.getThisPlayer().getFields().size() > 2){
 				harvest3.setVisible(true);
 			}
+		} else {
+			harvest1.setVisible(false);
+			harvest2.setVisible(false);
+			harvest3.setVisible(false);
 		}
 		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true : false);
 		if(actions.contains(Protocol.PLANTASIDEBEAN)){
@@ -314,7 +313,6 @@ public class GameController extends AnchorPane implements Initializable {
 
 		}
 	}
-
 
 	public void setupMakeOffer(final ImageView cardView, final CardPOJO card){
 		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
