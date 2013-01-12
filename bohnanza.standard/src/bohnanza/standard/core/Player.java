@@ -105,7 +105,7 @@ public class Player {
 		if(field.getCards().size() == 1) {
 			boolean ok = true;
 			for(Field f: beanFields){
-				if(f.getCards().size() != 1)
+				if(f.getCards().size() > 1)
 					ok = false;
 			}
 			if(!ok) {

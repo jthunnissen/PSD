@@ -143,8 +143,9 @@ public class Game {
 	public int goToNextPlayer(final int skip) {
 		if (skip < 0)
 			throw new IllegalArgumentException("skip must be >= 0");
-		
-		return activePlayerIndex = (activePlayerIndex + 1 + skip) % players.size();
+		activePlayerIndex = (activePlayerIndex + 1 + skip) % players.size();
+		System.out.println("ActivePlayer: "+activePlayerIndex);
+		return activePlayerIndex;
 	}
 	
 	public Player getNextPlayer() {

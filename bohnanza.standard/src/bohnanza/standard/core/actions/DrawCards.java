@@ -13,7 +13,7 @@ public class DrawCards extends Action {
 			Card card = game.drawCard();
 			initiator.addCardToHand(card);
 		}
-		game.goToNextPlayer();
+		//game.goToNextPlayer();
 	}
 
 }
