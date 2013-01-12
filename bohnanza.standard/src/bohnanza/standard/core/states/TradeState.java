@@ -23,8 +23,8 @@ public class TradeState extends TurnState {
 			for(Player player: context.getPlayers()) {
 				removeAction(player, ProposeTrade.class);
 			}
-			addAction(proposition.getOtherPlayer(), AcceptTrade.class);
-			addAction(proposition.getOtherPlayer(), DeclineTrade.class);
+			addAction(proposition.getActivePlayer(), AcceptTrade.class);
+			addAction(proposition.getActivePlayer(), DeclineTrade.class);
 		} else if(action instanceof AcceptTrade || action instanceof DeclineTrade) {
 			startTrade();
 			

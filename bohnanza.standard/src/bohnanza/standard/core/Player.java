@@ -195,9 +195,16 @@ public class Player {
 		boolean valid = true;
 		for(Card card: give) {
 			if(active){
-				if(faceUpCards.contains(card)) valid = false;
+				if(!faceUpCards.contains(card)){
+					valid = false;
+					System.out.println("Active does not have: "+card.getName());
+				}
 			} else {
-				if(!hand.contains(card)) valid = false;
+				if(!hand.contains(card)) {
+					valid = false;
+					System.out.println("Initiator does not have: "+card.getName());
+				}
+				
 			}
 		}
 		return valid;

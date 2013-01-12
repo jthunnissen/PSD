@@ -16,7 +16,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
@@ -25,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import org.json.JSONObject;
+import org.json.OfferPOJO;
 
 import bohnanza.standard.server.Protocol;
 
@@ -132,10 +132,8 @@ public class ClientGUI extends Application {
 							gameController.update(Protocol.fromJSON(oldResponse.toString(), username));
 						}
 					} else if(action.equals(Protocol.PROPOSETRADE)){
-						String playerName = response.getString(Protocol.PLAYER_NAME);
-						String cardName = response.getString(Protocol.CARD_NAME);
-						String offerCards = response.getString(Protocol.PROPOSETRADE);
-						gameController.viewOffer(playerName, cardName, offerCards);
+						OfferPOJO offer = Protocol.sendOfferFromJSON(response);
+						gameController.viewOffer(offer);
 					} else if(action.equals("gameupdate")) {
 						if(state == ClientGUI.AWAITING_START){
 							goToGame();

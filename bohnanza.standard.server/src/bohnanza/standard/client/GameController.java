@@ -40,9 +40,9 @@ import javafx.stage.Stage;
 
 import org.json.CardPOJO;
 import org.json.GamePOJO;
+import org.json.OfferPOJO;
 import org.json.PlayerPOJO;
 
-import bohnanza.standard.core.Card;
 import bohnanza.standard.server.Protocol;
 
 
@@ -333,17 +333,27 @@ public class GameController extends AnchorPane implements Initializable {
 
 	}
 
-	public void viewOffer(final String player, final String card, final String offer){
+	public void viewOffer(final OfferPOJO offer){
 		final Stage myDialog = new Stage();
 		myDialog.initModality(Modality.WINDOW_MODAL);
-
-		Text descriptionText = new Text(player +" offers "+ offer + " for: "+ card);
+		
+		StringBuilder cardsString = new StringBuilder();
+		for(CardPOJO card :offer.getCards()){
+			cardsString.append(card.getName());
+			cardsString.append(",");
+		}
+		StringBuilder offerString = new StringBuilder();
+		for(CardPOJO card :offer.getOffer()){
+			cardsString.append(card.getName());
+			cardsString.append(",");
+		}
+		Text descriptionText = new Text("Offer: "+ offerString.toString() + " for: "+ cardsString.toString());
 
 		Button dismissButton = new Button("Dismiss");
 		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.DECLINETRADE + " " + player);
+				application.client.sendToServer(Protocol.DECLINETRADE + " ");
 				myDialog.close();
 			}
 		});
@@ -352,7 +362,7 @@ public class GameController extends AnchorPane implements Initializable {
 		okButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.ACCEPTTRADE + ";" + card +";"+offer);
+				application.client.sendToServer(Protocol.ACCEPTTRADE+Protocol.sendOfferToJSON(Protocol.ACCEPTTRADE, offer.getInitiator(), offer.getCards(), offer.getOffer()));
 				myDialog.close();
 			}
 
