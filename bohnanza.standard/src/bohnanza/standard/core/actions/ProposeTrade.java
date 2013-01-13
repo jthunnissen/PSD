@@ -5,15 +5,15 @@ import bohnanza.standard.core.*;
 
 public class ProposeTrade extends Action {
 
-	private final Player otherPlayer;
-	private final List<Card> give;
-	private final List<Card> receive;
+	private final Player activePlayer;
+	private final List<Card> cards;
+	private final List<Card> offer;
 	
-	public ProposeTrade(Game game, Player initiator, Player otherPlayer, List<Card> give, List<Card> receive) {
+	public ProposeTrade(Game game, Player initiator, Player activePlayer, List<Card> cards, List<Card> offer) {
 		super(game, initiator);
-		this.otherPlayer = otherPlayer;
-		this.give = give;
-		this.receive = receive;
+		this.activePlayer = activePlayer;
+		this.cards = cards;
+		this.offer = offer;
 	}
 	
 	/**Trade or donate cards
@@ -22,19 +22,19 @@ public class ProposeTrade extends Action {
 	 */
 	@Override
 	public void handle() throws IllegalActionException {
-		if(!(initiator == game.getActivePlayer() || otherPlayer == game.getActivePlayer())) throw new IllegalActionException("Only trades with the active player are allowed");
-		if(!initiator.isValidTrade(give,receive,true) || !otherPlayer.isValidTrade(receive, give, false)) throw new IllegalActionException("No valid trade");
+		if(!(initiator == game.getActivePlayer() || activePlayer == game.getActivePlayer())) throw new IllegalActionException("Only trades with the active player are allowed");
+		if(!initiator.isValidTrade(cards,offer,false) || !activePlayer.isValidTrade(offer, cards, true)) throw new IllegalActionException("No valid trade");
 	}
 	
 	public List<Card> getGivenCards() {
-		return give;
+		return offer;
 	}
 	
 	public List<Card> getReceivedCards() {
-		return receive;
+		return cards;
 	}
 	
-	public Player getOtherPlayer() {
-		return otherPlayer;
+	public Player getActivePlayer() {
+		return activePlayer;
 	}
 }

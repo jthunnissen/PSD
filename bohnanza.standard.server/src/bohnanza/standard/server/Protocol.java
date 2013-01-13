@@ -9,6 +9,7 @@ import org.json.GamePOJO;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.OfferPOJO;
 import org.json.PlayerPOJO;
 
 import bohnanza.standard.core.Card;
@@ -32,17 +33,17 @@ import bohnanza.standard.core.actions.SetAsideCard;
 
 public class Protocol {
 
-	private static final String CURRENTPLAYER = "currentplayer";
-	private static final String PLAYERS = "players";
-	private static final String PLAYER_NAME = "name";
-	private static final String PLAYER_SCORE = "score";
-	private static final String PLAYER_HAND = "hand";
-	private static final String PLAYER_ASIDE = "aside";
-	private static final String PLAYER_FACEUP = "faceup";
-	private static final String PLAYER_FIELDS = "fields";
-	private static final String PLAYER_ACTIONS = "actions";
-	private static final String CARD_NAME = "name";
-	private static final String CARD_SCORE = "score";
+	public static final String CURRENTPLAYER = "currentplayer";
+	public static final String PLAYERS = "players";
+	public static final String PLAYER_NAME = "name";
+	public static final String PLAYER_SCORE = "score";
+	public static final String PLAYER_HAND = "hand";
+	public static final String PLAYER_ASIDE = "aside";
+	public static final String PLAYER_FACEUP = "faceup";
+	public static final String PLAYER_FIELDS = "fields";
+	public static final String PLAYER_ACTIONS = "actions";
+	public static final String CARD_NAME = "name";
+	public static final String CARD_SCORE = "score";
 
 	public static final String ACCEPTTRADE = "ACCEPTTRADE";
 	public static final String BUYBEANFIELD = "BUYBEANFIELD";
@@ -325,6 +326,59 @@ public class Protocol {
 			JSONObject root = new JSONObject();
 			root.put("type", Protocol.ERROR);
 			root.put("response", message);
+			result = root.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static OfferPOJO sendOfferFromJSON(JSONObject root){
+		OfferPOJO result = null;
+		
+		try {
+			String player = root.getString(PLAYER_NAME);
+			ArrayList<CardPOJO> cards = new ArrayList<CardPOJO>();
+			JSONArray jsonCards = root.getJSONArray("cards");
+			for(int i=0; i<jsonCards.length(); i++){
+				JSONObject jsonCard = jsonCards.getJSONObject(i);
+				cards.add(new CardPOJO(jsonCard.getString(Protocol.CARD_NAME), ""));
+			}
+			
+			ArrayList<CardPOJO> offer = new ArrayList<CardPOJO>();
+			JSONArray jsonOffer = root.getJSONArray("offer");
+			for(int j=0; j<jsonOffer.length(); j++){
+				JSONObject jsonCard = jsonOffer.getJSONObject(j);
+				offer.add(new CardPOJO(jsonCard.getString(Protocol.CARD_NAME), ""));
+			}
+			result = new OfferPOJO(player, cards, offer);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String sendOfferToJSON(String type, String playerName, List<CardPOJO> cards, List<CardPOJO> offer) {
+		String result = "";	
+		try {
+			JSONObject root = new JSONObject();
+			root.put("type", type);
+			root.put(Protocol.PLAYER_NAME, playerName);
+			JSONArray jsonCards = new JSONArray();
+			for(CardPOJO card: cards){
+				JSONObject jsonCard = new JSONObject();
+				jsonCard.put(Protocol.CARD_NAME, card.getName());
+				jsonCards.put(jsonCard);
+			}
+			root.put("cards", jsonCards);
+			JSONArray jsonOffer = new JSONArray();
+			for(CardPOJO card: offer){
+				JSONObject jsonCard = new JSONObject();
+				jsonCard.put(Protocol.CARD_NAME, card.getName());
+				jsonOffer.put(jsonCard);
+			}
+			root.put("offer", jsonOffer);
 			result = root.toString();
 		} catch (JSONException e) {
 			e.printStackTrace();

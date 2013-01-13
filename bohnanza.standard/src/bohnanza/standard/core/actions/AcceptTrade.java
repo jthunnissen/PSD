@@ -10,20 +10,20 @@ import bohnanza.standard.core.Player;
 public class AcceptTrade extends Action {
 
 	private final Player otherPlayer;
-	private final List<Card> give;
-	private final List<Card> receive;
+	private final List<Card> cards;
+	private final List<Card> offer;
 	
-	public AcceptTrade(Game game, Player player, Player otherPlayer, List<Card> give, List<Card> receive) {
+	public AcceptTrade(Game game, Player player, Player otherPlayer, List<Card> cards, List<Card> offer) {
 		super(game, player);
 		this.otherPlayer = otherPlayer;
-		this.give = give;
-		this.receive = receive;
+		this.cards = cards;
+		this.offer = offer;
 	}
 
 	@Override
 	public void handle() throws IllegalActionException {
-		initiator.trade(give, receive, true);
-		otherPlayer.trade(receive, give, false);
+		otherPlayer.trade(cards, offer, false);
+		initiator.trade(offer, cards, true);
 	}
 
 }

@@ -40,9 +40,9 @@ import javafx.stage.Stage;
 
 import org.json.CardPOJO;
 import org.json.GamePOJO;
+import org.json.OfferPOJO;
 import org.json.PlayerPOJO;
 
-import bohnanza.standard.core.Card;
 import bohnanza.standard.server.Protocol;
 
 
@@ -121,6 +121,14 @@ public class GameController extends AnchorPane implements Initializable {
 		nextPhase.setVisible(false);
 		actionsPane.setVisible(false);
 		offerPane.setVisible(false);
+		aside.setOnDragOver(null);
+		aside.setOnDragDropped(null);
+		field1.setOnDragOver(null);
+		field1.setOnDragDropped(null);
+		field2.setOnDragOver(null);
+		field2.setOnDragDropped(null);
+		field3.setOnDragOver(null);
+		field3.setOnDragDropped(null);
 		
 		// Players + scores
 		updatePlayersList(update);
@@ -136,9 +144,6 @@ public class GameController extends AnchorPane implements Initializable {
 
 		// Build trading phase
 		updateAsideCards(update);
-		
-		
-	
 	}
 	
 	private void updateAsideCards(GamePOJO update){
@@ -147,9 +152,8 @@ public class GameController extends AnchorPane implements Initializable {
 			ImageView cardView = new ImageView(card.getImage());
 			cardView.setUserData(card);
 			if(update.getCurrentPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)){
-				this.setupPlantSource(cardView, card.getName());	
+				this.setupPlantSource(cardView);	
 			}
-			
 			aside.getChildren().add(cardView);
 		}
 	}
@@ -159,15 +163,13 @@ public class GameController extends AnchorPane implements Initializable {
 		for(CardPOJO card : update.getCurrentPlayer().getFaceUp()){
 			ImageView cardView = new ImageView(card.getImage());
 			tradearea.getChildren().add(cardView);
-			if(isActivePlayer(update.getCurrentPlayer().getName())){
+			if(update.getThisPlayer().getActions().contains(Protocol.SETASIDECARD)){
 				setupSetAsideSource(cardView, card);
 				setupSetAsideTarget(aside);
-			} else {
+			} else if(update.getThisPlayer().getActions().contains(Protocol.PROPOSETRADE)) {
 				setupMakeOffer(cardView, card);
 			}
 		}
-		
-
 	}
 
 	private void setupSetAsideTarget(final HBox targetBox) {
@@ -234,25 +236,17 @@ public class GameController extends AnchorPane implements Initializable {
 			} else {
 				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
 			}
-
 		}
 		players.setItems(items);
 	}
 
 	public void updateThisPlayerHand(GamePOJO update){
 		hand.getChildren().clear();
-		PlayerPOJO player = update.getThisPlayer();
-		boolean first = true;
-		for(CardPOJO card : player.getHand()){
+		for(CardPOJO card : update.getThisPlayer().getHand()){
 			ImageView cardView = new ImageView(card.getImage());
-			cardView = new ImageView(card.getImage());
-			if(first){
-				//this.setupGestureSource(cardView, card.getName());
-				first = false;
-			}
+			cardView.setUserData(card);
 			hand.getChildren().add(cardView);
 		}
-
 	}
 
 	public void updateActionsView(GamePOJO update){
@@ -277,6 +271,8 @@ public class GameController extends AnchorPane implements Initializable {
 		if(actions.contains(Protocol.BUYBEANFIELD)){
 			harvest3.setVisible(false);
 			buy3.setVisible(true);
+		} else {
+			buy3.setVisible(false);
 		}
 
 		drawcard.setVisible((actions.contains(Protocol.DRAWCARDS)) ? true : false);
@@ -288,11 +284,15 @@ public class GameController extends AnchorPane implements Initializable {
 			if(update.getThisPlayer().getFields().size() > 2){
 				harvest3.setVisible(true);
 			}
+		} else {
+			harvest1.setVisible(false);
+			harvest2.setVisible(false);
+			harvest3.setVisible(false);
 		}
 		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true : false);
 		if(actions.contains(Protocol.PLANTASIDEBEAN)){
 			for(Node node : aside.getChildren()){
-				setupPlantSource((ImageView) node, ((CardPOJO)node.getUserData()).getName());
+				setupPlantSource((ImageView) node);
 			}
 			setupPlantTarget(false, field1, 0);
 			setupPlantTarget(false, field2, 1);
@@ -310,18 +310,20 @@ public class GameController extends AnchorPane implements Initializable {
 				setupPlantTarget(true, field3, 2);
 				harvest3.setVisible(true);
 			}
-			setupPlantSource((ImageView) hand.getChildren().get(0), update.getCurrentPlayer().getHand().get(0).getName());
+			setupPlantSource((ImageView) hand.getChildren().get(0));
 
 		}
 	}
-
 
 	public void setupMakeOffer(final ImageView cardView, final CardPOJO card){
 		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				System.out.println("Click on: "+card.getName());
-				offer.setVisible(true);
+				offerPane.setVisible(true);
 				setupOfferTarget(offer);
+				for(Node node : hand.getChildren()){
+					setupPlantSource((ImageView) node);
+				}
 				if(offerItem != card) {
 					offerItem = card;
 					offer.getChildren().clear();
@@ -331,17 +333,27 @@ public class GameController extends AnchorPane implements Initializable {
 
 	}
 
-	public void viewOffer(final String player, String card, String offer){
+	public void viewOffer(final OfferPOJO offer){
 		final Stage myDialog = new Stage();
 		myDialog.initModality(Modality.WINDOW_MODAL);
-
-		Text descriptionText = new Text(player +" offers "+ offer + " for: "+ card);
+		
+		StringBuilder cardsString = new StringBuilder();
+		for(CardPOJO card :offer.getCards()){
+			cardsString.append(card.getName());
+			cardsString.append(",");
+		}
+		StringBuilder offerString = new StringBuilder();
+		for(CardPOJO card :offer.getOffer()){
+			cardsString.append(card.getName());
+			cardsString.append(",");
+		}
+		Text descriptionText = new Text("Offer: "+ offerString.toString() + " for: "+ cardsString.toString());
 
 		Button dismissButton = new Button("Dismiss");
 		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.DECLINETRADE + " " + player);
+				application.client.sendToServer(Protocol.DECLINETRADE + " ");
 				myDialog.close();
 			}
 		});
@@ -350,7 +362,7 @@ public class GameController extends AnchorPane implements Initializable {
 		okButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.ACCEPTTRADE + " " + player);
+				application.client.sendToServer(Protocol.ACCEPTTRADE+Protocol.sendOfferToJSON(Protocol.ACCEPTTRADE, offer.getInitiator(), offer.getCards(), offer.getOffer()));
 				myDialog.close();
 			}
 
@@ -475,7 +487,7 @@ public class GameController extends AnchorPane implements Initializable {
 		});
 	}
 
-	void setupPlantSource(final ImageView source, final String cardName){
+	void setupPlantSource(final ImageView source){
 
 		source.setOnDragDetected(new EventHandler <MouseEvent>() {
 			@Override
@@ -489,7 +501,7 @@ public class GameController extends AnchorPane implements Initializable {
 
 				Image sourceImage = source.getImage();
 				content.putImage(sourceImage);
-				content.putString(cardName);
+				content.putString(((CardPOJO)source.getUserData()).getName());
 				db.setContent(content);
 
 				event.consume();
