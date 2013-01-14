@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1297,831" id="bohnanza.standard.core" metadata="uml2-1.0" initialized="true" scrolledY="72" tag="1000" key="32303037303533312D3130303020626F686E616E7A612E7374616E646172642F44616D6961616E">
-  <children xsi:type="editmodel:ClassEditModel" name="Game" location="804,50" size="181,250" id="bohnanza.standard.core/Game" runTimeClassModel="main([Ljava.lang.String;),goToNextPlayer(I),getNextPlayer(),Game(),addPlayer(Ljava.lang.String;),start(),drawCard(),getActivePlayer(),setCurrentState(Lbohnanza.standard.core.states.TurnState;),addCardToDiscardPile(Lbohnanza.standard.core.Card;),goToNextPlayer()">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1403,636" id="bohnanza.standard.core" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020626F686E616E7A612E7374616E646172642F44616D6961616E">
+  <children xsi:type="editmodel:ClassEditModel" name="Game" location="804,50" size="181,250" id="bohnanza.standard.core/Game" runTimeClassModel="main([Ljava.lang.String;),goToNextPlayer(I),getNextPlayer(),Game(),addPlayer(Ljava.lang.String;),start(),getActions(Lbohnanza.standard.core.Player;),drawCard(),getActivePlayer(),addCardToDiscardPile(Lbohnanza.standard.core.Card;),handle(Lbohnanza.standard.core.actions.Action;),goToNextPlayer()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="158,198">
       <children xsi:type="editmodel:MethodEditModel" name="Game" id="bohnanza.standard.core/Game#Game()"/>
@@ -11,8 +11,8 @@
       <children xsi:type="editmodel:MethodEditModel" name="getNextPlayer" id="bohnanza.standard.core/Game#getNextPlayer()"/>
       <children xsi:type="editmodel:MethodEditModel" name="goToNextPlayer" id="bohnanza.standard.core/Game#goToNextPlayer()"/>
       <children xsi:type="editmodel:MethodEditModel" name="goToNextPlayer" id="bohnanza.standard.core/Game#goToNextPlayer(I)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="main" id="bohnanza.standard.core/Game#main([Ljava.lang.String;)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="setCurrentState" id="bohnanza.standard.core/Game#setCurrentState(Lbohnanza.standard.core.states.TurnState;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handle" id="bohnanza.standard.core/Game#handle(Lbohnanza.standard.core.actions.Action;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getActions" id="bohnanza.standard.core/Game#getActions(Lbohnanza.standard.core.Player;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="start" id="bohnanza.standard.core/Game#start()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>

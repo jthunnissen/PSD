@@ -39,7 +39,7 @@ public abstract class TurnState {
 		if(handled(action)) {
 			getNextState(action);
 		} else System.out.println("Contains next state :"+String.valueOf(transitions.containsKey(action)));
-		System.out.println("State: "+context.getCurrentState().getClass().getName());
+		System.out.println("State: " + this.getClass().getName());
 	}
 
 	private void getNextState(Action action) {
