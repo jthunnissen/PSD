@@ -37,15 +37,19 @@ public abstract class TurnState {
 		action.handle();
 		//if(handled(action) && transitions.containsKey(action)) {
 		if(handled(action)) {
-			try {
-				TurnState nextState = transitions.get(action.getClass());
-				nextState.reset();
-				context.setCurrentState(nextState);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			getNextState(action);
 		} else System.out.println("Contains next state :"+String.valueOf(transitions.containsKey(action)));
 		System.out.println("State: "+context.getCurrentState().getClass().getName());
+	}
+
+	private void getNextState(Action action) {
+		try {
+			TurnState nextState = transitions.get(action.getClass());
+			nextState.reset();
+			context.setCurrentState(nextState);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

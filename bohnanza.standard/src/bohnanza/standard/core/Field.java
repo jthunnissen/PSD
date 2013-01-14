@@ -1,6 +1,8 @@
 package bohnanza.standard.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 
 public abstract class Field {
@@ -18,6 +20,14 @@ public abstract class Field {
 	 */
 	public ArrayList<Card> getCards() {
 		return cards;
+	}
+	
+	/**
+	 * Get the amount of cards in this field.
+	 * @return amount of cards.
+	 */
+	public int getSize() {
+		return cards.size();
 	}
 
 	public void addCard(Card card) throws IllegalActionException {
