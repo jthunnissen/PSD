@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:SequenceDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="bahnanza.standard.core.model" size="1260,786" metadata="uml2-1.0" initialized="true" scrolledY="135" tag="1000" key="32303037303533312D3130303020626F686E616E7A612E7374616E646172642F44616D6961616E">
+  <children xsi:type="editmodel:InstanceEditModel" name="Game" location="315,20" size="136,746" id="bohnanza.standard.core/Game" itemName="game1">
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.1/@children.0/@sourceConnections.0" location="60,131" size="16,40" sequenceItemContainer="//@children.0">
+      <sourceConnections xsi:type="editmodel:ReturnArrowEditModel" source="//@children.0/@children.0" target="//@children.1/@children.0" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,40" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,40" anchorKind="FixedAtEdge" userLabel="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.2/@children.3/@sourceConnections.0" location="60,576" size="16,40" sequenceItemContainer="//@children.0"/>
+  </children>
+  <children xsi:type="editmodel:ActorEditModel" location="150,20" size="100,746" itemName="Server">
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0" location="42,131" size="16,40" sequenceItemContainer="//@children.1">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="getCurrentState" id="bohnanza.standard.core/Game#getCurrentState()" source="//@children.1/@children.0" target="//@children.0/@children.0" targetEnd="//@children.1/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="getCurrentState(): TurnState" associatedSequenceNumber="1" associatedReturnArrow="//@children.0/@children.0/@sourceConnections.0" shouldShowReturnArrow="true">
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.1/@children.0/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.1/@children.0/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.1/@children.0/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.1/@children.0/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="getCurrentState(): TurnState" size="163,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" size="7,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" userLabel="//@children.1/@children.0/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.1/@children.0/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.1/@children.0/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.1/@children.0/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.2/@children.0/@sourceConnections.0" location="42,201" size="16,40" sequenceItemContainer="//@children.1">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="getActions" id="bohnanza.standard.core.states/TurnState#getActions(Lbohnanza.standard.core.Player;)" source="//@children.1/@children.1" target="//@children.2/@children.0" targetEnd="//@children.1/@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="getActions(Player): List" associatedSequenceNumber="2" associatedReturnArrow="//@children.2/@children.0/@sourceConnections.0" shouldShowReturnArrow="true">
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.1/@children.1/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.1/@children.1/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.1/@children.1/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.1/@children.1/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="getActions(Player): List" size="136,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="2" size="7,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" userLabel="//@children.1/@children.1/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.1/@children.1/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.1/@children.1/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.1/@children.1/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.3/@children.0/@sourceConnections.0" location="42,283" size="16,80" sequenceItemContainer="//@children.1" length="80">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="PlantBean" id="bohnanza.standard.core.actions/PlantBean#PlantBean(Lbohnanza.standard.core.Game;Lbohnanza.standard.core.Player;Lbohnanza.standard.core.BeanCard;Lbohnanza.standard.core.BeanField;)" source="//@children.1/@children.2" target="//@children.3" targetEnd="//@children.1/@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="PlantBean(Game,Player,BeanCard,BeanField)" associatedSequenceNumber="3" associatedReturnArrow="//@children.3/@children.0/@sourceConnections.0" creation="true" shouldShowReturnArrow="true">
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.1/@children.2/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.1/@children.2/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.1/@children.2/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.1/@children.2/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="PlantBean(Game,Player,BeanCard,BeanField)" size="266,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="3" size="7,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,40" anchorKind="FixedAtEdge" userLabel="//@children.1/@children.2/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.1/@children.2/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.1/@children.2/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.1/@children.2/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:ActivationEditModel" location="42,403" size="16,233" sequenceItemContainer="//@children.1" length="233">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="handle" id="bohnanza.standard.core.states/TurnState#handle(Lbohnanza.standard.core.actions.Action;)" source="//@children.1/@children.3" target="//@children.2/@children.1" targetEnd="//@children.1/@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.3/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="handle(Action)" associatedSequenceNumber="4">
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.1/@children.3/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.1/@children.3/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.1/@children.3/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.1/@children.3/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="handle(Action)" size="83,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="4" size="7,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" userLabel="//@children.1/@children.3/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.1/@children.3/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.1/@children.3/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.1/@children.3/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+  </children>
+  <children xsi:type="editmodel:InstanceEditModel" name="PlantState" location="420,20" size="186,746" id="bohnanza.standard.core.states/PlantState" itemName="state1">
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.1/@children.1/@sourceConnections.0" location="85,201" size="16,40" sequenceItemContainer="//@children.2">
+      <sourceConnections xsi:type="editmodel:ReturnArrowEditModel" source="//@children.2/@children.0" target="//@children.1/@children.1" targetEnd="//@children.2/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,40" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.2/@children.0/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.2/@children.0/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.2/@children.0/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.2/@children.0/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,40" anchorKind="FixedAtEdge" userLabel="//@children.2/@children.0/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.2/@children.0/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.2/@children.0/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.2/@children.0/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.0" location="85,403" size="16,233" sequenceItemContainer="//@children.2" recursiveChildren="//@children.2/@children.2 //@children.2/@children.3" length="233">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="handle" id="bohnanza.standard.core.actions/Action#handle()" source="//@children.2/@children.1" target="//@children.3/@children.1" targetEnd="//@children.2/@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="handle()" associatedSequenceNumber="4.1">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="8,19" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.2/@children.1/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.2/@children.1/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.2/@children.1/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.2/@children.1/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="handle()" size="46,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="4.1" size="18,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" userLabel="//@children.2/@children.1/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.2/@children.1/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.2/@children.1/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.2/@children.1/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:SelfSequenceMessageEditModel" name="handled" id="bohnanza.standard.core.states/TurnState#handled(Lbohnanza.standard.core.actions.Action;)" source="//@children.2/@children.1" target="//@children.2/@children.2" targetEnd="//@children.2/@children.1/@sourceConnections.1/@children.1" sourceEnd="//@children.2/@children.1/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan" associatedMethod="handled(Action): boolean" associatedSequenceNumber="4.2">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="7,59" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.2/@children.1/@sourceConnections.1/@children.0/@children.0" methodLabel="//@children.2/@children.1/@sourceConnections.1/@children.0/@children.1" sequenceNumberLabel="//@children.2/@children.1/@sourceConnections.1/@children.0/@children.2" statementExpression="//@children.2/@children.1/@sourceConnections.1/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="handled(Action): boolean" size="143,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="4.2" size="18,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" location="16,0" anchorKind="FixedAtEdge" userLabel="//@children.2/@children.1/@sourceConnections.1/@children.1/@children.0" methodLabel="//@children.2/@children.1/@sourceConnections.1/@children.1/@children.1" sequenceNumberLabel="//@children.2/@children.1/@sourceConnections.1/@children.1/@children.2" statementExpression="//@children.2/@children.1/@sourceConnections.1/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:SelfSequenceMessageEditModel" name="getNextState" id="bohnanza.standard.core.states/TurnState#getNextState(Lbohnanza.standard.core.actions.Action;)" source="//@children.2/@children.1" target="//@children.2/@children.3" targetEnd="//@children.2/@children.1/@sourceConnections.2/@children.1" sourceEnd="//@children.2/@children.1/@sourceConnections.2/@children.0" connectionRouterKind="Manhattan" associatedMethod="getNextState(Action)" associatedSequenceNumber="4.3">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="3,144" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.2/@children.1/@sourceConnections.2/@children.0/@children.0" methodLabel="//@children.2/@children.1/@sourceConnections.2/@children.0/@children.1" sequenceNumberLabel="//@children.2/@children.1/@sourceConnections.2/@children.0/@children.2" statementExpression="//@children.2/@children.1/@sourceConnections.2/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="getNextState(Action)" size="121,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="4.3" size="18,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" location="16,0" anchorKind="FixedAtEdge" userLabel="//@children.2/@children.1/@sourceConnections.2/@children.1/@children.0" methodLabel="//@children.2/@children.1/@sourceConnections.2/@children.1/@children.1" sequenceNumberLabel="//@children.2/@children.1/@sourceConnections.2/@children.1/@children.2" statementExpression="//@children.2/@children.1/@sourceConnections.2/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:RecursiveActivationEditModel" targetConnections="//@children.2/@children.1/@sourceConnections.1" location="93,472" size="16,61" sequenceItemContainer="//@children.2" length="61" associatedActivation="//@children.2/@children.1" relativeLocation="8,47"/>
+    <children xsi:type="editmodel:RecursiveActivationEditModel" targetConnections="//@children.2/@children.1/@sourceConnections.2" location="93,557" size="16,59" sequenceItemContainer="//@children.2" length="59" associatedActivation="//@children.2/@children.1" relativeLocation="8,154">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="setCurrentState" id="bohnanza.standard.core/Game#setCurrentState(Lbohnanza.standard.core.states.TurnState;)" source="//@children.2/@children.3" target="//@children.0/@children.1" targetEnd="//@children.2/@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@children.3/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="setCurrentState(TurnState)" associatedSequenceNumber="4.3.1">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="9,19" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.2/@children.3/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.2/@children.3/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.2/@children.3/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.2/@children.3/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="setCurrentState(TurnState)" size="155,16"/>
+          <children xsi:type="editmodel:LabelEditModel" name="4.3.1" size="29,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" userLabel="//@children.2/@children.3/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.2/@children.3/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.2/@children.3/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.2/@children.3/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+  </children>
+  <children xsi:type="editmodel:InstanceEditModel" targetConnections="//@children.1/@children.2/@sourceConnections.0" name="PlantBean" location="540,263" size="184,503" id="bohnanza.standard.core.actions/PlantBean" itemName="action1" creatingActivation="//@children.3/@children.0" creation="true">
+    <children xsi:type="editmodel:ActivationEditModel" location="84,80" size="16,40" sequenceItemContainer="//@children.3">
+      <sourceConnections xsi:type="editmodel:ReturnArrowEditModel" source="//@children.3/@children.0" target="//@children.1/@children.2" targetEnd="//@children.3/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,40" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.3/@children.0/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.3/@children.0/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.3/@children.0/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.3/@children.0/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" location="0,80" anchorKind="FixedAtEdge" userLabel="//@children.3/@children.0/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.3/@children.0/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.3/@children.0/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.3/@children.0/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,16"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,16"/>
+        </children>
+      </sourceConnections>
+    </children>
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.2/@children.1/@sourceConnections.0" location="84,179" size="16,40" sequenceItemContainer="//@children.3"/>
+  </children>
+  <diagramOptions xsi:type="options:SequenceDiagramOptions" level="0" properties="Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <sequenceDiagramPreferences showPopupBars="true" showConnectionHandles="true"/>
+</editmodel:SequenceDiagramEditModel>

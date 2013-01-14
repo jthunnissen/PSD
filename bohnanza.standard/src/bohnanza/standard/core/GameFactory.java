@@ -13,7 +13,7 @@ public class GameFactory {
 
 	/**
 	 */
-	private GameFactory() {
+	protected GameFactory() {
 	}
 
 	/**
