@@ -5,7 +5,9 @@ package bohnanza.standard.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import bohnanza.standard.core.actions.Action;
 import bohnanza.standard.core.states.TurnState;
 
 /**
@@ -81,15 +83,23 @@ public class Game {
 		Collections.shuffle(drawDeck);
 	}
 
+	public void handle(Action action) throws IllegalActionException {
+		currentState.handle(action);
+	}
+	
+	public List<Class<? extends Action>> getActions(Player player) {
+		return currentState.getActions(player);
+	}
+	
 	/**
 	 * Getter of the property <tt>currentState</tt>
 	 * 
 	 * @return Returns the currentState.
 	 * @uml.property name="currentState"
 	 */
-	public TurnState getCurrentState() {
+	/*public TurnState getCurrentState() {
 		return currentState;
-	}
+	}*/
 
 	/**
 	 * @param currentState the currentState to set

@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.CardPOJO;
@@ -93,15 +94,35 @@ class ServerThread extends Thread {
 						OfferPOJO offerPOJO = Protocol.sendOfferFromJSON(offerJSON);
 						
 						List<Card> cards = new ArrayList<Card>();
+<<<<<<< HEAD
 						for(CardPOJO cardPOJO : offerPOJO.getCards()){
+=======
+						
+						for(CardPOJO cardPOJO : offerPOJO.getCards()){
+							
+								
+>>>>>>> 48dffdda767d187a09c9e7be9bd524ba6c5b9394
 							BeanCard card = findBeanCardFromPlayerFaceUp(cardPOJO.getName(), player);
 							cards.add(card);
 						}
 						
 						List<Card> offer = new ArrayList<Card>();
+<<<<<<< HEAD
 						
 						for(CardPOJO cardPOJO : offerPOJO.getOffer()){
 							offer.add(findBeanCardFromPlayerHand(cardPOJO.getName(), findPlayer(offerPOJO.getInitiator())));
+=======
+						HashMap<String, Integer> offerNames = new HashMap<String, Integer>();
+						for(CardPOJO cardPOJO : offerPOJO.getOffer()){
+							int index = 0;
+							if(offerNames.containsKey(cardPOJO.getName())){
+								index = (int)offerNames.get(cardPOJO.getName()) + 1;
+							} else{
+								index = 1;
+							}
+							offerNames.put(cardPOJO.getName(), index);
+							offer.add(findBeanCardFromPlayerHand(cardPOJO.getName(), findPlayer(offerPOJO.getInitiator()), 1));
+>>>>>>> 48dffdda767d187a09c9e7be9bd524ba6c5b9394
 						}
 						Action action = new AcceptTrade(game, game.getActivePlayer(), findPlayer(offerPOJO.getInitiator()), cards, offer);
 						game.getCurrentState().handle(action);
@@ -152,6 +173,7 @@ class ServerThread extends Thread {
 						
 						game.getCurrentState().handle(action);
 						server.sendUpdate(id);
+<<<<<<< HEAD
 					} else if(line.startsWith(Protocol.PROPOSETRADE)){
 						String[] options = line.split(";");
 						BeanCard card = findBeanCardFromPlayerFaceUp(options[1], game.getActivePlayer());
@@ -169,18 +191,51 @@ class ServerThread extends Thread {
 									offer.add(offerCard);
 									offerPOJO.add(new CardPOJO(offerCard.getName(), ""));
 								}
-							}
+=======
+					} else if(line.startsWith(Protocol.PROPOSETRADE)){
+						OfferPOJO offerPOJO = Protocol.sendOfferFromJSON(new JSONObject(line.replaceFirst(Protocol.PROPOSETRADE, "")));
+						List<Card> cards = new ArrayList<Card>();
+						List<CardPOJO> cardsPOJO = new ArrayList<CardPOJO>();
+						for(CardPOJO card: offerPOJO.getCards()){
+							cards.add(findBeanCardFromPlayerFaceUp(card.getName(), game.getActivePlayer()));
+							cardsPOJO.add(new CardPOJO(card.getName(), ""));
 						}
+						
+						List<Card> offer = new ArrayList<Card>();
+						List<CardPOJO> offerCardPOJO = new ArrayList<CardPOJO>();
+						HashMap<String, Integer> offerNames = new HashMap<String, Integer>();
+						for(CardPOJO card: offerPOJO.getOffer()){
+							int index = 1;
+							if(offerNames.containsKey(card.getName())){
+								index = (int) offerNames.get(card.getName()) + 1;
+>>>>>>> 48dffdda767d187a09c9e7be9bd524ba6c5b9394
+							}
+							offerNames.put(card.getName(), index);
+							Card offerCard = findBeanCardFromPlayerHand(card.getName(), player, index);
+							offer.add(offerCard);
+							offerCardPOJO.add(new CardPOJO(offerCard.getName(), ""));
+						}
+<<<<<<< HEAD
 						//Action action = new ProposeTrade(game, player, game.getActivePlayer(), give, receive);
 						Action action = new ProposeTrade(game, player, game.getActivePlayer(), cards, offer);
 						game.getCurrentState().handle(action);
 						server.sendToPlayer(game.getActivePlayer(), Protocol.sendOfferToJSON(Protocol.PROPOSETRADE, player.getName(), cardsPOJO, offerPOJO));
+=======
+						
+						Action action = new ProposeTrade(game, player, game.getActivePlayer(), cards, offer);
+						game.getCurrentState().handle(action);
+						server.sendToPlayer(game.getActivePlayer(), Protocol.sendOfferToJSON(Protocol.PROPOSETRADE, player.getName(), cardsPOJO, offerCardPOJO));
+>>>>>>> 48dffdda767d187a09c9e7be9bd524ba6c5b9394
 					} else if(line.startsWith(Protocol.SETASIDECARD)){
 						Action action = new SetAsideCard(game, player, findBeanCardFromPlayerFaceUp(commandos[1], player));
 						game.getCurrentState().handle(action);
 						server.sendUpdate(0);
 					} else if(line.startsWith(Protocol.CHAT)){
+<<<<<<< HEAD
 						server.broadcast(id, Protocol.chatToJSON(line.replace(Protocol.CHAT+" ", "")));
+=======
+						server.broadcast(id, Protocol.chatToJSON(line.replaceFirst(Protocol.CHAT+" ", "")));
+>>>>>>> 48dffdda767d187a09c9e7be9bd524ba6c5b9394
 					} else {
 						System.out.println("Unknown command: "+ line);
 						//server.broadcast(id, line);
@@ -220,11 +275,23 @@ class ServerThread extends Thread {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	public Card findBeanCardFromPlayerHand(String cardName, Player player){
 		Card result = null;
 		for(Card card :  player.getHand()){
 			if(card.getName().equals(cardName)){
 				result = card;
+=======
+	public Card findBeanCardFromPlayerHand(String cardName, Player player, int index){
+		Card result = null;
+		int found = 0;
+		for(Card card :  player.getHand()){
+			if(card.getName().equals(cardName)){
+				result = card;
+				found++;
+			}
+			if(found == index) {
+>>>>>>> 48dffdda767d187a09c9e7be9bd524ba6c5b9394
 				break;
 			}
 		}

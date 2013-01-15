@@ -17,7 +17,7 @@ public abstract class TurnState {
 	/**
 	 * @uml.property name="transitions"
 	 */
-	private Map<Class<? extends Action>, TurnState> transitions = new HashMap<Class<? extends Action>, TurnState>();
+	private Map<Class<? extends Action>, Class<? extends TurnState>> transitions = new HashMap<Class<? extends Action>, Class<? extends TurnState>>();
 	
 	/**
 	 * @uml.property name="context"
@@ -37,15 +37,19 @@ public abstract class TurnState {
 		action.handle();
 		//if(handled(action) && transitions.containsKey(action)) {
 		if(handled(action)) {
-			try {
-				TurnState nextState = transitions.get(action.getClass());
-				nextState.reset();
-				context.setCurrentState(nextState);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			getNextState(action);
 		} else System.out.println("Contains next state :"+String.valueOf(transitions.containsKey(action)));
-		System.out.println("State: "+context.getCurrentState().getClass().getName());
+		System.out.println("State: " + this.getClass().getName());
+	}
+
+	private void getNextState(Action action) {
+		try {
+			TurnState nextState = GameFactory.getInstance().getTurnState(transitions.get(action.getClass()), context);
+			nextState.reset();
+			context.setCurrentState(nextState);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -91,7 +95,7 @@ public abstract class TurnState {
 	}
 	
 	/**To be used only by the game factory. Adds state as the next state the game will be in if action ends the current state.*/
-	public void addTransition(Class<? extends Action> action, TurnState state) {
+	public void addTransition(Class<? extends Action> action, Class<? extends TurnState> state) {
 		transitions.put(action, state);
 	}
 }

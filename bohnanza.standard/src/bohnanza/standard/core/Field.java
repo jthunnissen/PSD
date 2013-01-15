@@ -19,6 +19,14 @@ public abstract class Field {
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
+	
+	/**
+	 * Get the amount of cards in this field.
+	 * @return amount of cards.
+	 */
+	public int getSize() {
+		return cards.size();
+	}
 
 	public void addCard(Card card) throws IllegalActionException {
 		if(!cards.add(card)) throw new IllegalActionException("Card already in field");

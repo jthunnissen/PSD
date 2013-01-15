@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="Dependencies" size="1318,613" id="." metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020626F686E616E7A612E7374616E646172642F44616D6961616E">
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.2/@sourceConnections.0" name="bohnanza.standard.core.states" location="180,315" size="280,60" id="bohnanza.standard.core.states">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="bohnanza.standard.core.states-Standard::Call->bohnanza.standard.core.actions*bohnanza.standard.core.states-Soyatec::Import->bohnanza.standard.core.actions" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Import»" size="80,16" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="185,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,60"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="bohnanza.standard.core.states-Standard::Call->bohnanza.standard.core*bohnanza.standard.core.states-Standard::Send->bohnanza.standard.core*bohnanza.standard.core.states-Soyatec::Import->bohnanza.standard.core" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Send, Import»" size="118,16" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="68,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="198,60"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.0/@sourceConnections.0" name="bohnanza.standard.core.actions" location="555,60" size="289,60" id="bohnanza.standard.core.actions">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="bohnanza.standard.core.actions-Standard::Call->bohnanza.standard.core*bohnanza.standard.core.actions-Standard::Send->bohnanza.standard.core*bohnanza.standard.core.actions-Standard::Instantiate->bohnanza.standard.core*bohnanza.standard.core.actions-Soyatec::Import->bohnanza.standard.core" source="//@children.1" target="//@children.2" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Send, Instantiate, Import»" size="0,16" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,24" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="227,34"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.0/@sourceConnections.1" name="bohnanza.standard.core" location="50,50" size="227,60" id="bohnanza.standard.core">
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="bohnanza.standard.core-Standard::Call->bohnanza.standard.core.states*bohnanza.standard.core-Standard::Instantiate->bohnanza.standard.core.states*bohnanza.standard.core-Soyatec::Import->bohnanza.standard.core.states" source="//@children.2" target="//@children.0" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call, Instantiate, Import»" size="0,16" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="178,60" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="48,0"/>
+    </sourceConnections>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" properties="wireOptions=4;Product=eUML2;displayOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3"/>
+</editmodel:ClassDiagramEditModel>

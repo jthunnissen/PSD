@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1403,636" id="bohnanza.standard.core" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020626F686E616E7A612E7374616E646172642F44616D6961616E">
+  <children xsi:type="editmodel:ClassEditModel" name="Game" location="804,50" size="181,250" id="bohnanza.standard.core/Game" runTimeClassModel="main([Ljava.lang.String;),goToNextPlayer(I),getNextPlayer(),Game(),addPlayer(Ljava.lang.String;),start(),getActions(Lbohnanza.standard.core.Player;),drawCard(),getActivePlayer(),addCardToDiscardPile(Lbohnanza.standard.core.Card;),handle(Lbohnanza.standard.core.actions.Action;),goToNextPlayer()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="158,198">
+      <children xsi:type="editmodel:MethodEditModel" name="Game" id="bohnanza.standard.core/Game#Game()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addCardToDiscardPile" id="bohnanza.standard.core/Game#addCardToDiscardPile(Lbohnanza.standard.core.Card;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addPlayer" id="bohnanza.standard.core/Game#addPlayer(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="drawCard" id="bohnanza.standard.core/Game#drawCard()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getActivePlayer" id="bohnanza.standard.core/Game#getActivePlayer()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNextPlayer" id="bohnanza.standard.core/Game#getNextPlayer()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="goToNextPlayer" id="bohnanza.standard.core/Game#goToNextPlayer()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="goToNextPlayer" id="bohnanza.standard.core/Game#goToNextPlayer(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handle" id="bohnanza.standard.core/Game#handle(Lbohnanza.standard.core.actions.Action;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getActions" id="bohnanza.standard.core/Game#getActions(Lbohnanza.standard.core.Player;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="start" id="bohnanza.standard.core/Game#start()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="GameFactory" location="50,510" size="172,106" id="bohnanza.standard.core/GameFactory" runTimeClassModel="getInstance(),buildTurnStatespace(Lbohnanza.standard.core.Game;Lbohnanza.standard.core.Player;),getGameDeck()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="149,54">
+      <children xsi:type="editmodel:MethodEditModel" name="buildTurnStatespace" id="bohnanza.standard.core/GameFactory#buildTurnStatespace(Lbohnanza.standard.core.Game;Lbohnanza.standard.core.Player;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGameDeck" id="bohnanza.standard.core/GameFactory#getGameDeck()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInstance" id="bohnanza.standard.core/GameFactory#getInstance()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="IllegalActionException" location="272,510" size="214,70" id="bohnanza.standard.core/IllegalActionException" runTimeClassModel="IllegalActionException(Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="159,18">
+      <children xsi:type="editmodel:MethodEditModel" name="IllegalActionException" id="bohnanza.standard.core/IllegalActionException#IllegalActionException(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Player" location="348,50" size="199,340" id="bohnanza.standard.core/Player" runTimeClassModel="trade(Ljava.util.List;Ljava.util.List;Z),buyField(),getHand(),setFaceUpCardaside(Lbohnanza.standard.core.Card;),calcScore(),setAsideCards,isValidTrade(Ljava.util.List;Ljava.util.List;Z),plantBean(Lbohnanza.standard.core.BeanCard;Lbohnanza.standard.core.BeanField;),faceUpCards,name,addCardToHand(Lbohnanza.standard.core.Card;),addCardToTreasury(Lbohnanza.standard.core.Card;),getBeanFields(),Player(Ljava.lang.String;),harvastField(Lbohnanza.standard.core.Field;),getSetAsideCards()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="176,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="faceUpCards" id="bohnanza.standard.core/Player#faceUpCards"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="bohnanza.standard.core/Player#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="setAsideCards" id="bohnanza.standard.core/Player#setAsideCards"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="152,234">
+      <children xsi:type="editmodel:MethodEditModel" name="Player" id="bohnanza.standard.core/Player#Player(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addCardToHand" id="bohnanza.standard.core/Player#addCardToHand(Lbohnanza.standard.core.Card;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addCardToTreasury" id="bohnanza.standard.core/Player#addCardToTreasury(Lbohnanza.standard.core.Card;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="buyField" id="bohnanza.standard.core/Player#buyField()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calcScore" id="bohnanza.standard.core/Player#calcScore()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBeanFields" id="bohnanza.standard.core/Player#getBeanFields()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getHand" id="bohnanza.standard.core/Player#getHand()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSetAsideCards" id="bohnanza.standard.core/Player#getSetAsideCards()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="harvastField" id="bohnanza.standard.core/Player#harvastField(Lbohnanza.standard.core.Field;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isValidTrade" id="bohnanza.standard.core/Player#isValidTrade(Ljava.util.List;Ljava.util.List;Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="plantBean" id="bohnanza.standard.core/Player#plantBean(Lbohnanza.standard.core.BeanCard;Lbohnanza.standard.core.BeanField;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setFaceUpCardaside" id="bohnanza.standard.core/Player#setFaceUpCardaside(Lbohnanza.standard.core.Card;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="trade" id="bohnanza.standard.core/Player#trade(Ljava.util.List;Ljava.util.List;Z)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:EnumerationEditModel" name="EBeanType" location="597,204" size="157,256" id="bohnanza.standard.core/EBeanType" runTimeClassModel="SOYBEAN%,CHILIBEAN%,COFFEEBEANS%,BLACKEYEDBEAN%,GARDENBEAN%,REDBEAN%,CACOABEAN%,BLUEBEAN%,STINKBEAN%,GREENBEAN%,WAXBEAN%">
+    <children xsi:type="editmodel:CompartmentEditModel" size="134,198">
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="WAXBEAN" id="bohnanza.standard.core/EBeanType#WAXBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="REDBEAN" id="bohnanza.standard.core/EBeanType#REDBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="STINKBEAN" id="bohnanza.standard.core/EBeanType#STINKBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="BLUEBEAN" id="bohnanza.standard.core/EBeanType#BLUEBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="SOYBEAN" id="bohnanza.standard.core/EBeanType#SOYBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="COFFEEBEANS" id="bohnanza.standard.core/EBeanType#COFFEEBEANS%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GARDENBEAN" id="bohnanza.standard.core/EBeanType#GARDENBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="BLACKEYEDBEAN" id="bohnanza.standard.core/EBeanType#BLACKEYEDBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="CACOABEAN" id="bohnanza.standard.core/EBeanType#CACOABEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="CHILIBEAN" id="bohnanza.standard.core/EBeanType#CHILIBEAN%"/>
+      <children xsi:type="editmodel:EnumerationLiteralEditModel" name="GREENBEAN" id="bohnanza.standard.core/EBeanType#GREENBEAN%"/>
+    </children>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="bohnanza.standard.core/IBeanType&lt;-bohnanza.standard.core/EBeanType" source="//@children.4" target="//@children.5" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="78,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="72,104"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.4/@sourceConnections.0" name="IBeanType" location="603,50" size="144,104" id="bohnanza.standard.core/IBeanType" runTimeClassModel="numberOfCards(),beanometer()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="121,36">
+      <children xsi:type="editmodel:MethodEditModel" name="beanometer" id="bohnanza.standard.core/IBeanType#beanometer()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="numberOfCards" id="bohnanza.standard.core/IBeanType#numberOfCards()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="BeanField" location="1035,206" size="119,106" id="bohnanza.standard.core/BeanField" runTimeClassModel="addCard(Lbohnanza.standard.core.Card;),addCard(Lbohnanza.standard.core.BeanCard;),harvest()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,54">
+      <children xsi:type="editmodel:MethodEditModel" name="addCard" id="bohnanza.standard.core/BeanField#addCard(Lbohnanza.standard.core.Card;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addCard" id="bohnanza.standard.core/BeanField#addCard(Lbohnanza.standard.core.BeanCard;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="harvest" id="bohnanza.standard.core/BeanField#harvest()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="bohnanza.standard.core/Field&lt;-bohnanza.standard.core/BeanField" source="//@children.6" target="//@children.7" targetEnd="//@children.6/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="59,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="51,106"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0" name="Field" location="1043,50" size="102,106" id="bohnanza.standard.core/Field" runTimeClassModel="addCard(Lbohnanza.standard.core.Card;),getSize(),harvest()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,54">
+      <children xsi:type="editmodel:MethodEditModel" name="addCard" id="bohnanza.standard.core/Field#addCard(Lbohnanza.standard.core.Card;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSize" id="bohnanza.standard.core/Field#getSize()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="harvest" id="bohnanza.standard.core/Field#harvest()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="BeanCard" location="50,206" size="248,142" id="bohnanza.standard.core/BeanCard" runTimeClassModel="BeanCard(Lbohnanza.standard.core.IBeanType;),getBeanometer(I),getType(),type,produce">
+    <children xsi:type="editmodel:CompartmentEditModel" size="225,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="produce" id="bohnanza.standard.core/BeanCard#produce"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="type" id="bohnanza.standard.core/BeanCard#type"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="119,54">
+      <children xsi:type="editmodel:MethodEditModel" name="BeanCard" id="bohnanza.standard.core/BeanCard#BeanCard(Lbohnanza.standard.core.IBeanType;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBeanometer" id="bohnanza.standard.core/BeanCard#getBeanometer(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getType" id="bohnanza.standard.core/BeanCard#getType()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="bohnanza.standard.core/Card&lt;-bohnanza.standard.core/BeanCard" source="//@children.8" target="//@children.9" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="124,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="77,106"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.8/@sourceConnections.0" name="Card" location="97,50" size="154,106" id="bohnanza.standard.core/Card" runTimeClassModel="Card(Ljava.lang.String;I),name,numberOfCards">
+    <children xsi:type="editmodel:CompartmentEditModel" size="131,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="bohnanza.standard.core/Card#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="numberOfCards" id="bohnanza.standard.core/Card#numberOfCards"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="58,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Card" id="bohnanza.standard.core/Card#Card(Ljava.lang.String;I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
