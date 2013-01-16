@@ -1,6 +1,8 @@
+
 package org.json;
 
 import java.util.ArrayList;
+
 public class OfferPOJO {
 
 	private String initiator;
@@ -24,4 +26,6 @@ public class OfferPOJO {
 	public ArrayList<CardPOJO> getOffer(){
 		return offer;
 	}
+	
+	
 }

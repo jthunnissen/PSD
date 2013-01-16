@@ -1,5 +1,7 @@
 package bohnanza.standard.core;
 
+import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.Protocol;
@@ -40,14 +42,16 @@ public abstract class Card implements ToJSON {
 		return numberOfCards;
 	}
 	
-	public JSONObject toJSON(){
+	public JSONObject toJSON(HashMap<Integer, Card> cardIndex){
 		JSONObject result = new JSONObject();
 		try {
 			result.put(Protocol.CARD_NAME, name);
-			result.put(Protocol.CARD_SCORE, "0");
+			result.put(Protocol.CARD_SCORE, 0);
+			result.put(Protocol.CARD_HASHCODE, this.hashCode());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		cardIndex.put(hashCode(), this);
 		return result;
 	}
 

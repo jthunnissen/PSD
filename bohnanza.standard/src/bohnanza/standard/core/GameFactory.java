@@ -18,6 +18,7 @@ public class GameFactory {
 	/**
 	 */
 	protected GameFactory() {
+		this.fillStateTransistions();
 	}
 
 	/**

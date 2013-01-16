@@ -2,8 +2,6 @@ package org.json;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
-
 public class GamePOJO {
 
 	private PlayerPOJO currentPlayer;

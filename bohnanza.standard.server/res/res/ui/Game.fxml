@@ -64,13 +64,13 @@
         </ImageView>
         <Button fx:id="drawcard" layoutX="353.0" layoutY="136.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
         <Button id="drawfaceup" fx:id="drawfaceupcard" layoutX="349.0" layoutY="104.0" mnemonicParsing="false" onAction="#drawfaceupcard" text="Draw Face-up" />
-        <Label fx:id="labelfield1" focusTraversable="false" layoutX="54.0" layoutY="19.0" prefHeight="74.0" text="" wrapText="false">
+        <Label fx:id="labelfield1" focusTraversable="false" layoutX="54.0" layoutY="19.0" mouseTransparent="true" prefHeight="74.0" text="" wrapText="false">
           <font>
             <Font size="75.0" fx:id="x1" />
           </font>
         </Label>
-        <Label id="labelfield1" fx:id="labelfield2" font="$x1" layoutX="149.0" layoutY="18.0" prefHeight="74.0" text="" wrapText="false" />
-        <Label id="labelfield1" fx:id="labelfield3" font="$x1" layoutX="247.0" layoutY="19.0" prefHeight="74.0" text="" wrapText="false" />
+        <Label id="labelfield1" fx:id="labelfield2" font="$x1" layoutX="149.0" layoutY="18.0" mouseTransparent="true" prefHeight="74.0" text="" wrapText="false" />
+        <Label id="labelfield1" fx:id="labelfield3" font="$x1" layoutX="247.0" layoutY="19.0" mouseTransparent="true" prefHeight="74.0" text="" wrapText="false" />
       </children>
     </AnchorPane>
     <AnchorPane id="offerpane" fx:id="offerPane" layoutX="314.0" layoutY="186.0" minWidth="459.0" prefHeight="146.0" prefWidth="459.0" visible="false">

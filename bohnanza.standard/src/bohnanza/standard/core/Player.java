@@ -1,6 +1,7 @@
 package bohnanza.standard.core;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -252,7 +253,7 @@ public class Player {
 		setAsideCards.add(card);
 	}
 	
-	public JSONObject toJSON(List<Class<? extends Action>> list){
+	public JSONObject toJSON(List<Class<? extends Action>> list, HashMap<Integer, Card> cardIndex){
 		JSONObject result = new JSONObject();
 		try {
 			result.put(Protocol.PLAYER_NAME, getName());
@@ -260,25 +261,25 @@ public class Player {
 
 			JSONArray jsonCards = new JSONArray();
 			for(Card card : getHand()){
-				jsonCards.put(card.toJSON());
+				jsonCards.put(card.toJSON(cardIndex));
 			}
 			result.put(Protocol.PLAYER_HAND, jsonCards);
 
 			JSONArray jsonFaceUps = new JSONArray();
 			for(Card card : getFaceUpCards()){
-				jsonFaceUps.put(card.toJSON());
+				jsonFaceUps.put(card.toJSON(cardIndex));
 			}
 			result.put(Protocol.PLAYER_FACEUP, jsonFaceUps);
 			
 			JSONArray jsonAsideCards = new JSONArray();
 			for(Card card : getSetAsideCards()){
-				jsonAsideCards.put(card.toJSON());
+				jsonAsideCards.put(card.toJSON(cardIndex));
 			}
 			result.put(Protocol.PLAYER_ASIDE, jsonAsideCards);
 
 			JSONArray jsonFields = new JSONArray();
 			for(Field field : getBeanFields()) {
-				jsonFields.put(field.toJSON());
+				jsonFields.put(field.toJSON(cardIndex));
 			}
 			result.put(Protocol.PLAYER_FIELDS, jsonFields);
 

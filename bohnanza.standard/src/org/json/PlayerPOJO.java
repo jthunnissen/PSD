@@ -37,18 +37,18 @@ public class PlayerPOJO {
 			// Face up
 			JSONArray jsonFaceUp = jsonPlayer.getJSONArray(Protocol.PLAYER_FACEUP);
 			for(int l=0; l<jsonFaceUp.length(); l++){
-				faceUp.add(new CardPOJO(jsonCards.getJSONObject(l)));
+				faceUp.add(new CardPOJO(jsonFaceUp.getJSONObject(l)));
 			}
 			
 			// Aside
 			JSONArray jsonAside = jsonPlayer.getJSONArray(Protocol.PLAYER_ASIDE);
 			for(int l=0; l<jsonAside.length(); l++){				
-				aside.add(new CardPOJO(jsonCards.getJSONObject(l)));
+				aside.add(new CardPOJO(jsonAside.getJSONObject(l)));
 			}
 			// Fields
 			JSONArray jsonFields = jsonPlayer.getJSONArray(Protocol.PLAYER_FIELDS);
 			for(int k=0; k< jsonFields.length(); k++){
-				fields.add(new CardPOJO(jsonCards.getJSONObject(k)));
+				fields.add(new CardPOJO(jsonFields.getJSONObject(k)));
 			}
 
 			// Actions

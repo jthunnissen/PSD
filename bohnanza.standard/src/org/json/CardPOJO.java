@@ -5,20 +5,19 @@ import javafx.scene.image.Image;
 public class CardPOJO {
 
 	private String name;
-	private String score;
+	private int score;
+	private int hashcode;
 	
-	public CardPOJO(String name, String score){
+	public CardPOJO(String name, int score, int hashcode){
 		this.name = name;
 		this.score = score;
+		this.hashcode = hashcode;
 	}
 	
 	public CardPOJO(JSONObject jsonCard){
-		try {
-			this.name = jsonCard.getString(Protocol.CARD_NAME);
-			this.score = jsonCard.getString(Protocol.CARD_SCORE);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		this.name = jsonCard.optString(Protocol.CARD_NAME);
+		this.score = jsonCard.optInt(Protocol.CARD_SCORE);
+		this.hashcode = jsonCard.optInt(Protocol.CARD_HASHCODE);
 		
 	}
 	
@@ -26,8 +25,12 @@ public class CardPOJO {
 		return name;
 	}
 	
-	public String getScore(){
+	public int getScore(){
 		return score;
+	}
+	
+	public int getHashcode(){
+		return hashcode;
 	}
 	
 	public Image getImage(){

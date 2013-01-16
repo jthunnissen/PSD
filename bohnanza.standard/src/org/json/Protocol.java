@@ -2,12 +2,13 @@
 package org.json;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import bohnanza.standard.core.Card;
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.Player;
 import bohnanza.standard.core.actions.Action;
-
 
 public class Protocol {
 
@@ -22,6 +23,7 @@ public class Protocol {
 	public static final String PLAYER_ACTIONS = "actions";
 	public static final String CARD_NAME = "name";
 	public static final String CARD_SCORE = "score";
+	public static final String CARD_HASHCODE = "hashcode";
 
 	public static final String ACCEPTTRADE = "ACCEPTTRADE";
 	public static final String BUYBEANFIELD = "BUYBEANFIELD";
@@ -37,16 +39,12 @@ public class Protocol {
 	public static final String SETASIDECARD = "SETASIDECARD";
 	public static final String CHAT = "CHAT";
 	public static final String ERROR = "error";
+	
 
 
 
 	private ArrayList<Player> players;
 	private ArrayList<Action> actions;
-	private Game game;
-
-	public Protocol(Game game){
-		this.game = game;
-	}
 
 	public void addPlayer(Player player){
 		players.add(player);
@@ -56,7 +54,7 @@ public class Protocol {
 		actions.add(action);
 	}
 
-	public String toJSON(){
+	public static String toJSON(Game game, HashMap<Integer, Card> cardIndex){
 		String result = "";
 
 		try {
@@ -67,7 +65,7 @@ public class Protocol {
 			// All players
 			JSONArray jsonPlayers = new JSONArray();
 			for(Player player: game.getPlayers()){
-				jsonPlayers.put(player.toJSON(game.getActions(player)));
+				jsonPlayers.put(player.toJSON(game.getActions(player), cardIndex));
 			}
 			root.put(PLAYERS, jsonPlayers);
 
@@ -193,15 +191,13 @@ public class Protocol {
 			ArrayList<CardPOJO> cards = new ArrayList<CardPOJO>();
 			JSONArray jsonCards = root.getJSONArray("cards");
 			for(int i=0; i<jsonCards.length(); i++){
-				JSONObject jsonCard = jsonCards.getJSONObject(i);
-				cards.add(new CardPOJO(jsonCard.getString(Protocol.CARD_NAME), ""));
+				cards.add(new CardPOJO(jsonCards.getJSONObject(i)));
 			}
 			
 			ArrayList<CardPOJO> offer = new ArrayList<CardPOJO>();
 			JSONArray jsonOffer = root.getJSONArray("offer");
 			for(int j=0; j<jsonOffer.length(); j++){
-				JSONObject jsonCard = jsonOffer.getJSONObject(j);
-				offer.add(new CardPOJO(jsonCard.getString(Protocol.CARD_NAME), ""));
+				offer.add(new CardPOJO(jsonOffer.getJSONObject(j)));
 			}
 			result = new OfferPOJO(player, cards, offer);
 		} catch (JSONException e) {
@@ -220,7 +216,7 @@ public class Protocol {
 			JSONArray jsonCards = new JSONArray();
 			for(CardPOJO card: cards){
 				JSONObject jsonCard = new JSONObject();
-				jsonCard.put(Protocol.CARD_NAME, card.getName());
+				jsonCard.put(Protocol.CARD_HASHCODE, card.getHashcode());
 				jsonCards.put(jsonCard);
 			}
 			root.put("cards", jsonCards);
@@ -228,6 +224,8 @@ public class Protocol {
 			for(CardPOJO card: offer){
 				JSONObject jsonCard = new JSONObject();
 				jsonCard.put(Protocol.CARD_NAME, card.getName());
+				jsonCard.put(Protocol.CARD_SCORE, card.getScore());
+				jsonCard.put(Protocol.CARD_HASHCODE, card.getHashcode());
 				jsonOffer.put(jsonCard);
 			}
 			root.put("offer", jsonOffer);

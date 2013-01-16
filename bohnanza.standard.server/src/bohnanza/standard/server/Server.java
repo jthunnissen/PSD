@@ -6,9 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 import org.json.Protocol;
 
+import bohnanza.standard.core.Card;
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
@@ -85,12 +87,12 @@ public class Server implements Runnable {
 				}
 			}
 		}
-		Protocol protocol = new Protocol(game);
+		//Protocol protocol = new Protocol(this);
 		String message;
 		if(!game.isStarted()){
 			message = Protocol.waitingForPlayers();
 		} else {
-			message = protocol.toJSON();
+			message = Protocol.toJSON(game, cardIndex);
 		}
 			
 		for (int i = 0; i < maxClientsCount; i++) {
@@ -132,6 +134,9 @@ public class Server implements Runnable {
 	}
 
 	public void sendToPlayer(Player player, String message) {
+		if(message.equals("GAMEUPDATE")){
+			message = Protocol.toJSON(game, cardIndex);
+		}
 		for (int i = 0; i < maxClientsCount; i++) {
 			if (threads[i] != null && threads[i].getPlayer() == player) {
 				threads[i].sendMessage(message);
@@ -139,5 +144,14 @@ public class Server implements Runnable {
 			}
 		}
 
+	}
+	
+	HashMap<Integer, Card> cardIndex = new HashMap<Integer, Card>();
+	public synchronized void addToCardIndex(Card card){
+		cardIndex.put(card.hashCode(), card);
+	}
+	
+	public Card getCardFromIndex(int hashcode){
+		return cardIndex.get(hashcode);
 	}
 }
