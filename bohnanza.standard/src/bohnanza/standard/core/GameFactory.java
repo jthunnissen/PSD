@@ -30,7 +30,7 @@ public class GameFactory {
 	 * @return the start state of the game
 	 */
 	public TurnState buildTurnStatespace(Game game, Player activePlayer) {
-		return getTurnState(StartState.class, game);
+		return getTurnState(PlantState.class, game);
 	}
 
 	public ArrayList<Card> getGameDeck() {
