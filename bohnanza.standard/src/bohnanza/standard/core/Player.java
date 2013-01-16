@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.Protocol;
 
 import bohnanza.standard.core.actions.AcceptTrade;
 import bohnanza.standard.core.actions.Action;
@@ -20,7 +21,6 @@ import bohnanza.standard.core.actions.PlantAsideBean;
 import bohnanza.standard.core.actions.PlantBean;
 import bohnanza.standard.core.actions.ProposeTrade;
 import bohnanza.standard.core.actions.SetAsideCard;
-import bohnanza.standard.server.Protocol;
 
 /**
  * This class represents a Player

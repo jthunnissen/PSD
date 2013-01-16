@@ -2,8 +2,8 @@ package bohnanza.standard.core;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.Protocol;
 
-import bohnanza.standard.server.Protocol;
 
 public abstract class Card implements ToJSON {
 
@@ -40,7 +40,7 @@ public abstract class Card implements ToJSON {
 		return numberOfCards;
 	}
 	
-	public JSONObject getJSON(){
+	public JSONObject toJSON(){
 		JSONObject result = new JSONObject();
 		try {
 			result.put(Protocol.CARD_NAME, name);

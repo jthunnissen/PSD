@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import bohnanza.standard.server.Protocol;
+import org.json.Protocol;
 
 
 public abstract class Field implements ToJSON {
@@ -52,7 +51,7 @@ public abstract class Field implements ToJSON {
 		JSONObject result = new JSONObject();
 
 		try {
-			if(cards.get(0) == null){
+			if(cards.size() == 0){
 				result.put(Protocol.CARD_NAME, "");
 				result.put(Protocol.CARD_SCORE, "0");
 			} else {

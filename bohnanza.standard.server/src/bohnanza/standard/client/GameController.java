@@ -42,8 +42,7 @@ import org.json.CardPOJO;
 import org.json.GamePOJO;
 import org.json.OfferPOJO;
 import org.json.PlayerPOJO;
-
-import bohnanza.standard.server.Protocol;
+import org.json.Protocol;
 
 
 /**

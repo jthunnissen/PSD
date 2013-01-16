@@ -1,34 +1,12 @@
 
-package bohnanza.standard.server;
+package org.json;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.CardPOJO;
-import org.json.GamePOJO;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.OfferPOJO;
-import org.json.PlayerPOJO;
-
-import bohnanza.standard.core.Card;
-import bohnanza.standard.core.Field;
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.Player;
-import bohnanza.standard.core.actions.AcceptTrade;
 import bohnanza.standard.core.actions.Action;
-import bohnanza.standard.core.actions.BuyBeanField;
-import bohnanza.standard.core.actions.DeclineTrade;
-import bohnanza.standard.core.actions.DrawCards;
-import bohnanza.standard.core.actions.DrawFaceUpCards;
-import bohnanza.standard.core.actions.Harvest;
-import bohnanza.standard.core.actions.NextPhase;
-import bohnanza.standard.core.actions.NextPlayer;
-import bohnanza.standard.core.actions.PlantAsideBean;
-import bohnanza.standard.core.actions.PlantBean;
-import bohnanza.standard.core.actions.ProposeTrade;
-import bohnanza.standard.core.actions.SetAsideCard;
 
 
 public class Protocol {

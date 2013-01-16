@@ -1,18 +1,12 @@
 
 package bohnanza.standard.client;
 
-import java.io.DataInputStream;
-import java.io.PrintStream;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
-import bohnanza.standard.server.Protocol;
-
-
-import javafx.application.Application;
 
 public class Client implements Runnable {
 

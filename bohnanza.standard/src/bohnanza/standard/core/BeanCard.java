@@ -2,11 +2,6 @@ package bohnanza.standard.core;
 
 import java.util.HashMap;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import bohnanza.standard.server.Protocol;
-
 
 public class BeanCard extends Card {
 

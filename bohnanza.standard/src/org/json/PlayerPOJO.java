@@ -2,17 +2,15 @@ package org.json;
 
 import java.util.ArrayList;
 
-import bohnanza.standard.server.Protocol;
-
 public class PlayerPOJO {
 
 	private String name;
 	private String score;
-	private ArrayList<CardPOJO> hand;
-	private ArrayList<CardPOJO> faceUp;
-	private ArrayList<CardPOJO> aside;
-	private ArrayList<CardPOJO> fields;
-	private ArrayList<String> actions;
+	private ArrayList<CardPOJO> hand = new ArrayList<CardPOJO>();
+	private ArrayList<CardPOJO> faceUp = new ArrayList<CardPOJO>();
+	private ArrayList<CardPOJO> aside = new ArrayList<CardPOJO>();
+	private ArrayList<CardPOJO> fields = new ArrayList<CardPOJO>();
+	private ArrayList<String> actions = new ArrayList<String>();
 	
 	
 	public PlayerPOJO(String name, String score, ArrayList<CardPOJO> hand, ArrayList<CardPOJO> faceUp, ArrayList<CardPOJO> aside, ArrayList<CardPOJO> fields, ArrayList<String> actions){

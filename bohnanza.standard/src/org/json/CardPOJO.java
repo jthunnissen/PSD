@@ -1,6 +1,5 @@
 package org.json;
 
-import bohnanza.standard.server.Protocol;
 import javafx.scene.image.Image;
 
 public class CardPOJO {

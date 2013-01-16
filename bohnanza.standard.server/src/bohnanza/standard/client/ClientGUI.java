@@ -25,8 +25,7 @@ import javafx.stage.WindowEvent;
 
 import org.json.JSONObject;
 import org.json.OfferPOJO;
-
-import bohnanza.standard.server.Protocol;
+import org.json.Protocol;
 
 
 

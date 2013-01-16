@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.json.Protocol;
+
 import bohnanza.standard.core.Game;
 import bohnanza.standard.core.IllegalActionException;
 import bohnanza.standard.core.Player;
