@@ -1,5 +1,6 @@
 package org.json;
 
+import bohnanza.standard.server.Protocol;
 import javafx.scene.image.Image;
 
 public class CardPOJO {
@@ -10,6 +11,16 @@ public class CardPOJO {
 	public CardPOJO(String name, String score){
 		this.name = name;
 		this.score = score;
+	}
+	
+	public CardPOJO(JSONObject jsonCard){
+		try {
+			this.name = jsonCard.getString(Protocol.CARD_NAME);
+			this.score = jsonCard.getString(Protocol.CARD_SCORE);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public String getName(){

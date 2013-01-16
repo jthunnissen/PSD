@@ -1,6 +1,11 @@
 package bohnanza.standard.core;
 
-public abstract class Card {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import bohnanza.standard.server.Protocol;
+
+public abstract class Card implements ToJSON {
 
 	/**
 	 * @uml.property  name="name"
@@ -33,6 +38,17 @@ public abstract class Card {
 	 */
 	public int getNumberOfCards() {
 		return numberOfCards;
+	}
+	
+	public JSONObject getJSON(){
+		JSONObject result = new JSONObject();
+		try {
+			result.put(Protocol.CARD_NAME, name);
+			result.put(Protocol.CARD_SCORE, "0");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

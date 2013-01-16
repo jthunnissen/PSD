@@ -70,9 +70,15 @@ public class GameController extends AnchorPane implements Initializable {
 	@FXML
 	ImageView field1;
 	@FXML
+	Label labelfield1;
+	@FXML
 	ImageView field2;
 	@FXML
+	Label labelfield2;
+	@FXML
 	ImageView field3;
+	@FXML
+	Label labelfield3;
 	@FXML
 	Button harvest1;
 	@FXML
@@ -99,7 +105,7 @@ public class GameController extends AnchorPane implements Initializable {
 	AnchorPane actionsPane;
 
 	private ClientGUI application;
-	private ArrayList<String> offerList = new ArrayList<String>();
+	private ArrayList<CardPOJO> offerList = new ArrayList<CardPOJO>();
 	private CardPOJO offerItem;
 	private Image defaultEmptyImage;
 
@@ -135,10 +141,12 @@ public class GameController extends AnchorPane implements Initializable {
 		// Hand view of this player
 		updateThisPlayerHand(update);
 		updateFaceUpCards(update);
+		updateActionsView(update);
 		if(this.isActivePlayer(update.getCurrentPlayer().getName())) {
 			// Build actions view		
-			updateActionsView(update);
+			
 		} else if(update.getCurrentPlayer().getActions().contains(Protocol.PROPOSETRADE)) {
+			actionsPane.setVisible(false);
 			offerPane.setVisible(true);
 		}
 
@@ -148,10 +156,10 @@ public class GameController extends AnchorPane implements Initializable {
 	
 	private void updateAsideCards(GamePOJO update){
 		aside.getChildren().clear();
-		for(CardPOJO card : update.getCurrentPlayer().getAside()){
+		for(CardPOJO card : update.getThisPlayer().getAside()){
 			ImageView cardView = new ImageView(card.getImage());
 			cardView.setUserData(card);
-			if(update.getCurrentPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)){
+			if(update.getThisPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)){
 				this.setupPlantSource(cardView);	
 			}
 			aside.getChildren().add(cardView);
@@ -258,13 +266,16 @@ public class GameController extends AnchorPane implements Initializable {
 		
 		if(Integer.valueOf(update.getThisPlayer().getFields().get(0).getScore()) > 0){
 			field1.setImage(update.getThisPlayer().getFields().get(0).getImage());
+			labelfield1.setText(update.getThisPlayer().getFields().get(0).getScore());
 		}
 		if(Integer.valueOf(update.getThisPlayer().getFields().get(1).getScore()) > 0){
 			field2.setImage(update.getThisPlayer().getFields().get(1).getImage());
+			labelfield2.setText(update.getThisPlayer().getFields().get(1).getScore());
 		}
 		if(update.getThisPlayer().getFields().size() > 2) {
 			if(Integer.valueOf(update.getThisPlayer().getFields().get(2).getScore()) > 0){
 				field3.setImage(update.getThisPlayer().getFields().get(2).getImage());
+				labelfield3.setText(update.getThisPlayer().getFields().get(2).getScore());
 			}
 		}
 		
@@ -379,13 +390,11 @@ public class GameController extends AnchorPane implements Initializable {
 	}
 
 	public void sendOffer(){
-		StringBuilder result = new StringBuilder();
-		for(String string : offerList) {
-			result.append(string);
-			result.append(",");
-		}
-		String cards= result.length() > 0 ? result.substring(0, result.length() - 1): "";
-		application.getClient().sendToServer(Protocol.PROPOSETRADE + ";"+offerItem.getName() + ";"+cards);
+		ArrayList<CardPOJO> cards = new ArrayList<CardPOJO>();
+		cards.add(offerItem);
+		application.getClient().sendToServer(Protocol.PROPOSETRADE + Protocol.sendOfferToJSON(Protocol.PROPOSETRADE, application.getUsername(), cards, offerList));
+		offerList.clear();
+		offerItem = null;
 	}
 
 	public void harvest1(){
@@ -444,7 +453,7 @@ public class GameController extends AnchorPane implements Initializable {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()){
 					targetBox.getChildren().add(new ImageView(db.getImage()));
-					offerList.add(db.getString());
+					offerList.add(new CardPOJO(db.getString(), ""));
 					event.setDropCompleted(true);
 				}else{
 					event.setDropCompleted(false);

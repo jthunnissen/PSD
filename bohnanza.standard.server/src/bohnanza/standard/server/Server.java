@@ -1,10 +1,4 @@
-
-
 package bohnanza.standard.server;
-
-
-
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,11 +72,11 @@ public class Server implements Runnable {
 	}
 
 	public void sendUpdate(int from){
-		if(game.getCurrentState() != null && game.getCurrentState().getActions(game.getActivePlayer()).size() == 1) {
-			if(game.getCurrentState().getActions(game.getActivePlayer()).contains(NextPlayer.class)){
+		if(game.isStarted() && game.getActions(game.getActivePlayer()).size() == 1) {
+			if(game.getActions(game.getActivePlayer()).contains(NextPlayer.class)){
 				Action action = new NextPlayer(game, game.getActivePlayer());
 				try {
-					game.getCurrentState().handle(action);
+					game.handle(action);
 				} catch (IllegalActionException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -91,7 +85,7 @@ public class Server implements Runnable {
 		}
 		Protocol protocol = new Protocol(game);
 		String message;
-		if(game.getCurrentState() == null){
+		if(!game.isStarted()){
 			message = Protocol.waitingForPlayers();
 		} else {
 			message = protocol.toJSON();

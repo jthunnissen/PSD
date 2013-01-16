@@ -42,12 +42,18 @@ public class Game {
 	 */
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
 
+	private boolean started = false;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	
+	}
+	
+	public boolean isStarted(){
+		return started;
 	}
 	
 	public void start(){
@@ -57,6 +63,7 @@ public class Game {
 			}
 		}
 		currentState = GameFactory.getInstance().buildTurnStatespace(this, this.getActivePlayer());
+		started  = true;
 	}
 
 	/**

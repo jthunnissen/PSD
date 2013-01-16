@@ -89,85 +89,7 @@ public class Protocol {
 			// All players
 			JSONArray jsonPlayers = new JSONArray();
 			for(Player player: game.getPlayers()){
-				JSONObject jsonPlayer = new JSONObject();
-				jsonPlayer.put(PLAYER_NAME, player.getName());
-				jsonPlayer.put(PLAYER_SCORE, String.valueOf(player.calcScore()));
-
-				JSONArray jsonCards = new JSONArray();
-				for(Card card : player.getHand()){
-					JSONObject jsonCard = new JSONObject();
-					jsonCard.put(CARD_NAME, card.getName());
-					jsonCard.put(CARD_SCORE, String.valueOf(card.getNumberOfCards()));
-					jsonCards.put(jsonCard);
-				}
-				jsonPlayer.put(PLAYER_HAND, jsonCards);
-
-				JSONArray jsonFaceUps = new JSONArray();
-				for(Card card : player.getFaceUpCards()){
-					JSONObject jsonFaceUp = new JSONObject();
-					jsonFaceUp.put(CARD_NAME, card.getName());
-					jsonFaceUp.put(CARD_SCORE, String.valueOf(card.getNumberOfCards()));
-					jsonFaceUps.put(jsonFaceUp);
-				}
-				jsonPlayer.put(PLAYER_FACEUP, jsonFaceUps);
-				
-				JSONArray jsonAsideCards = new JSONArray();
-				for(Card card : player.getSetAsideCards()){
-					JSONObject jsonAside = new JSONObject();
-					jsonAside.put(CARD_NAME, card.getName());
-					jsonAside.put(CARD_SCORE, String.valueOf(card.getNumberOfCards()));
-					jsonAsideCards.put(jsonAside);
-				}
-				jsonPlayer.put(PLAYER_ASIDE, jsonAsideCards);
-
-				JSONArray jsonFields = new JSONArray();
-				for(Field field : player.getBeanFields()) {
-					JSONObject jsonField = new JSONObject();
-					if(field.getCards().size() == 0) {
-						jsonField.put(CARD_NAME, "null");
-						jsonField.put(CARD_SCORE, "0");
-					} else {
-						jsonField.put(CARD_NAME, field.getCards().get(0).getName());
-						jsonField.put(CARD_SCORE, String.valueOf(field.getCards().size()));
-					}
-					jsonFields.put(jsonField);
-				}
-				jsonPlayer.put(PLAYER_FIELDS, jsonFields);
-
-				// Actions
-				JSONArray jsonActions = new JSONArray();
-				if(game == null) System.out.println("Game null");
-				if(game.getCurrentState() == null) System.out.println("Currentstate null"); 
-				List<Class<? extends Action>> actions = game.getCurrentState().getActions(player);
-				if(actions.size() > 0){
-					if(actions.contains(AcceptTrade.class))
-						jsonActions.put(Protocol.ACCEPTTRADE);
-					if(actions.contains(BuyBeanField.class))
-						jsonActions.put(Protocol.BUYBEANFIELD);
-					if(actions.contains(DeclineTrade.class))
-						jsonActions.put(Protocol.DECLINETRADE);
-					if(actions.contains(DrawCards.class))
-						jsonActions.put(Protocol.DRAWCARDS);
-					if(actions.contains(DrawFaceUpCards.class))
-						jsonActions.put(Protocol.DRAWFACEUPCARDS);
-					if(actions.contains(Harvest.class))
-						jsonActions.put(Protocol.HARVEST);
-					if(actions.contains(NextPhase.class))
-						jsonActions.put(Protocol.NEXTPHASE);
-					if(actions.contains(NextPlayer.class))
-						jsonActions.put(Protocol.NEXTPLAYER);
-					if(actions.contains(PlantAsideBean.class))
-						jsonActions.put(Protocol.PLANTASIDEBEAN);
-					if(actions.contains(PlantBean.class))
-						jsonActions.put(Protocol.PLANTBEAN);
-					if(actions.contains(ProposeTrade.class))
-						jsonActions.put(Protocol.PROPOSETRADE);
-					if(actions.contains(SetAsideCard.class))
-						jsonActions.put(Protocol.SETASIDECARD);
-				}
-				jsonPlayer.put(PLAYER_ACTIONS, jsonActions);
-
-				jsonPlayers.put(jsonPlayer);
+				jsonPlayers.put(player.toJSON(game.getActions(player)));
 			}
 			root.put(PLAYERS, jsonPlayers);
 
@@ -187,66 +109,18 @@ public class Protocol {
 		try {
 			root = new JSONObject(json);
 			String currentPlayerName = root.getString(CURRENTPLAYER);
-			PlayerPOJO thisPlayer = null;
-			PlayerPOJO currentPlayer = null;
+			PlayerPOJO thisPlayer = null, currentPlayer = null;
+
 			ArrayList<PlayerPOJO> playersPOJO = new ArrayList<PlayerPOJO>();
 			JSONArray players = root.getJSONArray(PLAYERS);
 			for(int i=0; i<players.length();i++){
-				String playerName = players.getJSONObject(i).getString(PLAYER_NAME);
-
-				String playerScore = players.getJSONObject(i).getString(PLAYER_SCORE);
-				// Hand
-				JSONArray jsonCards = players.getJSONObject(i).getJSONArray(PLAYER_HAND);
-				ArrayList<CardPOJO> playerHand = new ArrayList<CardPOJO>();
-				for(int j=0; j< jsonCards.length(); j++){
-					String cardName = jsonCards.getJSONObject(j).getString(CARD_NAME);
-					String cardScore = jsonCards.getJSONObject(j).getString(CARD_SCORE);
-					playerHand.add(new CardPOJO(cardName, cardScore));
-				}
-
-				// Face up
-				JSONArray jsonFaceUp = players.getJSONObject(i).getJSONArray(PLAYER_FACEUP);
-				ArrayList<CardPOJO> playerFaceUp = new ArrayList<CardPOJO>();
-				for(int l=0; l<jsonFaceUp.length(); l++){
-					String cardName = jsonFaceUp.getJSONObject(l).getString(CARD_NAME);
-					String cardScore = jsonFaceUp.getJSONObject(l).getString(CARD_SCORE);
-					playerFaceUp.add(new CardPOJO(cardName, cardScore));
-				}
-				
-				// Aside
-				JSONArray jsonAside = players.getJSONObject(i).getJSONArray(PLAYER_ASIDE);
-				ArrayList<CardPOJO> playerAside = new ArrayList<CardPOJO>();
-				for(int l=0; l<jsonAside.length(); l++){
-					String cardName = jsonAside.getJSONObject(l).getString(CARD_NAME);
-					String cardScore = jsonAside.getJSONObject(l).getString(CARD_SCORE);
-					playerAside.add(new CardPOJO(cardName, cardScore));
-				}
-				// Fields
-				JSONArray jsonFields = players.getJSONObject(i).getJSONArray(PLAYER_FIELDS);
-				ArrayList<CardPOJO> playerFields = new ArrayList<CardPOJO>();
-				for(int k=0; k< jsonFields.length(); k++){
-					String cardName = jsonFields.getJSONObject(k).getString(CARD_NAME);
-					String cardScore = jsonFields.getJSONObject(k).getString(CARD_SCORE);
-					playerFields.add(new CardPOJO(cardName, cardScore));
-				}
-
-				// Actions
-				JSONArray jsonActions = players.getJSONObject(i).getJSONArray(PLAYER_ACTIONS);
-				ArrayList<String> playerActions = new ArrayList<String>();
-				for(int m=0; m<jsonActions.length(); m++){
-					playerActions.add(jsonActions.getString(m));
-				}
-
-
-				PlayerPOJO playerPOJO = new PlayerPOJO(playerName, playerScore, playerHand, playerFaceUp, playerAside, playerFields, playerActions);
-
+				PlayerPOJO playerPOJO =new PlayerPOJO(players.getJSONObject(i)); 
 				playersPOJO.add(playerPOJO);
 
-
-				if(username.equals(playerName)){
+				if(username.equals(playerPOJO.getName())){
 					thisPlayer = playerPOJO;
 				}
-				if(currentPlayerName.equals(playerName)){
+				if(currentPlayerName.equals(playerPOJO.getName())){
 					currentPlayer = playerPOJO;
 				}
 

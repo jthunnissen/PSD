@@ -3,6 +3,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import bohnanza.standard.core.actions.AcceptTrade;
+import bohnanza.standard.core.actions.Action;
+import bohnanza.standard.core.actions.BuyBeanField;
+import bohnanza.standard.core.actions.DeclineTrade;
+import bohnanza.standard.core.actions.DrawCards;
+import bohnanza.standard.core.actions.DrawFaceUpCards;
+import bohnanza.standard.core.actions.Harvest;
+import bohnanza.standard.core.actions.NextPhase;
+import bohnanza.standard.core.actions.NextPlayer;
+import bohnanza.standard.core.actions.PlantAsideBean;
+import bohnanza.standard.core.actions.PlantBean;
+import bohnanza.standard.core.actions.ProposeTrade;
+import bohnanza.standard.core.actions.SetAsideCard;
+import bohnanza.standard.server.Protocol;
+
 /**
  * This class represents a Player
  * @author Anne
@@ -231,5 +250,74 @@ public class Player {
 	public void setFaceUpCardaside(Card card) throws IllegalActionException {
 		if(!faceUpCards.remove(card)) throw new IllegalActionException("Can only set aside face-up cards");
 		setAsideCards.add(card);
+	}
+	
+	public JSONObject toJSON(List<Class<? extends Action>> list){
+		JSONObject result = new JSONObject();
+		try {
+			result.put(Protocol.PLAYER_NAME, getName());
+			result.put(Protocol.PLAYER_SCORE, String.valueOf(calcScore()));
+
+			JSONArray jsonCards = new JSONArray();
+			for(Card card : getHand()){
+				jsonCards.put(card.toJSON());
+			}
+			result.put(Protocol.PLAYER_HAND, jsonCards);
+
+			JSONArray jsonFaceUps = new JSONArray();
+			for(Card card : getFaceUpCards()){
+				jsonFaceUps.put(card.toJSON());
+			}
+			result.put(Protocol.PLAYER_FACEUP, jsonFaceUps);
+			
+			JSONArray jsonAsideCards = new JSONArray();
+			for(Card card : getSetAsideCards()){
+				jsonAsideCards.put(card.toJSON());
+			}
+			result.put(Protocol.PLAYER_ASIDE, jsonAsideCards);
+
+			JSONArray jsonFields = new JSONArray();
+			for(Field field : getBeanFields()) {
+				jsonFields.put(field.toJSON());
+			}
+			result.put(Protocol.PLAYER_FIELDS, jsonFields);
+
+			// Actions
+			JSONArray jsonActions = new JSONArray();
+			//List<Class<? extends Action>> actions = .getActions(player);
+			if(list.size() > 0){
+				if(list.contains(AcceptTrade.class))
+					jsonActions.put(Protocol.ACCEPTTRADE);
+				if(list.contains(BuyBeanField.class))
+					jsonActions.put(Protocol.BUYBEANFIELD);
+				if(list.contains(DeclineTrade.class))
+					jsonActions.put(Protocol.DECLINETRADE);
+				if(list.contains(DrawCards.class))
+					jsonActions.put(Protocol.DRAWCARDS);
+				if(list.contains(DrawFaceUpCards.class))
+					jsonActions.put(Protocol.DRAWFACEUPCARDS);
+				if(list.contains(Harvest.class))
+					jsonActions.put(Protocol.HARVEST);
+				if(list.contains(NextPhase.class))
+					jsonActions.put(Protocol.NEXTPHASE);
+				if(list.contains(NextPlayer.class))
+					jsonActions.put(Protocol.NEXTPLAYER);
+				if(list.contains(PlantAsideBean.class))
+					jsonActions.put(Protocol.PLANTASIDEBEAN);
+				if(list.contains(PlantBean.class))
+					jsonActions.put(Protocol.PLANTBEAN);
+				if(list.contains(ProposeTrade.class))
+					jsonActions.put(Protocol.PROPOSETRADE);
+				if(list.contains(SetAsideCard.class))
+					jsonActions.put(Protocol.SETASIDECARD);
+			}
+			result.put(Protocol.PLAYER_ACTIONS, jsonActions);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+		
 	}
 }

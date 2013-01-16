@@ -2,8 +2,13 @@ package bohnanza.standard.core;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public abstract class Field {
+import bohnanza.standard.server.Protocol;
+
+
+public abstract class Field implements ToJSON {
 
 	/** 
 	 * @uml.property name="card"
@@ -41,6 +46,25 @@ public abstract class Field {
 		ArrayList<Card> result = cards;
 		cards = new ArrayList<Card>();
 		return result; 
+	}
+	
+	public JSONObject toJSON(){
+		JSONObject result = new JSONObject();
+
+		try {
+			if(cards.get(0) == null){
+				result.put(Protocol.CARD_NAME, "");
+				result.put(Protocol.CARD_SCORE, "0");
+			} else {
+				result.put(Protocol.CARD_NAME, cards.get(0).getName());
+				result.put(Protocol.CARD_SCORE, ""+cards.size());
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+
 	}
 
 }

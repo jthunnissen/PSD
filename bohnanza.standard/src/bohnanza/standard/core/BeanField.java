@@ -45,9 +45,11 @@ public class BeanField extends Field {
 		}
 		return true;
 	}
-	
+
 	private IBeanType getTypeOf(Card card) {
 		return ((BeanCard) cards.get(0)).getType();
 	}
+
+	
 
 }

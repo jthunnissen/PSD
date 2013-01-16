@@ -2,6 +2,8 @@ package org.json;
 
 import java.util.ArrayList;
 
+import bohnanza.standard.server.Protocol;
+
 public class PlayerPOJO {
 
 	private String name;
@@ -21,6 +23,47 @@ public class PlayerPOJO {
 		this.aside = aside;
 		this.fields = fields;
 		this.actions = actions;
+	}
+	
+	public PlayerPOJO(JSONObject jsonPlayer){
+		try {
+			name = jsonPlayer.getString(Protocol.PLAYER_NAME);
+			score = jsonPlayer.getString(Protocol.PLAYER_SCORE);
+			// Hand
+			JSONArray jsonCards = jsonPlayer.getJSONArray(Protocol.PLAYER_HAND);
+			
+			for(int j=0; j< jsonCards.length(); j++){
+				hand.add(new CardPOJO(jsonCards.getJSONObject(j)));
+			}
+
+			// Face up
+			JSONArray jsonFaceUp = jsonPlayer.getJSONArray(Protocol.PLAYER_FACEUP);
+			for(int l=0; l<jsonFaceUp.length(); l++){
+				faceUp.add(new CardPOJO(jsonCards.getJSONObject(l)));
+			}
+			
+			// Aside
+			JSONArray jsonAside = jsonPlayer.getJSONArray(Protocol.PLAYER_ASIDE);
+			for(int l=0; l<jsonAside.length(); l++){				
+				aside.add(new CardPOJO(jsonCards.getJSONObject(l)));
+			}
+			// Fields
+			JSONArray jsonFields = jsonPlayer.getJSONArray(Protocol.PLAYER_FIELDS);
+			for(int k=0; k< jsonFields.length(); k++){
+				fields.add(new CardPOJO(jsonCards.getJSONObject(k)));
+			}
+
+			// Actions
+			JSONArray jsonActions = jsonPlayer.getJSONArray(Protocol.PLAYER_ACTIONS);
+			for(int m=0; m<jsonActions.length(); m++){
+				actions.add(jsonActions.getString(m));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 	
 	public String getName(){

@@ -64,7 +64,7 @@
         </ImageView>
         <Button fx:id="drawcard" layoutX="353.0" layoutY="136.0" mnemonicParsing="false" onAction="#drawcard" text="Draw Card" />
         <Button id="drawfaceup" fx:id="drawfaceupcard" layoutX="349.0" layoutY="104.0" mnemonicParsing="false" onAction="#drawfaceupcard" text="Draw Face-up" />
-        <Label fx:id="labelfield1" layoutX="54.0" layoutY="19.0" prefHeight="74.0" text="" wrapText="false">
+        <Label fx:id="labelfield1" focusTraversable="false" layoutX="54.0" layoutY="19.0" prefHeight="74.0" text="" wrapText="false">
           <font>
             <Font size="75.0" fx:id="x1" />
           </font>
