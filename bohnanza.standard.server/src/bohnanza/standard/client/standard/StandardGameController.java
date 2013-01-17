@@ -1,31 +1,20 @@
-
-package bohnanza.standard.client;
+package bohnanza.standard.client.standard;
 
 /*
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
  */
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -42,25 +31,16 @@ import javafx.stage.Stage;
 import org.json.CardPOJO;
 import org.json.GamePOJO;
 import org.json.OfferPOJO;
-import org.json.PlayerPOJO;
 import org.json.Protocol;
+
+import bohnanza.standard.client.core.GameController;
 
 
 /**
  * Game Controller.
  */
-public class GameController extends AnchorPane implements Initializable {
+public class StandardGameController extends GameController {
 
-	@FXML
-	ListView<String> players;
-	@FXML
-	TextField username;
-	@FXML
-	Button login;
-	@FXML
-	Label error;
-	@FXML
-	HBox hand;
 	@FXML
 	HBox aside;
 	@FXML
@@ -68,59 +48,16 @@ public class GameController extends AnchorPane implements Initializable {
 	@FXML
 	HBox offer;
 	@FXML
-	ImageView field1;
-	@FXML
-	Label labelfield1;
-	@FXML
-	ImageView field2;
-	@FXML
-	Label labelfield2;
-	@FXML
-	ImageView field3;
-	@FXML
-	Label labelfield3;
-	@FXML
-	Button harvest1;
-	@FXML
-	Button harvest2;
-	@FXML
-	Button harvest3;
-	@FXML
-	Button buy3;
-	@FXML
 	Button drawcard;
 	@FXML
 	Button drawfaceupcard;
-	@FXML
-	Button nextPhase;
-	@FXML
-	TextArea chatbox;
-	@FXML
-	TextField chatmessage;
-	@FXML
-	Button sendmessage;
 	@FXML
 	AnchorPane offerPane;
 	@FXML
 	AnchorPane actionsPane;
 
-	private ClientGUI application;
 	private List<CardPOJO> offerList = new ArrayList<CardPOJO>();
 	private CardPOJO offerItem;
-	private Image defaultEmptyImage;
-
-	public void setApp(ClientGUI application){
-		this.application = application;
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		defaultEmptyImage = field1.getImage();
-	}
-
-	public void addChat(String text){
-		chatbox.setText(chatbox.getText() +"\n"+text);
-	}
 
 	public void update(GamePOJO update){
 		// Init
@@ -201,7 +138,7 @@ public class GameController extends AnchorPane implements Initializable {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()){
 					targetBox.getChildren().add(new ImageView(db.getImage()));
-					application.getClient().sendToServer(Protocol.SETASIDECARD +" "+db.getString());
+					application.sendToServer(Protocol.SETASIDECARD +" "+db.getString());
 					event.setDropCompleted(true);
 				}else{
 					event.setDropCompleted(false);
@@ -224,30 +161,6 @@ public class GameController extends AnchorPane implements Initializable {
 				event.consume();
 			}
 		});
-	}
-
-
-
-	public void updatePlayersList(GamePOJO update) {
-		ArrayList<PlayerPOJO> playersPOJOS = update.getPlayers();
-		ObservableList<String> items = FXCollections.observableArrayList();
-		for(PlayerPOJO playerPOJO : playersPOJOS) {
-			if(update.getCurrentPlayer().getName().equals(playerPOJO.getName())){
-				items.add(">>> "+playerPOJO.getName() + " - " + playerPOJO.getScore());
-			} else {
-				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
-			}
-		}
-		players.setItems(items);
-	}
-
-	public void updateThisPlayerHand(GamePOJO update){
-		hand.getChildren().clear();
-		for(CardPOJO card : update.getThisPlayer().getHand()){
-			ImageView cardView = new ImageView(card.getImage());
-			cardView.setUserData(card);
-			hand.getChildren().add(cardView);
-		}
 	}
 
 	public void updateActionsView(GamePOJO update){
@@ -360,7 +273,7 @@ public class GameController extends AnchorPane implements Initializable {
 		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.DECLINETRADE + " " + offer.getInitiator());
+				application.sendToServer(Protocol.DECLINETRADE + " " + offer.getInitiator());
 				myDialog.close();
 			}
 		});
@@ -369,14 +282,14 @@ public class GameController extends AnchorPane implements Initializable {
 		okButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.client.sendToServer(Protocol.ACCEPTTRADE+Protocol.sendOfferToJSON(Protocol.ACCEPTTRADE, offer.getInitiator(), offer.getCards(), offer.getOffer()));
+				application.sendToServer(Protocol.ACCEPTTRADE+Protocol.sendOfferToJSON(Protocol.ACCEPTTRADE, offer.getInitiator(), offer.getCards(), offer.getOffer()));
 				myDialog.close();
 			}
 
 		});
 
 		Scene myDialogScene = new Scene(VBoxBuilder.create()
-				.children(new Text("Hello! it's My Dialog."), descriptionText, dismissButton, okButton)
+				.children(new Text("Offer received from "+offer.getInitiator()+"!"), descriptionText, dismissButton, okButton)
 				.alignment(Pos.CENTER)
 				.padding(new Insets(10))
 				.build());
@@ -388,48 +301,18 @@ public class GameController extends AnchorPane implements Initializable {
 	public void sendOffer(){
 		ArrayList<CardPOJO> cards = new ArrayList<CardPOJO>();
 		cards.add(offerItem);
-		application.getClient().sendToServer(Protocol.PROPOSETRADE + Protocol.sendOfferToJSON(Protocol.PROPOSETRADE, application.getUsername(), cards, offerList));
+		application.sendToServer(Protocol.PROPOSETRADE + Protocol.sendOfferToJSON(Protocol.PROPOSETRADE, application.getUsername(), cards, offerList));
 		offerList.clear();
 		offerItem = null;
 	}
 
-	public void harvest1(){
-		application.getClient().sendToServer(Protocol.HARVEST+" 0");
-	}
-
-	public void harvest2(){
-		application.getClient().sendToServer(Protocol.HARVEST+" 1");
-	}
-
-	public void harvest3(){
-		application.getClient().sendToServer(Protocol.HARVEST+" 2");
-	}
-
-	public void buy3(){
-		application.getClient().sendToServer(Protocol.BUYBEANFIELD);
-	}
-
+	
 	public void drawcard(){
-		application.getClient().sendToServer(Protocol.DRAWCARDS);
+		application.sendToServer(Protocol.DRAWCARDS);
 	}
 
 	public void drawfaceupcard(){
-		application.getClient().sendToServer(Protocol.DRAWFACEUPCARDS);
-	}
-
-	public void nextPhase(){
-		application.getClient().sendToServer(Protocol.NEXTPHASE);
-	}
-
-	public void sendmessage(){
-		if(chatmessage.getText().length()>0){
-			application.getClient().sendToServer(Protocol.CHAT + " "+application.getUsername()+": " +chatmessage.getText());
-			chatmessage.setText("");
-		}
-	}
-
-	public boolean isActivePlayer(String activePlayer){
-		return (activePlayer.equals(application.getUsername()));
+		application.sendToServer(Protocol.DRAWFACEUPCARDS);
 	}
 
 	void setupOfferTarget(final HBox targetBox){
@@ -438,7 +321,7 @@ public class GameController extends AnchorPane implements Initializable {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()){
-					event.acceptTransferModes(TransferMode.COPY);
+					event.acceptTransferModes(TransferMode.MOVE);
 				}
 				event.consume();
 			}
@@ -459,68 +342,4 @@ public class GameController extends AnchorPane implements Initializable {
 		});
 	}
 
-	void setupPlantTarget(final boolean isFromHand, final ImageView targetBox, final int fieldid){
-		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
-			@Override
-			public void handle(DragEvent event) {
-				Dragboard db = event.getDragboard();
-				if(db.hasImage()){
-					event.acceptTransferModes(TransferMode.COPY);
-				}
-				event.consume();
-			}
-		});
-
-		targetBox.setOnDragDropped(new EventHandler <DragEvent>() {
-			@Override
-			public void handle(DragEvent event) {
-				Dragboard db = event.getDragboard();
-				if(db.hasImage()){
-					targetBox.setImage(db.getImage());
-					if(isFromHand){
-						application.getClient().sendToServer(Protocol.PLANTBEAN +" "+ fieldid+" "+db.getString());
-					} else {
-						application.getClient().sendToServer(Protocol.PLANTASIDEBEAN +" "+ fieldid+" "+db.getString());
-					}
-					
-					event.setDropCompleted(true);
-				}else{
-					event.setDropCompleted(false);
-				}
-				event.consume();
-			}
-		});
-	}
-
-	void setupCardDraggable(final ImageView source){
-		System.out.println("Draggable:"+((CardPOJO)source.getUserData()).getName());
-		source.setOnDragDetected(new EventHandler <MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-
-				/* allow any transfer mode */
-				Dragboard db = source.startDragAndDrop(TransferMode.COPY);
-
-				/* put a image on dragboard */
-				ClipboardContent content = new ClipboardContent();
-
-				Image sourceImage = source.getImage();
-				content.putImage(sourceImage);
-				content.putString(""+((CardPOJO)source.getUserData()).getHashcode());
-				db.setContent(content);
-
-				event.consume();
-			}
-		});
-		source.setOnDragDone(new EventHandler<DragEvent>() {
-			@Override	
-			public void handle(DragEvent event) {
-				if(event.isAccepted()){
-					((HBox)source.getParent()).getChildren().remove(source);
-					event.consume();
-				}
-			}
-
-		});
-	}
 }

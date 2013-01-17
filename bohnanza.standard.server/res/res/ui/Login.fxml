@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="474.0" xmlns:fx="http://javafx.com/fxml" fx:controller="bohnanza.standard.client.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="474.0" xmlns:fx="http://javafx.com/fxml" fx:controller="bohnanza.standard.client.core.LoginController">
   <children>
     <Button fx:id="login" layoutX="281.0" layoutY="207.0" mnemonicParsing="false" onAction="#doLogin" text="Login" />
     <TextField fx:id="host" layoutX="116.0" layoutY="95.0" prefWidth="200.0" text="localhost:2222" />

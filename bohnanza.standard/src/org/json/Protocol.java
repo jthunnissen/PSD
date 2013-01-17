@@ -11,8 +11,14 @@ import bohnanza.standard.core.Player;
 import bohnanza.standard.core.actions.Action;
 
 public class Protocol {
+	
+	public static final String TYPE = "type";
 
 	public static final String CURRENTPLAYER = "currentplayer";
+	public static final String GAME_TYPE = "game_type";
+	public static final int GAME_STANDARD = 1;
+	public static final int GAME_AL_CABOHNE = 2;
+	
 	public static final String PLAYERS = "players";
 	public static final String PLAYER_NAME = "name";
 	public static final String PLAYER_SCORE = "score";
@@ -59,7 +65,8 @@ public class Protocol {
 
 		try {
 			JSONObject root = new JSONObject();
-			root.put("type", "gameupdate");
+			root.put(TYPE, "gameupdate");
+			root.put(GAME_TYPE, GAME_STANDARD);
 			// Current player
 			root.put(CURRENTPLAYER, game.getActivePlayer().getName());
 			// All players
@@ -124,7 +131,7 @@ public class Protocol {
 		String result = "";
 		JSONObject root = new JSONObject();
 		try {
-			root.put("type", "usernamecheck");
+			root.put(TYPE, "usernamecheck");
 			root.put("response", response);
 			result = root.toString();
 		} catch (JSONException e) {
@@ -147,7 +154,7 @@ public class Protocol {
 		String result = "";	
 		try {
 			JSONObject root = new JSONObject();
-			root.put("type", Protocol.CHAT);
+			root.put(TYPE, Protocol.CHAT);
 			root.put("response", response);
 			result = root.toString();
 		} catch (JSONException e) {
@@ -161,7 +168,7 @@ public class Protocol {
 
 		try {
 			JSONObject root = new JSONObject();
-			root.put("type", "waiting");
+			root.put(TYPE, "waiting");
 			result = root.toString();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -174,7 +181,7 @@ public class Protocol {
 		String result = "";	
 		try {
 			JSONObject root = new JSONObject();
-			root.put("type", Protocol.ERROR);
+			root.put(TYPE, Protocol.ERROR);
 			root.put("response", message);
 			result = root.toString();
 		} catch (JSONException e) {
@@ -211,7 +218,7 @@ public class Protocol {
 		String result = "";	
 		try {
 			JSONObject root = new JSONObject();
-			root.put("type", type);
+			root.put(TYPE, type);
 			root.put(Protocol.PLAYER_NAME, playerName);
 			JSONArray jsonCards = new JSONArray();
 			for(CardPOJO card: cards){

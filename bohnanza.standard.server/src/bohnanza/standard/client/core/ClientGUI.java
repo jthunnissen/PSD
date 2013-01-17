@@ -1,5 +1,5 @@
 
-package bohnanza.standard.client;
+package bohnanza.standard.client.core;
 
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -27,6 +27,9 @@ import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;
 
+import bohnanza.standard.client.standard.StandardGameController;
+
+
 
 
 public class ClientGUI extends Application {
@@ -46,10 +49,6 @@ public class ClientGUI extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(ClientGUI.class, (java.lang.String[])null);
-	}
-
-	public Client getClient(){
-		return client;
 	}
 
 	public void setUsername(String username){
@@ -88,10 +87,15 @@ public class ClientGUI extends Application {
 		}
 	}
 
-	public void goToGame(){
+	public void goToGame(int type){
 		try {
-			gameController = (GameController) replaceSceneContent("Game.fxml");
+			if(type == 1){
+				gameController = (StandardGameController) replaceSceneContent("Game.fxml");
+			} else {
+				gameController = (GameController) replaceSceneContent("Game.fxml");
+			}
 			gameController.setApp(this);
+				
 		} catch (Exception ex) {
 			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -132,10 +136,10 @@ public class ClientGUI extends Application {
 						}
 					} else if(action.equals(Protocol.PROPOSETRADE)){
 						OfferPOJO offer = Protocol.sendOfferFromJSON(response);
-						gameController.viewOffer(offer);
+						((StandardGameController)gameController).viewOffer(offer);
 					} else if(action.equals("gameupdate")) {
 						if(state == ClientGUI.AWAITING_START){
-							goToGame();
+							goToGame(response.getInt(Protocol.GAME_TYPE));
 							state = ClientGUI.AWAITING_GAMEUPDATE;
 						}
 						oldResponse = update;
@@ -158,7 +162,6 @@ public class ClientGUI extends Application {
 		dismissButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
-			
 				myDialog.close();
 			}
 		});		
@@ -210,5 +213,9 @@ public class ClientGUI extends Application {
 		//        }
 		stage.sizeToScene();
 		return (Initializable) loader.getController();
+	}
+
+	public void sendToServer(String string) {
+		client.sendToServer(string);		
 	}
 }

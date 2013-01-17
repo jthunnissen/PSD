@@ -1,5 +1,5 @@
 
-package bohnanza.standard.client;
+package bohnanza.standard.client.core;
 
 /*
  * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
@@ -7,6 +7,7 @@ package bohnanza.standard.client;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +24,7 @@ public class LoginController extends AnchorPane implements Initializable {
 	@FXML
 	TextField host;
 	@FXML
-	TextField username;
+	public TextField username;
 	@FXML
 	Button login;
 	@FXML
