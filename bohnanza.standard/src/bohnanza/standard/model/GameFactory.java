@@ -1,14 +1,14 @@
 package bohnanza.standard.model;
 
 import bohnanza.core.AbstractFactory;
-import bohnanza.standard.actions.DrawCards;
-import bohnanza.standard.actions.NextPhase;
-import bohnanza.standard.actions.NextPlayer;
+import bohnanza.core.shared.actions.DrawCards;
+import bohnanza.core.shared.actions.NextPhase;
+import bohnanza.core.shared.actions.NextPlayer;
+import bohnanza.core.shared.states.DrawState;
+import bohnanza.core.shared.states.PlantState;
+import bohnanza.core.shared.states.StartState;
 import bohnanza.standard.actions.PlantAsideBean;
-import bohnanza.standard.states.DrawState;
-import bohnanza.standard.states.PlantState;
 import bohnanza.standard.states.SecondPlantState;
-import bohnanza.standard.states.StartState;
 import bohnanza.standard.states.TradeState;
 
 public class GameFactory extends AbstractFactory {

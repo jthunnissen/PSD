@@ -14,7 +14,7 @@ import bohnanza.core.Action;
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
-import bohnanza.standard.actions.NextPlayer;
+import bohnanza.core.shared.actions.NextPlayer;
 import bohnanza.standard.model.Game;
 
 public class Server implements Runnable {

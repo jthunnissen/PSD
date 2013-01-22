@@ -1,14 +1,14 @@
-package bohnanza.standard.actions;
+package bohnanza.core.shared.actions;
 
 import bohnanza.core.Action;
 import bohnanza.core.Card;
+import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
-import bohnanza.standard.model.Game;
 
 public class DrawCards extends Action {
 
-	public DrawCards(Game game, Player initiator) {
+	public DrawCards(GameBase game, Player initiator) {
 		super(game, initiator);
 	}
 	

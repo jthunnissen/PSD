@@ -9,7 +9,7 @@ import bohnanza.core.BeanCard;
 import bohnanza.core.Card;
 import bohnanza.core.Field;
 import bohnanza.core.IllegalActionException;
-import bohnanza.standard.actions.PlantBean;
+import bohnanza.core.shared.actions.PlantBean;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.EBeanType;
 import bohnanza.standard.model.Game;

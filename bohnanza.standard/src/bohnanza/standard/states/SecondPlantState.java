@@ -3,8 +3,8 @@ package bohnanza.standard.states;
 import bohnanza.core.Action;
 import bohnanza.core.Player;
 import bohnanza.core.TurnState;
+import bohnanza.core.shared.states.Harvest;
 import bohnanza.standard.actions.BuyBeanField;
-import bohnanza.standard.actions.Harvest;
 import bohnanza.standard.actions.PlantAsideBean;
 import bohnanza.standard.model.Game;
 

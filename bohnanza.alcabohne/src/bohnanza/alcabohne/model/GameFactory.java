@@ -7,12 +7,12 @@ import bohnanza.alcabohne.states.CultivationState;
 import bohnanza.alcabohne.states.GiftMafiaState;
 import bohnanza.alcabohne.states.UseLeftoverBeansState;
 import bohnanza.core.AbstractFactory;
-import bohnanza.standard.actions.DrawCards;
-import bohnanza.standard.actions.NextPhase;
-import bohnanza.standard.actions.NextPlayer;
-import bohnanza.standard.states.DrawState;
-import bohnanza.standard.states.PlantState;
-import bohnanza.standard.states.StartState;
+import bohnanza.core.shared.actions.DrawCards;
+import bohnanza.core.shared.actions.NextPhase;
+import bohnanza.core.shared.actions.NextPlayer;
+import bohnanza.core.shared.states.DrawState;
+import bohnanza.core.shared.states.PlantState;
+import bohnanza.core.shared.states.StartState;
 
 public class GameFactory extends AbstractFactory {
 

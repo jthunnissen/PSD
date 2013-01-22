@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
-import bohnanza.standard.actions.DrawCards;
+import bohnanza.core.shared.actions.DrawCards;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.Game;
 

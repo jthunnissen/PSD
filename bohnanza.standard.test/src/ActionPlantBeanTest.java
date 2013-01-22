@@ -3,7 +3,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import bohnanza.standard.actions.DrawCards;
+import bohnanza.core.shared.actions.DrawCards;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.Game;
 
