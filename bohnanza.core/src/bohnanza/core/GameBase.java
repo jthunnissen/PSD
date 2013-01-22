@@ -9,27 +9,27 @@ public abstract class GameBase {
 	 * @uml.property name="currentState"
 	 * @uml.associationEnd inverse="context:main.TurnState"
 	 */
-	private TurnState currentState;
+	protected TurnState currentState;
 
 	/**
 	 * @uml.property name="players"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Player"
 	 */
-	private ArrayList<Player> players = new ArrayList<Player>();
+	protected ArrayList<Player> players = new ArrayList<Player>();
 	
-	private int activePlayerIndex = 0;
+	protected int activePlayerIndex = 0;
 	
 	/**
 	 * @uml.property name="drawDeck"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
-	private ArrayList<Card> drawDeck = new ArrayList<Card>();
+	protected ArrayList<BeanCard> drawDeck = new ArrayList<BeanCard>();
 
 	/**
 	 * @uml.property name="discardPile"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
-	private ArrayList<Card> discardPile = new ArrayList<Card>();
+	protected ArrayList<BeanCard> discardPile = new ArrayList<BeanCard>();
 
 	protected boolean started = false;
 	
@@ -59,7 +59,7 @@ public abstract class GameBase {
 		return player;
 	}
 	
-	private void shuffleCards() {
+	protected void shuffleCards() {
 		Collections.shuffle(drawDeck);
 	}
 
@@ -98,7 +98,7 @@ public abstract class GameBase {
 		return players;
 	}
 	
-	public boolean addCardToDiscardPile(Card card){
+	public boolean addCardToDiscardPile(BeanCard card){
 		return this.discardPile.add(card);
 	}
 
@@ -107,9 +107,8 @@ public abstract class GameBase {
 	 * @require !drawDeck.isEmpty()
 	 * @return the card that was drawn
 	 */
-	public Card drawCard() {
-		//TODO: reshuffle deck if empty
-		Card drawnCard = drawDeck.remove(0);
+	public BeanCard drawCard() {
+		BeanCard drawnCard = drawDeck.remove(0);
 		if(drawDeck.isEmpty()) {
 			drawDeck.addAll(discardPile);
 			discardPile.clear();
