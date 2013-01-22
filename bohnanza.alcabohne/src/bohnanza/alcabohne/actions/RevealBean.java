@@ -1,9 +1,9 @@
 package bohnanza.alcabohne.actions;
 
+import bohnanza.alcabohne.model.Game;
 import bohnanza.core.Action;
-import bohnanza.standard.model.Game;
-import bohnanza.standard.model.model.IllegalActionException;
-import bohnanza.standard.model.model.Player;
+import bohnanza.core.IllegalActionException;
+import bohnanza.core.Player;
 
 public class RevealBean extends Action {
 

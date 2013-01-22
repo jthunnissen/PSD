@@ -1,5 +1,6 @@
 package bohnanza.alcabohne.states;
 
+import bohnanza.alcabohne.model.Game;
 import bohnanza.core.Action;
 import bohnanza.core.TurnState;
 

@@ -1,4 +1,4 @@
-package bohnanza.alcabohne.core;
+package bohnanza.alcabohne.model;
 
 public class NormalPlayer extends AlCabohnePlayer {
 
