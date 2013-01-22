@@ -1,9 +1,9 @@
 package bohnanza.alcabohne.states;
 
-import bohnanza.standard.core.Game;
-import bohnanza.standard.core.states.TurnStart;
+import bohnanza.core.Game;
+import bohnanza.core.states.StartState;
 
-public class CultivationState extends TurnStart {
+public class CultivationState extends StartState {
 
 	public CultivationState(Game context) {
 		super(context);

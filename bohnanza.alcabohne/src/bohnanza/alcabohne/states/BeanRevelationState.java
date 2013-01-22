@@ -1,7 +1,8 @@
 package bohnanza.alcabohne.states;
-import bohnanza.standard.core.*;
-import bohnanza.standard.core.states.*;
-import bohnanza.standard.core.actions.*;
+
+import bohnanza.core.Game;
+import bohnanza.core.actions.Action;
+import bohnanza.core.states.TurnState;
 
 public class BeanRevelationState extends TurnState {
 

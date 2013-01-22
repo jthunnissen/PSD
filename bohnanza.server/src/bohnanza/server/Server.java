@@ -10,12 +10,14 @@ import java.util.HashMap;
 
 import org.json.Protocol;
 
-import bohnanza.standard.core.Card;
-import bohnanza.standard.core.Game;
-import bohnanza.standard.core.IllegalActionException;
-import bohnanza.standard.core.Player;
-import bohnanza.standard.core.actions.Action;
-import bohnanza.standard.core.actions.NextPlayer;
+import bohnanza.core.Card;
+import bohnanza.core.Game;
+import bohnanza.core.IllegalActionException;
+import bohnanza.core.Player;
+import bohnanza.core.actions.Action;
+import bohnanza.core.actions.NextPlayer;
+
+
 public class Server implements Runnable {
 
 	// The server socket.

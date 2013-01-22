@@ -1,14 +1,21 @@
 package bohnanza.alcabohne.core;
 import bohnanza.alcabohne.actions.GiftBeanToMafia;
+import bohnanza.alcabohne.actions.RevealBean;
 import bohnanza.alcabohne.states.BeanRevelationState;
 import bohnanza.alcabohne.states.CultivationState;
 import bohnanza.alcabohne.states.GiftMafiaState;
 import bohnanza.alcabohne.states.UseLeftoverBeansState;
-import bohnanza.standard.core.*;
-import bohnanza.standard.core.states.*;
-import bohnanza.standard.core.actions.*;
+import bohnanza.core.Game;
+import bohnanza.core.Player;
+import bohnanza.core.actions.DrawCards;
+import bohnanza.core.actions.NextPhase;
+import bohnanza.core.actions.NextPlayer;
+import bohnanza.core.states.DrawState;
+import bohnanza.core.states.PlantState;
+import bohnanza.core.states.StartState;
+import bohnanza.core.states.TurnState;
 
-public class GameFactory extends bohnanza.standard.core.GameFactory {
+public class GameFactory extends bohnanza.core.GameFactory {
 
 	private GameFactory() {}
 	
@@ -17,7 +24,7 @@ public class GameFactory extends bohnanza.standard.core.GameFactory {
 	 */
 	@Override
 	public TurnState buildTurnStatespace(Game game, Player activePlayer) {
-		TurnState startState = new TurnStart(game);
+		TurnState startState = new StartState(game);
 		TurnState useLeftovState = new UseLeftoverBeansState(game);
 		startState.addTransition(NextPlayer.class, useLeftovState);
 		TurnState giftMafiaState = new GiftMafiaState(game);

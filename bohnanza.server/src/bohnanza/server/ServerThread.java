@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.CardPOJO;
@@ -17,24 +16,24 @@ import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;
 
-import bohnanza.standard.core.BeanCard;
-import bohnanza.standard.core.Card;
-import bohnanza.standard.core.EBeanType;
-import bohnanza.standard.core.Game;
-import bohnanza.standard.core.IllegalActionException;
-import bohnanza.standard.core.Player;
-import bohnanza.standard.core.actions.AcceptTrade;
-import bohnanza.standard.core.actions.Action;
-import bohnanza.standard.core.actions.BuyBeanField;
-import bohnanza.standard.core.actions.DeclineTrade;
-import bohnanza.standard.core.actions.DrawCards;
-import bohnanza.standard.core.actions.DrawFaceUpCards;
-import bohnanza.standard.core.actions.Harvest;
-import bohnanza.standard.core.actions.NextPhase;
-import bohnanza.standard.core.actions.PlantAsideBean;
-import bohnanza.standard.core.actions.PlantBean;
-import bohnanza.standard.core.actions.ProposeTrade;
-import bohnanza.standard.core.actions.SetAsideCard;
+import bohnanza.core.BeanCard;
+import bohnanza.core.Card;
+import bohnanza.core.EBeanType;
+import bohnanza.core.Game;
+import bohnanza.core.IllegalActionException;
+import bohnanza.core.Player;
+import bohnanza.core.actions.AcceptTrade;
+import bohnanza.core.actions.Action;
+import bohnanza.core.actions.BuyBeanField;
+import bohnanza.core.actions.DeclineTrade;
+import bohnanza.core.actions.DrawCards;
+import bohnanza.core.actions.DrawFaceUpCards;
+import bohnanza.core.actions.Harvest;
+import bohnanza.core.actions.NextPhase;
+import bohnanza.core.actions.PlantAsideBean;
+import bohnanza.core.actions.PlantBean;
+import bohnanza.core.actions.ProposeTrade;
+import bohnanza.core.actions.SetAsideCard;
 
 class ServerThread extends Thread {
 

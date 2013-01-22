@@ -2,23 +2,23 @@ package bohnanza.alcabohne.core;
 
 import java.util.HashMap;
 
-import bohnanza.standard.core.IBeanType;
+import bohnanza.core.IBeanType;
 
 public enum EBeanType implements IBeanType {
 	BLUEBEAN {
 		@Override
 		public final String toString() {
-			return bohnanza.standard.core.EBeanType.BLUEBEAN.toString();
+			return EBeanType.BLUEBEAN.toString();
 		}
 
 		@Override
 		public final int numberOfCards() { //20
-			return bohnanza.standard.core.EBeanType.BLUEBEAN.numberOfCards();
+			return EBeanType.BLUEBEAN.numberOfCards();
 		}
 
 		@Override
 		public final HashMap<Integer, Integer> beanometer() {
-			return bohnanza.standard.core.EBeanType.BLUEBEAN.beanometer();
+			return EBeanType.BLUEBEAN.beanometer();
 		}
 	},
 	KIDNEYBEAN {
