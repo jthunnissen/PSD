@@ -8,10 +8,10 @@ import org.json.JSONObject;
 import bohnanza.core.Action;
 import bohnanza.core.Card;
 
-public class NormalPlayer extends AlCabohnePlayer {
+public class MaffiaPlayer extends AlCabohnePlayer {
 
-	protected NormalPlayer(String name) {
-		super(name);
+	protected MaffiaPlayer(String name) {
+		super(name, false);
 	}
 
 	@Override

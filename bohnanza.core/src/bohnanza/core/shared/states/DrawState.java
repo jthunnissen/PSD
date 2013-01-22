@@ -1,13 +1,13 @@
-package bohnanza.standard.states;
+package bohnanza.core.shared.states;
 
 import bohnanza.core.Action;
+import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
-import bohnanza.standard.actions.DrawCards;
-import bohnanza.standard.model.Game;
+import bohnanza.core.shared.actions.DrawCards;
 
 public class DrawState extends TurnState {
 
-	public DrawState(Game context) {
+	public DrawState(GameBase context) {
 		super(context);
 	}
 

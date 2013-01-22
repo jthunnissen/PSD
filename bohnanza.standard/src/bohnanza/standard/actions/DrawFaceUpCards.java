@@ -16,7 +16,7 @@ public class DrawFaceUpCards extends Action {
 	}
 	
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		List<Card> asideCards = new ArrayList<Card>();
 		asideCards.add(game.drawCard());
 		asideCards.add(game.drawCard());

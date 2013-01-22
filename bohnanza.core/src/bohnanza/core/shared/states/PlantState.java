@@ -1,17 +1,16 @@
-package bohnanza.standard.states;
+package bohnanza.core.shared.states;
 
 import bohnanza.core.Action;
+import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
-import bohnanza.standard.actions.Harvest;
-import bohnanza.standard.actions.NextPhase;
-import bohnanza.standard.actions.PlantBean;
-import bohnanza.standard.model.*;
+import bohnanza.core.shared.actions.NextPhase;
+import bohnanza.core.shared.actions.PlantBean;
 
 public class PlantState extends TurnState {
 
 	private int beansPlanted;
 	
-	public PlantState(Game context) {	
+	public PlantState(GameBase context) {	
 		super(context);
 	}
 

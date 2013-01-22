@@ -27,7 +27,7 @@ public class ProposeTrade extends Action {
 	 * @require give != null
 	 */
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		if(!(initiator == game.getActivePlayer() || activePlayer == game.getActivePlayer())) throw new IllegalActionException("Only trades with the active player are allowed");
 		if(!initiator.isValidTrade(cards,offer,false) || !activePlayer.isValidTrade(offer, cards, true)) throw new IllegalActionException("No valid trade");
 	}

@@ -22,7 +22,7 @@ public class AcceptTrade extends Action {
 	}
 
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		otherPlayer.trade(cards, offer, false);
 		initiator.trade(offer, cards, true);
 	}

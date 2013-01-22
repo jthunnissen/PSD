@@ -1,8 +1,8 @@
 package bohnanza.alcabohne.model;
 
-import bohnanza.standard.model.BohnanzaPlayer;
+import bohnanza.core.Player;
 
-public abstract class AlCabohnePlayer extends BohnanzaPlayer {
+public abstract class AlCabohnePlayer extends Player {
 
 	private boolean isPlayable;
 	
@@ -18,5 +18,4 @@ public abstract class AlCabohnePlayer extends BohnanzaPlayer {
 	public boolean isPlayerable() {
 		return isPlayable;
 	}
-
 }

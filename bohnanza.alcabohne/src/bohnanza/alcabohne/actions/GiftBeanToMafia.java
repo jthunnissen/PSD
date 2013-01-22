@@ -13,7 +13,7 @@ public class GiftBeanToMafia extends Action {
 	}
 
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		// TODO Auto-generated method stub
 
 	}

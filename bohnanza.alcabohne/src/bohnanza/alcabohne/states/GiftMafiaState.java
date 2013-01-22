@@ -1,10 +1,10 @@
 package bohnanza.alcabohne.states;
 import bohnanza.alcabohne.actions.GiftBeanToMafia;
+import bohnanza.alcabohne.model.Game;
 import bohnanza.core.Action;
 import bohnanza.core.TurnState;
-import bohnanza.standard.actions.Harvest;
-import bohnanza.standard.actions.NextPhase;
-import bohnanza.standard.model.Game;
+import bohnanza.core.shared.actions.NextPhase;
+import bohnanza.core.shared.states.Harvest;
 
 
 public class GiftMafiaState extends TurnState {

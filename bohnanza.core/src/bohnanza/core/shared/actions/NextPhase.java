@@ -1,18 +1,18 @@
-package bohnanza.standard.actions;
+package bohnanza.core.shared.actions;
 
 import bohnanza.core.Action;
+import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
-import bohnanza.standard.model.Game;
 
 public class NextPhase extends Action {
 
-	public NextPhase(Game game, Player initiator) {
+	public NextPhase(GameBase game, Player initiator) {
 		super(game, initiator);
 	}
 
 	/**Doesn't do anything, just triggers state advance*/
 	@Override
-	public void handle() throws IllegalActionException {}
+	protected void innerHandle() throws IllegalActionException {}
 
 }

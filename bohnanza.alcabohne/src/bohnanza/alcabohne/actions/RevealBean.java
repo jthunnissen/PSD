@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package bohnanza.alcabohne.actions;
 
 import java.util.ArrayList;
@@ -48,3 +49,26 @@ public class RevealBean extends Action {
 		return false;
 	}
 }
+=======
+package bohnanza.alcabohne.actions;
+
+import bohnanza.alcabohne.model.Game;
+import bohnanza.core.Action;
+import bohnanza.core.IllegalActionException;
+import bohnanza.core.Player;
+
+public class RevealBean extends Action {
+
+	public RevealBean(Game game, Player initiator) {
+		super(game, initiator);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void innerHandle() throws IllegalActionException {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+>>>>>>> 1f09a064eaa2d34888f51f3b286359bf459e4732

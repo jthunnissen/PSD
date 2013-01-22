@@ -3,7 +3,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import bohnanza.standard.actions.DrawCards;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.Game;
 
@@ -20,13 +19,11 @@ public class ActionPlantBeanTest {
 	private static final String PLAYER_NAME = "Player";
 	private BohnanzaPlayer player;
 	private Game game;
-	private DrawCards action;
 
 	@Before 
 	public void setUp() { 
 		player = new BohnanzaPlayer(PLAYER_NAME);
 		game = new Game();
-		action = new DrawCards(game, player);
 	}
 
 	@Test

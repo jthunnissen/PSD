@@ -1,12 +1,13 @@
-package bohnanza.standard.states;
+package bohnanza.core.shared.states;
+
 import bohnanza.core.Action;
+import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
-import bohnanza.standard.actions.NextPlayer;
-import bohnanza.standard.model.Game;
+import bohnanza.core.shared.actions.NextPlayer;
 
 public class StartState extends TurnState {
 	
-	public StartState(Game context) {
+	public StartState(GameBase context) {
 		super(context);
 	}
 
