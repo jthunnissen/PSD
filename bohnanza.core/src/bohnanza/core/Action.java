@@ -10,7 +10,7 @@ public abstract class Action {
 		this.initiator = initiator;
 	}
 	
-	public final void handle() throws IllegalActionException {
+	public void handle() throws IllegalActionException {
 		if(!game.getPlayers().contains(initiator)) 
 			throw new IllegalActionException("This player is not part of this game.");
 		innerHandle();

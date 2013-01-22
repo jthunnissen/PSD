@@ -43,17 +43,17 @@ public class Game extends GameBase {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			BeanCard card = drawCard();
+			BeanCard card = (BeanCard)drawCard();
 			List<BeanCard> cards = mobBosses.get(0).getCards();
 			do {
 				mobBosses.get(0).addCard(card);
-				card = drawCard();
+				card = (BeanCard)drawCard();
 			} while(cards.get(cards.size()-1).getType()==card.getType());
 			mobBosses.get(1).addCard(card);
 		}
 	}
 	
-	public BeanCard drawDiscardedCard() throws IllegalActionException {
+	public Card drawDiscardedCard() throws IllegalActionException {
 		if(discardPile.isEmpty()) throw new IllegalActionException("Can't draw from empty discard pile");
 		return discardPile.remove(0);
 	}

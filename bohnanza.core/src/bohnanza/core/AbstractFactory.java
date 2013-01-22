@@ -19,8 +19,8 @@ public abstract class AbstractFactory {
 		return null;
 	}
 	
-	public ArrayList<BeanCard> getGameDeck() {
-		ArrayList<BeanCard> deck = getStandardDeck(beanTypes);
+	public ArrayList<Card> getGameDeck() {
+		ArrayList<Card> deck = getStandardDeck(beanTypes);
 		return deck;
 	}
 	
@@ -75,8 +75,8 @@ public abstract class AbstractFactory {
 		}
 	}
 	
-	protected ArrayList<BeanCard> getStandardDeck(IBeanType[] beanTypes) {
-		ArrayList<BeanCard> standardDeck = new ArrayList<BeanCard>();
+	protected ArrayList<Card> getStandardDeck(IBeanType[] beanTypes) {
+		ArrayList<Card> standardDeck = new ArrayList<Card>();
 		for (IBeanType bt : beanTypes) {
 			for (int i = 0; i < bt.numberOfCards(); i++) {
 				standardDeck.add(new BeanCard(bt));

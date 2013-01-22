@@ -10,7 +10,7 @@ import bohnanza.core.Player;
  * @author Damiaan
  * @uml.dependency supplier="main.GameFactory" stereotypes="Standard::Call"
  */
-public class Game extends GameBase<Player> {
+public class Game extends GameBase {
 
 	public Game() {
 		super(GameFactory.getInstance());

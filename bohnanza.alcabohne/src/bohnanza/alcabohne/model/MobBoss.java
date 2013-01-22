@@ -1,6 +1,10 @@
 package bohnanza.alcabohne.model;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONObject;
+
 import bohnanza.core.*;
 
 public class MobBoss extends AlCabohnePlayer {
@@ -17,6 +21,13 @@ public class MobBoss extends AlCabohnePlayer {
 	
 	public void addCard(BeanCard card) {
 		cards.add(card);
+	}
+
+	@Override
+	public JSONObject toJSON(List<Class<? extends Action>> list,
+			HashMap<Integer, Card> cardIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

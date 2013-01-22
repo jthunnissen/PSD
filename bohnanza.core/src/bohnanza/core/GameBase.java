@@ -1,5 +1,4 @@
 package bohnanza.core;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,13 +22,13 @@ public abstract class GameBase {
 	 * @uml.property name="drawDeck"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
-	protected ArrayList<BeanCard> drawDeck = new ArrayList<BeanCard>();
+	protected ArrayList<Card> drawDeck = new ArrayList<Card>();
 
 	/**
 	 * @uml.property name="discardPile"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card"
 	 */
-	protected ArrayList<BeanCard> discardPile = new ArrayList<BeanCard>();
+	protected ArrayList<Card> discardPile = new ArrayList<Card>();
 
 	protected boolean started = false;
 	
@@ -58,13 +57,10 @@ public abstract class GameBase {
 		return player;
 	}
 	
-<<<<<<< HEAD
 	protected void shuffleCards() {
 		Collections.shuffle(drawDeck);
 	}
 
-=======
->>>>>>> 1f09a064eaa2d34888f51f3b286359bf459e4732
 	public void handle(Action action) throws IllegalActionException {
 		currentState.handle(action);
 	}
@@ -100,7 +96,7 @@ public abstract class GameBase {
 		return players;
 	}
 	
-	public boolean addCardToDiscardPile(BeanCard card){
+	public boolean addCardToDiscardPile(Card card){
 		return this.discardPile.add(card);
 	}
 
@@ -109,13 +105,8 @@ public abstract class GameBase {
 	 * @require !drawDeck.isEmpty()
 	 * @return the card that was drawn
 	 */
-<<<<<<< HEAD
-	public BeanCard drawCard() {
-		BeanCard drawnCard = drawDeck.remove(0);
-=======
 	public Card drawCard() {
 		Card drawnCard = drawDeck.remove(0);
->>>>>>> 1f09a064eaa2d34888f51f3b286359bf459e4732
 		if(drawDeck.isEmpty()) {
 			drawDeck.addAll(discardPile);
 			discardPile.clear();
@@ -154,9 +145,5 @@ public abstract class GameBase {
 	
 	public List<Card> getDiscardPile() {
 		return Collections.unmodifiableList(discardPile);
-	}
-
-	private void shuffleCards() {
-		Collections.shuffle(drawDeck);
 	}
 }
