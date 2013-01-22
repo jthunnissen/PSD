@@ -1,6 +1,6 @@
 package bohnanza.alcabohne.core;
 
-import bohnanza.core.Player;
+import bohnanza.standard.model.model.Player;
 
 
 public abstract class AlCabohnePlayer extends Player {

@@ -1,9 +1,9 @@
 package bohnanza.alcabohne.actions;
 
-import bohnanza.core.Game;
-import bohnanza.core.IllegalActionException;
-import bohnanza.core.Player;
-import bohnanza.core.actions.Action;
+import bohnanza.core.Action;
+import bohnanza.standard.model.Game;
+import bohnanza.standard.model.model.IllegalActionException;
+import bohnanza.standard.model.model.Player;
 
 
 public class GiftBeanToMafia extends Action {

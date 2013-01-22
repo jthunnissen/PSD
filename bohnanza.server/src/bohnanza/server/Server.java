@@ -1,5 +1,6 @@
 package bohnanza.server;
 
+import java.awt.Desktop.Action;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,14 +9,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
-import org.json.Protocol;
-
-import bohnanza.core.Card;
-import bohnanza.core.Game;
-import bohnanza.core.IllegalActionException;
-import bohnanza.core.Player;
-import bohnanza.core.actions.Action;
-import bohnanza.core.actions.NextPlayer;
+import bohnanza.standard.actions.NextPlayer;
+import bohnanza.standard.model.Game;
 
 
 public class Server implements Runnable {

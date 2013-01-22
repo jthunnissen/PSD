@@ -16,24 +16,24 @@ import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;
 
+import bohnanza.core.Action;
 import bohnanza.core.BeanCard;
-import bohnanza.core.Card;
-import bohnanza.core.EBeanType;
-import bohnanza.core.Game;
-import bohnanza.core.IllegalActionException;
-import bohnanza.core.Player;
-import bohnanza.core.actions.AcceptTrade;
-import bohnanza.core.actions.Action;
-import bohnanza.core.actions.BuyBeanField;
-import bohnanza.core.actions.DeclineTrade;
-import bohnanza.core.actions.DrawCards;
-import bohnanza.core.actions.DrawFaceUpCards;
-import bohnanza.core.actions.Harvest;
-import bohnanza.core.actions.NextPhase;
-import bohnanza.core.actions.PlantAsideBean;
-import bohnanza.core.actions.PlantBean;
-import bohnanza.core.actions.ProposeTrade;
-import bohnanza.core.actions.SetAsideCard;
+import bohnanza.standard.actions.AcceptTrade;
+import bohnanza.standard.actions.BuyBeanField;
+import bohnanza.standard.actions.DeclineTrade;
+import bohnanza.standard.actions.DrawCards;
+import bohnanza.standard.actions.DrawFaceUpCards;
+import bohnanza.standard.actions.Harvest;
+import bohnanza.standard.actions.NextPhase;
+import bohnanza.standard.actions.PlantAsideBean;
+import bohnanza.standard.actions.PlantBean;
+import bohnanza.standard.actions.ProposeTrade;
+import bohnanza.standard.actions.SetAsideCard;
+import bohnanza.standard.model.EBeanType;
+import bohnanza.standard.model.Game;
+import bohnanza.standard.model.model.Card;
+import bohnanza.standard.model.model.IllegalActionException;
+import bohnanza.standard.model.model.Player;
 
 class ServerThread extends Thread {
 

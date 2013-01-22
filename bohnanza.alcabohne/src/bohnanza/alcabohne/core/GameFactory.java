@@ -1,29 +1,33 @@
 package bohnanza.alcabohne.core;
+import java.util.ArrayList;
+
 import bohnanza.alcabohne.actions.GiftBeanToMafia;
 import bohnanza.alcabohne.actions.RevealBean;
 import bohnanza.alcabohne.states.BeanRevelationState;
 import bohnanza.alcabohne.states.CultivationState;
 import bohnanza.alcabohne.states.GiftMafiaState;
 import bohnanza.alcabohne.states.UseLeftoverBeansState;
-import bohnanza.core.Game;
-import bohnanza.core.Player;
-import bohnanza.core.actions.DrawCards;
-import bohnanza.core.actions.NextPhase;
-import bohnanza.core.actions.NextPlayer;
-import bohnanza.core.states.DrawState;
-import bohnanza.core.states.PlantState;
-import bohnanza.core.states.StartState;
-import bohnanza.core.states.TurnState;
+import bohnanza.core.AbstractFactory;
+import bohnanza.core.Card;
+import bohnanza.core.IBeanType;
+import bohnanza.core.TurnState;
 
-public class GameFactory extends bohnanza.core.GameFactory {
+public class GameFactory extends AbstractFactory {
 
-	private GameFactory() {}
+	private static final GameFactory = new GameFactory();
 	
-	/**Links the different states that compose a turn together
-	 * @return the start state of the game
-	 */
+	private GameFactory() {
+		super(EBeanType.values());
+	}
+	
 	@Override
-	public TurnState buildTurnStatespace(Game game, Player activePlayer) {
+	public static AbstractFactory getInstance() {
+		return null;
+	}
+
+	@Override
+	protected void fillStateTransistions() {
+		setStartState(null);
 		TurnState startState = new StartState(game);
 		TurnState useLeftovState = new UseLeftoverBeansState(game);
 		startState.addTransition(NextPlayer.class, useLeftovState);
@@ -40,5 +44,7 @@ public class GameFactory extends bohnanza.core.GameFactory {
 		cultivationState.addTransition(NextPhase.class, drawState);
 		drawState.addTransition(DrawCards.class, startState);		
 		return plantState;
+		
 	}
+
 }
