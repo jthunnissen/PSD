@@ -1,4 +1,5 @@
 package bohnanzagui.standard;
+
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,9 +26,7 @@ import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;
 
-
 public class ClientGUI extends Application {
-
 	Stage stage;
 	Client client;
 	GameController gameController;

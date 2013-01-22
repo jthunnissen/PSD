@@ -1,4 +1,3 @@
-
 package bohnanza.server;
 
 
@@ -18,6 +17,9 @@ import org.json.Protocol;
 
 import bohnanza.core.Action;
 import bohnanza.core.BeanCard;
+import bohnanza.core.Card;
+import bohnanza.core.IllegalActionException;
+import bohnanza.core.Player;
 import bohnanza.standard.actions.AcceptTrade;
 import bohnanza.standard.actions.BuyBeanField;
 import bohnanza.standard.actions.DeclineTrade;
@@ -29,11 +31,9 @@ import bohnanza.standard.actions.PlantAsideBean;
 import bohnanza.standard.actions.PlantBean;
 import bohnanza.standard.actions.ProposeTrade;
 import bohnanza.standard.actions.SetAsideCard;
+import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.EBeanType;
 import bohnanza.standard.model.Game;
-import bohnanza.standard.model.model.Card;
-import bohnanza.standard.model.model.IllegalActionException;
-import bohnanza.standard.model.model.Player;
 
 class ServerThread extends Thread {
 
@@ -79,7 +79,8 @@ class ServerThread extends Thread {
 					String[] commandos = line.split(" ");
 					if(line.startsWith("NEWPLAYER")){
 						try{
-							player = server.game.addPlayer(line.replace("NEWPLAYER ", ""));
+							player = new BohnanzaPlayer(line.replace("NEWPLAYER ", ""));
+							player = server.game.addPlayer(player);
 						}catch(IllegalActionException e){
 							this.sendMessage(Protocol.usernameCheckToJSON(false));
 						}
