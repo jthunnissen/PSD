@@ -13,6 +13,6 @@ public class NextPhase extends Action {
 
 	/**Doesn't do anything, just triggers state advance*/
 	@Override
-	public void handle() throws IllegalActionException {}
+	protected void innerHandle() throws IllegalActionException {}
 
 }

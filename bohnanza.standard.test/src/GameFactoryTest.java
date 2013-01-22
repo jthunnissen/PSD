@@ -10,7 +10,7 @@ import bohnanza.standard.model.GameFactory;
 public class GameFactoryTest {
 	
 	GameFactory gameFactory = GameFactory.getInstance();
-	final int STANDARDDECKSIZE = 154;
+	public static final int STANDARDDECKSIZE = 154;
 
 	@Test
 	public void singeletonTest() {

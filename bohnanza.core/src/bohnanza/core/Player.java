@@ -2,6 +2,7 @@ package bohnanza.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import org.json.JSONObject;
 
 /**
  * This class represents a Player
- * @author Anne
+ * @author Anne & Damiaan
  *
  */
 public abstract class Player {
@@ -124,15 +125,11 @@ public abstract class Player {
 	 * @return true if the BeanCard is successfully planted in the Players' field.
 	 * @throws IllegalActionException 
 	 */
-	public void plantBean(BeanCard bean, BeanField field) throws IllegalActionException {
-		if(!setAsideCards.isEmpty()){
-			if(!setAsideCards.remove(bean)) throw new IllegalActionException("Bean must be set aside");
-		}
-		else if(!hand.isEmpty() && hand.get(0)==bean) hand.remove(0);
-		else throw new IllegalActionException("Player cannot plant this bean");
-		
-		if(beanFields.contains(field)) field.addCard(bean);
-		else throw new IllegalActionException("Player does not own field");
+	public void plantBean(Card card, Field field) throws IllegalActionException {
+		if(hand.indexOf(card) != 0) throw new IllegalActionException("Player cannot plant this bean");
+		if(!beanFields.contains(field)) throw new IllegalActionException("Player does not own field");
+		hand.remove(0);
+		field.addCard(card);
 	}
 
 	/**
@@ -148,7 +145,7 @@ public abstract class Player {
 	 * @return The fields of this Player.
 	 */
 	public List<BeanField> getBeanFields(){
-		return beanFields;
+		return Collections.unmodifiableList(beanFields);
 	}
 	
 	/**

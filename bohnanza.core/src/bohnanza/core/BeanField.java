@@ -1,4 +1,5 @@
 package bohnanza.core;
+
 import java.util.ArrayList;
 
 
@@ -11,8 +12,8 @@ public class BeanField extends Field {
 	 */
 	@Override
 	public void addCard(Card card) throws IllegalActionException {
-		if(card instanceof BeanCard) super.addCard(card);
-		else throw new IllegalActionException("Cannot at non-Beancard to Beanfield");
+		if(!(card instanceof BeanCard)) throw new IllegalActionException("Cannot at non-Beancard to Beanfield");
+		addCard((BeanCard) card);
 	}
 
 	/*
@@ -27,8 +28,8 @@ public class BeanField extends Field {
 	}
 
 	public void addCard(BeanCard card) throws IllegalActionException {
-		if(checkCard(card)) super.addCard(card);
-		else throw new IllegalActionException("Bean is not of same type");
+		if(!checkCard(card)) throw new IllegalActionException("Bean is not of same type");
+		super.addCard(card);
 	}
 
 	/**

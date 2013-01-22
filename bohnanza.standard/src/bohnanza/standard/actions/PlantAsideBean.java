@@ -19,7 +19,7 @@ public class PlantAsideBean extends Action {
 	}
 
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		if(initiator.getSetAsideCards().contains(card)) initiator.plantBean(card, field);
 		else throw new IllegalActionException("Can only plant set aside cards");
 	}

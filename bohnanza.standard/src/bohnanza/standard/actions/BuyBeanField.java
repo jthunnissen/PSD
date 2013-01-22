@@ -16,7 +16,7 @@ public class BuyBeanField extends Action {
 	/**
 	 * Player buys a new bean field
 	 */
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		initiator.buyField();
 	}
 }

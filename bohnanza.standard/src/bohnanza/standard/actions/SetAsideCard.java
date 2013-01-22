@@ -16,7 +16,7 @@ public class SetAsideCard extends Action {
 	}
 	
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		initiator.setFaceUpCardaside(card);
 	}
 

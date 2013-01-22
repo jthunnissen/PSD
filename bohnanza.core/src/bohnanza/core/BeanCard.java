@@ -10,7 +10,6 @@ public class BeanCard extends Card {
 	 */
 	private final HashMap<Integer, Integer> produces;
 
-
 	/**
 	 * @uml.property  name="type"
 	 */

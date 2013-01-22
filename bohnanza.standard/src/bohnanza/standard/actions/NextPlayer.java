@@ -12,7 +12,7 @@ public class NextPlayer extends Action {
 	}
 
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		game.goToNextPlayer();
 	}
 

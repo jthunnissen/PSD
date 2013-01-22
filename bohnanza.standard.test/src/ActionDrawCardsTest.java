@@ -1,55 +1,50 @@
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import bohnanza.standard.actions.DrawFaceUpCards;
-import bohnanza.standard.core.*;
-import bohnanza.standard.core.actions.*;
+import bohnanza.core.Card;
+import bohnanza.core.IllegalActionException;
+import bohnanza.standard.actions.DrawCards;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.Game;
 
 /**
  * Test class for the Player.
- * @author Anne van de Venis
+ * @author Anne van de Venis & Damiaan van der Kruk
  */
 public class ActionDrawCardsTest {
 
 	private static final String PLAYER_NAME = "Player";
 	private BohnanzaPlayer player;
 	private Game game;
-	private DrawFaceUpCards action;
 
 	@Before 
-	public void setUp() { 
+	public void setUp() throws IllegalActionException { 
 		player = new BohnanzaPlayer(PLAYER_NAME);
 		game = new Game();
-		action = new DrawFaceUpCards(game, player);
+		game.addPlayer(player);
 	}
 
 	@Test
 	public void testDraw2Cards(){
-		boolean result = false;
-		if(player.addCardToHand(game.drawCard()) &&
-				player.addCardToHand(game.drawCard())){
-			result = true;
-		}
-
-		assertEquals("Player could not draw two cards", result, true);		
+		player.addCardToHand(game.drawCard());
+		player.addCardToHand(game.drawCard());
+		assertThat("Player could not draw two cards", player.getHand().size(), is(2));	
 	}
 
 	@Test
 	public void testDrawAllCards(){
-		boolean result = true;
+		Card card;
 		for(int i = 0; i<2; i++){
-			for(int cards=0; cards<154; cards++) {
-				try{
-					game.drawCard();
-				} catch(Exception e) {
-					result = false;
-				}
+			for(int cards = 0; cards < GameFactoryTest.STANDARDDECKSIZE; cards++) {
+				card = game.drawCard();
+				game.addCardToDiscardPile(card);
 			}
 		}
-		assertEquals("Stack is not reshuffled", result, true);
+		assertThat("Stack is not reshuffled", game.getDrawDeck().size() + game.getDiscardPile().size(), is(GameFactoryTest.STANDARDDECKSIZE));
 	}
 
 	@Test
@@ -68,6 +63,13 @@ public class ActionDrawCardsTest {
 			result = false;
 		}
 		assertEquals("Game does not finish", result, false);
+	}
+	
+	@Test
+	public void TestActionHandle() throws IllegalActionException {
+		new DrawCards(game, player).handle();
+		assertThat("Player hasn't drawn three cards.", player.getHand().size(), is(3));
+		assertThat("There where not three cards drawn from the deck", game.getDrawDeck().size(), is(GameFactoryTest.STANDARDDECKSIZE-3));
 	}
 
 

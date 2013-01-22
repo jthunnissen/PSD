@@ -35,12 +35,6 @@ public abstract class GameBase {
 	
 	protected final AbstractFactory factory;
 
-	public boolean isStarted(){
-		return started;
-	}
-	
-	public abstract void start();
-
 	/**
 		 */
 	protected GameBase(AbstractFactory facotry) {
@@ -49,6 +43,11 @@ public abstract class GameBase {
 		shuffleCards();
 	}
 
+	public abstract void start();
+
+	public boolean isStarted(){
+		return started;
+	}
 	
 	public Player addPlayer(Player player) throws IllegalActionException{
 		for(Player p: players){
@@ -59,10 +58,6 @@ public abstract class GameBase {
 		return player;
 	}
 	
-	private void shuffleCards() {
-		Collections.shuffle(drawDeck);
-	}
-
 	public void handle(Action action) throws IllegalActionException {
 		currentState.handle(action);
 	}
@@ -108,7 +103,6 @@ public abstract class GameBase {
 	 * @return the card that was drawn
 	 */
 	public Card drawCard() {
-		//TODO: reshuffle deck if empty
 		Card drawnCard = drawDeck.remove(0);
 		if(drawDeck.isEmpty()) {
 			drawDeck.addAll(discardPile);
@@ -140,5 +134,18 @@ public abstract class GameBase {
 	
 	public Player getNextPlayer() {
 		return players.get(activePlayerIndex+1);
+	}
+	
+	public List<Card> getDrawDeck() {
+		return Collections.unmodifiableList(drawDeck);
+	}
+	
+	public List<Card> getDiscardPile() {
+		return Collections.unmodifiableList(discardPile);
+	}
+
+
+	private void shuffleCards() {
+		Collections.shuffle(drawDeck);
 	}
 }

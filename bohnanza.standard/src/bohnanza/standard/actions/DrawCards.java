@@ -13,12 +13,11 @@ public class DrawCards extends Action {
 	}
 	
 	@Override
-	public void handle() throws IllegalActionException {
+	protected void innerHandle() throws IllegalActionException {
 		for (int i = 0; i < 3; i++) {
 			Card card = game.drawCard();
 			initiator.addCardToHand(card);
 		}
-		//game.goToNextPlayer();
 	}
 
 }
