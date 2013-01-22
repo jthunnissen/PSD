@@ -7,13 +7,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import bohnanza.core.Card;
+import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.Game;
@@ -38,7 +38,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void playerTest() {
+	public void playerTest() throws IllegalActionException {
 		Player player1 = new BohnanzaPlayer(PLAYER1_NAME);
 		Player player2 = new BohnanzaPlayer(PLAYER2_NAME);
 		Player player3 = new BohnanzaPlayer(PLAYER3_NAME);
@@ -66,25 +66,21 @@ public class GameTest {
 		game.goToNextPlayer(-1);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test
-	public void shuffleDeck() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		Field drawDeskField = Game.class.getDeclaredField("drawDesk");
-		drawDeskField.setAccessible(true);
-		ArrayList<Card> game1DrawDesk = (ArrayList<Card>) drawDeskField.get(game);
-		ArrayList<Card> game2DrawDesk = (ArrayList<Card>) drawDeskField.get(new Game());
+	public void shuffleDeck(){
+		List<Card> game1DrawDesk = game.getDrawDeck();
+		List<Card> game2DrawDesk = new Game().getDrawDeck();
 		
 		assertThat(game1DrawDesk.size(), is(game2DrawDesk.size()));
-		assertThat(game1DrawDesk, is(not(equalTo(game2DrawDesk))));
+		assertThat(game1DrawDesk, not(equalTo(game2DrawDesk)));
 	}
 	
 	@Test
 	public void drawCardsTest() {
-		int drawDeskSize = game.getDrawDeskSize();
+		int drawDeskSize = game.getDrawDeck().size();
 		
-		assertThat("discrad pile size must be 0 by default", game.getDiscardPileSize(), is(0));
 		assertThat(game.drawCard(), instanceOf(Card.class));
-		assertThat(game.getDrawDeskSize(), is(drawDeskSize-1));
-		assertThat(game.getDiscardPileSize(), is(0));
+		assertThat(game.getDrawDeck().size(), is(drawDeskSize-1));
+		assertThat(game.getDiscardPile().size(), is(0));
 	}
 }

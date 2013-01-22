@@ -144,7 +144,6 @@ public abstract class GameBase {
 		return Collections.unmodifiableList(discardPile);
 	}
 
-
 	private void shuffleCards() {
 		Collections.shuffle(drawDeck);
 	}

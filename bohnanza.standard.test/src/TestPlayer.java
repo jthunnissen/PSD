@@ -41,14 +41,10 @@ public class TestPlayer {
 	}
 
 	@Test
-	public void testPlayerPlant() {
+	public void testPlayerPlant() throws IllegalActionException {
 		player.addCardToHand(card);
-		try {
-			player.plantBean(card, field);
-		} catch (IllegalActionException e) {
-		}
-		assertEquals("Card has not been removed from hand", 1, player
-				.getBeanFields().get(1).getCards().size());
+		player.plantBean(card, field);
+		assertEquals("Card has not been removed from hand", 1, field.getCards().size());
 	}
 
 	@Test
