@@ -1,5 +1,5 @@
 package bohnanza.alcabohne.states;
-import bohnanza.alcabohne.actions.GiftBeanToMafia;
+import bohnanza.alcabohne.actions.GiftBeanToMobb;
 import bohnanza.alcabohne.model.Game;
 import bohnanza.core.Action;
 import bohnanza.core.TurnState;
@@ -16,7 +16,7 @@ public class GiftMafiaState extends TurnState {
 	@Override
 	protected void reset() {
 		if(needsToPay()) {
-			addAction(GiftBeanToMafia.class);
+			addAction(GiftBeanToMobb.class);
 			addAction(Harvest.class);
 		} else {
 			addAction(NextPhase.class);
@@ -25,7 +25,7 @@ public class GiftMafiaState extends TurnState {
 
 	@Override
 	protected boolean handled(Action action) {
-		if(action instanceof GiftBeanToMafia || action instanceof NextPhase) {
+		if(action instanceof GiftBeanToMobb || action instanceof NextPhase) {
 			return true;
 		} else if(action instanceof Harvest && !needsToPay()) {
 			removeAllActions();

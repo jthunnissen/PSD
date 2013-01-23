@@ -1,6 +1,7 @@
 package bohnanza.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.json.JSONException;
@@ -8,20 +9,20 @@ import org.json.JSONObject;
 import org.json.Protocol;
 
 
-public abstract class Field implements ToJSON {
+public abstract class Field<CardType extends Card> implements ToJSON {
 
 	/** 
 	 * @uml.property name="card"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="field:main.Card"
 	 */
-	protected ArrayList<Card> cards = new ArrayList<Card>();
+	protected ArrayList<CardType> cards = new ArrayList<CardType>();
 
 	/** 
 	 * Getter of the property <tt>card</tt>
 	 * @return  Returns the cards.
 	 * @uml.property  name="card"
 	 */
-	public ArrayList<Card> getCards() {
+	public ArrayList<CardType> getCards() {
 		return cards;
 	}
 	
@@ -33,8 +34,15 @@ public abstract class Field implements ToJSON {
 		return cards.size();
 	}
 
-	public void addCard(Card card) throws IllegalActionException {
+	public void addCard(CardType card) throws IllegalActionException {
 		if(!cards.add(card)) throw new IllegalActionException("Card already in field");
+	}
+	
+	public void addAllCards(Collection<CardType> cards) throws IllegalActionException {
+		for(CardType card : cards){
+			if(cards.contains(card)) throw new IllegalActionException("Card already in field");
+		}
+		cards.addAll(cards);
 	}
 	
 	/**
@@ -42,9 +50,9 @@ public abstract class Field implements ToJSON {
 	 * @post this.getCards().size() == 0
 	 * @return The cards that are harvested from this field.
 	 */
-	public ArrayList<Card> harvest(){
-		ArrayList<Card> result = cards;
-		cards = new ArrayList<Card>();
+	public ArrayList<CardType> harvest(){
+		ArrayList<CardType> result = cards;
+		cards = new ArrayList<CardType>();
 		return result; 
 	}
 	

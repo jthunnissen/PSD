@@ -18,7 +18,7 @@ public class Game extends GameBase {
 
 	@Override
 	public void start() {
-		for(Player player: getPlayers()){
+		for(Player player: getPlayers()) {
 			for(int i=0; i<5; i++) {
 				player.addCardToHand(this.drawCard());
 			}

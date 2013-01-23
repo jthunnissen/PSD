@@ -8,8 +8,9 @@ import org.json.JSONObject;
 import bohnanza.core.*;
 
 public class MobBoss extends AlCabohnePlayer {
-
-	List<BeanCard> cards = new ArrayList<BeanCard>();
+	
+	/**@invariant !cards.isEmpty()**/
+	private List<BeanCard> cards = new ArrayList<BeanCard>();
 	
 	protected MobBoss(String name) {
 		super(name, false);
@@ -21,6 +22,14 @@ public class MobBoss extends AlCabohnePlayer {
 	
 	public void addCard(BeanCard card) {
 		cards.add(card);
+	}
+	
+	/**
+	 * @require cards != null
+	 * @return the type of bean this mob boss is collecting
+	 */
+	public IBeanType getBeanType() {
+		return cards.get(0).getType();
 	}
 
 	@Override

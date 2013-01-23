@@ -3,33 +3,12 @@ package bohnanza.core;
 import java.util.ArrayList;
 
 
-public class BeanField extends Field {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see main.Field#addCard(main.Card)
-	 */
+public class BeanField extends Field<BeanCard> {
+	
 	@Override
-	public void addCard(Card card) throws IllegalActionException {
-		if(!(card instanceof BeanCard)) throw new IllegalActionException("Cannot at non-Beancard to Beanfield");
-		addCard((BeanCard) card);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see main.Field#harvest()
-	 */
-	@Override
-	public ArrayList<Card> harvest() {
+	public ArrayList<BeanCard> harvest() {
 		// TODO Handle here points if possible
 		return super.harvest();
-	}
-
-	public void addCard(BeanCard card) throws IllegalActionException {
-		if(!checkCard(card)) throw new IllegalActionException("Bean is not of same type");
-		super.addCard(card);
 	}
 
 	/**
@@ -40,16 +19,16 @@ public class BeanField extends Field {
 	 *            Card that should be added.
 	 * @return true if card is of the same type of the other card on this field.
 	 */
-	private boolean checkCard(BeanCard card) {
+	public boolean checkCard(BeanCard card) {
 		if (cards.size() > 0) {
-			if (getTypeOf(card) != card.getType())
+			if (getTypeOf() != card.getType())
 				return false;
 		}
 		return true;
 	}
 
-	private IBeanType getTypeOf(Card card) {
-		return ((BeanCard) cards.get(0)).getType();
+	public IBeanType getTypeOf() {
+		return cards.get(0).getType();
 	}
 
 	
