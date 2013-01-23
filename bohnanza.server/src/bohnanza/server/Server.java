@@ -33,8 +33,7 @@ public class Server implements Runnable {
 		// The default port number.
 		int portNumber = 2222;
 		if(args.length < 1) {
-			System.out.println("Usage: java Server <portNumber>\n"
-					+ "Now using port number=" + portNumber);
+			System.out.println("Usage: java Server <portNumber>\n" + "Now using port number=" + portNumber);
 		} else {
 			portNumber = Integer.valueOf(args[0]).intValue();
 		}
@@ -56,14 +55,12 @@ public class Server implements Runnable {
 				int i = 0;
 				for(i = 0; i < maxClientsCount; i++) {
 					if(threads[i] == null) {
-						(threads[i] = new ServerThread(clientSocket, server, i))
-								.start();
+						(threads[i] = new ServerThread(clientSocket, server, i)).start();
 						break;
 					}
 				}
 				if(i == maxClientsCount) {
-					PrintStream os = new PrintStream(
-							clientSocket.getOutputStream());
+					PrintStream os = new PrintStream(clientSocket.getOutputStream());
 					os.println("Server too busy. Try later.");
 					os.close();
 					clientSocket.close();
@@ -75,10 +72,8 @@ public class Server implements Runnable {
 	}
 
 	public void sendUpdate(int from) {
-		if(game.isStarted()
-				&& game.getActions(game.getActivePlayer()).size() == 1) {
-			if(game.getActions(game.getActivePlayer()).contains(
-					NextPlayer.class)) {
+		if(game.isStarted() && game.getActions(game.getActivePlayer()).size() == 1) {
+			if(game.getActions(game.getActivePlayer()).contains(NextPlayer.class)) {
 				Action action = new NextPlayer(game, game.getActivePlayer());
 				try {
 					game.handle(action);

@@ -12,8 +12,7 @@ public class PlantAsideBean extends Action<StandardGame> {
 	private final BeanCard card;
 	private final BeanField field;
 
-	public PlantAsideBean(StandardGame game, Player initiator, BeanCard card,
-			BeanField field) {
+	public PlantAsideBean(StandardGame game, Player initiator, BeanCard card, BeanField field) {
 		super(game, initiator);
 		this.card = card;
 		this.field = field;

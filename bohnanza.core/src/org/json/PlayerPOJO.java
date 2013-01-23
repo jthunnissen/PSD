@@ -12,9 +12,7 @@ public class PlayerPOJO {
 	private ArrayList<CardPOJO> fields = new ArrayList<CardPOJO>();
 	private ArrayList<String> actions = new ArrayList<String>();
 
-	public PlayerPOJO(String name, String score, ArrayList<CardPOJO> hand,
-			ArrayList<CardPOJO> faceUp, ArrayList<CardPOJO> aside,
-			ArrayList<CardPOJO> fields, ArrayList<String> actions) {
+	public PlayerPOJO(String name, String score, ArrayList<CardPOJO> hand, ArrayList<CardPOJO> faceUp, ArrayList<CardPOJO> aside, ArrayList<CardPOJO> fields, ArrayList<String> actions) {
 		this.name = name;
 		this.score = score;
 		this.hand = hand;
@@ -36,28 +34,24 @@ public class PlayerPOJO {
 			}
 
 			// Face up
-			JSONArray jsonFaceUp = jsonPlayer
-					.getJSONArray(Protocol.PLAYER_FACEUP);
+			JSONArray jsonFaceUp = jsonPlayer.getJSONArray(Protocol.PLAYER_FACEUP);
 			for(int l = 0; l < jsonFaceUp.length(); l++) {
 				faceUp.add(new CardPOJO(jsonFaceUp.getJSONObject(l)));
 			}
 
 			// Aside
-			JSONArray jsonAside = jsonPlayer
-					.getJSONArray(Protocol.PLAYER_ASIDE);
+			JSONArray jsonAside = jsonPlayer.getJSONArray(Protocol.PLAYER_ASIDE);
 			for(int l = 0; l < jsonAside.length(); l++) {
 				aside.add(new CardPOJO(jsonAside.getJSONObject(l)));
 			}
 			// Fields
-			JSONArray jsonFields = jsonPlayer
-					.getJSONArray(Protocol.PLAYER_FIELDS);
+			JSONArray jsonFields = jsonPlayer.getJSONArray(Protocol.PLAYER_FIELDS);
 			for(int k = 0; k < jsonFields.length(); k++) {
 				fields.add(new CardPOJO(jsonFields.getJSONObject(k)));
 			}
 
 			// Actions
-			JSONArray jsonActions = jsonPlayer
-					.getJSONArray(Protocol.PLAYER_ACTIONS);
+			JSONArray jsonActions = jsonPlayer.getJSONArray(Protocol.PLAYER_ACTIONS);
 			for(int m = 0; m < jsonActions.length(); m++) {
 				actions.add(jsonActions.getString(m));
 			}

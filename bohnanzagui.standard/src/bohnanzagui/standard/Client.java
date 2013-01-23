@@ -31,15 +31,11 @@ public class Client implements Runnable {
 			clientSocket = new Socket(this.host, this.port);
 			inputLine = new BufferedReader(new InputStreamReader(System.in));
 			os = new PrintStream(clientSocket.getOutputStream());
-			is = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
+			is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		} catch(UnknownHostException e) {
-			System.err.println("Don't know about host " + this.host + ":"
-					+ this.port);
+			System.err.println("Don't know about host " + this.host + ":" + this.port);
 		} catch(IOException e) {
-			System.err
-					.println("Couldn't get I/O for the connection to the host "
-							+ host);
+			System.err.println("Couldn't get I/O for the connection to the host " + host);
 		}
 
 		/* If everything has been initialized then we want to write some data to

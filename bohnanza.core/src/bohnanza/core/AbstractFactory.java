@@ -36,27 +36,22 @@ public abstract class AbstractFactory {
 
 	protected abstract void fillStateTransistions();
 
-	public TurnState getTurnState(Class<? extends TurnState> state,
-			GameBase game) {
+	public TurnState getTurnState(Class<? extends TurnState> state, GameBase game) {
 		try {
-			TurnState newState = state.getConstructor(GameBase.class)
-					.newInstance(game);
+			TurnState newState = state.getConstructor(GameBase.class).newInstance(game);
 			if(stateTransitions.containsKey(state)) {
 				for(Transition transition : stateTransitions.get(state)) {
 					newState.addTransition(transition.action, transition.state);
 				}
 			}
 			return newState;
-		} catch(NoSuchMethodException | SecurityException
-				| InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e) {
+		} catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	protected final boolean addTransition(Class<? extends TurnState> fromState,
-			Class<? extends Action> action, Class<? extends TurnState> toState) {
+	protected final boolean addTransition(Class<? extends TurnState> fromState, Class<? extends Action> action, Class<? extends TurnState> toState) {
 		ArrayList<Transition> transactions;
 		if(stateTransitions.containsKey(fromState)) {
 			transactions = stateTransitions.get(fromState);
@@ -71,8 +66,7 @@ public abstract class AbstractFactory {
 		private final Class<? extends Action> action;
 		private final Class<? extends TurnState> state;
 
-		protected Transition(Class<? extends Action> action,
-				Class<? extends TurnState> state) {
+		protected Transition(Class<? extends Action> action, Class<? extends TurnState> state) {
 			this.action = action;
 			this.state = state;
 		}

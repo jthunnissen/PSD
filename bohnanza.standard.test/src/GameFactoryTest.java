@@ -12,17 +12,13 @@ public class GameFactoryTest {
 	@Test
 	public void singeletonTest() {
 		GameFactory gameFactory = GameFactory.getInstance();
-		assertSame("There must be only one instance of gameFactory(Singleton)",
-				gameFactory, this.gameFactory);
+		assertSame("There must be only one instance of gameFactory(Singleton)", gameFactory, this.gameFactory);
 	}
 
 	@Test
 	public void standartCardDeckTest() {
 		ArrayList<Card> deck = gameFactory.getGameDeck();
-		assertEquals(
-				"Standard deck size must be "
-						+ String.valueOf(STANDARDDECKSIZE), STANDARDDECKSIZE,
-				deck.size());
+		assertEquals("Standard deck size must be " + String.valueOf(STANDARDDECKSIZE), STANDARDDECKSIZE, deck.size());
 	}
 
 }

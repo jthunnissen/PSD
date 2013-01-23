@@ -12,8 +12,7 @@ public class AcceptTrade extends Action<StandardGame> {
 	private final List<Card> cards;
 	private final List<Card> offer;
 
-	public AcceptTrade(StandardGame game, Player player, Player otherPlayer,
-			List<Card> cards, List<Card> offer) {
+	public AcceptTrade(StandardGame game, Player player, Player otherPlayer, List<Card> cards, List<Card> offer) {
 		super(game, player);
 		this.otherPlayer = otherPlayer;
 		this.cards = cards;

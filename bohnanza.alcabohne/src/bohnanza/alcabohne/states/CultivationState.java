@@ -19,8 +19,7 @@ public class CultivationState extends TurnState<AlCabhoneGame> {
 
 	@Override
 	protected boolean handled(Action<? extends GameBase> action) {
-		if(action instanceof CultivateRevealedBeanType
-				&& context.getRevealedBeans().isEmpty()) {
+		if(action instanceof CultivateRevealedBeanType && context.getRevealedBeans().isEmpty()) {
 			removeAction(CultivateRevealedBeanType.class);
 			addAction(NextPhase.class);
 		}

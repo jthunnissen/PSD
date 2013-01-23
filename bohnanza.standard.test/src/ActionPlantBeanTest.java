@@ -25,8 +25,7 @@ public class ActionPlantBeanTest {
 	@Test
 	public void testDraw2Cards() {
 		boolean result = false;
-		if(player.addCardToHand(game.drawCard())
-				&& player.addCardToHand(game.drawCard())) {
+		if(player.addCardToHand(game.drawCard()) && player.addCardToHand(game.drawCard())) {
 			result = true;
 		}
 

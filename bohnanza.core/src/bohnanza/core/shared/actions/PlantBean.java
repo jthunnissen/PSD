@@ -12,8 +12,7 @@ public class PlantBean extends Action<GameBase> {
 	private final BeanCard card;
 	private final BeanField field;
 
-	public PlantBean(GameBase game, Player initiator, BeanCard card,
-			BeanField field) {
+	public PlantBean(GameBase game, Player initiator, BeanCard card, BeanField field) {
 		super(game, initiator);
 		this.card = card;
 		this.field = field;
@@ -22,9 +21,7 @@ public class PlantBean extends Action<GameBase> {
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		if(!(initiator.getHand().indexOf(card) == 0))
-			throw new IllegalActionException(MessageFormat.format(
-					"Can only plant first card in hand ({0})", initiator
-							.getHand().get(0).getName()));
+			throw new IllegalActionException(MessageFormat.format("Can only plant first card in hand ({0})", initiator.getHand().get(0).getName()));
 
 		initiator.plantBean(card, field);
 	}

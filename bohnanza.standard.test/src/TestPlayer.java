@@ -30,8 +30,7 @@ public class TestPlayer {
 	@Test
 	public void testPlayerInit() {
 		assertSame("Score is not 0", player.calcScore(), 0);
-		assertSame("Player has not two fields", player.getBeanFields().size(),
-				2);
+		assertSame("Player has not two fields", player.getBeanFields().size(), 2);
 		assertEquals("Player has incorrect name", player.getName(), PLAYER_NAME);
 		assertEquals("Player has strange hand", player.getHand().size(), 0);
 	}
@@ -40,8 +39,7 @@ public class TestPlayer {
 	public void testPlayerPlant() throws IllegalActionException {
 		player.addCardToHand(card);
 		player.plantBean(card, field);
-		assertEquals("Card has not been removed from hand", 1, field.getCards()
-				.size());
+		assertEquals("Card has not been removed from hand", 1, field.getCards().size());
 	}
 
 	@Test
@@ -55,8 +53,7 @@ public class TestPlayer {
 		} catch(IllegalActionException e) {
 
 		}
-		assertEquals("Score is incorrect", player.calcScore(),
-				card.getBeanometer(2));
+		assertEquals("Score is incorrect", player.calcScore(), card.getBeanometer(2));
 	}
 
 	@Test
@@ -88,8 +85,7 @@ public class TestPlayer {
 		} catch(IllegalActionException e) {
 			result = false;
 		}
-		assertEquals("Player can buy field but has not enough money", false,
-				result);
+		assertEquals("Player can buy field but has not enough money", false, result);
 
 		result = true;
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
@@ -116,8 +112,7 @@ public class TestPlayer {
 			System.out.println(e.getMessage());
 		}
 		assertEquals("Player can not buy third field", true, result);
-		assertEquals("Player does not have a third field", 3, player
-				.getBeanFields().size());
+		assertEquals("Player does not have a third field", 3, player.getBeanFields().size());
 
 		for(int i = 0; i < 5; i++) {
 			player.addCardToHand(card);

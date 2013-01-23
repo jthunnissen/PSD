@@ -53,13 +53,11 @@ public abstract class GameBase {
 		Collections.shuffle(drawDeck);
 	}
 
-	public void handle(Action<? extends GameBase> action)
-			throws IllegalActionException {
+	public void handle(Action<? extends GameBase> action) throws IllegalActionException {
 		currentState.handle(action);
 	}
 
-	public List<Class<? extends Action<? extends GameBase>>> getActions(
-			Player player) {
+	public List<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
 		return currentState.getActions(player);
 	}
 
@@ -67,8 +65,7 @@ public abstract class GameBase {
 	 * 
 	 * @return Returns the currentState.
 	 * @uml.property name="currentState" */
-	/*
-	 * public TurnState getCurrentState() { return currentState; } */
+	/* public TurnState getCurrentState() { return currentState; } */
 
 	/** @param currentState the currentState to set */
 	public void setCurrentState(TurnState<? extends GameBase> currentState) {

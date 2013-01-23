@@ -36,8 +36,7 @@ public class TradeState extends TurnState<StandardGame> {
 			}
 			addAction(proposition.getActivePlayer(), AcceptTrade.class);
 			addAction(proposition.getActivePlayer(), DeclineTrade.class);
-		} else if(action instanceof AcceptTrade
-				|| action instanceof DeclineTrade) {
+		} else if(action instanceof AcceptTrade || action instanceof DeclineTrade) {
 			startTrade();
 
 		}

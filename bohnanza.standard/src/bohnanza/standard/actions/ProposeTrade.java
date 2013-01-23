@@ -13,8 +13,7 @@ public class ProposeTrade extends Action<StandardGame> {
 	private final List<Card> cards;
 	private final List<Card> offer;
 
-	public ProposeTrade(StandardGame game, Player initiator,
-			Player activePlayer, List<Card> cards, List<Card> offer) {
+	public ProposeTrade(StandardGame game, Player initiator, Player activePlayer, List<Card> cards, List<Card> offer) {
 		super(game, initiator);
 		this.activePlayer = activePlayer;
 		this.cards = cards;
@@ -26,12 +25,9 @@ public class ProposeTrade extends Action<StandardGame> {
 	 * @require give != null */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
-		if(!(initiator == game.getActivePlayer() || activePlayer == game
-				.getActivePlayer()))
-			throw new IllegalActionException(
-					"Only trades with the active player are allowed");
-		if(!initiator.isValidTrade(cards, offer, false)
-				|| !activePlayer.isValidTrade(offer, cards, true))
+		if(!(initiator == game.getActivePlayer() || activePlayer == game.getActivePlayer()))
+			throw new IllegalActionException("Only trades with the active player are allowed");
+		if(!initiator.isValidTrade(cards, offer, false) || !activePlayer.isValidTrade(offer, cards, true))
 			throw new IllegalActionException("No valid trade");
 	}
 

@@ -64,8 +64,7 @@ public class ClientGUI extends Application {
 			gotoLogin();
 			primaryStage.show();
 		} catch(Exception ex) {
-			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null,
-					ex);
+			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -74,8 +73,7 @@ public class ClientGUI extends Application {
 			loginController = (LoginController) replaceSceneContent("Login.fxml");
 			loginController.setApp(this);
 		} catch(Exception ex) {
-			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null,
-					ex);
+			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -89,8 +87,7 @@ public class ClientGUI extends Application {
 			gameController.setApp(this);
 
 		} catch(Exception ex) {
-			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null,
-					ex);
+			Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -114,10 +111,8 @@ public class ClientGUI extends Application {
 
 					JSONObject response = new JSONObject(update);
 					String action = response.getString("type");
-					if(state == ClientGUI.AWAITING_USERNAMECHECK
-							&& action.equals("usernamecheck")) {
-						loginController.checkLogin(Protocol
-								.usernameFromJSON(response));
+					if(state == ClientGUI.AWAITING_USERNAMECHECK && action.equals("usernamecheck")) {
+						loginController.checkLogin(Protocol.usernameFromJSON(response));
 					} else if(action.equals("waiting")) {
 						loginController.username.setText("waiting for game...");
 					} else if(action.equals(Protocol.CHAT)) {
@@ -125,21 +120,18 @@ public class ClientGUI extends Application {
 					} else if(action.equals(Protocol.ERROR)) {
 						showError(response.getString("response"));
 						if(state == ClientGUI.AWAITING_GAMEUPDATE) {
-							gameController.update(Protocol.fromJSON(
-									oldResponse.toString(), username));
+							gameController.update(Protocol.fromJSON(oldResponse.toString(), username));
 						}
 					} else if(action.equals(Protocol.PROPOSETRADE)) {
 						OfferPOJO offer = Protocol.sendOfferFromJSON(response);
-						((StandardGameController) gameController)
-								.viewOffer(offer);
+						((StandardGameController) gameController).viewOffer(offer);
 					} else if(action.equals("gameupdate")) {
 						if(state == ClientGUI.AWAITING_START) {
 							goToGame(response.getInt(Protocol.GAME_TYPE));
 							state = ClientGUI.AWAITING_GAMEUPDATE;
 						}
 						oldResponse = update;
-						gameController.update(Protocol.fromJSON(update,
-								username));
+						gameController.update(Protocol.fromJSON(update, username));
 					}
 				} catch(Exception ex) {
 					ex.printStackTrace();
@@ -162,9 +154,7 @@ public class ClientGUI extends Application {
 			}
 		});
 
-		Scene myDialogScene = new Scene(VBoxBuilder.create()
-				.children(descriptionText, dismissButton).alignment(Pos.CENTER)
-				.padding(new Insets(10)).build());
+		Scene myDialogScene = new Scene(VBoxBuilder.create().children(descriptionText, dismissButton).alignment(Pos.CENTER).padding(new Insets(10)).build());
 
 		myDialog.setScene(myDialogScene);
 		myDialog.show();
@@ -172,11 +162,9 @@ public class ClientGUI extends Application {
 
 	private Initializable replaceSceneContent(String fxml) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		InputStream in = this.getClass().getClassLoader()
-				.getResourceAsStream("res/ui/" + fxml);
+		InputStream in = this.getClass().getClassLoader().getResourceAsStream("res/ui/" + fxml);
 		loader.setBuilderFactory(new JavaFXBuilderFactory());
-		loader.setLocation(getClass().getClassLoader().getResource(
-				"res/ui/" + fxml));
+		loader.setLocation(getClass().getClassLoader().getResource("res/ui/" + fxml));
 		AnchorPane page = null;
 		try {
 			page = (AnchorPane) loader.load(in);

@@ -29,9 +29,7 @@ public class MobBoss extends AlCabohnePlayer {
 	}
 
 	@Override
-	public JSONObject toJSON(
-			List<Class<? extends Action<? extends GameBase>>> list,
-			HashMap<Integer, Card> cardIndex) {
+	public JSONObject toJSON(List<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}

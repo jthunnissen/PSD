@@ -6,8 +6,7 @@ import bohnanza.core.*;
 
 public class AlCabhoneGame extends GameBase {
 
-	private final String[] mobbossNames = { "Al Cabhone", "Don Corlebohne",
-			"Joe Bohnano" };
+	private final String[] mobbossNames = { "Al Cabhone", "Don Corlebohne", "Joe Bohnano" };
 	private List<MobBoss> mobBosses = new ArrayList<MobBoss>();
 	private List<List<BeanCard>> revealedBeans = new ArrayList<List<BeanCard>>();
 
@@ -27,8 +26,7 @@ public class AlCabhoneGame extends GameBase {
 	public Player addPlayer(Player player) throws IllegalActionException {
 		assert player instanceof NormalPlayer;
 		if(Arrays.asList(mobbossNames).contains(player.getName()))
-			throw new IllegalActionException(player.getName()
-					+ " is a reserved name");
+			throw new IllegalActionException(player.getName() + " is a reserved name");
 		return super.addPlayer(player);
 	}
 
@@ -57,8 +55,7 @@ public class AlCabhoneGame extends GameBase {
 
 	public Card drawDiscardedCard() throws IllegalActionException {
 		if(discardPile.isEmpty())
-			throw new IllegalActionException(
-					"Can't draw from empty discard pile");
+			throw new IllegalActionException("Can't draw from empty discard pile");
 		return discardPile.remove(0);
 	}
 }

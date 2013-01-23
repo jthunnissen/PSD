@@ -11,8 +11,7 @@ public class GamePOJO {
 	private PlayerPOJO thisPlayer;
 	private ArrayList<String> actions;
 
-	public GamePOJO(PlayerPOJO currentPlayer, PlayerPOJO thisPlayer,
-			ArrayList<PlayerPOJO> players) {
+	public GamePOJO(PlayerPOJO currentPlayer, PlayerPOJO thisPlayer, ArrayList<PlayerPOJO> players) {
 		this.currentPlayer = currentPlayer;
 		this.thisPlayer = thisPlayer;
 		this.players = players;

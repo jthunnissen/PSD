@@ -67,8 +67,7 @@ public class Protocol {
 			// All players
 			JSONArray jsonPlayers = new JSONArray();
 			for(Player player : game.getPlayers()) {
-				jsonPlayers.put(player.toJSON(game.getActions(player),
-						cardIndex));
+				jsonPlayers.put(player.toJSON(game.getActions(player), cardIndex));
 			}
 			root.put(PLAYERS, jsonPlayers);
 
@@ -209,8 +208,7 @@ public class Protocol {
 		return result;
 	}
 
-	public static String sendOfferToJSON(String type, String playerName,
-			List<CardPOJO> cards, List<CardPOJO> offer) {
+	public static String sendOfferToJSON(String type, String playerName, List<CardPOJO> cards, List<CardPOJO> offer) {
 		String result = "";
 		try {
 			JSONObject root = new JSONObject();

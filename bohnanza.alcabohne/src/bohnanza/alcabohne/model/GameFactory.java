@@ -28,17 +28,12 @@ public class GameFactory extends AbstractFactory {
 	@Override
 	protected void fillStateTransistions() {
 		setStartState(StartState.class);
-		addTransition(StartState.class, NextPlayer.class,
-				UseLeftoverBeansState.class);
-		addTransition(UseLeftoverBeansState.class, null /* TODO */,
-				GiftMobState.class);
-		addTransition(GiftMobState.class, GiftBeanToMobb.class,
-				PlantState.class);
+		addTransition(StartState.class, NextPlayer.class, UseLeftoverBeansState.class);
+		addTransition(UseLeftoverBeansState.class, null /* TODO */, GiftMobState.class);
+		addTransition(GiftMobState.class, GiftBeanToMobb.class, PlantState.class);
 		addTransition(GiftMobState.class, NextPhase.class, PlantState.class);
-		addTransition(PlantState.class, NextPhase.class,
-				BeanRevelationState.class);
-		addTransition(BeanRevelationState.class, RevealBean.class,
-				CultivationState.class);
+		addTransition(PlantState.class, NextPhase.class, BeanRevelationState.class);
+		addTransition(BeanRevelationState.class, RevealBean.class, CultivationState.class);
 		addTransition(CultivationState.class, NextPhase.class, DrawState.class);
 		addTransition(DrawState.class, DrawCards.class, StartState.class);
 	}

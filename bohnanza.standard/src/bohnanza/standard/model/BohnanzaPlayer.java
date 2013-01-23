@@ -32,9 +32,7 @@ public class BohnanzaPlayer extends Player {
 	}
 
 	@Override
-	public JSONObject toJSON(
-			List<Class<? extends Action<? extends GameBase>>> list,
-			HashMap<Integer, Card> cardIndex) {
+	public JSONObject toJSON(List<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex) {
 		JSONObject result = new JSONObject();
 		try {
 			result.put(Protocol.PLAYER_NAME, getName());

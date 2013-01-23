@@ -28,8 +28,7 @@ public class ActionDrawCardsTest {
 	public void testDraw2Cards() {
 		player.addCardToHand(game.drawCard());
 		player.addCardToHand(game.drawCard());
-		assertThat("Player could not draw two cards", player.getHand().size(),
-				is(2));
+		assertThat("Player could not draw two cards", player.getHand().size(), is(2));
 	}
 
 	@Test
@@ -41,9 +40,7 @@ public class ActionDrawCardsTest {
 				game.addCardToDiscardPile(card);
 			}
 		}
-		assertThat("Stack is not reshuffled", game.getDrawDeck().size()
-				+ game.getDiscardPile().size(),
-				is(GameFactoryTest.STANDARDDECKSIZE));
+		assertThat("Stack is not reshuffled", game.getDrawDeck().size() + game.getDiscardPile().size(), is(GameFactoryTest.STANDARDDECKSIZE));
 	}
 
 	@Test
@@ -67,10 +64,8 @@ public class ActionDrawCardsTest {
 	@Test
 	public void TestActionHandle() throws IllegalActionException {
 		new DrawCards(game, player).handle();
-		assertThat("Player hasn't drawn three cards.", player.getHand().size(),
-				is(3));
-		assertThat("There where not three cards drawn from the deck", game
-				.getDrawDeck().size(), is(GameFactoryTest.STANDARDDECKSIZE - 3));
+		assertThat("Player hasn't drawn three cards.", player.getHand().size(), is(3));
+		assertThat("There where not three cards drawn from the deck", game.getDrawDeck().size(), is(GameFactoryTest.STANDARDDECKSIZE - 3));
 	}
 
 }

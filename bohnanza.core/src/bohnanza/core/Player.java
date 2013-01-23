@@ -73,8 +73,7 @@ public abstract class Player {
 	 * @param fieldnr Number of the field that will be harvested.
 	 * @return Cards that should be added to the discard pile.
 	 * @throws IllegalActionException */
-	public ArrayList<Card> harvastField(Field<? extends Card> field)
-			throws IllegalActionException {
+	public ArrayList<Card> harvastField(Field<? extends Card> field) throws IllegalActionException {
 		// Check if all fields contain one card
 		if(field.getCards().size() == 1) {
 			boolean ok = true;
@@ -83,8 +82,7 @@ public abstract class Player {
 					ok = false;
 			}
 			if(!ok) {
-				throw new IllegalActionException(
-						"This field has one card, other fields have more");
+				throw new IllegalActionException("This field has one card, other fields have more");
 			}
 		}
 
@@ -107,8 +105,7 @@ public abstract class Player {
 	 * @return true if the BeanCard is successfully planted in the Players'
 	 *         field.
 	 * @throws IllegalActionException */
-	public void plantBean(BeanCard card, BeanField field)
-			throws IllegalActionException {
+	public void plantBean(BeanCard card, BeanField field) throws IllegalActionException {
 		if(hand.indexOf(card) != 0)
 			throw new IllegalActionException("Player cannot plant this bean");
 		if(!fields.contains(field))
@@ -137,8 +134,7 @@ public abstract class Player {
 			throw new IllegalActionException("Player already has 3 fields");
 		}
 		if(this.calcScore() < 3)
-			throw new IllegalActionException(
-					"Player has not enough money. Has: " + this.calcScore());
+			throw new IllegalActionException("Player has not enough money. Has: " + this.calcScore());
 		BeanField thirdField = new BeanField();
 		fields.add(thirdField);
 
@@ -150,32 +146,27 @@ public abstract class Player {
 	 * @param receive
 	 * @param give
 	 * @throws IllegalOperationException if not isValidTrade(receive,give) */
-	public void trade(List<Card> receive, List<Card> give, boolean active)
-			throws IllegalActionException {
+	public void trade(List<Card> receive, List<Card> give, boolean active) throws IllegalActionException {
 		if(!isValidTrade(receive, give, active))
-			throw new IllegalActionException(this.getName()
-					+ " can only trade onwned for not owned cards");
+			throw new IllegalActionException(this.getName() + " can only trade onwned for not owned cards");
 		hand.removeAll(give);
 		if(active)
 			faceUpCards.removeAll(give);
 		setAsideCards.addAll(receive);
 	}
 
-	public boolean isValidTrade(List<Card> receive, List<Card> give,
-			boolean active) {
+	public boolean isValidTrade(List<Card> receive, List<Card> give, boolean active) {
 		boolean valid = true;
 		for(Card card : give) {
 			if(active) {
 				if(!faceUpCards.contains(card)) {
 					valid = false;
-					System.out.println("Active does not have: "
-							+ card.getName());
+					System.out.println("Active does not have: " + card.getName());
 				}
 			} else {
 				if(!hand.contains(card)) {
 					valid = false;
-					System.out.println("Initiator does not have: "
-							+ card.getName());
+					System.out.println("Initiator does not have: " + card.getName());
 				}
 
 			}
@@ -203,7 +194,5 @@ public abstract class Player {
 		setAsideCards.add(card);
 	}
 
-	public abstract JSONObject toJSON(
-			List<Class<? extends Action<? extends GameBase>>> list,
-			HashMap<Integer, Card> cardIndex);
+	public abstract JSONObject toJSON(List<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex);
 }

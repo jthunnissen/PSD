@@ -15,8 +15,7 @@ public class CultivateRevealedBeanType extends Action<AlCabhoneGame> {
 	private final IBeanType beanType;
 	private BeanField emptyField;
 
-	public CultivateRevealedBeanType(AlCabhoneGame game, Player initiator,
-			EBeanType beanType) {
+	public CultivateRevealedBeanType(AlCabhoneGame game, Player initiator, EBeanType beanType) {
 		super(game, initiator);
 		this.beanType = beanType;
 	}

@@ -91,8 +91,7 @@ public class GameController extends AnchorPane implements Initializable {
 		ObservableList<String> items = FXCollections.observableArrayList();
 		for(PlayerPOJO playerPOJO : playersPOJOS) {
 			if(update.getCurrentPlayer().getName().equals(playerPOJO.getName())) {
-				items.add(">>> " + playerPOJO.getName() + " - "
-						+ playerPOJO.getScore());
+				items.add(">>> " + playerPOJO.getName() + " - " + playerPOJO.getScore());
 			} else {
 				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());
 			}
@@ -135,8 +134,7 @@ public class GameController extends AnchorPane implements Initializable {
 
 	public void sendmessage() {
 		if(chatmessage.getText().length() > 0) {
-			application.sendToServer(Protocol.CHAT + " "
-					+ application.getUsername() + ": " + chatmessage.getText());
+			application.sendToServer(Protocol.CHAT + " " + application.getUsername() + ": " + chatmessage.getText());
 			chatmessage.setText("");
 		}
 	}
@@ -145,8 +143,7 @@ public class GameController extends AnchorPane implements Initializable {
 		return(activePlayer.equals(application.getUsername()));
 	}
 
-	protected void setupPlantTarget(final boolean isFromHand,
-			final ImageView targetBox, final int fieldid) {
+	protected void setupPlantTarget(final boolean isFromHand, final ImageView targetBox, final int fieldid) {
 		targetBox.setOnDragOver(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent event) {
@@ -165,11 +162,9 @@ public class GameController extends AnchorPane implements Initializable {
 				if(db.hasImage()) {
 					targetBox.setImage(db.getImage());
 					if(isFromHand) {
-						application.sendToServer(Protocol.PLANTBEAN + " "
-								+ fieldid + " " + db.getString());
+						application.sendToServer(Protocol.PLANTBEAN + " " + fieldid + " " + db.getString());
 					} else {
-						application.sendToServer(Protocol.PLANTASIDEBEAN + " "
-								+ fieldid + " " + db.getString());
+						application.sendToServer(Protocol.PLANTASIDEBEAN + " " + fieldid + " " + db.getString());
 					}
 
 					event.setDropCompleted(true);
@@ -188,8 +183,7 @@ public class GameController extends AnchorPane implements Initializable {
 				Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 				ClipboardContent content = new ClipboardContent();
 				content.putImage(source.getImage());
-				content.putString(""
-						+ ((CardPOJO) source.getUserData()).getHashcode());
+				content.putString("" + ((CardPOJO) source.getUserData()).getHashcode());
 				db.setContent(content);
 
 				event.consume();

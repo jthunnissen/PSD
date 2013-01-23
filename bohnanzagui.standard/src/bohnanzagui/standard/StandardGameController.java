@@ -73,8 +73,7 @@ public class StandardGameController extends GameController {
 		if(this.isActivePlayer(update.getCurrentPlayer().getName())) {
 			// Build actions view
 
-		} else if(update.getCurrentPlayer().getActions()
-				.contains(Protocol.PROPOSETRADE)) {
+		} else if(update.getCurrentPlayer().getActions().contains(Protocol.PROPOSETRADE)) {
 			actionsPane.setVisible(false);
 			offerPane.setVisible(true);
 		}
@@ -88,8 +87,7 @@ public class StandardGameController extends GameController {
 		for(CardPOJO card : update.getThisPlayer().getAside()) {
 			ImageView cardView = new ImageView(card.getImage());
 			cardView.setUserData(card);
-			if(update.getThisPlayer().getActions()
-					.contains(Protocol.PLANTASIDEBEAN)) {
+			if(update.getThisPlayer().getActions().contains(Protocol.PLANTASIDEBEAN)) {
 				this.setupCardDraggable(cardView);
 			}
 			aside.getChildren().add(cardView);
@@ -101,12 +99,10 @@ public class StandardGameController extends GameController {
 		for(CardPOJO card : update.getCurrentPlayer().getFaceUp()) {
 			ImageView cardView = new ImageView(card.getImage());
 			tradearea.getChildren().add(cardView);
-			if(update.getThisPlayer().getActions()
-					.contains(Protocol.SETASIDECARD)) {
+			if(update.getThisPlayer().getActions().contains(Protocol.SETASIDECARD)) {
 				setupSetAsideSource(cardView, card);
 				setupSetAsideTarget(aside);
-			} else if(update.getThisPlayer().getActions()
-					.contains(Protocol.PROPOSETRADE)) {
+			} else if(update.getThisPlayer().getActions().contains(Protocol.PROPOSETRADE)) {
 				setupMakeOffer(cardView, card);
 			}
 		}
@@ -130,8 +126,7 @@ public class StandardGameController extends GameController {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()) {
 					targetBox.getChildren().add(new ImageView(db.getImage()));
-					application.sendToServer(Protocol.SETASIDECARD + " "
-							+ db.getString());
+					application.sendToServer(Protocol.SETASIDECARD + " " + db.getString());
 					event.setDropCompleted(true);
 				} else {
 					event.setDropCompleted(false);
@@ -142,8 +137,7 @@ public class StandardGameController extends GameController {
 
 	}
 
-	private void setupSetAsideSource(final ImageView cardView,
-			final CardPOJO card) {
+	private void setupSetAsideSource(final ImageView cardView, final CardPOJO card) {
 		cardView.setOnDragDetected(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -165,31 +159,20 @@ public class StandardGameController extends GameController {
 		field3.setImage(defaultEmptyImage);
 
 		if(update.getThisPlayer().getFields().get(0).getScore() > 0) {
-			field1.setImage(update.getThisPlayer().getFields().get(0)
-					.getImage());
-			labelfield1.setText(""
-					+ update.getThisPlayer().getFields().get(0).getScore());
-			System.out.println("CARD: "
-					+ update.getThisPlayer().getFields().get(0).getName());
+			field1.setImage(update.getThisPlayer().getFields().get(0).getImage());
+			labelfield1.setText("" + update.getThisPlayer().getFields().get(0).getScore());
+			System.out.println("CARD: " + update.getThisPlayer().getFields().get(0).getName());
 		} else {
-			System.out.println("NO CARDS" + " "
-					+ update.getThisPlayer().getFields().get(0).getName() + " "
-					+ update.getThisPlayer().getFields().get(0).getScore());
+			System.out.println("NO CARDS" + " " + update.getThisPlayer().getFields().get(0).getName() + " " + update.getThisPlayer().getFields().get(0).getScore());
 		}
-		if(Integer
-				.valueOf(update.getThisPlayer().getFields().get(1).getScore()) > 0) {
-			field2.setImage(update.getThisPlayer().getFields().get(1)
-					.getImage());
-			labelfield2.setText(""
-					+ update.getThisPlayer().getFields().get(1).getScore());
+		if(Integer.valueOf(update.getThisPlayer().getFields().get(1).getScore()) > 0) {
+			field2.setImage(update.getThisPlayer().getFields().get(1).getImage());
+			labelfield2.setText("" + update.getThisPlayer().getFields().get(1).getScore());
 		}
 		if(update.getThisPlayer().getFields().size() > 2) {
-			if(Integer.valueOf(update.getThisPlayer().getFields().get(2)
-					.getScore()) > 0) {
-				field3.setImage(update.getThisPlayer().getFields().get(2)
-						.getImage());
-				labelfield3.setText(""
-						+ update.getThisPlayer().getFields().get(2).getScore());
+			if(Integer.valueOf(update.getThisPlayer().getFields().get(2).getScore()) > 0) {
+				field3.setImage(update.getThisPlayer().getFields().get(2).getImage());
+				labelfield3.setText("" + update.getThisPlayer().getFields().get(2).getScore());
 			}
 		}
 
@@ -200,11 +183,8 @@ public class StandardGameController extends GameController {
 			buy3.setVisible(false);
 		}
 
-		drawcard.setVisible((actions.contains(Protocol.DRAWCARDS)) ? true
-				: false);
-		drawfaceupcard
-				.setVisible((actions.contains(Protocol.DRAWFACEUPCARDS)) ? true
-						: false);
+		drawcard.setVisible((actions.contains(Protocol.DRAWCARDS)) ? true : false);
+		drawfaceupcard.setVisible((actions.contains(Protocol.DRAWFACEUPCARDS)) ? true : false);
 
 		if(actions.contains(Protocol.HARVEST)) {
 			harvest1.setVisible(true);
@@ -217,8 +197,7 @@ public class StandardGameController extends GameController {
 			harvest2.setVisible(false);
 			harvest3.setVisible(false);
 		}
-		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true
-				: false);
+		nextPhase.setVisible((actions.contains(Protocol.NEXTPHASE)) ? true : false);
 		if(actions.contains(Protocol.PLANTASIDEBEAN)) {
 			for(Node node : aside.getChildren()) {
 				setupCardDraggable((ImageView) node);
@@ -245,22 +224,21 @@ public class StandardGameController extends GameController {
 	}
 
 	public void setupMakeOffer(final ImageView cardView, final CardPOJO card) {
-		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED,
-				new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent event) {
-						System.out.println("Click on: " + card.getName());
-						offerPane.setVisible(true);
-						setupOfferTarget(offer);
-						for(Node node : hand.getChildren()) {
-							setupCardDraggable((ImageView) node);
-						}
-						if(offerItem != card) {
-							offerItem = card;
-							offer.getChildren().clear();
-							offerList.clear();
-						}
-					};
-				});
+		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				System.out.println("Click on: " + card.getName());
+				offerPane.setVisible(true);
+				setupOfferTarget(offer);
+				for(Node node : hand.getChildren()) {
+					setupCardDraggable((ImageView) node);
+				}
+				if(offerItem != card) {
+					offerItem = card;
+					offer.getChildren().clear();
+					offerList.clear();
+				}
+			};
+		});
 
 	}
 
@@ -278,16 +256,13 @@ public class StandardGameController extends GameController {
 			offerString.append(card.getName());
 			offerString.append(",");
 		}
-		Text descriptionText = new Text("Offer: "
-				+ offerString.substring(0, offerString.length() - 1).toString()
-				+ " for: " + cardsString.toString());
+		Text descriptionText = new Text("Offer: " + offerString.substring(0, offerString.length() - 1).toString() + " for: " + cardsString.toString());
 
 		Button dismissButton = new Button("Dismiss");
 		dismissButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.sendToServer(Protocol.DECLINETRADE + " "
-						+ offer.getInitiator());
+				application.sendToServer(Protocol.DECLINETRADE + " " + offer.getInitiator());
 				myDialog.close();
 			}
 		});
@@ -296,22 +271,13 @@ public class StandardGameController extends GameController {
 		okButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				application.sendToServer(Protocol.ACCEPTTRADE
-						+ Protocol.sendOfferToJSON(Protocol.ACCEPTTRADE,
-								offer.getInitiator(), offer.getCards(),
-								offer.getOffer()));
+				application.sendToServer(Protocol.ACCEPTTRADE + Protocol.sendOfferToJSON(Protocol.ACCEPTTRADE, offer.getInitiator(), offer.getCards(), offer.getOffer()));
 				myDialog.close();
 			}
 
 		});
 
-		Scene myDialogScene = new Scene(VBoxBuilder
-				.create()
-				.children(
-						new Text("Offer received from " + offer.getInitiator()
-								+ "!"), descriptionText, dismissButton,
-						okButton).alignment(Pos.CENTER).padding(new Insets(10))
-				.build());
+		Scene myDialogScene = new Scene(VBoxBuilder.create().children(new Text("Offer received from " + offer.getInitiator() + "!"), descriptionText, dismissButton, okButton).alignment(Pos.CENTER).padding(new Insets(10)).build());
 
 		myDialog.setScene(myDialogScene);
 		myDialog.show();
@@ -320,9 +286,7 @@ public class StandardGameController extends GameController {
 	public void sendOffer() {
 		ArrayList<CardPOJO> cards = new ArrayList<CardPOJO>();
 		cards.add(offerItem);
-		application.sendToServer(Protocol.PROPOSETRADE
-				+ Protocol.sendOfferToJSON(Protocol.PROPOSETRADE,
-						application.getUsername(), cards, offerList));
+		application.sendToServer(Protocol.PROPOSETRADE + Protocol.sendOfferToJSON(Protocol.PROPOSETRADE, application.getUsername(), cards, offerList));
 		offerList.clear();
 		offerItem = null;
 	}
@@ -352,8 +316,7 @@ public class StandardGameController extends GameController {
 				Dragboard db = event.getDragboard();
 				if(db.hasImage()) {
 					targetBox.getChildren().add(new ImageView(db.getImage()));
-					offerList.add(new CardPOJO("", 0, Integer.valueOf(db
-							.getString())));
+					offerList.add(new CardPOJO("", 0, Integer.valueOf(db.getString())));
 					event.setDropCompleted(true);
 				} else {
 					event.setDropCompleted(false);

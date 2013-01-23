@@ -8,8 +8,7 @@ public class OfferPOJO {
 	private ArrayList<CardPOJO> cards;
 	private ArrayList<CardPOJO> offer;
 
-	public OfferPOJO(String initiator, ArrayList<CardPOJO> cards,
-			ArrayList<CardPOJO> offer) {
+	public OfferPOJO(String initiator, ArrayList<CardPOJO> cards, ArrayList<CardPOJO> offer) {
 		this.initiator = initiator;
 		this.cards = cards;
 		this.offer = offer;

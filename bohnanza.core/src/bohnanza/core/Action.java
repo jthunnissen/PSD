@@ -12,8 +12,7 @@ public abstract class Action<Game extends GameBase> {
 
 	public void handle() throws IllegalActionException {
 		if(!game.getPlayers().contains(initiator))
-			throw new IllegalActionException(
-					"This player is not part of this game.");
+			throw new IllegalActionException("This player is not part of this game.");
 		innerHandle();
 	}
 

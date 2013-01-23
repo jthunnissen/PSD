@@ -27,8 +27,7 @@ public class GiftBeanToMobb extends Action<AlCabhoneGame> {
 				return;
 			}
 		}
-		throw new IllegalActionException(
-				"No mob boss cultivates this type of bean");
+		throw new IllegalActionException("No mob boss cultivates this type of bean");
 	}
 
 }

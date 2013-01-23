@@ -38,10 +38,8 @@ public class ActionPlantBeanCardTest {
 		player.addCardToHand(card1);
 		player.addCardToHand(card2);
 		new PlantBean(game, player, card1, field).handle();
-		assertThat("Card wasn't removed from the hand", player.getHand(),
-				not(hasItem(card1)));
-		assertThat("Card wasn't planted in the players field",
-				field.getCards(), hasItem(card1));
+		assertThat("Card wasn't removed from the hand", player.getHand(), not(hasItem(card1)));
+		assertThat("Card wasn't planted in the players field", field.getCards(), hasItem(card1));
 	}
 
 	@Test(expected = IllegalActionException.class)

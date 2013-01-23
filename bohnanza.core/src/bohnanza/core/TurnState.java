@@ -19,40 +19,32 @@ public abstract class TurnState<Game extends GameBase> {
 	public TurnState(final Game context) {
 		this.context = context;
 		for(Player player : context.getPlayers())
-			actions.put(
-					player,
-					new ArrayList<Class<? extends Action<? extends GameBase>>>());
+			actions.put(player, new ArrayList<Class<? extends Action<? extends GameBase>>>());
 	}
 
-	public final void handle(Action<? extends GameBase> action)
-			throws IllegalActionException {
-		List<Class<? extends Action<? extends GameBase>>> playerActions = actions
-				.get(action.getInitiator());
+	public final void handle(Action<? extends GameBase> action) throws IllegalActionException {
+		List<Class<? extends Action<? extends GameBase>>> playerActions = actions.get(action.getInitiator());
 		if(playerActions == null || !playerActions.contains(action.getClass()))
-			throw new IllegalActionException(
-					"Action not permitted for this player in current state");
+			throw new IllegalActionException("Action not permitted for this player in current state");
 		action.handle();
 		// if(handled(action) && transitions.containsKey(action)) {
 		if(handled(action)) {
 			getNextState(action);
 		} else
-			System.out.println("Contains next state :"
-					+ String.valueOf(transitions.containsKey(action)));
+			System.out.println("Contains next state :" + String.valueOf(transitions.containsKey(action)));
 		System.out.println("State: " + this.getClass().getName());
 	}
 
 	private void getNextState(Action<? extends GameBase> action) {
 		try {
-			TurnState<Game> nextState = AbstractFactory.getInstance()
-					.getTurnState(transitions.get(action.getClass()), context);
+			TurnState<Game> nextState = AbstractFactory.getInstance().getTurnState(transitions.get(action.getClass()), context);
 			context.setCurrentState(nextState);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<Class<? extends Action<? extends GameBase>>> getActions(
-			Player player) {
+	public List<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
 		return actions.get(player);
 	}
 
@@ -63,8 +55,7 @@ public abstract class TurnState<Game extends GameBase> {
 
 	/** Adds action to the list of possible actions for initiator in the current
 	 * state. */
-	protected void addAction(Player initiator,
-			Class<? extends Action<? extends GameBase>> action) {
+	protected void addAction(Player initiator, Class<? extends Action<? extends GameBase>> action) {
 		actions.get(initiator).add(action);
 	}
 
@@ -76,31 +67,26 @@ public abstract class TurnState<Game extends GameBase> {
 
 	/** Remove action from the list of possible actions for the active player in
 	 * the current state. */
-	protected void removeAction(
-			Class<? extends Action<? extends GameBase>> action) {
+	protected void removeAction(Class<? extends Action<? extends GameBase>> action) {
 		actions.get(context.getActivePlayer()).remove(action);
 	}
 
 	/** Remove action from the list of possible actions for initiator in the
 	 * current state. */
-	protected void removeAction(Player initiator,
-			Class<? extends Action<? extends GameBase>> action) {
+	protected void removeAction(Player initiator, Class<? extends Action<? extends GameBase>> action) {
 		actions.get(initiator).remove(action);
 	}
 
 	/** Remove all actions in the current state. */
 	protected void removeAllActions() {
-		for(List<Class<? extends Action<? extends GameBase>>> playeractions : actions
-				.values()) {
+		for(List<Class<? extends Action<? extends GameBase>>> playeractions : actions.values()) {
 			playeractions.clear();
 		}
 	}
 
 	/** To be used only by the game factory. Adds state as the next state the
 	 * game will be in if action ends the current state. */
-	public void addTransition(
-			Class<? extends Action<? extends GameBase>> action,
-			Class<? extends TurnState<Game>> state) {
+	public void addTransition(Class<? extends Action<? extends GameBase>> action, Class<? extends TurnState<Game>> state) {
 		transitions.put(action, state);
 	}
 }
