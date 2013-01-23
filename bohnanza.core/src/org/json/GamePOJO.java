@@ -7,34 +7,35 @@ public class GamePOJO {
 	private PlayerPOJO currentPlayer;
 	private ArrayList<PlayerPOJO> players;
 	private ArrayList<CardPOJO> faceup;
-	
+
 	private PlayerPOJO thisPlayer;
 	private ArrayList<String> actions;
-	
-	public GamePOJO(PlayerPOJO currentPlayer, PlayerPOJO thisPlayer, ArrayList<PlayerPOJO> players){
+
+	public GamePOJO(PlayerPOJO currentPlayer, PlayerPOJO thisPlayer,
+			ArrayList<PlayerPOJO> players) {
 		this.currentPlayer = currentPlayer;
 		this.thisPlayer = thisPlayer;
 		this.players = players;
 	}
-	
-	public PlayerPOJO getCurrentPlayer(){
+
+	public PlayerPOJO getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
-	public PlayerPOJO getThisPlayer(){
+
+	public PlayerPOJO getThisPlayer() {
 		return thisPlayer;
 	}
-	
-	public ArrayList<PlayerPOJO> getPlayers(){
+
+	public ArrayList<PlayerPOJO> getPlayers() {
 		return players;
 	}
-	
-	public ArrayList<CardPOJO> getFaceup(){
+
+	public ArrayList<CardPOJO> getFaceup() {
 		return faceup;
 	}
-	
-	public ArrayList<String> getActions(){
+
+	public ArrayList<String> getActions() {
 		return actions;
 	}
-	
+
 }

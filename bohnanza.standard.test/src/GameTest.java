@@ -6,81 +6,83 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
-
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 import bohnanza.standard.model.BohnanzaPlayer;
-import bohnanza.standard.model.Game;
+import bohnanza.standard.model.StandardGame;
 
 public class GameTest {
-	
+
 	public final String PLAYER1_NAME = "player1";
 	public final String PLAYER2_NAME = "player2";
 	public final String PLAYER3_NAME = "player3";
-	
-	public Game game;
+
+	public StandardGame game;
 
 	@Before
 	public void setUp() throws Exception {
-		game = new Game();
+		game = new StandardGame();
 	}
 
 	@Test
 	public void defaultTest() {
 		assertNotNull("Players must not be null", game.getPlayers());
-		assertEquals("Players must be empty on creation", 0, game.getPlayers().size());
+		assertEquals("Players must be empty on creation", 0, game.getPlayers()
+				.size());
 	}
-	
+
 	@Test
 	public void playerTest() throws IllegalActionException {
 		Player player1 = new BohnanzaPlayer(PLAYER1_NAME);
 		Player player2 = new BohnanzaPlayer(PLAYER2_NAME);
 		Player player3 = new BohnanzaPlayer(PLAYER3_NAME);
-		
+
 		game.addPlayer(player1);
 		assertEquals("Player size must be 1", 1, game.getPlayers().size());
-		
+
 		game.addPlayer(player2);
 		assertEquals("Player size must be 2", 2, game.getPlayers().size());
-		assertSame("Default player must be the first player added (player1)", player1, game.getActivePlayer());
-		
+		assertSame("Default player must be the first player added (player1)",
+				player1, game.getActivePlayer());
+
 		game.goToNextPlayer();
-		assertSame("The (next) current player must be player2", player2, game.getActivePlayer());
-		
+		assertSame("The (next) current player must be player2", player2,
+				game.getActivePlayer());
+
 		game.addPlayer(player3);
 		assertEquals("Player size must be 3", 3, game.getPlayers().size());
-		assertSame("The current player shouldn't change by adding a player", player2, game.getActivePlayer());
-		
+		assertSame("The current player shouldn't change by adding a player",
+				player2, game.getActivePlayer());
+
 		game.goToNextPlayer(1);
-		assertSame("player 3 must be skipped so current playter must be 1", player1, game.getActivePlayer());
+		assertSame("player 3 must be skipped so current playter must be 1",
+				player1, game.getActivePlayer());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void goToNextPlayerInvalidArgsTest() {
 		game.goToNextPlayer(-1);
 	}
-	
+
 	@Test
-	public void shuffleDeck(){
+	public void shuffleDeck() {
 		List<Card> game1DrawDesk = game.getDrawDeck();
-		List<Card> game2DrawDesk = new Game().getDrawDeck();
-		
+		List<Card> game2DrawDesk = new StandardGame().getDrawDeck();
+
 		assertThat(game1DrawDesk.size(), is(game2DrawDesk.size()));
 		assertThat(game1DrawDesk, not(equalTo(game2DrawDesk)));
 	}
-	
+
 	@Test
 	public void drawCardsTest() {
 		int drawDeskSize = game.getDrawDeck().size();
-		
+
 		assertThat(game.drawCard(), instanceOf(Card.class));
-		assertThat(game.getDrawDeck().size(), is(drawDeskSize-1));
+		assertThat(game.getDrawDeck().size(), is(drawDeskSize - 1));
 		assertThat(game.getDiscardPile().size(), is(0));
 	}
 }

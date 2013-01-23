@@ -13,11 +13,9 @@ import bohnanza.standard.states.TradeState;
 
 public class GameFactory extends AbstractFactory {
 
-	/**
-	 * @uml.property name="singleton" readOnly="true"
-	 */
+	/** @uml.property name="singleton" readOnly="true" */
 	private static final GameFactory singleton = new GameFactory();
-	
+
 	/**
 	 */
 	protected GameFactory() {
@@ -35,7 +33,8 @@ public class GameFactory extends AbstractFactory {
 		addTransition(StartState.class, NextPlayer.class, PlantState.class);
 		addTransition(PlantState.class, NextPhase.class, TradeState.class);
 		addTransition(TradeState.class, NextPhase.class, SecondPlantState.class);
-		addTransition(SecondPlantState.class, PlantAsideBean.class, DrawState.class);
+		addTransition(SecondPlantState.class, PlantAsideBean.class,
+				DrawState.class);
 		addTransition(DrawState.class, DrawCards.class, StartState.class);
 	}
 }

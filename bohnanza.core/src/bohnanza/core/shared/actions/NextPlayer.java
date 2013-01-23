@@ -5,7 +5,7 @@ import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
-public class NextPlayer extends Action {
+public class NextPlayer extends Action<GameBase> {
 
 	public NextPlayer(GameBase game, Player initiator) {
 		super(game, initiator);

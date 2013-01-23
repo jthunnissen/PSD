@@ -1,4 +1,3 @@
-
 package bohnanzagui.standard;
 
 /*
@@ -7,8 +6,6 @@ package bohnanzagui.standard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * Login Controller.
- */
+/** Login Controller. */
 public class LoginController extends AnchorPane implements Initializable {
 
 	@FXML
@@ -33,8 +28,7 @@ public class LoginController extends AnchorPane implements Initializable {
 
 	private ClientGUI application;
 
-
-	public void setApp(ClientGUI application){
+	public void setApp(ClientGUI application) {
 		this.application = application;
 	}
 
@@ -44,7 +38,7 @@ public class LoginController extends AnchorPane implements Initializable {
 	}
 
 	public void doLogin(ActionEvent event) {
-		if (application == null){
+		if(application == null) {
 			// We are running in isolated FXML, possibly in Scene Builder.
 			// NO-OP.
 		} else {
@@ -52,11 +46,11 @@ public class LoginController extends AnchorPane implements Initializable {
 			application.testLogin(host.getText(), username.getText());
 		}
 	}
-	
-	public void checkLogin(boolean ok){
-		if(ok){
+
+	public void checkLogin(boolean ok) {
+		if(ok) {
 			application.state = ClientGUI.AWAITING_START;
-		}else
+		} else
 			username.setText("Username already taken");
 	}
 

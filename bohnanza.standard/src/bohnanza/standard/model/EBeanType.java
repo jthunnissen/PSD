@@ -1,13 +1,9 @@
 package bohnanza.standard.model;
 
 import java.util.HashMap;
-
 import bohnanza.core.IBeanType;
 
-/**
- * @author Damiaan
- * 
- */
+/** @author Damiaan */
 public enum EBeanType implements IBeanType {
 	CHILIBEAN {
 		@Override

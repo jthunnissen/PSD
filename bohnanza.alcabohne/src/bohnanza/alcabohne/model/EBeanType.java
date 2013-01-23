@@ -1,7 +1,6 @@
 package bohnanza.alcabohne.model;
 
 import java.util.HashMap;
-
 import bohnanza.core.IBeanType;
 
 public enum EBeanType implements IBeanType {
@@ -12,7 +11,7 @@ public enum EBeanType implements IBeanType {
 		}
 
 		@Override
-		public final int numberOfCards() { //20
+		public final int numberOfCards() { // 20
 			return EBeanType.BLUEBEAN.numberOfCards();
 		}
 
@@ -26,7 +25,6 @@ public enum EBeanType implements IBeanType {
 		public final String toString() {
 			return "Kidney Bean";
 		}
-
 
 		@Override
 		public int numberOfCards() {
@@ -42,14 +40,13 @@ public enum EBeanType implements IBeanType {
 			beano.put(3, 1);
 			return beano;
 		}
-		
+
 	},
 	FIREBEAN {
 		@Override
 		public final String toString() {
 			return "Fire Bean";
 		}
-
 
 		@Override
 		public int numberOfCards() {
@@ -72,7 +69,6 @@ public enum EBeanType implements IBeanType {
 			return "Puff Bean";
 		}
 
-
 		@Override
 		public int numberOfCards() {
 			return 16;
@@ -93,7 +89,6 @@ public enum EBeanType implements IBeanType {
 		public final String toString() {
 			return "Board Bean";
 		}
-
 
 		@Override
 		public int numberOfCards() {
@@ -116,7 +111,6 @@ public enum EBeanType implements IBeanType {
 			return "French Bean";
 		}
 
-
 		@Override
 		public int numberOfCards() {
 			return 14;
@@ -137,7 +131,6 @@ public enum EBeanType implements IBeanType {
 		public final String toString() {
 			return "Runner Bean";
 		}
-
 
 		@Override
 		public int numberOfCards() {

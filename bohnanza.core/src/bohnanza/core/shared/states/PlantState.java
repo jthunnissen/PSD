@@ -7,11 +7,11 @@ import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
 import bohnanza.core.shared.actions.PlantBean;
 
-public class PlantState extends TurnState {
+public class PlantState extends TurnState<GameBase> {
 
 	private int beansPlanted = 0;
-	
-	public PlantState(GameBase context) {	
+
+	public PlantState(GameBase context) {
 		super(context);
 		if(context.getActivePlayer().getHand().isEmpty()) {
 			addAction(NextPhase.class);
@@ -22,12 +22,14 @@ public class PlantState extends TurnState {
 	}
 
 	@Override
-	protected boolean handled(Action action) {
-		if(action instanceof NextPhase) return true;
+	protected boolean handled(Action<? extends GameBase> action) {
+		if(action instanceof NextPhase)
+			return true;
 		if(action instanceof PlantBean) {
 			beansPlanted++;
-			if(beansPlanted==1) addAction(NextPhase.class);
-			if(beansPlanted==2) {
+			if(beansPlanted == 1)
+				addAction(NextPhase.class);
+			if(beansPlanted == 2) {
 				removeAction(PlantBean.class);
 				removeAction(Harvest.class);
 			}

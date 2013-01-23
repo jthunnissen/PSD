@@ -7,7 +7,6 @@ package bohnanzagui.standard;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -27,17 +26,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-
 import org.json.CardPOJO;
 import org.json.GamePOJO;
 import org.json.PlayerPOJO;
 import org.json.Protocol;
 
-
-
-/**
- * Game Controller.
- */
+/** Game Controller. */
 public class GameController extends AnchorPane implements Initializable {
 
 	@FXML
@@ -76,7 +70,7 @@ public class GameController extends AnchorPane implements Initializable {
 	protected ClientGUI application;
 	protected Image defaultEmptyImage;
 
-	public void setApp(ClientGUI application){
+	public void setApp(ClientGUI application) {
 		this.application = application;
 	}
 
@@ -85,8 +79,8 @@ public class GameController extends AnchorPane implements Initializable {
 		defaultEmptyImage = field1.getImage();
 	}
 
-	public void addChat(String text){
-		chatbox.setText(chatbox.getText() +"\n"+text);
+	public void addChat(String text) {
+		chatbox.setText(chatbox.getText() + "\n" + text);
 	}
 
 	public void update(GamePOJO update) {
@@ -96,86 +90,90 @@ public class GameController extends AnchorPane implements Initializable {
 		ArrayList<PlayerPOJO> playersPOJOS = update.getPlayers();
 		ObservableList<String> items = FXCollections.observableArrayList();
 		for(PlayerPOJO playerPOJO : playersPOJOS) {
-			if(update.getCurrentPlayer().getName().equals(playerPOJO.getName())){
-				items.add(">>> "+playerPOJO.getName() + " - " + playerPOJO.getScore());
+			if(update.getCurrentPlayer().getName().equals(playerPOJO.getName())) {
+				items.add(">>> " + playerPOJO.getName() + " - "
+						+ playerPOJO.getScore());
 			} else {
-				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());	
+				items.add(playerPOJO.getName() + " - " + playerPOJO.getScore());
 			}
 		}
 		players.setItems(items);
 	}
 
-	public void updateThisPlayerHand(GamePOJO update){
+	public void updateThisPlayerHand(GamePOJO update) {
 		hand.getChildren().clear();
-		for(CardPOJO card : update.getThisPlayer().getHand()){
+		for(CardPOJO card : update.getThisPlayer().getHand()) {
 			ImageView cardView = new ImageView(card.getImage());
 			cardView.setUserData(card);
 			hand.getChildren().add(cardView);
 		}
 	}
 
-	public void harvest1(){
-		application.sendToServer(Protocol.HARVEST+" 0");
+	public void harvest1() {
+		application.sendToServer(Protocol.HARVEST + " 0");
 	}
 
-	public void harvest2(){
-		application.sendToServer(Protocol.HARVEST+" 1");
+	public void harvest2() {
+		application.sendToServer(Protocol.HARVEST + " 1");
 	}
 
-	public void harvest3(){
-		application.sendToServer(Protocol.HARVEST+" 2");
+	public void harvest3() {
+		application.sendToServer(Protocol.HARVEST + " 2");
 	}
 
-	public void buy3(){
+	public void buy3() {
 		application.sendToServer(Protocol.BUYBEANFIELD);
 	}
 
-	public void drawcard(){
+	public void drawcard() {
 		application.sendToServer(Protocol.DRAWCARDS);
 	}
 
-	public void nextPhase(){
+	public void nextPhase() {
 		application.sendToServer(Protocol.NEXTPHASE);
 	}
 
-	public void sendmessage(){
-		if(chatmessage.getText().length()>0){
-			application.sendToServer(Protocol.CHAT + " "+application.getUsername()+": " +chatmessage.getText());
+	public void sendmessage() {
+		if(chatmessage.getText().length() > 0) {
+			application.sendToServer(Protocol.CHAT + " "
+					+ application.getUsername() + ": " + chatmessage.getText());
 			chatmessage.setText("");
 		}
 	}
 
-	public boolean isActivePlayer(String activePlayer){
-		return (activePlayer.equals(application.getUsername()));
+	public boolean isActivePlayer(String activePlayer) {
+		return(activePlayer.equals(application.getUsername()));
 	}
 
-	
-	protected void setupPlantTarget(final boolean isFromHand, final ImageView targetBox, final int fieldid){
-		targetBox.setOnDragOver(new EventHandler <DragEvent>() {
+	protected void setupPlantTarget(final boolean isFromHand,
+			final ImageView targetBox, final int fieldid) {
+		targetBox.setOnDragOver(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
-				if(db.hasImage()){
+				if(db.hasImage()) {
 					event.acceptTransferModes(TransferMode.MOVE);
 				}
 				event.consume();
 			}
 		});
 
-		targetBox.setOnDragDropped(new EventHandler <DragEvent>() {
+		targetBox.setOnDragDropped(new EventHandler<DragEvent>() {
 			@Override
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
-				if(db.hasImage()){
+				if(db.hasImage()) {
 					targetBox.setImage(db.getImage());
-					if(isFromHand){
-						application.sendToServer(Protocol.PLANTBEAN +" "+ fieldid+" "+db.getString());
+					if(isFromHand) {
+						application.sendToServer(Protocol.PLANTBEAN + " "
+								+ fieldid + " " + db.getString());
 					} else {
-						application.sendToServer(Protocol.PLANTASIDEBEAN +" "+ fieldid+" "+db.getString());
+						application.sendToServer(Protocol.PLANTASIDEBEAN + " "
+								+ fieldid + " " + db.getString());
 					}
-					
+
 					event.setDropCompleted(true);
-				}else{
+				} else {
 					event.setDropCompleted(false);
 				}
 				event.consume();
@@ -183,19 +181,20 @@ public class GameController extends AnchorPane implements Initializable {
 		});
 	}
 
-	protected void setupCardDraggable(final ImageView source){
-		source.setOnDragDetected(new EventHandler <MouseEvent>() {
+	protected void setupCardDraggable(final ImageView source) {
+		source.setOnDragDetected(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
 				ClipboardContent content = new ClipboardContent();
 				content.putImage(source.getImage());
-				content.putString(""+((CardPOJO)source.getUserData()).getHashcode());
+				content.putString(""
+						+ ((CardPOJO) source.getUserData()).getHashcode());
 				db.setContent(content);
 
 				event.consume();
 			}
 		});
-		
+
 	}
 }

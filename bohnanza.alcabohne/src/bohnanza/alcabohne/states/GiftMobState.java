@@ -1,15 +1,15 @@
 package bohnanza.alcabohne.states;
 import bohnanza.alcabohne.actions.GiftBeanToMobb;
-import bohnanza.alcabohne.model.Game;
+import bohnanza.alcabohne.model.AlCabhoneGame;
 import bohnanza.core.Action;
+import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
 
+public class GiftMobState extends TurnState<AlCabhoneGame> {
 
-public class GiftMafiaState extends TurnState {
-
-	public GiftMafiaState(Game context) {
+	public GiftMobState(AlCabhoneGame context) {
 		super(context);
 		if(needsToPay()) {
 			addAction(GiftBeanToMobb.class);
@@ -20,7 +20,7 @@ public class GiftMafiaState extends TurnState {
 	}
 
 	@Override
-	protected boolean handled(Action action) {
+	protected boolean handled(Action<? extends GameBase> action) {
 		if(action instanceof GiftBeanToMobb || action instanceof NextPhase) {
 			return true;
 		} else if(action instanceof Harvest && !needsToPay()) {
@@ -31,7 +31,7 @@ public class GiftMafiaState extends TurnState {
 	}
 
 	private boolean needsToPay() {
-		//TODO return true if mafia collects same beans as player
+		// TODO return true if mafia collects same beans as player
 		return false;
 	}
 }

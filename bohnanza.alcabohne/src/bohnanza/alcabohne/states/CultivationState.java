@@ -1,15 +1,16 @@
 package bohnanza.alcabohne.states;
 import bohnanza.alcabohne.actions.CultivateRevealedBeanType;
 import bohnanza.alcabohne.actions.GiftBeanToMobb;
-import bohnanza.alcabohne.model.Game;
+import bohnanza.alcabohne.model.AlCabhoneGame;
 import bohnanza.core.Action;
+import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
 
-public class CultivationState extends TurnState {
+public class CultivationState extends TurnState<AlCabhoneGame> {
 
-	public CultivationState(Game context) {
+	public CultivationState(AlCabhoneGame context) {
 		super(context);
 		addAction(GiftBeanToMobb.class);
 		addAction(Harvest.class);
@@ -17,8 +18,9 @@ public class CultivationState extends TurnState {
 	}
 
 	@Override
-	protected boolean handled(Action action) {
-		if(action instanceof CultivateRevealedBeanType && ((Game)context).getRevealedBeans().isEmpty()) {
+	protected boolean handled(Action<? extends GameBase> action) {
+		if(action instanceof CultivateRevealedBeanType
+				&& context.getRevealedBeans().isEmpty()) {
 			removeAction(CultivateRevealedBeanType.class);
 			addAction(NextPhase.class);
 		}

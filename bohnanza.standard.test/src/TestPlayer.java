@@ -1,9 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import bohnanza.core.BeanCard;
 import bohnanza.core.BeanField;
 import bohnanza.core.IllegalActionException;
@@ -11,11 +9,9 @@ import bohnanza.core.Player;
 import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.EBeanType;
 
-/**
- * Test class for the Player.
+/** Test class for the Player.
  * 
- * @author Anne van de Venis
- */
+ * @author Anne van de Venis */
 public class TestPlayer {
 
 	private static final String PLAYER_NAME = "Player";
@@ -44,7 +40,8 @@ public class TestPlayer {
 	public void testPlayerPlant() throws IllegalActionException {
 		player.addCardToHand(card);
 		player.plantBean(card, field);
-		assertEquals("Card has not been removed from hand", 1, field.getCards().size());
+		assertEquals("Card has not been removed from hand", 1, field.getCards()
+				.size());
 	}
 
 	@Test
@@ -55,7 +52,7 @@ public class TestPlayer {
 			player.plantBean(card, field);
 			player.plantBean(card, field);
 			player.harvastField(field);
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 
 		}
 		assertEquals("Score is incorrect", player.calcScore(),
@@ -65,18 +62,18 @@ public class TestPlayer {
 	@Test
 	public void testPlayerHarvestWithDiscard() {
 		int nrOfCards = 2;
-		for (int i = 0; i < nrOfCards; i++) {
+		for(int i = 0; i < nrOfCards; i++) {
 			player.addCardToHand(card);
 			try {
 				player.plantBean(card, field);
-			} catch (IllegalActionException e) {
+			} catch(IllegalActionException e) {
 				e.printStackTrace();
 			}
 		}
 		int discard;
 		try {
 			discard = player.harvastField(field).size();
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 			discard = 0;
 		}
 		assertEquals("Player discards incorrectly", 1, discard);
@@ -88,7 +85,7 @@ public class TestPlayer {
 		boolean result = true;
 		try {
 			result = player.buyField();
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 			result = false;
 		}
 		assertEquals("Player can buy field but has not enough money", false,
@@ -98,23 +95,23 @@ public class TestPlayer {
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		BeanField field = player.getBeanFields().get(0);
 		// 5 BlackEyedBeanCards means 3 coins
-		for (int i = 0; i < 5; i++) {
+		for(int i = 0; i < 5; i++) {
 			player.addCardToHand(card);
 			try {
 				player.plantBean(card, field);
-			} catch (IllegalActionException e) {
+			} catch(IllegalActionException e) {
 			}
 		}
 
 		try {
 			player.harvastField(field);
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 			result = false;
 		}
 
 		try {
 			player.buyField();
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 			result = false;
 			System.out.println(e.getMessage());
 		}
@@ -122,22 +119,22 @@ public class TestPlayer {
 		assertEquals("Player does not have a third field", 3, player
 				.getBeanFields().size());
 
-		for (int i = 0; i < 5; i++) {
+		for(int i = 0; i < 5; i++) {
 			player.addCardToHand(card);
 			try {
 				player.plantBean(card, field);
-			} catch (IllegalActionException e) {
+			} catch(IllegalActionException e) {
 			}
 		}
 		try {
 			player.harvastField(field);
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 			result = false;
 		}
 
 		try {
 			player.buyField();
-		} catch (IllegalActionException e) {
+		} catch(IllegalActionException e) {
 			result = false;
 		}
 		assertEquals("Player can buy a fourth field", false, result);

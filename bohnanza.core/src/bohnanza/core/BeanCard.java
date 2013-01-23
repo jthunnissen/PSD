@@ -2,56 +2,45 @@ package bohnanza.core;
 
 import java.util.HashMap;
 
-
 public class BeanCard extends Card {
 
-	/**
-	 * @uml.property  name="produce" multiplicity="(0 -1)" dimension="2"
-	 */
+	/** @uml.property name="produce" multiplicity="(0 -1)" dimension="2" */
 	private final HashMap<Integer, Integer> produces;
 
-	/**
-	 * @uml.property  name="type"
-	 */
+	/** @uml.property name="type" */
 	private final IBeanType type;
-	
-	
+
 	public BeanCard(IBeanType type) {
 		super(type.toString(), type.numberOfCards());
 		this.produces = type.beanometer();
 		this.type = type;
 	}
 
-	public IBeanType getType(){
+	public IBeanType getType() {
 		return type;
 	}
-	/**
-	 * Getter of the property <tt>produce</tt>
-	 * @return  Returns the produces.
-	 * @uml.property  name="produce"
-	 */
+
+	/** Getter of the property <tt>produce</tt>
+	 * @return Returns the produces.
+	 * @uml.property name="produce" */
 	public HashMap<Integer, Integer> getProduce() {
 		return produces;
 	}
-	
-	/**
-	 * Calculates the beanometer.
+
+	/** Calculates the beanometer.
 	 * @param cards Number of cards
-	 * @return Score of the beanometer
-	 */
+	 * @return Score of the beanometer */
 	public int getBeanometer(int cards) {
 		int nrOfCards = cards;
 		int result = 0;
-		while(result == 0 && nrOfCards != 0 ) {
+		while(result == 0 && nrOfCards != 0) {
 			if(produces.get(nrOfCards) != null) {
-				result = produces.get(nrOfCards);     
+				result = produces.get(nrOfCards);
 			} else {
 				nrOfCards--;
 			}
 		}
 		return result;
 	}
-	
-	
 
 }

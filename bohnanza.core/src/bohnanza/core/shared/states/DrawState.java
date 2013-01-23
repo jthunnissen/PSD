@@ -5,7 +5,7 @@ import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.DrawCards;
 
-public class DrawState extends TurnState {
+public class DrawState extends TurnState<GameBase> {
 
 	public DrawState(GameBase context) {
 		super(context);
@@ -13,7 +13,7 @@ public class DrawState extends TurnState {
 	}
 
 	@Override
-	protected boolean handled(Action action) {
+	protected boolean handled(Action<? extends GameBase> action) {
 		return true;
 	}
 }

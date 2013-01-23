@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 import bohnanza.core.BeanCard;
 import bohnanza.standard.model.EBeanType;
 
@@ -8,22 +7,24 @@ import bohnanza.standard.model.EBeanType;
  * 
  */
 
-/**
- * Test class for the Player.
- * @author Anne van de Venis
- */
+/** Test class for the Player.
+ * @author Anne van de Venis */
 public class TestCard {
-	
+
 	@Test
-	public void testInit(){
+	public void testInit() {
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
-		assertEquals("Card name is not created correctly", card.getName(), EBeanType.BLACKEYEDBEAN.toString());
-		assertEquals("No. of cards is not created correctly", card.getNumberOfCards(), EBeanType.BLACKEYEDBEAN.numberOfCards());
-		assertEquals("Produces of card is not created correctly", card.getProduce(), EBeanType.BLACKEYEDBEAN.beanometer());
+		assertEquals("Card name is not created correctly", card.getName(),
+				EBeanType.BLACKEYEDBEAN.toString());
+		assertEquals("No. of cards is not created correctly",
+				card.getNumberOfCards(),
+				EBeanType.BLACKEYEDBEAN.numberOfCards());
+		assertEquals("Produces of card is not created correctly",
+				card.getProduce(), EBeanType.BLACKEYEDBEAN.beanometer());
 	}
-	
+
 	@Test
-	public void testBeanoMeter(){
+	public void testBeanoMeter() {
 		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		assertEquals("Incorrect beanometer", 0, card.getBeanometer(0));
 		assertEquals("Incorrect beanometer", 0, card.getBeanometer(1));
