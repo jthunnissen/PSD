@@ -9,17 +9,11 @@ public class StartState extends TurnState {
 	
 	public StartState(GameBase context) {
 		super(context);
+		addAction(context.getActivePlayer(), NextPlayer.class);
 	}
 
 	@Override
 	protected boolean handled(Action action) {
 		return action instanceof NextPlayer;
 	}
-
-	@Override
-	protected void reset() {
-		removeAllActions();
-		addAction(context.getActivePlayer(), NextPlayer.class);
-	}
-
 }

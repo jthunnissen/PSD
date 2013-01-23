@@ -3,7 +3,7 @@ package bohnanza.standard.states;
 import bohnanza.core.Action;
 import bohnanza.core.Player;
 import bohnanza.core.TurnState;
-import bohnanza.core.shared.states.Harvest;
+import bohnanza.core.shared.actions.Harvest;
 import bohnanza.standard.actions.BuyBeanField;
 import bohnanza.standard.actions.PlantAsideBean;
 import bohnanza.standard.model.Game;
@@ -12,6 +12,13 @@ public class SecondPlantState extends TurnState {
 
 	public SecondPlantState(Game context) {
 		super(context);
+		for(Player player: context.getPlayers()) {
+			if(!player.getSetAsideCards().isEmpty()) {
+				addAction(player, PlantAsideBean.class);
+				addAction(player, Harvest.class);
+				addAction(player, BuyBeanField.class);
+			}
+		}
 	}
 
 	@Override
@@ -33,18 +40,6 @@ public class SecondPlantState extends TurnState {
 			if(!player.getSetAsideCards().isEmpty()) return false;
 		}
 		return true;
-	}
-
-	@Override
-	protected void reset() {
-		removeAllActions();
-		for(Player player: context.getPlayers()) {
-			if(!player.getSetAsideCards().isEmpty()) {
-				addAction(player, PlantAsideBean.class);
-				addAction(player, Harvest.class);
-				addAction(player, BuyBeanField.class);
-			}
-		}
 	}
 }
 

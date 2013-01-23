@@ -10,12 +10,6 @@ public class BeanRevelationState extends TurnState {
 	}
 
 	@Override
-	protected void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected boolean handled(Action action) {
 		if(((Game)context).getRevealedBeans().size()==3) {
 			return true;

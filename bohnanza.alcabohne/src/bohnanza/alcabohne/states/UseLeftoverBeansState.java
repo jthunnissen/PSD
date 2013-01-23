@@ -13,12 +13,6 @@ public class UseLeftoverBeansState extends TurnState {
 	}
 
 	@Override
-	protected void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected boolean handled(Action action) {
 		// TODO Auto-generated method stub
 		return false;

@@ -17,6 +17,7 @@ public class TradeState extends TurnState {
 	
 	public TradeState(Game context) {
 		super(context);
+		addAction(DrawFaceUpCards.class);
 	}
 
 	@Override
@@ -51,11 +52,5 @@ public class TradeState extends TurnState {
 				addAction(player, ProposeTrade.class);
 			}
 		}
-	}
-
-	@Override
-	protected void reset() {
-		removeAllActions();
-		addAction(DrawFaceUpCards.class);
 	}
 }

@@ -4,8 +4,8 @@ import bohnanza.alcabohne.actions.GiftBeanToMobb;
 import bohnanza.alcabohne.model.Game;
 import bohnanza.core.Action;
 import bohnanza.core.TurnState;
+import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
-import bohnanza.core.shared.states.Harvest;
 
 public class CultivationState extends TurnState {
 
@@ -14,12 +14,6 @@ public class CultivationState extends TurnState {
 		addAction(GiftBeanToMobb.class);
 		addAction(Harvest.class);
 		addAction(CultivateRevealedBeanType.class);
-	}
-
-	@Override
-	protected void reset() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

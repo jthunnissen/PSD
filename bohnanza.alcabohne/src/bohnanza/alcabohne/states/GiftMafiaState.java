@@ -3,18 +3,14 @@ import bohnanza.alcabohne.actions.GiftBeanToMobb;
 import bohnanza.alcabohne.model.Game;
 import bohnanza.core.Action;
 import bohnanza.core.TurnState;
+import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
-import bohnanza.core.shared.states.Harvest;
 
 
 public class GiftMafiaState extends TurnState {
 
 	public GiftMafiaState(Game context) {
 		super(context);
-	}
-
-	@Override
-	protected void reset() {
 		if(needsToPay()) {
 			addAction(GiftBeanToMobb.class);
 			addAction(Harvest.class);

@@ -26,7 +26,6 @@ public abstract class TurnState {
 		this.context = context;
 		for(Player player: context.getPlayers()) 
 			actions.put(player, new ArrayList<Class<? extends Action>>());
-		reset();
 	}
 
 	public final void handle(Action action) throws IllegalActionException {
@@ -43,17 +42,11 @@ public abstract class TurnState {
 	private void getNextState(Action action) {
 		try {
 			TurnState nextState = AbstractFactory.getInstance().getTurnState(transitions.get(action.getClass()), context);
-			nextState.reset();
 			context.setCurrentState(nextState);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Resets the states internal state, called when the game enters this state
-	 */
-	protected abstract void reset();
 	
 	public List<Class<? extends Action>> getActions(Player player) {
 		return actions.get(player);
