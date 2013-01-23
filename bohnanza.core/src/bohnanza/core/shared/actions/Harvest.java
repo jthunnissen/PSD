@@ -1,4 +1,4 @@
-package bohnanza.core.shared.states;
+package bohnanza.core.shared.actions;
 
 import java.util.ArrayList;
 
