@@ -68,4 +68,12 @@ public class AlCabhoneGame extends GameBase {
 			throw new IllegalActionException("Can't draw from empty discard pile");
 		return discardPile.remove(0);
 	}
+	
+	public int getMobScore() {
+		int score = 0;
+		for(MobBoss boss : mobBosses) {
+			score += boss.calcScore();
+		}
+		return score;
+	}
 }
