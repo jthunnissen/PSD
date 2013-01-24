@@ -23,7 +23,7 @@ public class Harvest extends Action<GameBase> {
 	 */
 	protected void innerHandle() throws IllegalActionException {
 		ArrayList<Card> discard = new ArrayList<Card>();
-		discard = initiator.harvastField(field);
+		discard = initiator.harvestField(field);
 		for(Card card : discard) {
 			game.addCardToDiscardPile(card);
 		}

@@ -73,13 +73,18 @@ public abstract class Player {
 	 * @param fieldnr Number of the field that will be harvested.
 	 * @return Cards that should be added to the discard pile.
 	 * @throws IllegalActionException */
-	public ArrayList<Card> harvastField(Field<? extends Card> field) throws IllegalActionException {
+	public ArrayList<Card> harvestField(Field<? extends Card> field) throws IllegalActionException {
+		if(field.getCards().isEmpty()) {
+			throw new IllegalActionException("Field is empty");
+		}
 		// Check if all fields contain one card
-		if(field.getCards().size() == 1) {
+		else if(field.getCards().size() == 1) {
 			boolean ok = true;
 			for(Field<? extends Card> f : fields) {
-				if(f.getCards().size() > 1)
+				if(f.getCards().size() > 1) {
 					ok = false;
+					break;
+				}
 			}
 			if(!ok) {
 				throw new IllegalActionException("This field has one card, other fields have more");

@@ -49,7 +49,7 @@ public class TestPlayer {
 			player.addCardToHand(card);
 			player.plantBean(card, field);
 			player.plantBean(card, field);
-			player.harvastField(field);
+			player.harvestField(field);
 		} catch(IllegalActionException e) {
 
 		}
@@ -69,7 +69,7 @@ public class TestPlayer {
 		}
 		int discard;
 		try {
-			discard = player.harvastField(field).size();
+			discard = player.harvestField(field).size();
 		} catch(IllegalActionException e) {
 			discard = 0;
 		}
@@ -100,7 +100,7 @@ public class TestPlayer {
 		}
 
 		try {
-			player.harvastField(field);
+			player.harvestField(field);
 		} catch(IllegalActionException e) {
 			result = false;
 		}
@@ -122,7 +122,7 @@ public class TestPlayer {
 			}
 		}
 		try {
-			player.harvastField(field);
+			player.harvestField(field);
 		} catch(IllegalActionException e) {
 			result = false;
 		}
