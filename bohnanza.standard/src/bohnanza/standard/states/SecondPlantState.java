@@ -13,11 +13,10 @@ public class SecondPlantState extends TurnState<StandardGame> {
 
 	public SecondPlantState(StandardGame context) {
 		super(context);
+		addDefaultActions();
 		for(Player player : context.getPlayers()) {
 			if(!player.getSetAsideCards().isEmpty()) {
 				addAction(player, PlantAsideBean.class);
-				addAction(player, Harvest.class);
-				addAction(player, BuyBeanField.class);
 			}
 		}
 	}

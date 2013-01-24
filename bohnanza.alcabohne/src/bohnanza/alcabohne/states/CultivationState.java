@@ -8,7 +8,6 @@ import bohnanza.core.BeanCard;
 import bohnanza.core.Card;
 import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
-import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
 import bohnanza.core.shared.actions.ShowHand;
 
@@ -17,8 +16,8 @@ public class CultivationState extends TurnState<AlCabhoneGame> {
 	public CultivationState(AlCabhoneGame context) {
 		super(context);
 		addAction(GiftBeanToMobb.class);
-		addAction(Harvest.class);
 		addAction(CultivateRevealedBeanType.class);
+		addDefaultActions();
 	}
 
 	@Override

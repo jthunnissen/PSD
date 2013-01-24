@@ -16,7 +16,7 @@ public class PlantState extends TurnState<GameBase> {
 		if(context.getActivePlayer().getHand().isEmpty()) {
 			addAction(NextPhase.class);
 		} else {
-			addAction(Harvest.class);
+			addDefaultActions();
 			addAction(PlantBean.class);
 		}
 	}

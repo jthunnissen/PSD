@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import bohnanza.core.shared.actions.BuyBeanField;
+import bohnanza.core.shared.actions.Harvest;
 
 public abstract class TurnState<Game extends GameBase> {
 
@@ -18,8 +20,16 @@ public abstract class TurnState<Game extends GameBase> {
 
 	public TurnState(final Game context) {
 		this.context = context;
-		for(Player player : context.getPlayers())
+		for(Player player : context.getPlayers()) {
 			actions.put(player, new ArrayList<Class<? extends Action<? extends GameBase>>>());
+		}
+	}
+
+	protected void addDefaultActions() {
+		for(Player player : context.getPlayers()) {
+			actions.get(player).add(Harvest.class);
+			actions.get(player).add(BuyBeanField.class);
+		}
 	}
 
 	public final void handle(Action<? extends GameBase> action) throws IllegalActionException {

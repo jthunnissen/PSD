@@ -25,6 +25,7 @@ public class TradeState extends TurnState<StandardGame> {
 	protected boolean handled(Action<? extends GameBase> action) {
 		if(action instanceof DrawFaceUpCards) {
 			removeAction(DrawFaceUpCards.class);
+			addDefaultActions();
 			startTrade();
 		} else if(action instanceof NextPhase) {
 			return true;
