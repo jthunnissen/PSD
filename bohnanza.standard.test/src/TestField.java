@@ -2,7 +2,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import bohnanza.core.BeanCard;
 import bohnanza.core.BeanField;
-import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
 import bohnanza.standard.model.EBeanType;
 
@@ -12,7 +11,7 @@ public class TestField {
 
 	@Test
 	public void testAddCard() throws IllegalActionException {
-		Card card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
 		BeanField field = new BeanField();
 		field.addCard(card);
 	}
