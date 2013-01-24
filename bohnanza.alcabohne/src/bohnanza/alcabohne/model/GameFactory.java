@@ -1,9 +1,12 @@
 package bohnanza.alcabohne.model;
+import bohnanza.alcabohne.actions.CultivateRevealedBeanType;
+import bohnanza.alcabohne.actions.DiscardRevealedBeans;
 import bohnanza.alcabohne.actions.GiftBeanToMobb;
+import bohnanza.alcabohne.actions.PayProtectionBeans;
 import bohnanza.alcabohne.actions.RevealBean;
 import bohnanza.alcabohne.states.BeanRevelationState;
 import bohnanza.alcabohne.states.CultivationState;
-import bohnanza.alcabohne.states.GiftMobState;
+import bohnanza.alcabohne.states.ProtectionBeansPaymentState;
 import bohnanza.alcabohne.states.UseLeftoverBeansState;
 import bohnanza.core.AbstractFactory;
 import bohnanza.core.shared.actions.DrawCards;
@@ -29,9 +32,9 @@ public class GameFactory extends AbstractFactory {
 	protected void fillStateTransistions() {
 		setStartState(StartState.class);
 		addTransition(StartState.class, NextPlayer.class, UseLeftoverBeansState.class);
-		addTransition(UseLeftoverBeansState.class, null /* TODO */, GiftMobState.class);
-		addTransition(GiftMobState.class, GiftBeanToMobb.class, PlantState.class);
-		addTransition(GiftMobState.class, NextPhase.class, PlantState.class);
+		addTransition(UseLeftoverBeansState.class, DiscardRevealedBeans.class, ProtectionBeansPaymentState.class);
+		addTransition(UseLeftoverBeansState.class, CultivateRevealedBeanType.class, ProtectionBeansPaymentState.class);
+		addTransition(ProtectionBeansPaymentState.class, PayProtectionBeans.class, PlantState.class);
 		addTransition(PlantState.class, NextPhase.class, BeanRevelationState.class);
 		addTransition(BeanRevelationState.class, RevealBean.class, CultivationState.class);
 		addTransition(CultivationState.class, NextPhase.class, DrawState.class);

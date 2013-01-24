@@ -1,8 +1,8 @@
 package bohnanza.alcabohne.actions;
 
 import java.util.List;
-import bohnanza.alcabohne.model.EBeanType;
 import bohnanza.alcabohne.model.AlCabhoneGame;
+import bohnanza.alcabohne.model.EBeanType;
 import bohnanza.core.Action;
 import bohnanza.core.BeanCard;
 import bohnanza.core.BeanField;
@@ -35,7 +35,7 @@ public class CultivateRevealedBeanType extends Action<AlCabhoneGame> {
 		for(BeanField field : initiator.getBeanFields()) {
 			if(field.getCards().isEmpty())
 				emptyField = field;
-			else if(field.getTypeOf() == beanType) {
+			else if(field.getBeanType() == beanType) {
 				game.getRevealedBeans().remove(beans);
 				field.addAllCards(beans);
 				return;

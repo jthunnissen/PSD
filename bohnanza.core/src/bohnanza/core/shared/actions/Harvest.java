@@ -1,5 +1,4 @@
 package bohnanza.core.shared.actions;
-
 import java.util.ArrayList;
 import bohnanza.core.Action;
 import bohnanza.core.Card;

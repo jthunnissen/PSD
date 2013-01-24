@@ -17,13 +17,13 @@ public class BeanField extends Field<BeanCard> {
 	 * @return true if card is of the same type of the other card on this field. */
 	public boolean checkCard(BeanCard card) {
 		if(cards.size() > 0) {
-			if(getTypeOf() != card.getType())
+			if(getBeanType() != card.getType())
 				return false;
 		}
 		return true;
 	}
 
-	public IBeanType getTypeOf() {
+	public IBeanType getBeanType() {
 		return cards.get(0).getType();
 	}
 

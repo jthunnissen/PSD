@@ -3,7 +3,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.json.JSONObject;
-import bohnanza.core.*;
+import bohnanza.core.Action;
+import bohnanza.core.BeanCard;
+import bohnanza.core.Card;
+import bohnanza.core.GameBase;
+import bohnanza.core.IBeanType;
 
 public class MobBoss extends AlCabohnePlayer {
 

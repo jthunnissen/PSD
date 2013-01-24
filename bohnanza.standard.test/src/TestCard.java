@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import bohnanza.core.BeanCard;
 import bohnanza.standard.model.EBeanType;

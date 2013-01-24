@@ -2,8 +2,6 @@ package bohnanza.standard.model;
 import bohnanza.core.GameBase;
 import bohnanza.core.Player;
 
-/** @author Damiaan
- * @uml.dependency supplier="main.GameFactory" stereotypes="Standard::Call" */
 public class StandardGame extends GameBase {
 
 	public StandardGame() {

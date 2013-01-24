@@ -40,6 +40,14 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 		cards.addAll(cards);
 	}
 
+	public CardType removeCard() throws IllegalActionException {
+		try {
+			return cards.remove(cards.size() - 1);
+		} catch(IndexOutOfBoundsException e) {
+			throw new IllegalActionException("Field is empty");
+		}
+	}
+
 	/** Harvests this field. It clears this field and returns the cards that this
 	 * field contained.
 	 * @post this.getCards().size() == 0
@@ -48,6 +56,11 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 		ArrayList<CardType> result = cards;
 		cards = new ArrayList<CardType>();
 		return result;
+	}
+
+	/** @return whether the field contains cards */
+	public boolean isEmpty() {
+		return cards.isEmpty();
 	}
 
 	public JSONObject toJSON(HashMap<Integer, Card> cardIndex) {

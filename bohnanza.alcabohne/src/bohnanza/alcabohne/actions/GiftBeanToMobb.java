@@ -1,5 +1,4 @@
 package bohnanza.alcabohne.actions;
-
 import bohnanza.alcabohne.model.AlCabhoneGame;
 import bohnanza.alcabohne.model.MobBoss;
 import bohnanza.core.Action;
