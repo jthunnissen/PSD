@@ -23,7 +23,8 @@ public class CultivationState extends TurnState<AlCabhoneGame> {
 
 	@Override
 	protected boolean handled(Action<? extends GameBase> action) {
-		if(action instanceof ShowHand) return true;
+		if(action instanceof ShowHand)
+			return true;
 		if(action instanceof CultivateRevealedBeanType) {
 			removeAction(CultivateRevealedBeanType.class);
 		}
@@ -37,7 +38,7 @@ public class CultivationState extends TurnState<AlCabhoneGame> {
 		}
 		return action instanceof NextPhase;
 	}
-	
+
 	private boolean mobFieldEmpty() {
 		for(MobBoss boss : context.getMobbosses()) {
 			if(boss.getCards().isEmpty()) {
@@ -46,19 +47,21 @@ public class CultivationState extends TurnState<AlCabhoneGame> {
 		}
 		return false;
 	}
-	
-	/**Determined whether the active play is able to pay tax to mob without violating the requirement that each mob boss cultivates different beans.*/
+
+	/** Determined whether the active play is able to pay tax to mob without
+	 * violating the requirement that each mob boss cultivates different beans. */
 	private boolean canPayTax() {
 		for(Card card : context.getActivePlayer().getHand()) {
 			if(card instanceof BeanCard) {
 				boolean alreadyCultivatedByMobb = false;
 				for(MobBoss boss : context.getMobbosses()) {
-					if(!boss.getCards().isEmpty() && boss.getBeanType()==((BeanCard)card).getType()) {
+					if(!boss.getCards().isEmpty() && boss.getBeanType() == ((BeanCard) card).getType()) {
 						alreadyCultivatedByMobb = true;
 						break;
 					}
 				}
-				if(!alreadyCultivatedByMobb) return true;
+				if(!alreadyCultivatedByMobb)
+					return true;
 			}
 		}
 		return false;

@@ -25,7 +25,7 @@ public abstract class GameBase {
 	protected boolean started = false;
 
 	protected final AbstractFactory factory;
-	
+
 	public final GameRules RULES;
 
 	/**

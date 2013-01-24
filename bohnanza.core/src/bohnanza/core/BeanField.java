@@ -1,18 +1,16 @@
 package bohnanza.core;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class BeanField extends Field<BeanCard> {
 
 	@Override
-	public ArrayList<BeanCard> harvest() {
+	public List<BeanCard> harvest() {
 		// TODO Handle here points if possible
 		return super.harvest();
 	}
 
 	/** Checks if the card that should be added is if the same type as the other
 	 * cards in this field.
-	 * 
 	 * @param card Card that should be added.
 	 * @return true if card is of the same type of the other card on this field. */
 	public boolean checkCard(BeanCard card) {

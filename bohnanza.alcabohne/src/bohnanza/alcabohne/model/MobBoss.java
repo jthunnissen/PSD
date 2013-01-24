@@ -20,7 +20,7 @@ public class MobBoss extends AlCabohnePlayer {
 		super(name, false);
 		this.autoHarvestSize = autoHarvestSize;
 	}
-	
+
 	public List<BeanCard> getCards() {
 		return field.getCards();
 	}
@@ -35,10 +35,10 @@ public class MobBoss extends AlCabohnePlayer {
 	public IBeanType getBeanType() {
 		return field.getBeanType();
 	}
-	
-	/**Harvest the field if preconditions are satisfied */
+
+	/** Harvest the field if preconditions are satisfied */
 	public void harvest() throws IllegalActionException {
-		if(field.getSize()>=autoHarvestSize) {
+		if(field.getSize() >= autoHarvestSize) {
 			harvestField(field);
 		}
 	}

@@ -5,7 +5,7 @@ import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
-/**This action doesn't do anything, but should be interpreted by the gui*/
+/** This action doesn't do anything, but should be interpreted by the gui */
 public class ShowHand extends Action<GameBase> {
 
 	public ShowHand(GameBase game, Player initiator) {
@@ -13,6 +13,7 @@ public class ShowHand extends Action<GameBase> {
 	}
 
 	@Override
-	protected void innerHandle() throws IllegalActionException {}
+	protected void innerHandle() throws IllegalActionException {
+	}
 
 }

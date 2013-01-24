@@ -1,5 +1,4 @@
 package bohnanza.core;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -91,7 +90,7 @@ public abstract class Player {
 			}
 		}
 
-		ArrayList<? extends Card> cards = field.harvest();
+		List<? extends Card> cards = field.harvest();
 		int beano = ((BeanCard) cards.get(0)).getBeanometer(cards.size());
 		ArrayList<Card> discard = new ArrayList<Card>();
 		for(int i = 0; i < cards.size(); i++) {
@@ -122,7 +121,7 @@ public abstract class Player {
 	/** Getter of the Players' hand
 	 * @return The hand of this Player. */
 	public List<Card> getHand() {
-		return hand;
+		return Collections.unmodifiableList(hand);
 	}
 
 	/** Getter of the Players' fields
@@ -131,7 +130,7 @@ public abstract class Player {
 		return Collections.unmodifiableList(fields);
 	}
 
-	/** This methods represents the Player's action to buy a third Field.
+	/** This method represents the Player's action to buy a third Field.
 	 * @return true if player has enough money and field is successfully bought.
 	 * @throws IllegalActionException */
 	public boolean buyField() throws IllegalActionException {

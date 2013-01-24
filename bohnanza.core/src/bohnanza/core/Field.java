@@ -2,7 +2,9 @@ package bohnanza.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.Protocol;
@@ -12,13 +14,13 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 	/** @uml.property name="card"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true"
 	 *                     inverse="field:main.Card" */
-	protected ArrayList<CardType> cards = new ArrayList<CardType>();
+	protected List<CardType> cards = new ArrayList<CardType>();
 
 	/** Getter of the property <tt>card</tt>
 	 * @return Returns the cards.
 	 * @uml.property name="card" */
-	public ArrayList<CardType> getCards() {
-		return cards;
+	public List<CardType> getCards() {
+		return Collections.unmodifiableList(cards);
 	}
 
 	/** Get the amount of cards in this field.
@@ -52,8 +54,8 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 	 * field contained.
 	 * @post this.getCards().size() == 0
 	 * @return The cards that are harvested from this field. */
-	public ArrayList<CardType> harvest() {
-		ArrayList<CardType> result = cards;
+	public List<CardType> harvest() {
+		List<CardType> result = cards;
 		cards = new ArrayList<CardType>();
 		return result;
 	}

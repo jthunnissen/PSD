@@ -42,8 +42,8 @@ public class AlCabhoneGame extends GameBase {
 			break;
 		case 2:
 			try {
-				mobBosses.add(new MobBoss(mobbossNames[0],3));
-				mobBosses.add(new MobBoss(mobbossNames[1],2));
+				mobBosses.add(new MobBoss(mobbossNames[0], 3));
+				mobBosses.add(new MobBoss(mobbossNames[1], 2));
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -52,12 +52,14 @@ public class AlCabhoneGame extends GameBase {
 			do {
 				try {
 					mobBosses.get(0).addCard(card);
-				} catch(IllegalActionException e) {}
+				} catch(IllegalActionException e) {
+				}
 				card = (BeanCard) drawCard();
 			} while(cards.get(cards.size() - 1).getType() == card.getType());
 			try {
 				mobBosses.get(1).addCard(card);
-			} catch(IllegalActionException e) {}
+			} catch(IllegalActionException e) {
+			}
 		}
 	}
 
