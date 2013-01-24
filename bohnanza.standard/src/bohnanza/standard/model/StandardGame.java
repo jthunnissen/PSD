@@ -5,7 +5,7 @@ import bohnanza.core.Player;
 public class StandardGame extends GameBase {
 
 	public StandardGame() {
-		super(GameFactory.getInstance());
+		super(GameFactory.getInstance(), new StandardGameRules());
 	}
 
 	@Override

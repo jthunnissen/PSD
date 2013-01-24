@@ -25,11 +25,14 @@ public abstract class GameBase {
 	protected boolean started = false;
 
 	protected final AbstractFactory factory;
+	
+	public final GameRules RULES;
 
 	/**
 		 */
-	protected GameBase(AbstractFactory facotry) {
+	protected GameBase(AbstractFactory facotry, GameRules rules) {
 		this.factory = facotry;
+		this.RULES = rules;
 		drawDeck = factory.getGameDeck();
 		shuffleCards();
 	}

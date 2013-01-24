@@ -23,7 +23,7 @@ public class AlCabhoneGame extends GameBase {
 	}
 
 	public AlCabhoneGame() {
-		super(GameFactory.getInstance());
+		super(GameFactory.getInstance(), new AlCabohneGameRules());
 	}
 
 	@Override

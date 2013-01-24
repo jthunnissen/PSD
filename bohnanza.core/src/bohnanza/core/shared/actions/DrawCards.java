@@ -14,7 +14,7 @@ public class DrawCards extends Action<GameBase> {
 
 	@Override
 	protected void innerHandle() throws IllegalActionException {
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < game.RULES.NrOfCardsDrawn; i++) {
 			Card card = game.drawCard();
 			initiator.addCardToHand(card);
 		}
