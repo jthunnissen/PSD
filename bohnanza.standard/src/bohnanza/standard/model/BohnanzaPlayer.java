@@ -1,7 +1,6 @@
 package bohnanza.standard.model;
-
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +31,7 @@ public class BohnanzaPlayer extends Player {
 	}
 
 	@Override
-	public JSONObject toJSON(List<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex) {
+	public JSONObject toJSON(Collection<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex) {
 		JSONObject result = new JSONObject();
 		try {
 			result.put(Protocol.PLAYER_NAME, getName());

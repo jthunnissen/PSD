@@ -1,13 +1,13 @@
 package bohnanza.core;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class TurnState<Game extends GameBase> {
 
 	/** @uml.property name="actions" */
-	private Map<Player, List<Class<? extends Action<? extends GameBase>>>> actions = new HashMap<Player, List<Class<? extends Action<? extends GameBase>>>>();
+	private Map<Player, Collection<Class<? extends Action<? extends GameBase>>>> actions = new HashMap<Player, Collection<Class<? extends Action<? extends GameBase>>>>();
 
 	/** @uml.property name="transitions" */
 	private Map<Class<? extends Action<? extends GameBase>>, Class<? extends TurnState<Game>>> transitions = new HashMap<Class<? extends Action<? extends GameBase>>, Class<? extends TurnState<Game>>>();
@@ -23,7 +23,7 @@ public abstract class TurnState<Game extends GameBase> {
 	}
 
 	public final void handle(Action<? extends GameBase> action) throws IllegalActionException {
-		List<Class<? extends Action<? extends GameBase>>> playerActions = actions.get(action.getInitiator());
+		Collection<Class<? extends Action<? extends GameBase>>> playerActions = actions.get(action.getInitiator());
 		if(playerActions == null || !playerActions.contains(action.getClass()))
 			throw new IllegalActionException("Action not permitted for this player in current state");
 		action.handle();
@@ -44,7 +44,7 @@ public abstract class TurnState<Game extends GameBase> {
 		}
 	}
 
-	public List<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
+	public Collection<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
 		return actions.get(player);
 	}
 
@@ -79,7 +79,7 @@ public abstract class TurnState<Game extends GameBase> {
 
 	/** Remove all actions in the current state. */
 	protected void removeAllActions() {
-		for(List<Class<? extends Action<? extends GameBase>>> playeractions : actions.values()) {
+		for(Collection<Class<? extends Action<? extends GameBase>>> playeractions : actions.values()) {
 			playeractions.clear();
 		}
 	}

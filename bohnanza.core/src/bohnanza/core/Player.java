@@ -198,5 +198,5 @@ public abstract class Player {
 		setAsideCards.add(card);
 	}
 
-	public abstract JSONObject toJSON(List<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex);
+	public abstract JSONObject toJSON(Collection<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex);
 }

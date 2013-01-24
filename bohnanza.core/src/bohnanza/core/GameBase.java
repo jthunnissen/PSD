@@ -1,5 +1,6 @@
 package bohnanza.core;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public abstract class GameBase {
 		currentState.handle(action);
 	}
 
-	public List<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
+	public Collection<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
 		return currentState.getActions(player);
 	}
 
