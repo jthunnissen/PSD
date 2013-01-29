@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public abstract class AbstractFactory {
 
 	private HashMap<Class<? extends TurnState>, ArrayList<Transition>> stateTransitions = new HashMap<Class<? extends TurnState>, ArrayList<Transition>>();
@@ -16,7 +18,7 @@ public abstract class AbstractFactory {
 	}
 
 	public static AbstractFactory getInstance() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	public ArrayList<Card> getGameDeck() {
