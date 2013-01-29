@@ -7,17 +7,22 @@ public enum EBeanType implements IBeanType {
 	BLUEBEAN {
 		@Override
 		public final String toString() {
-			return EBeanType.BLUEBEAN.toString();
+			return "Blue Bean";
 		}
 
 		@Override
 		public final int numberOfCards() { // 20
-			return EBeanType.BLUEBEAN.numberOfCards();
+			return 20;
 		}
 
 		@Override
 		public final HashMap<Integer, Integer> beanometer() {
-			return EBeanType.BLUEBEAN.beanometer();
+			HashMap<Integer, Integer> beano = new HashMap<Integer, Integer>();
+			beano.put(10, 4);
+			beano.put(8, 3);
+			beano.put(6, 2);
+			beano.put(4, 1);
+			return beano;
 		}
 	},
 	KIDNEYBEAN {
