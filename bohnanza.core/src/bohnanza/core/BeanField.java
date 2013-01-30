@@ -1,7 +1,18 @@
 package bohnanza.core;
+import java.text.MessageFormat;
 import java.util.List;
 
 public class BeanField extends Field<BeanCard> {
+
+	@Override
+	public void addCard(BeanCard card) throws IllegalActionException {
+		if(getSize() > 0 && card.getType() != getBeanType()) 
+			throw new IllegalActionException(MessageFormat.format(
+				"Tried to add card of type {0} but requires {1}", 
+				card.getType(), 
+				getBeanType()));
+		super.addCard(card);
+	}
 
 	@Override
 	public List<BeanCard> harvest() {
@@ -22,7 +33,7 @@ public class BeanField extends Field<BeanCard> {
 	}
 
 	public IBeanType getBeanType() {
-		return cards.get(0).getType();
+		return (getSize() > 0 ? cards.get(0).getType() : null);
 	}
 
 }

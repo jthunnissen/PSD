@@ -30,16 +30,15 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 	}
 
 	public void addCard(CardType card) throws IllegalActionException {
-		if(!cards.add(card))
+		if(cards.contains(card))
 			throw new IllegalActionException("Card already in field");
+		cards.add(card);
 	}
 
 	public void addAllCards(Collection<CardType> cards) throws IllegalActionException {
 		for(CardType card : cards) {
-			if(cards.contains(card))
-				throw new IllegalActionException("Card already in field");
+			addCard(card);
 		}
-		cards.addAll(cards);
 	}
 
 	public CardType removeCard() throws IllegalActionException {
