@@ -26,7 +26,11 @@ import org.json.GamePOJO;
 import org.json.OfferPOJO;
 import org.json.Protocol;
 
-/** Game Controller. */
+/** This class holds the Controller for the Game GUI. 
+*
+* @author Anne van de Venis
+* @version 1.0
+*/
 public class StandardGameController extends GameController {
 
 	@FXML
@@ -44,9 +48,18 @@ public class StandardGameController extends GameController {
 	@FXML
 	AnchorPane actionsPane;
 
+	/**
+	 * Lists of cards that belong to an offer
+	 */
 	private List<CardPOJO> offerList = new ArrayList<CardPOJO>();
+	/**
+	 * Card that this user want to trade for.
+	 */
 	private CardPOJO offerItem;
 
+	/**
+	 * Updates game GUI
+	 */
 	public void update(GamePOJO update) {
 		// Init
 		nextPhase.setVisible(false);
@@ -82,6 +95,10 @@ public class StandardGameController extends GameController {
 		updateAsideCards(update);
 	}
 
+	/***
+	 * Updates aside cards panel
+	 * @param update New gamestate
+	 */
 	private void updateAsideCards(GamePOJO update) {
 		aside.getChildren().clear();
 		for(CardPOJO card : update.getThisPlayer().getAside()) {
@@ -94,6 +111,10 @@ public class StandardGameController extends GameController {
 		}
 	}
 
+	/**
+	 * Updates face-up cards panel
+	 * @param update New gamestate
+	 */
 	private void updateFaceUpCards(GamePOJO update) {
 		tradearea.getChildren().clear();
 		for(CardPOJO card : update.getCurrentPlayer().getFaceUp()) {
@@ -108,6 +129,10 @@ public class StandardGameController extends GameController {
 		}
 	}
 
+	/**
+	 * Creates handler to make it possible to drag cards to this target
+	 * @param targetBox HBox where cards could be drawn into
+	 */
 	private void setupSetAsideTarget(final HBox targetBox) {
 		targetBox.setOnDragOver(new EventHandler<DragEvent>() {
 			@Override
@@ -137,6 +162,11 @@ public class StandardGameController extends GameController {
 
 	}
 
+	/**
+	 * Creater handler for moving a card
+	 * @param cardView View of the movable object
+	 * @param card POJO of the card that belong to the CardView
+	 */
 	private void setupSetAsideSource(final ImageView cardView, final CardPOJO card) {
 		cardView.setOnDragDetected(new EventHandler<MouseEvent>() {
 			@Override
@@ -151,6 +181,10 @@ public class StandardGameController extends GameController {
 		});
 	}
 
+	/**
+	 * Updates actions panel
+	 * @param update New gamestate
+	 */
 	public void updateActionsView(GamePOJO update) {
 		actionsPane.setVisible(true);
 		ArrayList<String> actions = update.getThisPlayer().getActions();
@@ -223,6 +257,12 @@ public class StandardGameController extends GameController {
 		}
 	}
 
+	/**
+	 * Creates handler for making a new offer.
+	 * If a user click on <i>cardView</i> the offer panel is shown
+	 * @param cardView Clickable item
+	 * @param card POJO for the cardView
+	 */
 	public void setupMakeOffer(final ImageView cardView, final CardPOJO card) {
 		cardView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -242,6 +282,10 @@ public class StandardGameController extends GameController {
 
 	}
 
+	/**
+	 * Shows an alertbox with a received offer
+	 * @param offer POJO of the received offer
+	 */
 	public void viewOffer(final OfferPOJO offer) {
 		final Stage myDialog = new Stage();
 		myDialog.initModality(Modality.WINDOW_MODAL);
@@ -283,6 +327,9 @@ public class StandardGameController extends GameController {
 		myDialog.show();
 	}
 
+	/**
+	 * Sends offer the server
+	 */
 	public void sendOffer() {
 		ArrayList<CardPOJO> cards = new ArrayList<CardPOJO>();
 		cards.add(offerItem);
@@ -291,14 +338,24 @@ public class StandardGameController extends GameController {
 		offerItem = null;
 	}
 
+	/**
+	 * Handler for the action drawcard
+	 */
 	public void drawcard() {
 		application.sendToServer(Protocol.DRAWCARDS);
 	}
 
+	/**
+	 * Handler for the action draw face up card
+	 */
 	public void drawfaceupcard() {
 		application.sendToServer(Protocol.DRAWFACEUPCARDS);
 	}
 
+	/**
+	 * Creates handler for adding cards to an offer
+	 * @param targetBox
+	 */
 	void setupOfferTarget(final HBox targetBox) {
 		targetBox.setOnDragOver(new EventHandler<DragEvent>() {
 			@Override

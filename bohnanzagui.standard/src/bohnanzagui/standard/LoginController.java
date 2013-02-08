@@ -1,9 +1,5 @@
 package bohnanzagui.standard;
 
-/*
- * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.
- */
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,7 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-/** Login Controller. */
+/** This class holds the Controller for the login window 
+*
+* @author Anne van de Venis
+* @version 1.0
+*/
 public class LoginController extends AnchorPane implements Initializable {
 
 	@FXML
@@ -26,8 +26,15 @@ public class LoginController extends AnchorPane implements Initializable {
 	@FXML
 	Label error;
 
+	/**
+	 * ClientGUI that controls GUI
+	 */
 	private ClientGUI application;
 
+	/**
+	 * Sets application that controls GUI
+	 * @param application  
+	 */
 	public void setApp(ClientGUI application) {
 		this.application = application;
 	}
@@ -37,6 +44,10 @@ public class LoginController extends AnchorPane implements Initializable {
 		error.setText("");
 	}
 
+	/**
+	 * Handler when a users wants to join the game
+	 * @param event
+	 */
 	public void doLogin(ActionEvent event) {
 		if(application == null) {
 			// We are running in isolated FXML, possibly in Scene Builder.
@@ -47,6 +58,10 @@ public class LoginController extends AnchorPane implements Initializable {
 		}
 	}
 
+	/**
+	 * Handler that is called when username verification has completed
+	 * @param ok
+	 */
 	public void checkLogin(boolean ok) {
 		if(ok) {
 			application.state = ClientGUI.AWAITING_START;

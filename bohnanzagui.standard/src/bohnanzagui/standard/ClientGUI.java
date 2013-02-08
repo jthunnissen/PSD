@@ -24,34 +24,71 @@ import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;
 
+/** This class is the runnable class, that starts a client GUI 
+ *
+ * @author Anne van de Venis
+ * @version 1.0
+ */
 public class ClientGUI extends Application {
+	/**
+	 * Stage that contains active panel
+	 */
 	Stage stage;
+	/**
+	 * Thread that contains connection with server
+	 */
 	Client client;
+	/**
+	 * Controller for the game view
+	 */
 	GameController gameController;
+	/**
+	 * Controller for the login view
+	 */
 	LoginController loginController;
+	/**
+	 * Username of this player
+	 */
 	String username = "";
+	/**
+	 * Previous gamestate
+	 */
+	private String oldResponse;
 
+	/**
+	 * States for the this client
+	 */
 	public static final int AWAITING_USERNAMECHECK = 0;
 	public static final int AWAITING_START = 3;
 	public static final int AWAITING_GAMEUPDATE = 1;
 	public static final int AWAITING_OFFER = 2;
+	/**
+	 * Initial state, waiting for username check
+	 */
 	public int state = AWAITING_USERNAMECHECK;
 
 	public static void main(String[] args) {
 		Application.launch(ClientGUI.class, (java.lang.String[]) null);
 	}
 
+	/**
+	 * Set username for this client
+	 * @param username Username of this player
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * Returns username for this client
+	 * @return The username for this client
+	 */
 	public String getUsername() {
 		return username;
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
-
 		try {
 			primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
 				@Override
@@ -68,6 +105,9 @@ public class ClientGUI extends Application {
 		}
 	}
 
+	/**
+	 * Change the view to the login panel
+	 */
 	private void gotoLogin() {
 		try {
 			loginController = (LoginController) replaceSceneContent("Login.fxml");
@@ -77,6 +117,10 @@ public class ClientGUI extends Application {
 		}
 	}
 
+	/**
+	 * Change the view to the game panel
+	 * @param type Type of the game (StandardGame or AlCabohneGame)
+	 */
 	public void goToGame(int type) {
 		try {
 			if(type == 1) {
@@ -91,6 +135,11 @@ public class ClientGUI extends Application {
 		}
 	}
 
+	/**
+	 * Sends username to server to be validated
+	 * @param host
+	 * @param username
+	 */
 	public void testLogin(String host, String username) {
 		if(client == null) {
 			setUsername(username);
@@ -99,10 +148,11 @@ public class ClientGUI extends Application {
 		client.sendToServer("NEWPLAYER " + username);
 	}
 
-	private String oldResponse;
-
-	/** This method is needed to update UI on UI-thread.
-	 * @param update */
+	
+	/** 
+	 * Updates the GUI (on UI-thread)
+	 * @param update response from server
+	 * */
 	public void update(final String update) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -140,6 +190,10 @@ public class ClientGUI extends Application {
 		});
 	}
 
+	/**
+	 * Show alertbox with a message
+	 * @param message Message to be shown in alertbox
+	 */
 	public void showError(String message) {
 		final Stage myDialog = new Stage();
 		myDialog.initModality(Modality.WINDOW_MODAL);
@@ -160,6 +214,12 @@ public class ClientGUI extends Application {
 		myDialog.show();
 	}
 
+	/**
+	 * Replace content of current panel
+	 * @param fxml URL to FXML file to be shown
+	 * @return
+	 * @throws Exception
+	 */
 	private Initializable replaceSceneContent(String fxml) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
 		InputStream in = this.getClass().getClassLoader().getResourceAsStream("res/ui/" + fxml);
@@ -199,6 +259,10 @@ public class ClientGUI extends Application {
 		return (Initializable) loader.getController();
 	}
 
+	/**
+	 * Send message to server
+	 * @param string Message to be send to server
+	 */
 	public void sendToServer(String string) {
 		client.sendToServer(string);
 	}
