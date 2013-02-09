@@ -15,7 +15,7 @@ public class StandardGame extends GameBase {
 				player.addCardToHand(this.drawCard());
 			}
 		}
-		setCurrentState(factory.buildTurnStatespace(this, this.getActivePlayer()));
+		setCurrentState(factory.buildTurnStatespace(this));
 		started = true;
 	}
 

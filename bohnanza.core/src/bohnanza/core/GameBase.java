@@ -55,7 +55,7 @@ public abstract class GameBase {
 
 	/** Forwards to concrete state. Check whether action is a allowed and execute it */
 	public void handle(Action<? extends GameBase> action) throws IllegalActionException {
-		currentState.handle(action);
+		currentState.handle(action, factory);
 	}
 
 	/** Forwards to concrete state. Returns list of allowed actions in current state */

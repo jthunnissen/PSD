@@ -33,22 +33,22 @@ public abstract class TurnState<Game extends GameBase> {
 	}
 
 	/** Check whether action is a allowed and execute it */
-	public final void handle(Action<? extends GameBase> action) throws IllegalActionException {
+	public final void handle(Action<? extends GameBase> action, AbstractFactory factory) throws IllegalActionException {
 		Collection<Class<? extends Action<? extends GameBase>>> playerActions = actions.get(action.getInitiator());
 		if(playerActions == null || !playerActions.contains(action.getClass()))
 			throw new IllegalActionException("Action not permitted for this player in current state");
 		action.handle();
 		// if(handled(action) && transitions.containsKey(action)) {
 		if(handled(action)) {
-			getNextState(action);
+			getNextState(action, factory);
 		} else
 			System.out.println("Contains next state :" + String.valueOf(transitions.containsKey(action)));
 		System.out.println("State: " + this.getClass().getName());
 	}
 
-	private void getNextState(Action<? extends GameBase> action) {
+	private void getNextState(Action<? extends GameBase> action, AbstractFactory factory) {
 		try {
-			TurnState<Game> nextState = AbstractFactory.getInstance().getTurnState(transitions.get(action.getClass()), context);
+			TurnState<Game> nextState = factory.getTurnState(transitions.get(action.getClass()), context);
 			context.setCurrentState(nextState);
 		} catch(Exception e) {
 			e.printStackTrace();

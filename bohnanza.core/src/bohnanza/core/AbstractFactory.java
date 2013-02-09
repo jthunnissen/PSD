@@ -17,10 +17,6 @@ public abstract class AbstractFactory {
 		this.beanTypes = beanTypes;
 	}
 
-	public static AbstractFactory getInstance() {
-		throw new NotImplementedException();
-	}
-
 	public ArrayList<Card> getGameDeck() {
 		ArrayList<Card> deck = getStandardDeck(beanTypes);
 		return deck;
@@ -28,7 +24,7 @@ public abstract class AbstractFactory {
 
 	/** Links the different states that compose a turn together
 	 * @return the start state of the game */
-	public TurnState buildTurnStatespace(GameBase game, Player activePlayer) {
+	public TurnState buildTurnStatespace(GameBase game) {
 		return getTurnState(startState, game);
 	}
 
