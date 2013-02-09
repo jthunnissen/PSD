@@ -32,20 +32,52 @@ import bohnanza.standard.model.BohnanzaPlayer;
 import bohnanza.standard.model.EBeanType;
 import bohnanza.standard.model.StandardGame;
 
+/** This class is responsible for sending and receiving updates to a player on the server side. 
+*
+* @author Anne van de Venis
+* @version 1.0
+*/
 class ServerThread extends Thread {
 
-	private BufferedReader is = null;
-	private PrintStream os = null;
+	/**
+	 * Socket to the client
+	 */
 	private Socket clientSocket = null;
+	/**
+	 * Outputstream for sending updates to client
+	 */
+	private PrintStream os = null;
+	/**
+	 * ID for this player
+	 */
 	private int id = 0;
+	/**
+	 * Server that created this thread
+	 */
 	private Server server;
+	/**
+	 * The Bohnanza game
+	 */
 	private StandardGame game;
+	/**
+	 * Player that plays via this connection
+	 */
 	private Player player;
 
+	/**
+	 * Getter for the player
+	 * @return The player that plays via this connection
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 
+	/**
+	 * Creates ServerThread
+	 * @param clientSocket Socket for this connection
+	 * @param server Server that created this thread
+	 * @param id ID for this player
+	 */
 	public ServerThread(Socket clientSocket, Server server, int id) {
 		this.clientSocket = clientSocket;
 		this.server = server;
@@ -53,11 +85,16 @@ class ServerThread extends Thread {
 		this.game = server.game;
 	}
 
+	/**
+	 * Send message to other players
+	 * @param message Message to be send
+	 */
 	public void sendMessage(String message) {
 		this.os.println(message);
 	}
 
 	public void run() {
+		BufferedReader is = null;	
 		try {
 			is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			os = new PrintStream(clientSocket.getOutputStream());
@@ -192,55 +229,11 @@ class ServerThread extends Thread {
 		}
 	}
 
-	public BeanCard findBeanCardFromPlayerFaceUp(String cardName, Player player) {
-		BeanCard result = null;
-		for(Card card : player.getFaceUpCards()) {
-			if(card.getName().startsWith(cardName)) {
-				result = (BeanCard) card;
-				break;
-			}
-		}
-		return result;
-	}
-
-	public Card findBeanCardFromPlayerHand(String cardName, Player player, int index) {
-		Card result = null;
-		int found = 0;
-		for(Card card : player.getHand()) {
-			if(card.getName().equals(cardName)) {
-				result = card;
-				found++;
-			}
-			if(found == index) {
-
-				break;
-			}
-		}
-		if(result == null)
-			System.out.println("this player has no " + cardName);
-		return result;
-	}
-
-	public BeanCard findBeanCardFromPlayerAside(String cardName) {
-		BeanCard result = null;
-		for(Card card : player.getSetAsideCards()) {
-			if(card.getName().startsWith(cardName)) {
-				result = (BeanCard) card;
-				break;
-			}
-		}
-		return result;
-	}
-
-	public BeanCard findBeanCard(String cardName) {
-		BeanCard result = null;
-		for(EBeanType bean : EBeanType.values()) {
-			if(bean.toString().startsWith(cardName))
-				result = new BeanCard(bean);
-		}
-		return result;
-	}
-
+	/**
+	 * Returns player for a given name
+	 * @param playerName Name of the player
+	 * @return Player with the given name or NULL
+	 */
 	public Player findPlayer(String playerName) {
 		Player result = null;
 		for(Player player : game.getPlayers()) {

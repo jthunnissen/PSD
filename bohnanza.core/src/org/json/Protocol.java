@@ -1,5 +1,10 @@
 package org.json;
 
+/** This class holds the protocol for the Bohnanza game 
+*
+* @author Anne van de Venis
+* @version 1.0
+*/
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,17 +49,37 @@ public class Protocol {
 	public static final String CHAT = "CHAT";
 	public static final String ERROR = "error";
 
+	/**
+	 * Players in this game update
+	 */
 	private ArrayList<Player> players;
+	/**
+	 * Actions in this game update
+	 */
 	private ArrayList<Action> actions;
 
+	/**
+	 * Adds player to this game update
+	 * @param player Player to be added to the game update
+	 */
 	public void addPlayer(Player player) {
 		players.add(player);
 	}
 
+	/**
+	 * Adds action to this game update
+	 * @param action Action to be added to this game update
+	 */
 	public void addAction(Action action) {
 		actions.add(action);
 	}
 
+	/**
+	 * Creates JSON response from current game state
+	 * @param game Game state
+	 * @param cardIndex Data holder for the cards
+	 * @return JSON response
+	 */
 	public static String toJSON(GameBase game, HashMap<Integer, Card> cardIndex) {
 		String result = "";
 
@@ -80,6 +105,12 @@ public class Protocol {
 		return result;
 	}
 
+	/**
+	 * Creates GamePOJO from JSON response
+	 * @param json Response
+	 * @param username Username of this player
+	 * @return GamePOJO from JSON response
+	 */
 	public static GamePOJO fromJSON(String json, String username) {
 		GamePOJO result = null;
 		JSONObject root;
@@ -111,16 +142,11 @@ public class Protocol {
 		return result;
 	}
 
-	public static boolean usernameFromJSON(JSONObject root) {
-		boolean result = false;
-		try {
-			result = (root.getBoolean("response") == true);
-		} catch(JSONException e) {
-			System.out.println(e.getMessage());
-		}
-		return result;
-	}
-
+	/**
+	 * Creates JSON response from username validation
+	 * @param response
+	 * @return
+	 */
 	public static String usernameCheckToJSON(boolean response) {
 		String result = "";
 		JSONObject root = new JSONObject();
@@ -134,6 +160,11 @@ public class Protocol {
 		return result;
 	}
 
+	/**
+	 * Extracts chat message from JSON response
+	 * @param response JSON response
+	 * @return Chat message
+	 */
 	public static String chatFromJSON(JSONObject response) {
 		String result = "";
 		try {
@@ -144,6 +175,11 @@ public class Protocol {
 		return result;
 	}
 
+	/**
+	 * Converts chat message to JSON response
+	 * @param response Chat message
+	 * @return JSON resposne
+	 */
 	public static String chatToJSON(String response) {
 		String result = "";
 		try {
@@ -157,6 +193,10 @@ public class Protocol {
 		return result;
 	}
 
+	/**
+	 * Creates JSON response that indicates that game has not started
+	 * @return JSON response
+	 */
 	public static String waitingForPlayers() {
 		String result = "";
 
@@ -171,6 +211,11 @@ public class Protocol {
 		return result;
 	}
 
+	/**
+	 * Creates JSON response for an error message
+	 * @param message
+	 * @return
+	 */
 	public static String errorToJSON(String message) {
 		String result = "";
 		try {
@@ -183,7 +228,12 @@ public class Protocol {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Creates an OfferPOJO from a JSON response
+	 * @param root JSON response
+	 * @return Information about the offer
+	 */
 	public static OfferPOJO sendOfferFromJSON(JSONObject root) {
 		OfferPOJO result = null;
 
@@ -208,6 +258,14 @@ public class Protocol {
 		return result;
 	}
 
+	/**
+	 * Creates JSON response for an offer
+	 * @param type Type of offer
+	 * @param playerName Name of player that initiates offer
+	 * @param cards Cards that initiator wants
+	 * @param offer Card that initiators offers
+	 * @return JSON response
+	 */
 	public static String sendOfferToJSON(String type, String playerName, List<CardPOJO> cards, List<CardPOJO> offer) {
 		String result = "";
 		try {

@@ -15,22 +15,41 @@ import bohnanza.core.Player;
 import bohnanza.core.shared.actions.NextPlayer;
 import bohnanza.standard.model.StandardGame;
 
+/** This class is responsible for creating connections to players 
+*
+* @author Anne van de Venis
+* @version 1.0
+*/
 public class Server implements Runnable {
 
-	// The server socket.
+	/**
+	 * Socket of the server
+	 */
 	private static ServerSocket serverSocket = null;
-	// The client socket.
+	/**
+	 * Socket of the client
+	 */
 	private static Socket clientSocket = null;
 
+	/**
+	 * The Bohnanza game
+	 */
 	public StandardGame game = new StandardGame();
 
-	// This chat server can accept up to maxClientsCount clients' connections.
+	/**
+	 * Max number of players
+	 */
 	private static final int maxClientsCount = 10;
+	/**
+	 * Array that contains all connections to the players
+	 */
 	private static final ServerThread[] threads = new ServerThread[maxClientsCount];
+	/**
+	 * Information storage about all cards that are send to players
+	 */
+	HashMap<Integer, Card> cardIndex = new HashMap<Integer, Card>();
 
 	public static void main(String args[]) {
-
-		// The default port number.
 		int portNumber = 2222;
 		if(args.length < 1) {
 			System.out.println("Usage: java Server <portNumber>\n" + "Now using port number=" + portNumber);
@@ -47,8 +66,6 @@ public class Server implements Runnable {
 		Server server = new Server();
 		new Thread(server).start();
 
-		/* Create a client socket for each connection and pass it to a new
-		 * client thread. */
 		while(true) {
 			try {
 				clientSocket = serverSocket.accept();
@@ -71,6 +88,10 @@ public class Server implements Runnable {
 		}
 	}
 
+	/**
+	 * Send game update to all players
+	 * @param from Player that caused the update
+	 */
 	public void sendUpdate(int from) {
 		if(game.isStarted() && game.getActions(game.getActivePlayer()).size() == 1) {
 			if(game.getActions(game.getActivePlayer()).contains(NextPlayer.class)) {
@@ -83,7 +104,6 @@ public class Server implements Runnable {
 				}
 			}
 		}
-		// Protocol protocol = new Protocol(this);
 		String message;
 		if(!game.isStarted()) {
 			message = Protocol.waitingForPlayers();
@@ -98,6 +118,11 @@ public class Server implements Runnable {
 		}
 	}
 
+	/**
+	 * Send message to all players
+	 * @param from Player that send message
+	 * @param message Message to be send
+	 */
 	public void broadcast(int from, String message) {
 		for(int i = 0; i < maxClientsCount; i++) {
 			if(threads[i] != null /* && i != from */) {
@@ -106,9 +131,8 @@ public class Server implements Runnable {
 		}
 	}
 
+	@Override
 	public void run() {
-		/* Keep on reading from the socket till we receive "Bye" from the
-		 * server. Once we received that then we want to break. */
 		String responseLine;
 		BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -127,6 +151,11 @@ public class Server implements Runnable {
 		}
 	}
 
+	/**
+	 * Send a message to a particular player
+	 * @param player Players that receives the update
+	 * @param message Message to be send
+	 */
 	public void sendToPlayer(Player player, String message) {
 		if(message.equals("GAMEUPDATE")) {
 			message = Protocol.toJSON(game, cardIndex);
@@ -140,12 +169,19 @@ public class Server implements Runnable {
 
 	}
 
-	HashMap<Integer, Card> cardIndex = new HashMap<Integer, Card>();
-
+	/**
+	 * Add card to the card information storage
+	 * @param card Card to be stored
+	 */
 	public synchronized void addToCardIndex(Card card) {
 		cardIndex.put(card.hashCode(), card);
 	}
 
+	/**
+	 * Getter for the card information storage
+	 * @param hashcode ID (hashcode) of the to be retrieved card
+	 * @return
+	 */
 	public Card getCardFromIndex(int hashcode) {
 		return cardIndex.get(hashcode);
 	}
