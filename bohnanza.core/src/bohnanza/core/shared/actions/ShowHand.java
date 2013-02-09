@@ -12,8 +12,8 @@ public class ShowHand extends Action<GameBase> {
 		super(game, initiator);
 	}
 
+	/** Doesn't do anything; only represents the possibility of a player looking at another players hand, which should be handled in the GUI */
 	@Override
-	protected void innerHandle() throws IllegalActionException {
-	}
+	protected void innerHandle() throws IllegalActionException {}
 
 }

@@ -17,10 +17,8 @@ public class Harvest extends Action<GameBase> {
 	}
 
 	@Override
-	/**
-	 * Harvest specified field from a Player
-	 * @param args[0] - Number of the field of the to be harvested field
-	 */
+	/**Harvest specified field from a Player
+	 * @throws IllegalActionException if harvesting of specified field is not allowed */
 	protected void innerHandle() throws IllegalActionException {
 		ArrayList<Card> discard = new ArrayList<Card>();
 		discard = initiator.harvestField(field);

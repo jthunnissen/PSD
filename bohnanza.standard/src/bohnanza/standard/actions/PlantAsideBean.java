@@ -18,6 +18,8 @@ public class PlantAsideBean extends Action<StandardGame> {
 		this.field = field;
 	}
 
+	/** Plant specified set aside card in specified bean field
+	 * @throws IllegalActionException if action is not allowed */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		if(initiator.getSetAsideCards().contains(card))

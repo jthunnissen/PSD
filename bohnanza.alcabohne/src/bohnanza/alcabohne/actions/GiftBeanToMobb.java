@@ -15,6 +15,8 @@ public class GiftBeanToMobb extends Action<AlCabhoneGame> {
 		this.card = card;
 	}
 
+	/** Gift the specified bean card to the bean mob
+	 * @throws IllegalActionException if this action is not allowed */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		if(!initiator.getHand().contains(card))

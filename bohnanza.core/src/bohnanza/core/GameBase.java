@@ -5,22 +5,18 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class GameBase {
-	/** @uml.property name="currentState"
-	 * @uml.associationEnd inverse="context:main.TurnState" */
+	/** @uml.property name="currentState" */
 	protected TurnState<? extends GameBase> currentState;
 
-	/** @uml.property name="players"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Player" */
+	/** @uml.property name="players" */
 	protected ArrayList<Player> players = new ArrayList<Player>();
 
 	protected int activePlayerIndex = 0;
 
-	/** @uml.property name="drawDeck"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card" */
+	/** @uml.property name="drawDeck" */
 	protected ArrayList<Card> drawDeck = new ArrayList<Card>();
 
-	/** @uml.property name="discardPile"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="game:main.Card" */
+	/** @uml.property name="discardPile" */
 	protected ArrayList<Card> discardPile = new ArrayList<Card>();
 
 	protected boolean started = false;
@@ -29,8 +25,6 @@ public abstract class GameBase {
 
 	public final GameRules RULES;
 
-	/**
-		 */
 	protected GameBase(AbstractFactory facotry, GameRules rules) {
 		this.factory = facotry;
 		this.RULES = rules;
@@ -44,6 +38,7 @@ public abstract class GameBase {
 		return started;
 	}
 
+	/**Adds player player to game. Should only be called BEFHORE this.start() */
 	public Player addPlayer(Player player) throws IllegalActionException {
 		for(Player p : players) {
 			if(p.getName().equals(player.getClass()))
@@ -53,44 +48,45 @@ public abstract class GameBase {
 		return player;
 	}
 
+	/** Randomly reorders the drawdeck */
 	protected void shuffleCards() {
 		Collections.shuffle(drawDeck);
 	}
 
+	/** Forwards to concrete state. Check whether action is a allowed and execute it */
 	public void handle(Action<? extends GameBase> action) throws IllegalActionException {
 		currentState.handle(action);
 	}
 
+	/** Forwards to concrete state. Returns list of allowed actions in current state */
 	public Collection<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
 		return currentState.getActions(player);
 	}
 
 	/** Getter of the property <tt>currentState</tt>
-	 * 
-	 * @return Returns the currentState.
 	 * @uml.property name="currentState" */
 	/* public TurnState getCurrentState() { return currentState; } */
 
-	/** @param currentState the currentState to set */
+	/**Sets the current game state to currentState 
+	 * @param currentState the currentState to set */
 	public void setCurrentState(TurnState<? extends GameBase> currentState) {
 		this.currentState = currentState;
 	}
 
 	/** Getter of the property <tt>players</tt>
-	 * 
-	 * @return Returns the players.
 	 * @uml.property name="players" */
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
+	/** Puts card on top of discard pile
+	 * @require !discardPile.contains(card) && This card instance is removed from the other collection it was part of */
 	public boolean addCardToDiscardPile(Card card) {
 		return this.discardPile.add(card);
 	}
 
-	/** Draw the top card from the drawdeck
-	 * @require !drawDeck.isEmpty()
-	 * @return the card that was drawn */
+	/** Draw the top card from the draw deck
+	 * @require !drawDeck.isEmpty() */
 	public Card drawCard() {
 		Card drawnCard = drawDeck.remove(0);
 		if(drawDeck.isEmpty()) {
@@ -101,16 +97,19 @@ public abstract class GameBase {
 		return drawnCard;
 	}
 
+	/** Returns the Player whose turn it is.	 */
 	public Player getActivePlayer() {
 		return players.get(activePlayerIndex);
 	}
 
+	/** Advances the turn to the next player */
 	public int goToNextPlayer() {
 		return goToNextPlayer(0);
 	}
 
-	/** @param skip
-	 * @requires skip >= 0 */
+	/**Advances the turn to the next player, skipping the turn of skip number of players
+	 * @requires skip >= 0
+	 * @return the number of the new active player */
 	public int goToNextPlayer(final int skip) {
 		if(skip < 0)
 			throw new IllegalArgumentException("skip must be >= 0");
@@ -119,14 +118,12 @@ public abstract class GameBase {
 		return activePlayerIndex;
 	}
 
-	public Player getNextPlayer() {
-		return players.get(activePlayerIndex + 1);
-	}
-
+	/** Getter for the draw deck. READ ONLY! */
 	public List<Card> getDrawDeck() {
 		return Collections.unmodifiableList(drawDeck);
 	}
 
+	/** Getter for the discard pile. READ ONLY! */
 	public List<Card> getDiscardPile() {
 		return Collections.unmodifiableList(discardPile);
 	}

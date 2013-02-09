@@ -14,8 +14,7 @@ public abstract class TurnState<Game extends GameBase> {
 	/** @uml.property name="transitions" */
 	private Map<Class<? extends Action<? extends GameBase>>, Class<? extends TurnState<Game>>> transitions = new HashMap<Class<? extends Action<? extends GameBase>>, Class<? extends TurnState<Game>>>();
 
-	/** @uml.property name="context"
-	 * @uml.associationEnd inverse="currentState:main.Game" */
+	/** @uml.property name="context" */
 	protected final Game context;
 
 	public TurnState(final Game context) {
@@ -25,6 +24,7 @@ public abstract class TurnState<Game extends GameBase> {
 		}
 	}
 
+	/** Adds the actions Harvest and BuyBeanField for each player */
 	protected void addDefaultActions() {
 		for(Player player : context.getPlayers()) {
 			actions.get(player).add(Harvest.class);
@@ -32,6 +32,7 @@ public abstract class TurnState<Game extends GameBase> {
 		}
 	}
 
+	/** Check whether action is a allowed and execute it */
 	public final void handle(Action<? extends GameBase> action) throws IllegalActionException {
 		Collection<Class<? extends Action<? extends GameBase>>> playerActions = actions.get(action.getInitiator());
 		if(playerActions == null || !playerActions.contains(action.getClass()))

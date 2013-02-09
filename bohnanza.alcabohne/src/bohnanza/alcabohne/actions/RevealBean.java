@@ -14,8 +14,9 @@ public class RevealBean extends Action<AlCabhoneGame> {
 		super(game, initiator);
 	}
 
+	/** Reveals beans from the draw deck and discard pile until piles of 3 different bean types are made */ 
 	@Override
-	public void handle() throws IllegalActionException {
+	public void innerHandle() {
 		BeanCard card;
 		do {
 			card = (BeanCard) game.drawCard();
@@ -25,7 +26,9 @@ public class RevealBean extends Action<AlCabhoneGame> {
 		newPile.add(card);
 		game.getRevealedBeans().add(newPile);
 		do {
-			card = (BeanCard) game.drawDiscardedCard();
+			try {
+				card = (BeanCard) game.drawDiscardedCard();
+			} catch (IllegalActionException e) { break; }
 		} while(addToExistingPile(card));
 		game.addCardToDiscardPile(card);
 	}
@@ -45,11 +48,5 @@ public class RevealBean extends Action<AlCabhoneGame> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	protected void innerHandle() throws IllegalActionException {
-		// TODO Auto-generated method stub
-
 	}
 }

@@ -3,7 +3,6 @@ package bohnanza.core.shared.actions;
 import bohnanza.core.Action;
 import bohnanza.core.Card;
 import bohnanza.core.GameBase;
-import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
 public class DrawCards extends Action<GameBase> {
@@ -12,8 +11,9 @@ public class DrawCards extends Action<GameBase> {
 		super(game, initiator);
 	}
 
+	/** Draws game.RULES.NrOfCardsDrawn cards from the draw deck and puts them in order at the back of the players hand */
 	@Override
-	protected void innerHandle() throws IllegalActionException {
+	protected void innerHandle()  {
 		for(int i = 0; i < game.RULES.NrOfCardsDrawn; i++) {
 			Card card = game.drawCard();
 			initiator.addCardToHand(card);

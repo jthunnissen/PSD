@@ -1,5 +1,4 @@
 package bohnanza.standard.actions;
-
 import bohnanza.core.Action;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
@@ -12,9 +11,8 @@ public class BuyBeanField extends Action<StandardGame> {
 	}
 
 	@Override
-	/**
-	 * Player buys a new bean field
-	 */
+	/**Player buys a new bean field
+	 * @throws IllegalActionException if purchase is not allowed */
 	protected void innerHandle() throws IllegalActionException {
 		initiator.buyField();
 	}

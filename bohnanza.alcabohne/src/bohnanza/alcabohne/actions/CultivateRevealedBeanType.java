@@ -13,13 +13,14 @@ import bohnanza.core.Player;
 public class CultivateRevealedBeanType extends Action<AlCabhoneGame> {
 
 	private final IBeanType beanType;
-	private BeanField emptyField;
 
 	public CultivateRevealedBeanType(AlCabhoneGame game, Player initiator, EBeanType beanType) {
 		super(game, initiator);
 		this.beanType = beanType;
 	}
 
+	/**Plant all beans in one of the revealed bean piles in a bean field 
+	 * @throws IllegalActionException if the specified bean type can not be planted */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		for(List<BeanCard> beans : game.getRevealedBeans()) {
@@ -31,7 +32,12 @@ public class CultivateRevealedBeanType extends Action<AlCabhoneGame> {
 		throw new IllegalActionException("The bean type is not revealed");
 	}
 
+	/**
+	 * Find a bean field that the player can plant these beans in and plant them 
+	 * @throws IllegalActionException if such a field does not exist
+	 */
 	private void plant(List<BeanCard> beans) throws IllegalActionException {
+		BeanField emptyField = null;
 		for(BeanField field : initiator.getBeanFields()) {
 			if(field.getCards().isEmpty())
 				emptyField = field;

@@ -11,6 +11,7 @@ public class DeclineTrade extends Action<StandardGame> {
 		super(game, player);
 	}
 
+	/** Doesn't do anything; just represents the possibility of a player to decline a proposed trade */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 	}

@@ -10,33 +10,36 @@ import bohnanza.standard.model.StandardGame;
 public class ProposeTrade extends Action<StandardGame> {
 
 	private final Player activePlayer;
-	private final List<Card> cards;
+	private final List<Card> request;
 	private final List<Card> offer;
 
-	public ProposeTrade(StandardGame game, Player initiator, Player activePlayer, List<Card> cards, List<Card> offer) {
+	/** @require !offer.isEmpty()
+	 * @param request: if empty the proposed trade is a donation */
+	public ProposeTrade(StandardGame game, Player initiator, Player activePlayer, List<Card> request, List<Card> offer) {
 		super(game, initiator);
 		this.activePlayer = activePlayer;
-		this.cards = cards;
+		this.request = request;
 		this.offer = offer;
 	}
 
-	/** Trade or donate cards recieve can be null, these means the cards are
-	 * donated
-	 * @require give != null */
+	/** Propose this trade or donation.
+	 * @throws IllegalActionException if this is not an allowed trade/donation */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		if(!(initiator == game.getActivePlayer() || activePlayer == game.getActivePlayer()))
 			throw new IllegalActionException("Only trades with the active player are allowed");
-		if(!initiator.isValidTrade(cards, offer, false) || !activePlayer.isValidTrade(offer, cards, true))
+		if(!initiator.isValidTrade(request, offer, false) || !activePlayer.isValidTrade(offer, request, true))
 			throw new IllegalActionException("No valid trade");
 	}
 
+	/** Getters of offered and requested cards, the active player */
+	
 	public List<Card> getGivenCards() {
 		return offer;
 	}
 
 	public List<Card> getReceivedCards() {
-		return cards;
+		return request;
 	}
 
 	public Player getActivePlayer() {

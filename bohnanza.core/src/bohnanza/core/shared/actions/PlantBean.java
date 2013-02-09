@@ -18,6 +18,8 @@ public class PlantBean extends Action<GameBase> {
 		this.field = field;
 	}
 
+	/** Plants the first bean in the players hand to specified field
+	 * @throws IllegalActionException if action is not allowed */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		if(!(initiator.getHand().indexOf(card) == 0))

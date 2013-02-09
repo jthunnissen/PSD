@@ -15,6 +15,8 @@ public class SetAsideCard extends Action<StandardGame> {
 		this.card = card;
 	}
 
+	/** Set aside the specified face up card
+	 * @throws IllegalActionException if action is not allowed */
 	@Override
 	protected void innerHandle() throws IllegalActionException {
 		initiator.setFaceUpCardaside(card);
