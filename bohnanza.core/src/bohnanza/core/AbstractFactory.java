@@ -76,9 +76,11 @@ public abstract class AbstractFactory {
 
 	protected ArrayList<Card> getStandardDeck(IBeanType[] beanTypes) {
 		ArrayList<Card> standardDeck = new ArrayList<Card>();
+		BeanCard card;
 		for(IBeanType bt : beanTypes) {
+			card = new BeanCard(bt);
 			for(int i = 0; i < bt.numberOfCards(); i++) {
-				standardDeck.add(new BeanCard(bt));
+				standardDeck.add(card);
 			}
 		}
 		return standardDeck;

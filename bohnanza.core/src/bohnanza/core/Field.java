@@ -30,8 +30,11 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 	}
 
 	public void addCard(CardType card) throws IllegalActionException {
-		if(cards.contains(card))
-			throw new IllegalActionException("Card already in field");
+		if(cards.size() > 0) {
+			if (!cards.get(0).equals(card)) {
+				throw new IllegalActionException("Card must be of type " + cards.get(0).getName());
+			}
+		}
 		cards.add(card);
 	}
 
@@ -62,6 +65,10 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 	/** @return whether the field contains cards */
 	public boolean isEmpty() {
 		return cards.isEmpty();
+	}
+	
+	public int size() {
+		return cards.size();
 	}
 
 	public JSONObject toJSON(HashMap<Integer, Card> cardIndex) {

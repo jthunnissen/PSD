@@ -129,6 +129,18 @@ public abstract class Player {
 	public List<BeanField> getBeanFields() {
 		return Collections.unmodifiableList(fields);
 	}
+	
+	/**
+	 * Return the first empty field of this player. 
+	 * If there are no empty fields null is returned.
+	 * @return The first empty BeanField or if no present null.
+	 */
+	public BeanField getFirstEmptyField() {
+		for (BeanField field : fields) {
+			if (field.getSize() == 0) return field;
+		}
+		return null;
+	}
 
 	/** This method represents the Player's action to buy a third Field.
 	 * @return true if player has enough money and field is successfully bought.

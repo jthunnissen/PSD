@@ -1,3 +1,4 @@
+package tests;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -7,13 +8,15 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 import java.util.List;
+
+import mocks.GameMock;
+import mocks.PlayerMock;
+
 import org.junit.Before;
 import org.junit.Test;
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
-import bohnanza.standard.model.BohnanzaPlayer;
-import bohnanza.standard.model.StandardGame;
 
 public class GameTest {
 
@@ -21,11 +24,11 @@ public class GameTest {
 	public final String PLAYER2_NAME = "player2";
 	public final String PLAYER3_NAME = "player3";
 
-	public StandardGame game;
+	public GameMock game;
 
 	@Before
 	public void setUp() throws Exception {
-		game = new StandardGame();
+		game = new GameMock();
 	}
 
 	@Test
@@ -36,9 +39,9 @@ public class GameTest {
 
 	@Test
 	public void playerTest() throws IllegalActionException {
-		Player player1 = new BohnanzaPlayer(PLAYER1_NAME);
-		Player player2 = new BohnanzaPlayer(PLAYER2_NAME);
-		Player player3 = new BohnanzaPlayer(PLAYER3_NAME);
+		Player player1 = new PlayerMock(PLAYER1_NAME);
+		Player player2 = new PlayerMock(PLAYER2_NAME);
+		Player player3 = new PlayerMock(PLAYER3_NAME);
 
 		game.addPlayer(player1);
 		assertEquals("Player size must be 1", 1, game.getPlayers().size());
@@ -66,7 +69,7 @@ public class GameTest {
 	@Test
 	public void shuffleDeck() {
 		List<Card> game1DrawDesk = game.getDrawDeck();
-		List<Card> game2DrawDesk = new StandardGame().getDrawDeck();
+		List<Card> game2DrawDesk = new GameMock().getDrawDeck();
 
 		assertThat(game1DrawDesk.size(), is(game2DrawDesk.size()));
 		assertThat(game1DrawDesk, not(equalTo(game2DrawDesk)));

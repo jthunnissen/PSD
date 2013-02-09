@@ -1,23 +1,26 @@
+package tests;
 import static org.junit.Assert.assertEquals;
 
+import mocks.EBeanTypeMock;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import bohnanza.core.BeanCard;
 import bohnanza.core.BeanField;
 import bohnanza.core.IllegalActionException;
-import bohnanza.standard.model.EBeanType;
 
 /** Test class for the Field
  * @author Anne van de Venis & Damiaan van der Kruk */
-public class TestBeanField {
+public class BeanFieldTest {
 	
 	private BeanCard card1;
 	private BeanField field;
 	
 	@Before
 	public void setUp() {
-		card1 = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		card1 = new BeanCard(EBeanTypeMock.BLACKEYEDBEAN);
 		field = new BeanField();
 	}
 
@@ -26,6 +29,7 @@ public class TestBeanField {
 		field.addCard(card1);
 	}
 	
+	@Ignore("Not relevant anymore.")
 	@Test(expected = IllegalActionException.class)
 	public void testAddSameCard() throws IllegalActionException {
 		field.addCard(card1);
@@ -41,14 +45,14 @@ public class TestBeanField {
 	@Test(expected = IllegalActionException.class)
 	public void testAddOfOtherTypeCard() throws IllegalActionException {
 		field.addCard(card1);
-		field.addCard(new BeanCard(EBeanType.BLUEBEAN));
+		field.addCard(new BeanCard(EBeanTypeMock.BLUEBEAN));
 	}
 
 	@Test
 	public void testHarvest() throws IllegalActionException {
 		int toHarvest = 5;
 		for(int i = 0; i < toHarvest; i++) {
-			field.addCard(new BeanCard(EBeanType.BLUEBEAN));
+			field.addCard(card1);
 		}
 		assertEquals("Not all beans are harvested", toHarvest, field.harvest().size());
 	}

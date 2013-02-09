@@ -1,26 +1,29 @@
+package tests;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import mocks.GameMock;
+import mocks.PlayerMock;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.shared.actions.DrawCards;
-import bohnanza.standard.model.BohnanzaPlayer;
-import bohnanza.standard.model.StandardGame;
 
 /** Test class for the Player.
  * @author Anne van de Venis & Damiaan van der Kruk */
 public class ActionDrawCardsTest {
 
 	private static final String PLAYER_NAME = "Player";
-	private BohnanzaPlayer player;
-	private StandardGame game;
+	private PlayerMock player;
+	private GameMock game;
 
 	@Before
 	public void setUp() throws IllegalActionException {
-		player = new BohnanzaPlayer(PLAYER_NAME);
-		game = new StandardGame();
+		player = new PlayerMock(PLAYER_NAME);
+		game = new GameMock();
 		game.addPlayer(player);
 	}
 

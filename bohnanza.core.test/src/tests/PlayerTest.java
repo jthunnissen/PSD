@@ -1,29 +1,32 @@
+package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import mocks.EBeanTypeMock;
+import mocks.PlayerMock;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import bohnanza.core.BeanCard;
 import bohnanza.core.BeanField;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
-import bohnanza.standard.model.BohnanzaPlayer;
-import bohnanza.standard.model.EBeanType;
 
 /** Test class for the Player.
  * 
  * @author Anne van de Venis */
-public class TestPlayer {
+public class PlayerTest {
 
 	private static final String PLAYER_NAME = "Player";
 
-	private BohnanzaPlayer player;
+	private PlayerMock player;
 	private BeanCard card;
 	private BeanField field;
 
 	@Before
 	public void setUp() {
-		player = new BohnanzaPlayer(PLAYER_NAME);
-		card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		player = new PlayerMock(PLAYER_NAME);
+		card = new BeanCard(EBeanTypeMock.BLACKEYEDBEAN);
 		field = player.getBeanFields().get(0);
 	}
 
@@ -51,7 +54,7 @@ public class TestPlayer {
 			player.plantBean(card, field);
 			player.harvestField(field);
 		} catch(IllegalActionException e) {
-
+			e.printStackTrace();
 		}
 		assertEquals("Score is incorrect", player.calcScore(), card.getBeanometer(2));
 	}
@@ -78,7 +81,7 @@ public class TestPlayer {
 
 	@Test
 	public void testPlayerBuyThirdField() {
-		Player player = new BohnanzaPlayer(PLAYER_NAME);
+		Player player = new PlayerMock(PLAYER_NAME);
 		boolean result = true;
 		try {
 			result = player.buyField();
@@ -88,7 +91,7 @@ public class TestPlayer {
 		assertEquals("Player can buy field but has not enough money", false, result);
 
 		result = true;
-		BeanCard card = new BeanCard(EBeanType.BLACKEYEDBEAN);
+		BeanCard card = new BeanCard(EBeanTypeMock.BLACKEYEDBEAN);
 		BeanField field = player.getBeanFields().get(0);
 		// 5 BlackEyedBeanCards means 3 coins
 		for(int i = 0; i < 5; i++) {
