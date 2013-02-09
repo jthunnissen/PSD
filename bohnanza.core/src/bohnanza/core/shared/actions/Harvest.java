@@ -9,9 +9,9 @@ import bohnanza.core.Player;
 
 public class Harvest extends Action<GameBase> {
 
-	private final Field<Card> field;
+	private final Field<? extends Card> field;
 
-	public Harvest(GameBase game, Player initiator, Field<Card> field) {
+	public Harvest(GameBase game, Player initiator, Field<? extends Card> field) {
 		super(game, initiator);
 		this.field = field;
 	}
