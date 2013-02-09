@@ -36,7 +36,7 @@ public abstract class AbstractFactory {
 
 	public TurnState getTurnState(Class<? extends TurnState> state, GameBase game) {
 		try {
-			TurnState newState = state.getConstructor(GameBase.class).newInstance(game);
+			TurnState newState = state.asSubclass(TurnState.class).getConstructor(GameBase.class).newInstance(game);
 			if(stateTransitions.containsKey(state)) {
 				for(Transition transition : stateTransitions.get(state)) {
 					newState.addTransition(transition.action, transition.state);
