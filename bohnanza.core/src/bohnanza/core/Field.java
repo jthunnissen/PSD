@@ -70,6 +70,15 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 	public int size() {
 		return cards.size();
 	}
+	
+	/**
+	 * Get the first card present in the field.
+	 * @return The first card, if not present it is null.
+	 */
+	public CardType getFirstCard() {
+		if(isEmpty()) return null;
+		return cards.get(0);
+	}
 
 	public JSONObject toJSON(HashMap<Integer, Card> cardIndex) {
 		JSONObject result = new JSONObject();
