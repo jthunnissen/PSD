@@ -1,10 +1,10 @@
 package org.json;
 
 /** This class holds the protocol for the Bohnanza game 
-*
-* @author Anne van de Venis
-* @version 1.0
-*/
+ *
+ * @author Anne van de Venis
+ * @version 1.0
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -161,6 +161,21 @@ public class Protocol {
 	}
 
 	/**
+	 * Returns validation result of username check from JSON
+	 * @param root JSON Object
+	 * @return true if validation was succesfull
+	 */
+	public static boolean usernameFromJSON(JSONObject root) {
+		boolean result = false;
+		try {
+			result = (root.getBoolean("response") == true);
+		} catch(JSONException e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
 	 * Extracts chat message from JSON response
 	 * @param response JSON response
 	 * @return Chat message
@@ -228,7 +243,7 @@ public class Protocol {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Creates an OfferPOJO from a JSON response
 	 * @param root JSON response
