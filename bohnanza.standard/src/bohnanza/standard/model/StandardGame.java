@@ -9,14 +9,12 @@ public class StandardGame extends GameBase {
 	}
 
 	@Override
-	public void start() {
+	protected void setupGame() {
 		for(Player player : getPlayers()) {
 			for(int i = 0; i < 5; i++) {
 				player.addCardToHand(this.drawCard());
 			}
 		}
-		setCurrentState(factory.buildTurnStatespace(this));
-		started = true;
 	}
 
 }

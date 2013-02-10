@@ -34,8 +34,22 @@ public class AlCabhoneGame extends GameBase {
 		return super.addPlayer(player);
 	}
 
+	public Card drawDiscardedCard() throws IllegalActionException {
+		if(discardPile.isEmpty())
+			throw new IllegalActionException("Can't draw from empty discard pile");
+		return discardPile.remove(0);
+	}
+	
+	public int getMobScore() {
+		int score = 0;
+		for(MobBoss boss : mobBosses) {
+			score += boss.calcScore();
+		}
+		return score;
+	}
+
 	@Override
-	public void start() {
+	protected void setupGame() {
 		switch(players.size()) {
 		case 1:
 
@@ -61,19 +75,5 @@ public class AlCabhoneGame extends GameBase {
 			} catch(IllegalActionException e) {
 			}
 		}
-	}
-
-	public Card drawDiscardedCard() throws IllegalActionException {
-		if(discardPile.isEmpty())
-			throw new IllegalActionException("Can't draw from empty discard pile");
-		return discardPile.remove(0);
-	}
-	
-	public int getMobScore() {
-		int score = 0;
-		for(MobBoss boss : mobBosses) {
-			score += boss.calcScore();
-		}
-		return score;
 	}
 }

@@ -161,7 +161,7 @@ class ServerThread extends Thread {
 						game.handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.NEXTPHASE)) {
-						Action action = new NextPhase(game, player);
+						Action action = new NextPhase(game);
 						game.handle(action);
 						server.sendUpdate(id);
 					} else if(line.startsWith(Protocol.PLANTBEAN) || line.startsWith(Protocol.PLANTASIDEBEAN)) {

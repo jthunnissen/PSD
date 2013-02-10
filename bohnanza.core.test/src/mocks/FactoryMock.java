@@ -21,8 +21,9 @@ public class FactoryMock extends AbstractFactory {
 	@Override
 	protected void fillStateTransistions() {
 		setStartState(PlantState.class);
-		addTransition(StartState.class, NextPlayer.class, PlantState.class);
 		addTransition(PlantState.class, DrawCards.class, StartState.class);
+		addTransition(StartState.class, NextPlayer.class, PlantState.class);
+		
 	}
 
 }

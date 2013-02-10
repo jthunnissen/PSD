@@ -5,6 +5,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/bohnanza.core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/bohnanza.standard"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="../bohnanzagui.core/jfxrt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_13/jre/lib/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

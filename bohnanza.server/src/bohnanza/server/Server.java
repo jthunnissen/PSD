@@ -95,7 +95,7 @@ public class Server implements Runnable {
 	public void sendUpdate(int from) {
 		if(game.isStarted() && game.getActions(game.getActivePlayer()).size() == 1) {
 			if(game.getActions(game.getActivePlayer()).contains(NextPlayer.class)) {
-				Action action = new NextPlayer(game, game.getActivePlayer());
+				Action action = new NextPlayer(game);
 				try {
 					game.handle(action);
 				} catch(IllegalActionException e) {
@@ -146,8 +146,8 @@ public class Server implements Runnable {
 					break;
 			}
 			// closed = true;
-		} catch(IOException e) {
-			System.err.println("IOException:  " + e);
+		} catch(IOException | IllegalActionException e) {
+			System.err.println("Exception:  " + e);
 		}
 	}
 

@@ -6,13 +6,10 @@ public class GameMock extends GameBase {
 
 	public GameMock() {
 		super(FactoryMock.getInstance(), new GameRulesMock());
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void start() {
+	protected void setupGame() {
 		// TODO Auto-generated method stub
-
 	}
-
 }

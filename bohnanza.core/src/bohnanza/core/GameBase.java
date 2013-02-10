@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.print.attribute.standard.Severity;
+
 public abstract class GameBase {
 	/** @uml.property name="currentState" */
 	protected TurnState<? extends GameBase> currentState;
@@ -32,7 +34,14 @@ public abstract class GameBase {
 		shuffleCards();
 	}
 
-	public abstract void start();
+	public final void start() throws IllegalActionException {
+		setupGame();
+		if(players.isEmpty()) throw new IllegalActionException("There must be at least one player.");
+		currentState = factory.buildTurnStatespace(this);
+		started = true;
+	}
+	
+	protected abstract void setupGame();
 
 	public boolean isStarted() {
 		return started;

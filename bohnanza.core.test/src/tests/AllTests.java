@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	BeanFieldTest.class, CardTest.class, GameFactoryTest.class, 
 	GameTest.class, PlayerTest.class, ActionPlantBeanCardTest.class,
-	ActionPlantBeanTest.class, ActionDrawCardsTest.class})
+	ActionPlantBeanTest.class, ActionDrawCardsTest.class, RunningGameTest.class})
 public class AllTests {
 
 }

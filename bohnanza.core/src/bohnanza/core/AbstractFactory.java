@@ -58,6 +58,7 @@ public abstract class AbstractFactory {
 	 * @param game Base game
 	 * @return List of possible transitions to next state
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TurnState getTurnState(Class<? extends TurnState> state, GameBase game) {
 		try {
 			TurnState newState = state.asSubclass(TurnState.class).getConstructor(GameBase.class).newInstance(game);
