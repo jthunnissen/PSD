@@ -2,6 +2,11 @@ package bohnanza.core;
 import java.text.MessageFormat;
 import java.util.List;
 
+/**
+ * This class represents a BeanField.
+ * @author Anne
+ *
+ */
 public class BeanField extends Field<BeanCard> {
 
 	@Override
@@ -32,6 +37,10 @@ public class BeanField extends Field<BeanCard> {
 		return true;
 	}
 
+	/**
+	 * Getter for the type of the beancard
+	 * @return If one or more Beancards are planted in this fields, the type of these cards is returned, otherwise null
+	 */
 	public IBeanType getBeanType() {
 		return (getSize() > 0 ? cards.get(0).getType() : null);
 	}

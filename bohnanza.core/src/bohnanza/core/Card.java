@@ -5,12 +5,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.Protocol;
 
+/**
+ * This class respresents a Card
+ * @author Anne
+ *
+ */
 public abstract class Card implements ToJSON {
 
-	/** @uml.property name="name" */
+	/**
+	 * Name of the card 
+	 * @uml.property name="name"
+	 */
 	private final String name;
 
-	/** @uml.property name="numberOfCards" */
+	/**
+	 * Number of cards that should be created in the gamedeck
+	 *  @uml.property name="numberOfCards" 
+	 */
 	private final int numberOfCards;
 
 	public Card(String name, int numberOfCards) {
@@ -32,6 +43,9 @@ public abstract class Card implements ToJSON {
 		return numberOfCards;
 	}
 
+	/**
+	 * Creates a JSON object for this card.
+	 */
 	public JSONObject toJSON(HashMap<Integer, Card> cardIndex) {
 		JSONObject result = new JSONObject();
 		try {

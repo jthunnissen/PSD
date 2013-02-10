@@ -4,12 +4,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public abstract class AbstractFactory {
 
+	/**
+	 * All possible transitions from the current state
+	 */
 	private HashMap<Class<? extends TurnState>, ArrayList<Transition>> stateTransitions = new HashMap<Class<? extends TurnState>, ArrayList<Transition>>();
+	/**
+	 * Beancards that should be included in the game deck
+	 */
 	private final IBeanType[] beanTypes;
+	/**
+	 * Initial state in the game
+	 */
 	private Class<? extends TurnState> startState;
 
 	protected AbstractFactory(IBeanType[] beanTypes) {
@@ -17,6 +24,10 @@ public abstract class AbstractFactory {
 		this.beanTypes = beanTypes;
 	}
 
+	/**
+	 * Returns game deck
+	 * @return Game deck
+	 */
 	public ArrayList<Card> getGameDeck() {
 		ArrayList<Card> deck = getStandardDeck(beanTypes);
 		return deck;
@@ -28,12 +39,25 @@ public abstract class AbstractFactory {
 		return getTurnState(startState, game);
 	}
 
+	/**
+	 * Sets given state as start state
+	 * @param startState The initial state
+	 */
 	public void setStartState(Class<? extends TurnState> startState) {
 		this.startState = startState;
 	}
 
+	/**
+	 * Creates all states transition (game flow) of this game
+	 */
 	protected abstract void fillStateTransistions();
 
+	/**
+	 * Return list of possible next states of the game
+	 * @param state Current state of the game
+	 * @param game Base game
+	 * @return List of possible transitions to next state
+	 */
 	public TurnState getTurnState(Class<? extends TurnState> state, GameBase game) {
 		try {
 			TurnState newState = state.asSubclass(TurnState.class).getConstructor(GameBase.class).newInstance(game);
@@ -49,6 +73,13 @@ public abstract class AbstractFactory {
 		return null;
 	}
 
+	/**
+	 * Adds transition to current state
+	 * @param fromState State of the game at the start of the transition
+	 * @param action Action that initiates the transition
+	 * @param toState State of the game after the transition
+	 * @return True if transition is successfully added
+	 */
 	protected final boolean addTransition(Class<? extends TurnState> fromState, Class<? extends Action> action, Class<? extends TurnState> toState) {
 		ArrayList<Transition> transactions;
 		if(stateTransitions.containsKey(fromState)) {
@@ -60,8 +91,17 @@ public abstract class AbstractFactory {
 		return(transactions.add(new Transition(action, toState)));
 	}
 
+	/**
+	 * Class that respresent an transition
+	 */
 	private final class Transition {
+		/**
+		 * Action that initiates the transition
+		 */
 		private final Class<? extends Action> action;
+		/**
+		 * State after the transition
+		 */
 		private final Class<? extends TurnState> state;
 
 		protected Transition(Class<? extends Action> action, Class<? extends TurnState> state) {
@@ -70,6 +110,11 @@ public abstract class AbstractFactory {
 		}
 	}
 
+	/**
+	 * Creates a gamedeck for the Bohnanza game
+	 * @param beanTypes List of all Beancard that should be included in the gamedeck
+	 * @return
+	 */
 	protected ArrayList<Card> getStandardDeck(IBeanType[] beanTypes) {
 		ArrayList<Card> standardDeck = new ArrayList<Card>();
 		BeanCard card;

@@ -2,12 +2,22 @@ package bohnanza.core;
 
 import java.util.HashMap;
 
+/**
+ * This class respresent a BeanCard
+ *
+ */
 public class BeanCard extends Card {
 
-	/** @uml.property name="produce" multiplicity="(0 -1)" dimension="2" */
+	/**
+	 * Bean-o-meter of this Beancard 
+	 * @uml.property name="produce" multiplicity="(0 -1)" dimension="2" 
+	 */
 	private final HashMap<Integer, Integer> produces;
 
-	/** @uml.property name="type" */
+	/**
+	 * Type of this Beancard
+	 *  @uml.property name="type" 
+	 */
 	private final IBeanType type;
 
 	public BeanCard(IBeanType type) {
@@ -16,6 +26,10 @@ public class BeanCard extends Card {
 		this.type = type;
 	}
 
+	/**
+	 * Getter for the type
+	 * @return Type of this Beancard
+	 */
 	public IBeanType getType() {
 		return type;
 	}

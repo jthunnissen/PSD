@@ -9,9 +9,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.Protocol;
 
+/**
+ * This class represents a field
+ * @author Anne
+ *
+ * @param <CardType>
+ */
 public abstract class Field<CardType extends Card> implements ToJSON {
 
-	/** @uml.property name="card"
+	/** 
+	 * Cards that are added in this field
+	 * @uml.property name="card"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true"
 	 *                     inverse="field:main.Card" */
 	protected List<CardType> cards = new ArrayList<CardType>();
@@ -29,6 +37,11 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 		return cards.size();
 	}
 
+	/**
+	 * Adds a card to this fields. If this field already contains a card, the new card should be of the same type.
+	 * @param card Card that should be added
+	 * @throws IllegalActionException
+	 */
 	public void addCard(CardType card) throws IllegalActionException {
 		if(cards.size() > 0) {
 			if (!cards.get(0).equals(card)) {
@@ -38,12 +51,22 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 		cards.add(card);
 	}
 
+	/**
+	 * Adds a list of cards to this field.
+	 * @param cards Cards that should be added to this field
+	 * @throws IllegalActionException
+	 */
 	public void addAllCards(Collection<CardType> cards) throws IllegalActionException {
 		for(CardType card : cards) {
 			addCard(card);
 		}
 	}
 
+	/**
+	 * Removes the newest card from this field 
+	 * @return The card that is removed
+	 * @throws IllegalActionException
+	 */
 	public CardType removeCard() throws IllegalActionException {
 		try {
 			return cards.remove(cards.size() - 1);
@@ -67,6 +90,10 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 		return cards.isEmpty();
 	}
 	
+	/**
+	 * Number of cards in this field
+	 * @return
+	 */
 	public int size() {
 		return cards.size();
 	}
@@ -80,6 +107,9 @@ public abstract class Field<CardType extends Card> implements ToJSON {
 		return cards.get(0);
 	}
 
+	/**
+	 * Creates a JSON Object for this field.
+	 */
 	public JSONObject toJSON(HashMap<Integer, Card> cardIndex) {
 		JSONObject result = new JSONObject();
 
