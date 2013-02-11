@@ -1,18 +1,19 @@
 package bohnanza.core.shared.actions;
 import java.text.MessageFormat;
+
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.BeanCard;
 import bohnanza.core.BeanField;
-import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
-public class PlantBean extends Action<GameBase> {
+public class PlantBean extends Action<BaseGame> {
 
 	private final BeanCard card;
 	private final BeanField field;
 
-	public PlantBean(GameBase game, Player initiator, BeanCard card, BeanField field) {
+	public PlantBean(BaseGame game, Player initiator, BeanCard card, BeanField field) {
 		super(game, initiator);
 		this.card = card;
 		this.field = field;

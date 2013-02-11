@@ -1,6 +1,7 @@
 package bohnanza.standard.actions;
 
 import java.util.List;
+
 import bohnanza.core.Action;
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;

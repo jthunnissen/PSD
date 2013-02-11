@@ -1,7 +1,10 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
+
 import org.junit.Test;
+
 import bohnanza.core.Card;
 import bohnanza.standard.model.GameFactory;
 

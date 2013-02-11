@@ -35,7 +35,7 @@ public abstract class AbstractFactory {
 
 	/** Links the different states that compose a turn together
 	 * @return the start state of the game */
-	public TurnState buildTurnStatespace(GameBase game) {
+	public TurnState buildTurnStatespace(BaseGame game) {
 		return getTurnState(startState, game);
 	}
 
@@ -59,9 +59,9 @@ public abstract class AbstractFactory {
 	 * @return List of possible transitions to next state
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public TurnState getTurnState(Class<? extends TurnState> state, GameBase game) {
+	public TurnState getTurnState(Class<? extends TurnState> state, BaseGame game) {
 		try {
-			TurnState newState = state.asSubclass(TurnState.class).getConstructor(GameBase.class).newInstance(game);
+			TurnState newState = state.asSubclass(TurnState.class).getConstructor(BaseGame.class).newInstance(game);
 			if(stateTransitions.containsKey(state)) {
 				for(Transition transition : stateTransitions.get(state)) {
 					newState.addTransition(transition.action, transition.state);

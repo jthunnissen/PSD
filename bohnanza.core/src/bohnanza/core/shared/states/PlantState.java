@@ -1,17 +1,17 @@
 package bohnanza.core.shared.states;
 
 import bohnanza.core.Action;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.Harvest;
 import bohnanza.core.shared.actions.NextPhase;
 import bohnanza.core.shared.actions.PlantBean;
 
-public class PlantState extends TurnState<GameBase> {
+public class PlantState extends TurnState<BaseGame> {
 
 	private int beansPlanted = 0;
 
-	public PlantState(GameBase context) {
+	public PlantState(BaseGame context) {
 		super(context);
 		if(context.getActivePlayer().getHand().isEmpty()) {
 			addAction(NextPhase.class);
@@ -22,7 +22,7 @@ public class PlantState extends TurnState<GameBase> {
 	}
 
 	@Override
-	protected boolean handled(Action<? extends GameBase> action) {
+	protected boolean handled(Action<? extends BaseGame> action) {
 		if(action instanceof NextPhase)
 			return true;
 		if(action instanceof PlantBean) {

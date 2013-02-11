@@ -1,7 +1,7 @@
 package bohnanza.standard.states;
 
 import bohnanza.core.Action;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.Player;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.NextPhase;
@@ -22,7 +22,7 @@ public class TradeState extends TurnState<StandardGame> {
 	}
 
 	@Override
-	protected boolean handled(Action<? extends GameBase> action) {
+	protected boolean handled(Action<? extends BaseGame> action) {
 		if(action instanceof DrawFaceUpCards) {
 			removeAction(DrawFaceUpCards.class);
 			addDefaultActions();

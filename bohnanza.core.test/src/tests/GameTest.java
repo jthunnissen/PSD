@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
+
 import java.util.List;
 
 import mocks.GameMock;
@@ -14,6 +15,7 @@ import mocks.PlayerMock;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import bohnanza.core.Card;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;

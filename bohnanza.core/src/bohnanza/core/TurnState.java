@@ -3,16 +3,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
 import bohnanza.core.shared.actions.BuyBeanField;
 import bohnanza.core.shared.actions.Harvest;
 
-public abstract class TurnState<Game extends GameBase> {
+public abstract class TurnState<Game extends BaseGame> {
 
 	/** @uml.property name="actions" */
-	private Map<Player, Collection<Class<? extends Action<? extends GameBase>>>> actions = new HashMap<Player, Collection<Class<? extends Action<? extends GameBase>>>>();
+	private Map<Player, Collection<Class<? extends Action<? extends BaseGame>>>> actions = new HashMap<Player, Collection<Class<? extends Action<? extends BaseGame>>>>();
 
 	/** @uml.property name="transitions" */
-	private Map<Class<? extends Action<? extends GameBase>>, Class<? extends TurnState<Game>>> transitions = new HashMap<Class<? extends Action<? extends GameBase>>, Class<? extends TurnState<Game>>>();
+	private Map<Class<? extends Action<? extends BaseGame>>, Class<? extends TurnState<Game>>> transitions = new HashMap<Class<? extends Action<? extends BaseGame>>, Class<? extends TurnState<Game>>>();
 
 	/** @uml.property name="context" */
 	protected final Game context;
@@ -20,7 +21,7 @@ public abstract class TurnState<Game extends GameBase> {
 	public TurnState(final Game context) {
 		this.context = context;
 		for(Player player : context.getPlayers()) {
-			actions.put(player, new ArrayList<Class<? extends Action<? extends GameBase>>>());
+			actions.put(player, new ArrayList<Class<? extends Action<? extends BaseGame>>>());
 		}
 	}
 
@@ -33,8 +34,8 @@ public abstract class TurnState<Game extends GameBase> {
 	}
 
 	/** Check whether action is a allowed and execute it */
-	public final void handle(Action<? extends GameBase> action, AbstractFactory factory) throws IllegalActionException {
-		Collection<Class<? extends Action<? extends GameBase>>> playerActions = actions.get(action.getInitiator());
+	public final void handle(Action<? extends BaseGame> action, AbstractFactory factory) throws IllegalActionException {
+		Collection<Class<? extends Action<? extends BaseGame>>> playerActions = actions.get(action.getInitiator());
 		if(playerActions == null || !playerActions.contains(action.getClass()))
 			throw new IllegalActionException("Action not permitted for this player in current state");
 		action.handle();
@@ -46,7 +47,7 @@ public abstract class TurnState<Game extends GameBase> {
 		System.out.println("State: " + this.getClass().getName());
 	}
 
-	private void getNextState(Action<? extends GameBase> action, AbstractFactory factory) {
+	private void getNextState(Action<? extends BaseGame> action, AbstractFactory factory) {
 		try {
 			TurnState<Game> nextState = factory.getTurnState(transitions.get(action.getClass()), context);
 			context.setCurrentState(nextState);
@@ -55,49 +56,49 @@ public abstract class TurnState<Game extends GameBase> {
 		}
 	}
 
-	public Collection<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
+	public Collection<Class<? extends Action<? extends BaseGame>>> getActions(Player player) {
 		return actions.get(player);
 	}
 
 	/** Update internal state of this TurnState, called after action was
 	 * successfully executed with parameters args
 	 * @return true if action advances the game to a new TurnState */
-	protected abstract boolean handled(Action<? extends GameBase> action);
+	protected abstract boolean handled(Action<? extends BaseGame> action);
 
 	/** Adds action to the list of possible actions for initiator in the current
 	 * state. */
-	protected void addAction(Player initiator, Class<? extends Action<? extends GameBase>> action) {
+	protected void addAction(Player initiator, Class<? extends Action<? extends BaseGame>> action) {
 		actions.get(initiator).add(action);
 	}
 
 	/** Adds action to the list of possible actions for the active player in the
 	 * current state. */
-	protected void addAction(Class<? extends Action<? extends GameBase>> action) {
+	protected void addAction(Class<? extends Action<? extends BaseGame>> action) {
 		actions.get(context.getActivePlayer()).add(action);
 	}
 
 	/** Remove action from the list of possible actions for the active player in
 	 * the current state. */
-	protected void removeAction(Class<? extends Action<? extends GameBase>> action) {
+	protected void removeAction(Class<? extends Action<? extends BaseGame>> action) {
 		actions.get(context.getActivePlayer()).remove(action);
 	}
 
 	/** Remove action from the list of possible actions for initiator in the
 	 * current state. */
-	protected void removeAction(Player initiator, Class<? extends Action<? extends GameBase>> action) {
+	protected void removeAction(Player initiator, Class<? extends Action<? extends BaseGame>> action) {
 		actions.get(initiator).remove(action);
 	}
 
 	/** Remove all actions in the current state. */
 	protected void removeAllActions() {
-		for(Collection<Class<? extends Action<? extends GameBase>>> playeractions : actions.values()) {
+		for(Collection<Class<? extends Action<? extends BaseGame>>> playeractions : actions.values()) {
 			playeractions.clear();
 		}
 	}
 
 	/** To be used only by the game factory. Adds state as the next state the
 	 * game will be in if action ends the current state. */
-	public void addTransition(Class<? extends Action<? extends GameBase>> action, Class<? extends TurnState<Game>> state) {
+	public void addTransition(Class<? extends Action<? extends BaseGame>> action, Class<? extends TurnState<Game>> state) {
 		transitions.put(action, state);
 	}
 }

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import org.json.JSONObject;
 
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.Card;
-import bohnanza.core.GameBase;
 import bohnanza.core.Player;
 
 
@@ -19,7 +19,7 @@ public class PlayerMock extends Player {
 
 	@Override
 	public JSONObject toJSON(
-			Collection<Class<? extends Action<? extends GameBase>>> list,
+			Collection<Class<? extends Action<? extends BaseGame>>> list,
 			HashMap<Integer, Card> cardIndex) {
 		// TODO Auto-generated method stub
 		return null;

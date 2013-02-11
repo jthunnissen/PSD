@@ -8,9 +8,10 @@ package org.json;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.Card;
-import bohnanza.core.GameBase;
 import bohnanza.core.Player;
 
 public class Protocol {
@@ -80,7 +81,7 @@ public class Protocol {
 	 * @param cardIndex Data holder for the cards
 	 * @return JSON response
 	 */
-	public static String toJSON(GameBase game, HashMap<Integer, Card> cardIndex) {
+	public static String toJSON(BaseGame game, HashMap<Integer, Card> cardIndex) {
 		String result = "";
 
 		try {

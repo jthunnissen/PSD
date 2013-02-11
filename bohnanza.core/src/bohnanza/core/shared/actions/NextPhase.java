@@ -1,12 +1,12 @@
 package bohnanza.core.shared.actions;
 
 import bohnanza.core.Action;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.IllegalActionException;
 
-public class NextPhase extends Action<GameBase> {
+public class NextPhase extends Action<BaseGame> {
 
-	public NextPhase(GameBase game) {
+	public NextPhase(BaseGame game) {
 		super(game, game.getActivePlayer());
 	}
 

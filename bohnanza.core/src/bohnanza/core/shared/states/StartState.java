@@ -1,18 +1,18 @@
 package bohnanza.core.shared.states;
 import bohnanza.core.Action;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.NextPlayer;
 
-public class StartState extends TurnState<GameBase> {
+public class StartState extends TurnState<BaseGame> {
 
-	public StartState(GameBase context) {
+	public StartState(BaseGame context) {
 		super(context);
 		addAction(context.getActivePlayer(), NextPlayer.class);
 	}
 
 	@Override
-	protected boolean handled(Action<? extends GameBase> action) {
+	protected boolean handled(Action<? extends BaseGame> action) {
 		return action instanceof NextPlayer;
 	}
 }

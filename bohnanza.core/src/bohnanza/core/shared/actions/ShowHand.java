@@ -1,14 +1,14 @@
 package bohnanza.core.shared.actions;
 
 import bohnanza.core.Action;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
 /** This action doesn't do anything, but should be interpreted by the gui */
-public class ShowHand extends Action<GameBase> {
+public class ShowHand extends Action<BaseGame> {
 
-	public ShowHand(GameBase game, Player initiator) {
+	public ShowHand(BaseGame game, Player initiator) {
 		super(game, initiator);
 	}
 

@@ -1,23 +1,11 @@
 package tests;
 
-import static org.junit.Assert.*;
-
-import java.util.Collection;
-
+import static org.junit.Assert.assertTrue;
 import mocks.GameMock;
 import mocks.PlayerMock;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import bohnanza.core.Action;
-import bohnanza.core.GameBase;
-import bohnanza.core.IllegalActionException;
-import bohnanza.core.Player;
-import bohnanza.core.shared.actions.DrawCards;
-import bohnanza.core.shared.actions.NextPhase;
-import bohnanza.core.shared.actions.NextPlayer;
-import bohnanza.core.shared.actions.PlantBean;
 
 public class RunningGameTest {
 	private static final String PLAYER1 = "player1";

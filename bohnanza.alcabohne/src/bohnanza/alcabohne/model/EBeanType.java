@@ -1,6 +1,7 @@
 package bohnanza.alcabohne.model;
 
 import java.util.HashMap;
+
 import bohnanza.core.IBeanType;
 
 public enum EBeanType implements IBeanType {

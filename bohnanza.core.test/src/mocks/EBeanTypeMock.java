@@ -1,6 +1,7 @@
 package mocks;
 
 import java.util.HashMap;
+
 import bohnanza.core.IBeanType;
 
 /** @author Damiaan */

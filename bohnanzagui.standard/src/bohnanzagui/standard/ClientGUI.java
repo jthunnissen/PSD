@@ -3,6 +3,7 @@ package bohnanzagui.standard;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;

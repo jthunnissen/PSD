@@ -7,11 +7,13 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.CardPOJO;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.OfferPOJO;
 import org.json.Protocol;
+
 import bohnanza.core.Action;
 import bohnanza.core.BeanCard;
 import bohnanza.core.Card;

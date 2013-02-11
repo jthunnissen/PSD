@@ -4,9 +4,9 @@ import bohnanza.alcabohne.actions.GiftBeanToMobb;
 import bohnanza.alcabohne.model.AlCabhoneGame;
 import bohnanza.alcabohne.model.MobBoss;
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.BeanCard;
 import bohnanza.core.Card;
-import bohnanza.core.GameBase;
 import bohnanza.core.TurnState;
 import bohnanza.core.shared.actions.NextPhase;
 import bohnanza.core.shared.actions.ShowHand;
@@ -21,7 +21,7 @@ public class CultivationState extends TurnState<AlCabhoneGame> {
 	}
 
 	@Override
-	protected boolean handled(Action<? extends GameBase> action) {
+	protected boolean handled(Action<? extends BaseGame> action) {
 		if(action instanceof ShowHand)
 			return true;
 		if(action instanceof CultivateRevealedBeanType) {

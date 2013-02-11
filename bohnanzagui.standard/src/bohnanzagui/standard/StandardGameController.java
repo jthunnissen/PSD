@@ -1,6 +1,7 @@
 package bohnanzagui.standard;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import org.json.CardPOJO;
 import org.json.GamePOJO;
 import org.json.OfferPOJO;

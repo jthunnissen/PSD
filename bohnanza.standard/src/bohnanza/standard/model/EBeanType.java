@@ -1,6 +1,7 @@
 package bohnanza.standard.model;
 
 import java.util.HashMap;
+
 import bohnanza.core.IBeanType;
 
 /** @author Damiaan */

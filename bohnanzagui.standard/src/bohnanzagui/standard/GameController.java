@@ -3,6 +3,7 @@ package bohnanzagui.standard;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -22,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+
 import org.json.CardPOJO;
 import org.json.GamePOJO;
 import org.json.PlayerPOJO;

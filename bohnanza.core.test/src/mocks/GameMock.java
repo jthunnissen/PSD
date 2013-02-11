@@ -1,8 +1,8 @@
 package mocks;
 
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 
-public class GameMock extends GameBase {
+public class GameMock extends BaseGame {
 
 	public GameMock() {
 		super(FactoryMock.getInstance(), new GameRulesMock());

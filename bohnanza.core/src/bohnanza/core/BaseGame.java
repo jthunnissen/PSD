@@ -4,11 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javax.print.attribute.standard.Severity;
-
-public abstract class GameBase {
+public abstract class BaseGame {
 	/** @uml.property name="currentState" */
-	protected TurnState<? extends GameBase> currentState;
+	protected TurnState<? extends BaseGame> currentState;
 
 	/** @uml.property name="players" */
 	protected ArrayList<Player> players = new ArrayList<Player>();
@@ -27,7 +25,7 @@ public abstract class GameBase {
 
 	public final GameRules RULES;
 
-	protected GameBase(AbstractFactory facotry, GameRules rules) {
+	protected BaseGame(AbstractFactory facotry, GameRules rules) {
 		this.factory = facotry;
 		this.RULES = rules;
 		drawDeck = factory.getGameDeck();
@@ -63,12 +61,12 @@ public abstract class GameBase {
 	}
 
 	/** Forwards to concrete state. Check whether action is a allowed and execute it */
-	public void handle(Action<? extends GameBase> action) throws IllegalActionException {
+	public void handle(Action<? extends BaseGame> action) throws IllegalActionException {
 		currentState.handle(action, factory);
 	}
 
 	/** Forwards to concrete state. Returns list of allowed actions in current state */
-	public Collection<Class<? extends Action<? extends GameBase>>> getActions(Player player) {
+	public Collection<Class<? extends Action<? extends BaseGame>>> getActions(Player player) {
 		return currentState.getActions(player);
 	}
 
@@ -78,7 +76,7 @@ public abstract class GameBase {
 
 	/**Sets the current game state to currentState 
 	 * @param currentState the currentState to set */
-	public void setCurrentState(TurnState<? extends GameBase> currentState) {
+	public void setCurrentState(TurnState<? extends BaseGame> currentState) {
 		this.currentState = currentState;
 	}
 

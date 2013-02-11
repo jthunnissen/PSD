@@ -1,17 +1,18 @@
 package bohnanza.core.shared.actions;
 import java.util.ArrayList;
+
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.Card;
 import bohnanza.core.Field;
-import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
-public class Harvest extends Action<GameBase> {
+public class Harvest extends Action<BaseGame> {
 
 	private final Field<? extends Card> field;
 
-	public Harvest(GameBase game, Player initiator, Field<? extends Card> field) {
+	public Harvest(BaseGame game, Player initiator, Field<? extends Card> field) {
 		super(game, initiator);
 		this.field = field;
 	}

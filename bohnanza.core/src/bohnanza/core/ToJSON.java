@@ -1,6 +1,7 @@
 package bohnanza.core;
 
 import java.util.HashMap;
+
 import org.json.JSONObject;
 
 /**

@@ -1,13 +1,13 @@
 package bohnanza.core.shared.actions;
 
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.Card;
-import bohnanza.core.GameBase;
 import bohnanza.core.Player;
 
-public class DrawCards extends Action<GameBase> {
+public class DrawCards extends Action<BaseGame> {
 
-	public DrawCards(GameBase game, Player initiator) {
+	public DrawCards(BaseGame game, Player initiator) {
 		super(game, initiator);
 	}
 

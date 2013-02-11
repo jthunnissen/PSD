@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
 import org.json.JSONObject;
 
 /** This class represents a Player
@@ -210,5 +211,5 @@ public abstract class Player {
 		setAsideCards.add(card);
 	}
 
-	public abstract JSONObject toJSON(Collection<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex);
+	public abstract JSONObject toJSON(Collection<Class<? extends Action<? extends BaseGame>>> list, HashMap<Integer, Card> cardIndex);
 }

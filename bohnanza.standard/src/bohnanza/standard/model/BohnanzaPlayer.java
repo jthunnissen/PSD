@@ -1,14 +1,16 @@
 package bohnanza.standard.model;
 import java.util.Collection;
 import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.Protocol;
+
 import bohnanza.core.Action;
+import bohnanza.core.BaseGame;
 import bohnanza.core.BeanField;
 import bohnanza.core.Card;
-import bohnanza.core.GameBase;
 import bohnanza.core.Player;
 import bohnanza.core.shared.actions.DrawCards;
 import bohnanza.core.shared.actions.Harvest;
@@ -31,7 +33,7 @@ public class BohnanzaPlayer extends Player {
 	}
 
 	@Override
-	public JSONObject toJSON(Collection<Class<? extends Action<? extends GameBase>>> list, HashMap<Integer, Card> cardIndex) {
+	public JSONObject toJSON(Collection<Class<? extends Action<? extends BaseGame>>> list, HashMap<Integer, Card> cardIndex) {
 		JSONObject result = new JSONObject();
 		try {
 			result.put(Protocol.PLAYER_NAME, getName());

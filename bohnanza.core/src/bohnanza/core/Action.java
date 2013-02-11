@@ -6,7 +6,7 @@ package bohnanza.core;
  *
  * @param <Game> The Bohnanza game
  */
-public abstract class Action<Game extends GameBase> {
+public abstract class Action<Game extends BaseGame> {
 
 	/**
 	 * The game

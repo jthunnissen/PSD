@@ -1,8 +1,8 @@
 package bohnanza.standard.model;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.Player;
 
-public class StandardGame extends GameBase {
+public class StandardGame extends BaseGame {
 
 	public StandardGame() {
 		super(GameFactory.getInstance(), new StandardGameRules());

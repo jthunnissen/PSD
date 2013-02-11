@@ -2,13 +2,14 @@ package bohnanza.alcabohne.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import bohnanza.core.BaseGame;
 import bohnanza.core.BeanCard;
 import bohnanza.core.Card;
-import bohnanza.core.GameBase;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
-public class AlCabhoneGame extends GameBase {
+public class AlCabhoneGame extends BaseGame {
 
 	private final String[] mobbossNames = { "Al Cabhone", "Don Corlebohne", "Joe Bohnano" };
 	private List<MobBoss> mobBosses = new ArrayList<MobBoss>();

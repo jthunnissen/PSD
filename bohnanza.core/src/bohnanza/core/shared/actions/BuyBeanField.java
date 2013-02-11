@@ -1,12 +1,12 @@
 package bohnanza.core.shared.actions;
 import bohnanza.core.Action;
-import bohnanza.core.GameBase;
+import bohnanza.core.BaseGame;
 import bohnanza.core.IllegalActionException;
 import bohnanza.core.Player;
 
-public class BuyBeanField extends Action<GameBase> {
+public class BuyBeanField extends Action<BaseGame> {
 
-	public BuyBeanField(GameBase game, Player initiator) {
+	public BuyBeanField(BaseGame game, Player initiator) {
 		super(game, initiator);
 	}
 

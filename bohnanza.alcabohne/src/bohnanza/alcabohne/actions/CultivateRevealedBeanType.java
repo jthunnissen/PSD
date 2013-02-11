@@ -1,6 +1,7 @@
 package bohnanza.alcabohne.actions;
 
 import java.util.List;
+
 import bohnanza.alcabohne.model.AlCabhoneGame;
 import bohnanza.alcabohne.model.EBeanType;
 import bohnanza.core.Action;
