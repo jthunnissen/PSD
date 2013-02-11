@@ -52,7 +52,7 @@ public class AlCabhoneGame extends GameBase {
 	protected void setupGame() {
 		switch(players.size()) {
 		case 1:
-
+			//TODO
 			break;
 		case 2:
 			try {
