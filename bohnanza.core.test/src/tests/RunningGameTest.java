@@ -41,15 +41,4 @@ public class RunningGameTest {
 	public void propertyTest() {
 		assertTrue("Game is not set as started.", game.isStarted());
 	}
-	
-	@Test
-	public void stateTransitionsTest() {
-		try {
-			game.handle(new NextPlayer(game));
-		} catch (IllegalActionException e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
-	}
-
 }
